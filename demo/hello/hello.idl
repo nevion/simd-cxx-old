@@ -1,0 +1,8 @@
+module swatch {
+
+  struct hello {
+    string<256> name;
+  };
+#pragma keylist hello
+
+};

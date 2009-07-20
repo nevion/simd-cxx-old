@@ -1,0 +1,22 @@
+PING DEMO
+---------
+
+This is a simple ping application that other than demonstrating the
+use of SIMD has also been used to demonstrate interoberabilty between
+OpenSplice DDS and other OMG DDS implementations.
+
+COMPILE
+-------
+
+The distributed version already includes generated IDL files. However if you change version of OpenSplice DDS or you port SIMD to another DDS implementation you'll need to re-generate IDLs. To do so, simply execute:
+
+$ make idl
+
+To make the application simply type:
+
+$ make
+
+RUNNING
+------
+
+

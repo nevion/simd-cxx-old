@@ -1,0 +1,16 @@
+struct PingType
+{
+  long         number;
+  long         counter;
+  string<32>   vendor;
+};
+#pragma keylist PingType
+
+struct KeyedPingType
+{
+  long         number;
+  long         counter;
+  string<32>   vendor;
+
+};
+#pragma keylist KeyedPingType vendor

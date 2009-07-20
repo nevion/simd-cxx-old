@@ -1,0 +1,5 @@
+include $(SIMD_HOME)/config/apps/Macros-idl.GNU
+
+TARGET_IDL=hello.idl
+
+include $(SIMD_HOME)/config/apps/Rules-idl.GNU

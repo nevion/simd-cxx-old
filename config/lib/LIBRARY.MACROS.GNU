@@ -1,0 +1,20 @@
+#
+# C++ Macros
+# 
+SIMD_CXXFLAGS = \
+    -W -Wall -Wpointer-arith -fPIC -fimplicit-templates
+
+SIMD_INCLUDE_DIRS = \
+   -I$(SIMD_HOME)/src \
+   -I$(BOOST_INCLUDE) \
+   -I$(OSPL_HOME)/include/dcps/C++/SACPP \
+   -I$(OSPL_HOME)/include \
+   -I$(OSPL_HOME)/include/sys \
+   -I$(SIMD_HOME)/src
+             
+SIMD_LD_DIRS=-L$(OSPL_HOME)/lib -L$(BOOST_LIB) -L$(SIMD_HOME)/lib
+
+SIMD_LD_LIBS=-lddsdatabase -ldcpsgapi -ldcpssacpp -lddsos -lboost_program_options-gcc43-mt-1_39  -lboost_signals-gcc43-mt-1_39 -lboost_thread-gcc43-mt-1_39
+
+
+

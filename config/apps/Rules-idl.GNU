@@ -1,0 +1,7 @@
+#-*-Makefile-*-
+
+COMPILE_IDLCPP_COMMAND = \
+   $(IDLC) $(IDLC_FLAGS) $(TARGET_IDL)
+
+all:
+	$(COMPILE_IDLCPP_COMMAND)

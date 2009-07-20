@@ -1,0 +1,8 @@
+include $(SIMD_HOME)/config/apps/Macros.GNU
+
+TARGET := hello-sub
+
+SRCS := hello-sub.cpp
+SRCS += $(wildcard ./gen/*.cpp)
+include $(SIMD_HOME)/config/apps/Rules.GNU
+

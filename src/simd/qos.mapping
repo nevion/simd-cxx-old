@@ -1,0 +1,94 @@
+;; This buffer is for notes you don't want to save, and for Lisp evaluation.
+;; If you want to create a file, visit that file with C-x C-f,
+;; then enter the text in that file's own buffer.
+
+    struct TopicQos {
+// Topic
+        DDS::TopicDataQosPolicy topic_data;
+        DDS::DurabilityServiceQosPolicy durability_service;
+
+// Writer
+        DDS::TransportPriorityQosPolicy transport_priority;
+
+// Reader + Writer
+        DDS::DurabilityQosPolicy durability;
+        DDS::DeadlineQosPolicy deadline;
+        DDS::LatencyBudgetQosPolicy latency_budget;
+        DDS::LivelinessQosPolicy liveliness;
+        DDS::ReliabilityQosPolicy reliability;
+        DDS::DestinationOrderQosPolicy destination_order;
+        DDS::HistoryQosPolicy history;
+        DDS::ResourceLimitsQosPolicy resource_limits;
+
+
+        DDS::LifespanQosPolicy lifespan;
+
+        DDS::OwnershipQosPolicy ownership;
+    };
+
+    struct DataWriterQos {
+// Writer
+        DDS::TransportPriorityQosPolicy transport_priority;
+        DDS::OwnershipStrengthQosPolicy ownership_strength;
+        DDS::WriterDataLifecycleQosPolicy writer_data_lifecycle;
+        DDS::LifespanQosPolicy lifespan;
+
+// Reader + Writer
+        DDS::UserDataQosPolicy user_data;
+//Writer+Reader+Topic
+        DDS::DurabilityQosPolicy durability;
+        DDS::DeadlineQosPolicy deadline;
+        DDS::LatencyBudgetQosPolicy latency_budget;
+        DDS::LivelinessQosPolicy liveliness;
+        DDS::ReliabilityQosPolicy reliability;
+        DDS::DestinationOrderQosPolicy destination_order;
+        DDS::HistoryQosPolicy history;
+        DDS::ResourceLimitsQosPolicy resource_limits;
+        DDS::OwnershipQosPolicy ownership;
+
+
+
+
+
+    };
+
+    struct DataReaderQos {
+// Reader
+        DDS::ReaderLifespanQosPolicy reader_lifespan;
+        DDS::ReaderDataLifecycleQosPolicy reader_data_lifecycle;
+        DDS::TimeBasedFilterQosPolicy time_based_filter;
+        DDS::SubscriptionKeyQosPolicy subscription_keys;
+
+// Reader + Writer
+
+        DDS::UserDataQosPolicy user_data;
+
+// Topic + Writer + Reader
+        DDS::DurabilityQosPolicy durability;
+        DDS::DeadlineQosPolicy deadline;
+        DDS::LatencyBudgetQosPolicy latency_budget;
+        DDS::LivelinessQosPolicy liveliness;
+        DDS::ReliabilityQosPolicy reliability;
+        DDS::DestinationOrderQosPolicy destination_order;
+        DDS::HistoryQosPolicy history;
+        DDS::ResourceLimitsQosPolicy resource_limits;
+        DDS::OwnershipQosPolicy ownership;
+
+
+
+    };
+
+
+    struct SubscriberQos {
+        DDS::PresentationQosPolicy presentation;
+        DDS::PartitionQosPolicy partition;
+        DDS::GroupDataQosPolicy group_data;
+        DDS::EntityFactoryQosPolicy entity_factory;
+    };
+
+    struct PublisherQos {
+        DDS::PresentationQosPolicy presentation;
+        DDS::PartitionQosPolicy partition;
+        DDS::GroupDataQosPolicy group_data;
+        DDS::EntityFactoryQosPolicy entity_factory;
+    };

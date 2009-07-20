@@ -1,0 +1,37 @@
+OVERVIEW
+--------
+SIMD is an abstraction layer that provides a very compact way of
+programming implementation of the OMG DDS standard. The implementation
+of SIMD has currently been tested only with OpenSplice DDS, however
+its code is practically implementation dependent
+
+For contribution, feedback or comments please contact 
+Angelo Corsaro<angelo.corsaro@gmail.com>
+
+REQUIREMENTS
+------------
+The requirements for compiling and running Swatch are:
+
+    - OpenSplice DDS v4.1 (http:://www.opensplice.org)
+    - boost v1.39.0
+    - GCC/G++ v4.1 (or higher)
+
+
+BOOST
+-----
+SIMD requires the BOOST_INCLUDE and BOOST_LIB environment variables to
+point to the boost installation containing headers and libraries
+respectively.
+
+
+COMPILING
+---------
+Once you've obtained a copy of SIMD  you need to do the following:
+
+$ ./configure
+$ source simd.env
+$ make
+
+Once you'll have done that check out one of the examples available under $SIMD_HOME/demo
+
+
