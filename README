@@ -10,7 +10,7 @@ Angelo Corsaro<angelo.corsaro@gmail.com>
 
 REQUIREMENTS
 ------------
-The requirements for compiling and running Swatch are:
+The requirements for compiling and running SIMD are:
 
     - OpenSplice DDS v4.1 (http:://www.opensplice.org)
     - boost v1.39.0

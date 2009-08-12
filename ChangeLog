@@ -1,3 +1,15 @@
+2009-08-12  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+	* configure: Now also adds required BOOST libraries from what
+	installed on the target machien (previously BOOST 1.39.0 was
+	assumed)
+	
+	* README: Removed reference to the SWATCH project.
+	
+	* src/simd/writer.hpp: addedd missing "return" on write methods.
+
+	Thanks to Reynald Bourtembourg for catchings this.
+
 2009-07-20  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 	* Release SIMD v0.1-alpha
