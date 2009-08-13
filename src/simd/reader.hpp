@@ -368,7 +368,7 @@ protected:
   boost::shared_ptr<DDS::Subscriber> sub_;
   boost::shared_ptr<DR> reader_;
 
-  DataReader<T>::DataReaderListener* listener_;
+  DataReaderListener* listener_;
 };
 
 

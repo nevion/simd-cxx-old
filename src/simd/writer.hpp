@@ -52,11 +52,11 @@ public:
   
 public:
   DDS::ReturnCode_t write(const T& sample) {
-    writer_->write(sample, DDS::HANDLE_NIL);
+    return writer_->write(sample, DDS::HANDLE_NIL);
   }
   
   DDS::ReturnCode_t write(const T& sample, const DDS::Time_t& timestamp) {
-    writer_->write(sample, timestamp, DDS::HANDLE_NIL);
+    return writer_->write(sample, timestamp, DDS::HANDLE_NIL);
   }
 
   boost::shared_ptr<simd::DataInstanceWriter<T> >
