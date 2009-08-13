@@ -7,6 +7,8 @@
 	* README: Removed reference to the SWATCH project.
 	
 	* src/simd/writer.hpp: addedd missing "return" on write methods.
+        * src/simd/reader.hpp: removed scope qualifier to address compilation
+          issues with gcc 4.2.
 
 	Thanks to Reynald Bourtembourg for catchings this.
 
