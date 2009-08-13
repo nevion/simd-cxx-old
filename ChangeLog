@@ -1,5 +1,9 @@
 2009-08-12  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
+	* src/simd/*.hpp: removed forward declaration of classes within
+	the simd namespace to work around some parsing issues that were
+	preventing proper code-aid in NetBeans.
+
 	* configure: Now also adds required BOOST libraries from what
 	installed on the target machien (previously BOOST 1.39.0 was
 	assumed)
