@@ -16,50 +16,47 @@
 
 namespace simd {
   template <typename T>
-  class DataReader;
+  class DataInstanceReader;
+
 
   template <typename T>
-  class DataInstanceReader;
-}
+  class DataReader 
+  {
+  public:
+    typedef typename topic_data_reader<T>::type DR;
+    typedef typename topic_data_seq<T>::type TSeq;
 
-template <typename T>
-class simd::DataReader 
-{
-public:
-  typedef typename simd::topic_data_reader<T>::type DR;
-  typedef typename simd::topic_data_seq<T>::type TSeq;
+  public:
+    // -- on_data_available signal/slot
+    typedef boost::signals2::signal1<void,
+				     DataReader<T>&>
+    on_data_available_signal_t;
 
-public:
-  // -- on_data_available signal/slot
-  typedef boost::signals2::signal1<void,
-				   DataReader<T>&>
-  on_data_available_signal_t;
+    typedef typename boost::signals2::signal1<void,
+					      DataReader<T>&>::slot_type
+    on_data_available_slot_t;
 
-  typedef typename boost::signals2::signal1<void,
-					    DataReader<T>&>::slot_type
-  on_data_available_slot_t;
+    // -- on_requested_incompatible_qos signal/slot
+    typedef boost::signals2::signal2<void,
+				     DataReader<T>&,
+				     const DDS::RequestedIncompatibleQosStatus&>
+    on_requested_incompatible_qos_signal_t;
 
-  // -- on_requested_incompatible_qos signal/slot
-  typedef boost::signals2::signal2<void,
-                                   DataReader<T>&,
-                                   const DDS::RequestedIncompatibleQosStatus&>
-  on_requested_incompatible_qos_signal_t;
+  typedef typename boost::signals2::signal2<void,
+					    DataReader<T>&,
+					    const DDS::RequestedIncompatibleQosStatus&>::slot_type
+					    on_requested_incompatible_qos_slot_t;
 
-typedef typename boost::signals2::signal2<void,
-					  DataReader<T>&,
-					  const DDS::RequestedIncompatibleQosStatus&>::slot_type
-on_requested_incompatible_qos_slot_t;
+// -- on_liveliness_changed singal/slot
+typedef boost::signals2::signal2<void,
+				 DataReader<T>&,
+				 const DDS::LivelinessChangedStatus&>
+on_liveliness_changed_signal_t;
 
-  // -- on_liveliness_changed singal/slot
-  typedef boost::signals2::signal2<void,
-				   DataReader<T>&,
-				   const DDS::LivelinessChangedStatus&>
-  on_liveliness_changed_signal_t;
-
-typedef typename boost::signals2::signal2<void,
-					  DataReader<T>&,
-					  const DDS::LivelinessChangedStatus&>::slot_type
-on_liveliness_changed_slot_t;
+    typedef typename boost::signals2::signal2<void,
+					      DataReader<T>&,
+					      const DDS::LivelinessChangedStatus&>::slot_type
+    on_liveliness_changed_slot_t;
 
   // -- on_deadline_missed_status_signal_t
   typedef  boost::signals2::signal2<void,
@@ -72,49 +69,49 @@ typedef typename boost::signals2::signal2<void,
 					  const DDS::RequestedDeadlineMissedStatus&>::slot_type
 on_requested_deadline_missed_slot_t;
 
-  // -- on_sample_rejected_signal_t
-  typedef  boost::signals2::signal2<void,
-				    DataReader<T>&,
-				    const DDS::SampleRejectedStatus&>
-  on_sample_rejected_signal_t;
+    // -- on_sample_rejected_signal_t
+    typedef  boost::signals2::signal2<void,
+				      DataReader<T>&,
+				      const DDS::SampleRejectedStatus&>
+    on_sample_rejected_signal_t;
 
-typedef typename boost::signals2::signal2<void,
-					  DataReader<T>&,
-					  const DDS::SampleRejectedStatus&>::slot_type
-on_sample_rejected_slot_t;
+  typedef typename boost::signals2::signal2<void,
+					    DataReader<T>&,
+					    const DDS::SampleRejectedStatus&>::slot_type
+					    on_sample_rejected_slot_t;
 
-  //-- on_subscription_matched_signal_t
-  typedef  boost::signals2::signal2<void,
-				    DataReader<T>&,
-				    const DDS::SubscriptionMatchedStatus&>
-  on_subscription_matched_signal_t;
+//-- on_subscription_matched_signal_t
+typedef  boost::signals2::signal2<void,
+				  DataReader<T>&,
+				  const DDS::SubscriptionMatchedStatus&>
+on_subscription_matched_signal_t;
 
 typedef  typename boost::signals2::signal2<void,
 					   DataReader<T>&,
 					   const DDS::SubscriptionMatchedStatus&>::slot_type
 on_subscription_matched_slot_t;
 
-  // on_sample_lost_signal_t
-  typedef  boost::signals2::signal2<void,
-				    DataReader<T>&,
-				    const DDS::SampleLostStatus&>
-  on_sample_lost_signal_t;
+    // on_sample_lost_signal_t
+    typedef  boost::signals2::signal2<void,
+				      DataReader<T>&,
+				      const DDS::SampleLostStatus&>
+    on_sample_lost_signal_t;
 
-typedef typename boost::signals2::signal2<void,
-					  DataReader<T>&,
-					  const DDS::SampleLostStatus&>::slot_type
-on_sample_lost_slot_t;
+    typedef typename boost::signals2::signal2<void,
+					      DataReader<T>&,
+					      const DDS::SampleLostStatus&>::slot_type
+    on_sample_lost_slot_t;
 
 public:
 
-  DataReader(simd::Topic<T>& topic)
+  DataReader(Topic<T>& topic)
   {
     listener_ = new DataReaderListener(*this);
     sub_ =
-      simd::Runtime::instance()->get_subscriber();
+      Runtime::instance()->get_subscriber();
 
-    simd::TopicQos tqos(topic.get_qos());
-    simd::DataReaderQos drqos(tqos);
+    TopicQos tqos(topic.get_qos());
+    DataReaderQos drqos(tqos);
     DDS::DataReader* r =
       sub_->create_datareader(topic.get_dds_topic(),
 			      drqos,
@@ -122,15 +119,15 @@ public:
 			      DDS::ANY_STATUS);
 
     boost::shared_ptr<DR> tmp(DR::_narrow(r),
-			      simd::mem::DRDeleter(sub_));
+			      mem::DRDeleter(sub_));
     reader_ = tmp;
   }
 
-  DataReader(simd::Topic<T>& topic, const simd::DataReaderQos& qos)
+  DataReader(Topic<T>& topic, const DataReaderQos& qos)
   {
     listener_ = new DataReaderListener(*this);
     sub_ =
-      simd::Runtime::instance()->get_subscriber();
+      Runtime::instance()->get_subscriber();
 
     DDS::DataReader* w =
       sub_->create_datareader(topic.get_dds_topic(),
@@ -139,7 +136,7 @@ public:
 			      DDS::ANY_STATUS);
 
     boost::shared_ptr<DR> tmp(DR::_narrow(w),
-			      simd::mem::DRDeleter(sub_));
+			      mem::DRDeleter(sub_));
     reader_ = tmp;
   }
 
@@ -248,10 +245,10 @@ public:
     return reader_->return_loan(samples, infos);
   }
 
-  boost::shared_ptr<simd::DataInstanceReader<T> >
+  boost::shared_ptr<DataInstanceReader<T> >
   get_instance_reader(const T& key) {
-    boost::shared_ptr<simd::DataInstanceReader<T> >
-      ireader(new simd::DataInstanceReader<T > (reader_, key));
+    boost::shared_ptr<DataInstanceReader<T> >
+      ireader(new DataInstanceReader<T > (reader_, key));
     return ireader;
   }
 
@@ -371,5 +368,5 @@ protected:
   DataReaderListener* listener_;
 };
 
-
+}
 #endif /* AC_SIMD_READER_HPP */

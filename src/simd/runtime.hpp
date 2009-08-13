@@ -13,10 +13,8 @@
 
 
 namespace simd {
-  class Runtime;
-}
 
-class simd::Runtime {
+class Runtime {
 private:
   Runtime();
   
@@ -68,5 +66,5 @@ private:
   boost::shared_ptr<DDS::Subscriber> sub_;
   
 };
-
+}
 #endif /* AC_SIMD_RUNTIME_HPP_ */
