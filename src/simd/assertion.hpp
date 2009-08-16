@@ -4,7 +4,7 @@
 #include <simd/exception.hpp>
 
 
-#define DECLARE_EXCEPTION( ExceptionName)		\
+#define DECLARE_EXCEPTION(ExceptionName)		\
   class ExceptionName : public virtual Exception {	\
   public:						\
   ExceptionName(const std::string& what) throw();	\
@@ -17,17 +17,17 @@
   }; 
 
 
-#define DEFINE_EXCEPTION(ExceptionName)					\
-  ExceptionName::ExceptionName(const std::string& what) throw()		\
+#define DEFINE_EXCEPTION(NP, ExceptionName)					\
+  NP::ExceptionName::ExceptionName(const std::string& what) throw()		\
     : Exception(what) { }						\
-  ExceptionName::ExceptionName(const std::string& what,			\
+  NP::ExceptionName::ExceptionName(const std::string& what,			\
 			       const std::string& where) throw()	\
     : Exception(what, where) { }					\
-  ExceptionName::ExceptionName(const std::string& what,			\
+  NP::ExceptionName::ExceptionName(const std::string& what,			\
 			       const std::string& where,		\
 			       int errno) throw()			\
     : Exception(what, where, errno) { }					\
-  ExceptionName::~ExceptionName() throw() { }	
+  NP::ExceptionName::~ExceptionName() throw() { }
 
 
 namespace simd {

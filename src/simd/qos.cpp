@@ -1,4 +1,7 @@
 #include <simd/qos.hpp>
+#include <simd/assertion.hpp>
+
+#include "config.hpp"
 
 simd::TopicQosInitializer::TopicQosInitializer(boost::shared_ptr<DDS::DomainParticipant> dp)
   : dp_(dp) { }
@@ -31,7 +34,7 @@ simd::TopicQos::set_durability_service(DDS::Duration_t service_cleanup_delay,
 				       DDS::Long max_instances,
 				       DDS::Long max_samples_per_instance)
 {
-  assert(0);
+  simd::Assert::precondition(false, "<TopicQoS::set_durability_service>: not implemented yet", __FILE__);
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -39,14 +42,14 @@ simd::TopicQos::set_durability_service(DDS::Duration_t service_cleanup_delay,
 simd::DataWriterQos::DataWriterQos() :  
   BaseTopicQos<DDS::DataWriterQos, NullInitializer>::BaseTopicQos()  
 { 
-  *((DDS::DataWriterQos*)this) = 
+  *((DDS::DataWriterQos*)this) =
     *(DDS::DomainParticipantFactory::datawriter_qos_default());
 }
 
 simd::DataWriterQos::DataWriterQos(const TopicQos& tqos) :  
   BaseTopicQos<DDS::DataWriterQos, NullInitializer>::BaseTopicQos()  
 { 
-  *((DDS::DataWriterQos*)this) = 
+  *((DDS::DataWriterQos*)this) =
     *(DDS::DomainParticipantFactory::datawriter_qos_default());
   this->copy_topic_qos(tqos);
 }

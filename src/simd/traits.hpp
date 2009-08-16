@@ -13,7 +13,6 @@ namespace simd {
 
   template <typename Topic>
   struct topic_data_seq { };
-
 }
 
 #define REGISTER_TOPIC_TRAITS(TOPIC) \

@@ -63,6 +63,20 @@ namespace simd {
     private:
       boost::shared_ptr<DDS::Subscriber> sub_;  
     };
+
+    template <typename DR>
+    class RCondDeleter {
+    public:
+       RCondDeleter(boost::shared_ptr<DR> reader) : reader_(reader) { }
+       ~RCondDeleter() { }
+    public:
+       void operator()(DDS::ReadCondition* rcond) {
+          reader_->delete_readcondition(rcond);
+       }
+
+    private:
+       boost::shared_ptr<DR> reader_;
+    };
   }
 }
 #endif /* AC_SIMD_DELETER_HPP_ */
