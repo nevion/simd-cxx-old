@@ -1,3 +1,17 @@
+2009-08-17  Angelo Corsaro  <angelocorsaro@gmail.com>
+
+	* demo/ping/ping-*.cpp: updated to reflect changes in the SIMD API.
+
+2009-08-16  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+	* src/simd/condition.cpp:
+	* src/simd/condition.hpp:
+	* src/simd/reader.hpp
+
+	  Added support for waitset and conditions. SIMD also provides a
+	  new kind of Condition which can dispatch call to a specified
+	  functor. 
+
 2009-08-12  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 	* src/simd/*.hpp: removed forward declaration of classes within

@@ -11,6 +11,7 @@
 #include <simd/topic.hpp>
 #include <simd/reader.hpp>
 #include <simd/traits.hpp>
+#include <simd/condition.hpp>
 
 // -- Hello Include
 #include <gen/ccpp_ping.h>
@@ -71,6 +72,13 @@ bool parse_args(int argc, char* argv[])
 }  
 REGISTER_TOPIC_TRAITS(PingType);
 
+class PingDataHandler {
+public:
+  void operator() (simd::DataReader<PingType>& reader) {
+    std::cout << ">> PingDataHandler: Reads Data" << std::endl;
+  }
+};
+
 int main(int argc, char* argv[]) {
   
   if (!parse_args(argc, argv))
@@ -85,12 +93,23 @@ int main(int argc, char* argv[]) {
   if (set_deadline)
     tqos.set_deadline(deadline);
 
-  simd::Topic<PingType> pingTopic(topic, tqos);
-  
+  boost::shared_ptr<simd::Topic<PingType> > 
+    pingTopic(new simd::Topic<PingType>(topic, tqos));
+
   simd::DataReaderQos drqos(tqos);
   drqos.set_keep_last(history);
 
   simd::DataReader<PingType> reader(pingTopic, drqos);
+
+  boost::shared_ptr<DDS::ReadCondition> rc = 
+    reader.create_readcondition();
+
+  PingDataHandler handler;
+
+  simd::ReadConditionCommand<simd::DataReader<PingType>&, PingDataHandler> 
+    rcc(rc, reader, handler);
+
+
 
   PingTypeSeq samples;
   DDS::SampleInfoSeq infos;

@@ -11,5 +11,8 @@ all:
 
 clean:
 	make -C ./src/simd clean $*
+
+cleanall:
+	make -C ./src/simd clean $*
 	make -C ./demo clean $*
 

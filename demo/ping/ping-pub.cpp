@@ -81,7 +81,8 @@ int main(int argc, char* argv[]) {
   simd::TopicQos tqos;
   tqos.set_best_effort();
   tqos.set_volatile();
-  simd::Topic<PingType> pingTopic(topic, tqos);
+  boost::shared_ptr<simd::Topic<PingType> > 
+    pingTopic(new simd::Topic<PingType>(topic, tqos));
 
   simd::DataWriterQos dwqos(tqos);
   simd::DataWriter<PingType> writer(pingTopic, dwqos);
