@@ -7,8 +7,6 @@
 // -- SIMD Include
 #include <traits.hpp>
 
-#include "qos.hpp"
-
 namespace simd {
 
    /**
