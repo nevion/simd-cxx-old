@@ -15,6 +15,8 @@ namespace simd {
    /**
     * The <code>DataWriter</code> class provides a generic API for
     * writing instances samples for a specific Topic.
+    *
+    * @author Angelo Corsaro <mailto:angelo.corsaro@gmail.com>
     */
    template <typename T>
    class DataWriter {
