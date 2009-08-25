@@ -57,12 +57,26 @@ simd::ExecutableWaitSet::wait(const DDS::Duration_t& timeout) {
 	waitset_.wait(cseq, timeout);
 	ExecutableConditionVector ecvec;
 
-	for (unsigned int i = 0; i < cseq.length(); ++i) {
-		ExecutableCondition* ec = dynamic_cast<ExecutableCondition*>(cseq[i].in());
-		ecvec.push_back(boost::shared_ptr<ExecutableCondition>(ec));
+	for (unsigned int i = 0; i < cond_vec_.size(); ++i) {
+		if (cond_vec_[i]->get_trigger_value())
+			ecvec.push_back(cond_vec_[i]);
 	}
 
 	return ecvec;
+}
+
+void
+simd::ExecutableWaitSet::dispatch(const DDS::Duration_t& timeout) {
+	DDS::ConditionSeq cseq;
+	waitset_.wait(cseq, timeout);
+	for (unsigned int i = 0; i < cond_vec_.size(); ++i)
+			if (cond_vec_[i]->get_trigger_value())
+				cond_vec_[i]->execute();
+}
+
+void
+simd::ExecutableWaitSet::dispatch() {
+	this->dispatch(DDS::DURATION_INFINITE);
 }
 
 simd::ExecutableConditionVector

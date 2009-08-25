@@ -10,7 +10,6 @@
 // -- DDS Includes
 #include <dds_dcps.h>
 #include <ccpp_dds_dcps.h>
-#include <ccpp_Condition_impl.h>
 
 // -- SIMD Includes
 #include <simd/config.hpp>
@@ -59,6 +58,7 @@ namespace simd {
 
    public:
 
+
       virtual DDS::SampleStateMask get_sample_state_mask() {
          return rcond_->get_sample_state_mask();
       }
@@ -83,7 +83,7 @@ namespace simd {
       virtual DDS::Boolean get_trigger_value() {
     	  return rcond_->get_trigger_value();
       }
-      
+
    protected:
          friend class ExecutableWaitSet;
          DDS::Condition* get_dds_condition() {

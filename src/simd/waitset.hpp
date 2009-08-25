@@ -60,11 +60,25 @@ public:
 	::simd::ExecutableConditionVector wait(const DDS::Duration_t& timeout);
 
 	/**
-	 * Waits for one of the attached condition to trigger.
+	 * Waits for one of the attached conditions to trigger.
 	 *
 	 * @return a vector containing the triggered conditions
 	 */
 	::simd::ExecutableConditionVector wait();
+
+	/**
+	 * Waits for at least one of the attached conditions to  trigger and then
+	 * dispatches the events.
+	 *
+	 */
+	void dispatch();
+
+	/**
+	 * Waits for at least one of the attached conditions to  trigger and then
+	 * dispatches the events, or, times out and unblocks.
+	 *
+	 */
+	void dispatch(const ::DDS::Duration_t& timeout);
 
 	ExecutableWaitSet& operator +=(const ::simd::ExecutableConditionRef& cond);
 	ExecutableWaitSet& operator -=(const ::simd::ExecutableConditionRef& cond);
