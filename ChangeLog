@@ -1,3 +1,8 @@
+2009-08-25  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+	* src/simd/condition.hpp:
+	* src/simd/waitset.hpp: Fixed implementation for ExecutableConditions.
+
 2009-08-21  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 	* src/simd/simd.hpp:
