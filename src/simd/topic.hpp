@@ -12,120 +12,150 @@
 
 namespace simd {
 
-   class TopicDescription {
-   public:
-      virtual ~TopicDescription();
-      
-   public:
-      virtual std::string get_name() = 0;
-      virtual std::string get_type_name() = 0;
-      virtual boost::shared_ptr<DDS::DomainParticipant> get_participant() = 0;
-   };
+class TopicDescription {
+public:
+	virtual ~TopicDescription();
 
-   template <typename T>
-   class Topic : public TopicDescription {
-   public:
+public:
+	virtual std::string get_name() = 0;
+	virtual std::string get_type_name() = 0;
+	virtual boost::shared_ptr<DDS::DomainParticipant> get_participant() = 0;
+};
 
-      Topic(const std::string& name, const std::string type_name)
-         : name_(name)
-      {
-         TopicQos qos;
-         this->init(name, type_name, qos);
-      }
+template <typename T>
+class TopicImpl : public TopicDescription {
+public:
 
-      Topic(const std::string& name)
-         : name_(name)
-      {
-         TopicQos qos;
-         std::string type_name(ts_.get_type_name());
-         this->init(name, type_name, qos);
-      }
+	TopicImpl(const std::string& name, const std::string type_name)
+	: name_(name)
+	{
+		TopicQos qos;
+		this->init(name, type_name, qos);
+	}
 
-      Topic(const std::string& name, const TopicQos& qos)
-         :  name_(name),
-            qos_(qos)
-      {
-         std::string type_name(ts_.get_type_name());
-         this->init(name, type_name, qos);
-      }
+	TopicImpl(const std::string& name)
+	: name_(name)
+	{
+		TopicQos qos;
+		std::string type_name(ts_.get_type_name());
+		this->init(name, type_name, qos);
+	}
 
-      Topic(const std::string& name,
-            const std::string& type_name,
-            const TopicQos& qos)
-      : name_(name),
-      qos_(qos) {
-         this->init(name, type_name, qos);
-      }
+	TopicImpl(const std::string& name, const TopicQos& qos)
+	:  name_(name),
+	qos_(qos)
+	{
+		std::string type_name(ts_.get_type_name());
+		this->init(name, type_name, qos);
+	}
 
-      virtual ~Topic() {
-         boost::shared_ptr<DDS::DomainParticipant> dp =
-                 Runtime::instance()->get_participant();
-         dp->delete_topic(t_);
-      }
+	TopicImpl(const std::string& name,
+			const std::string& type_name,
+			const TopicQos& qos)
+	: name_(name),
+	qos_(qos) {
+		this->init(name, type_name, qos);
+	}
 
-   private:
+	virtual ~TopicImpl() {
+		boost::shared_ptr<DDS::DomainParticipant> dp =
+				Runtime::instance()->get_participant();
+		dp->delete_topic(t_);
+	}
 
-      void init(const std::string& name,
-              const std::string type_name,
-              const TopicQos& qos) {
-         boost::shared_ptr<DDS::DomainParticipant> dp =
-                 Runtime::instance()->get_participant();
+private:
 
-         ts_.register_type(dp.get(),
-                 type_name.c_str());
+	void init(const std::string& name,
+			const std::string type_name,
+			const TopicQos& qos) {
+		boost::shared_ptr<DDS::DomainParticipant> dp =
+				Runtime::instance()->get_participant();
 
-         t_ = dp->create_topic(name.c_str(),
-                 type_name.c_str(),
-                 qos,
-                 0,
-                 DDS::ANY_STATUS);
-      }
+		ts_.register_type(dp.get(),
+				type_name.c_str());
 
-   public:
+		t_ = dp->create_topic(name.c_str(),
+				type_name.c_str(),
+				qos,
+				0,
+				DDS::ANY_STATUS);
+	}
 
-      TopicQos get_qos() {
-         return qos_;
-      }
+public:
 
-      DDS::ReturnCode_t set_qos(const TopicQos& qos) {
-	DDS::ReturnCode_t rc = t_->set_qos(qos);
-         if (rc == DDS::RETCODE_OK)
-            qos_ = qos;
-         return rc;
-      }
+	TopicQos
+	get_qos() const {
+		return qos_;
+	}
 
-      // TODO: Add other methods
-      // void set_listener();
+	DDS::ReturnCode_t
+	set_qos(const TopicQos& qos) {
+		DDS::ReturnCode_t rc = t_->set_qos(qos);
+		if (rc == DDS::RETCODE_OK)
+			qos_ = qos;
+		return rc;
+	}
 
-      //private:
-      //  friend template <typename W, typename D> class ::Datawriter;
-   public:
+	// TODO: Add other methods
+	// void set_listener();
 
-      DDS::Topic* get_dds_topic() {
-         return t_;
-      }
+	//private:
+	//  friend template <typename W, typename D> class ::Datawriter;
+	public:
 
-   public:
-      // -- Methods inherited from TopicDescription
-      virtual std::string get_name() {
-         return name_;
-      }
+	DDS::Topic*
+	get_dds_topic() const {
+		return t_;
+	}
 
-      virtual std::string get_type_name() {
-         return std::string(ts_.get_type_name());
-      }
+	public:
+	// -- Methods inherited from TopicDescription
+	virtual std::string
+	get_name() {
+		return name_;
+	}
 
-      virtual boost::shared_ptr<DDS::DomainParticipant>
-      get_participant() {
-         return Runtime::instance()->get_participant();
-      }
-   private:
-      std::string name_;
-      TopicQos qos_;
-      typename topic_type_support<T>::type ts_;
-      DDS::Topic* t_;
+	virtual std::string
+	get_type_name() {
+		return std::string(ts_.get_type_name());
+	}
 
-   };
+	virtual boost::shared_ptr<DDS::DomainParticipant>
+	get_participant() {
+		return Runtime::instance()->get_participant();
+	}
+	private:
+	std::string name_;
+	TopicQos qos_;
+	typename topic_type_support<T>::type ts_;
+	DDS::Topic* t_;
+
+};
+
+template <typename T>
+class Topic : public ::boost::shared_ptr< TopicImpl<T> > {
+public:
+	Topic(const std::string& name, const std::string type_name)
+	{
+		this->reset(new TopicImpl<T>(name, type_name));
+	}
+
+	Topic(const std::string& name) {
+		this->reset(new TopicImpl<T>(name));
+	}
+
+	Topic(const std::string& name, const TopicQos& qos)
+	{
+		this->reset(new TopicImpl<T>(name, qos));
+	}
+
+	Topic(const std::string& name,
+			const std::string& type_name,
+			const TopicQos& qos)
+	{
+		this->reset(new TopicImpl<T>(name, type_name, qos));
+	}
+};
 }
 
 #endif /* AC_SIMD_TOPIC_HPP */

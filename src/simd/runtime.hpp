@@ -43,6 +43,7 @@ public:
   // TODO: Implement this method1
   //  void set_listener(shared_ptr<DDS::DomainParticipantListener> listener);
 
+  //@TODO: Provide SIMD facades to the DomainParticipant, Publisher, Subscriber, etc.
   /**
    * Get the default participant.
    */

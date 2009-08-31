@@ -1,3 +1,28 @@
+2009-08-31  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+	* src/simd/writer.hpp: 
+
+	* src/simd/waitset.hpp: 
+	* src/simd/waitset.cpp: 
+
+	* src/simd/topic.hpp: 
+
+	* src/simd/runtime.hpp: 
+
+	* src/simd/reader.hpp: 
+
+	* src/simd/memory.cpp: 
+
+	* src/simd/condition.hpp: 
+	* src/simd/condition.cpp: 
+
+	  Made Topic(s)/DataReader(s)/DataWriter(s) as reference
+	  objects. Now in the API the boost::shared_ptr is no more
+	  visible, this is used internally yet the user gets reference
+	  sematics for all the DDS entities. Othern than making the API
+	  simpler, this also makes it safer.
+
+	  
 2009-08-25  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 	* src/simd/condition.hpp:

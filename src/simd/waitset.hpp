@@ -9,40 +9,40 @@
 
 
 namespace simd {
-	class ExecutableWaitSet;
+	class ActiveWaitSet;
 }
 
 /**
- * The <code>ExecutableWaitSet</code> can be used in
+ * The <code>ActiveWaitSet</code> can be used in
  * alternative to <code>DDS::WaitSet</code> to leverage
- * the automatic dispatching provided by <code>ExecutableCondition</code>.
+ * the automatic dispatching provided by <code>ActiveCondition</code>.
  *
  * @author Angelo Corsaro <mailto:angelo.corsaro@gmail.com>
  */
-class simd::ExecutableWaitSet : public ::boost::noncopyable {
+class simd::ActiveWaitSet : public ::boost::noncopyable {
 public:
-	typedef ::simd::ExecutableConditionVector::iterator iterator;
+	typedef ::simd::ActiveConditionVector::iterator iterator;
 
 public:
 	/**
-	 * Creates a new <code>ExecutableWaitSet</code> which has not
+	 * Creates a new <code>ActiveWaitSet</code> which has not
 	 * condition attached to it.
 	 */
-	ExecutableWaitSet();
+	ActiveWaitSet();
 
 	/**
-	 * Creates a new <code>ExecutableWaitSet</code> and attaches the
+	 * Creates a new <code>ActiveWaitSet</code> and attaches the
 	 * condition passed to the ctor.
 	 *
 	 * @param cond the condition to be attached to this wait-set.
 	 */
-	ExecutableWaitSet(const ::simd::ExecutableConditionRef& cond);
+	ActiveWaitSet(const ::simd::ActiveCondition& cond);
 
 	/**
 	 * Destroys this and unregisters all the conditions that are
 	 * still attached.
 	 */
-	~ExecutableWaitSet();
+	~ActiveWaitSet();
 
 public:
 	/**
@@ -57,14 +57,14 @@ public:
 	 * @return a vector containing the triggered conditions
 	 *
 	 */
-	::simd::ExecutableConditionVector wait(const DDS::Duration_t& timeout);
+	::simd::ActiveConditionVector wait(const DDS::Duration_t& timeout);
 
 	/**
 	 * Waits for one of the attached conditions to trigger.
 	 *
 	 * @return a vector containing the triggered conditions
 	 */
-	::simd::ExecutableConditionVector wait();
+	::simd::ActiveConditionVector wait();
 
 	/**
 	 * Waits for at least one of the attached conditions to  trigger and then
@@ -80,18 +80,18 @@ public:
 	 */
 	void dispatch(const ::DDS::Duration_t& timeout);
 
-	ExecutableWaitSet& operator +=(const ::simd::ExecutableConditionRef& cond);
-	ExecutableWaitSet& operator -=(const ::simd::ExecutableConditionRef& cond);
+	ActiveWaitSet& operator +=(const ::simd::ActiveCondition& cond);
+	ActiveWaitSet& operator -=(const ::simd::ActiveCondition& cond);
 
-	DDS::ReturnCode_t attach(const ::simd::ExecutableConditionRef& cond);
-	DDS::ReturnCode_t detach(const ::simd::ExecutableConditionRef& cond);
+	DDS::ReturnCode_t attach(const ::simd::ActiveCondition& cond);
+	DDS::ReturnCode_t detach(const ::simd::ActiveCondition& cond);
 
 	iterator begin();
 	iterator end();
 
 private:
 	::DDS::WaitSet waitset_;
-	::simd::ExecutableConditionVector cond_vec_;
+	::simd::ActiveConditionVector cond_vec_;
 };
 
 
