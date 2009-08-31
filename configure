@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "export SIMD_HOME=$PWD" > ./simd.env
-echo "export LD_LIBRARY_PATH=$SIMD_HOME/lib:$LD_LIBRARY_PATH" >> ./simd.env
+echo "export LD_LIBRARY_PATH=$PWD/lib:$LD_LIBRARY_PATH" >> ./simd.env
 cp ./simd.env ~/.simd.env
 chmod +x simd.env
 mkdir ./bin &>/dev/null
