@@ -98,7 +98,7 @@ int main(int argc, char* argv[]) {
     ss.str("");
     sample.name = DDS::string_dup(tmp.c_str());
     std::cout << "<<= " <<  sample.name << std::endl;
-    writer.write(sample);
+    writer->write(sample);
     usleep(period*1000);
   }
   std::cout << "[done]" << std::endl;

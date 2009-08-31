@@ -75,15 +75,15 @@ int main(int argc, char* argv[]) {
   if (!parse_args(argc, argv))
     return 1;
 
-  // -- init the simd runtime
+  // -- init the simd runtime to use the default DDS partition, which
+  // -- as per the DDS standard is ""
   simd::Runtime::init("");
   
   simd::TopicQos tqos;
   tqos.set_best_effort();
   tqos.set_volatile();
-  boost::shared_ptr<simd::Topic<PingType> > 
-    pingTopic(new simd::Topic<PingType>(topic, tqos));
-
+  simd::Topic<PingType> pingTopic(topic, tqos);
+  
   simd::DataWriterQos dwqos(tqos);
   simd::DataWriter<PingType> writer(pingTopic, dwqos);
 
@@ -93,7 +93,7 @@ int main(int argc, char* argv[]) {
   d.vendor = name.c_str();
   for (int i = 0; i < N; ++i) {
     
-    writer.write(d);
+    writer->write(d);
     std::cout << ".";
     std::cout.flush();
     d.counter++;

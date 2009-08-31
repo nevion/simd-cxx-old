@@ -77,17 +77,18 @@ bool parse_args(int argc, char* argv[])
 }  
 
 struct DataHandler {
-  void handle_data(simd::DataReader<PingType>& reader) {
+
+  void handle_data(simd::DataReader<PingType> reader) {
     PingTypeSeq samples;
     DDS::SampleInfoSeq infos;
     
-    reader.read(samples, infos);
+    reader->read(samples, infos);
     for (int i = 0; i < samples.length(); ++i) {
       std::cout << samples[i].vendor << " . " << samples[i].counter 
 		<< std::endl;
       samples_to_read--;
     }
-    reader.return_loan(samples, infos);
+    reader->return_loan(samples, infos);
     if (samples_to_read <= 0)
       completion_barrier.wait();
   }
@@ -112,8 +113,7 @@ int main(int argc, char* argv[]) {
   tqos.set_best_effort();
   tqos.set_volatile();
 
-  boost::shared_ptr<simd::Topic<PingType> > 
-    pingTopic(new simd::Topic<PingType>(topic, tqos));
+  simd::Topic<PingType> pingTopic(topic, tqos);
 
   
   simd::DataReaderQos drqos(tqos);
@@ -121,15 +121,16 @@ int main(int argc, char* argv[]) {
   simd::DataReader<PingType> reader(pingTopic, drqos);
   
   boost::signals2::connection con_data = 
-    reader.on_data_available_signal_connect(boost::bind(&DataHandler::handle_data, &dh, _1));
+    reader->on_data_available_signal_connect(boost::bind(&DataHandler::handle_data, &dh, _1));
+
 
   boost::signals2::connection con_liv = 
-    reader.on_liveliness_changed_signal_connect(boost::bind(&DataHandler::handle_liveliness_change, 
+    reader->on_liveliness_changed_signal_connect(boost::bind(&DataHandler::handle_liveliness_change, 
 						    &dh, 
 						    _1, 
 						    _2));
   
-
+  
   completion_barrier.wait();
   con_data.disconnect();
   con_liv.disconnect();

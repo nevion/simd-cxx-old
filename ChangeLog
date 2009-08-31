@@ -1,5 +1,16 @@
 2009-08-31  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
+	* demo/ping/ping-sub.cpp: 
+	* demo/ping/ping-pub.cpp: 
+	* demo/ping/ping-asub.cpp: 
+
+	* demo/hello/hello-sub.cpp: 
+	* demo/hello/hello-pub.cpp: 
+
+	  Updated demo examples to reflect API changes described below.
+
+
+
 	* src/simd/writer.hpp: 
 
 	* src/simd/waitset.hpp: 

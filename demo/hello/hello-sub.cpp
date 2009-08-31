@@ -59,13 +59,16 @@ int main(int argc, char* argv[]) {
   if (!parse_args(argc, argv)) 
     return 1;
   
+  // -- Init SIMD
   simd::Runtime::init();
   
+  // -- Create a Topic
   simd::TopicQos tqos;
   tqos.set_reliable();
   tqos.set_transient();
   simd::Topic<swatch::hello> helloTopic("helloTopic", tqos);
 
+  // Create a DataReader
   simd::DataReaderQos drqos(tqos);  
   drqos.set_keep_last(history_depth);
   simd::DataReader<swatch::hello> reader(helloTopic, drqos);
@@ -73,17 +76,21 @@ int main(int argc, char* argv[]) {
   swatch::helloSeq samples;
   DDS::SampleInfoSeq infos;
   
+  // Read the data
   while (true) {
-    reader.read(samples, infos);
+    reader->read(samples, infos);
     
     for (int i = 0; i < samples.length(); ++i) {
       std::cout << "=>> " <<  samples[i].name << std::endl;
     }
     if (samples.length() > 0)
       std::cout << "--" << std::endl;
-    reader.return_loan(samples, infos);
-    usleep(period*1000);
 
+    // Notice that since the container had initially a lengh of 0
+    // (zero) we are loaning the memory and thus need to return it
+    // back to the middleware.
+    reader->return_loan(samples, infos);
+    usleep(period*1000);
   }
   
   return 0;
