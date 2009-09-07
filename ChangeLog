@@ -1,3 +1,15 @@
+2009-09-08  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+	* src/simd/runtime.hpp: 
+	* src/simd/memory.hpp: 
+	  Removed OpenSplice DDS includes	
+	
+	* src/simd/instance_writer.hpp: 
+	* src/simd/writer.hpp: 
+	  Removed explicit dependency from boost::shared_ptr.
+
+	* src/simd/config.hpp: Added OpenSplice DDS specific includes.
+
 2009-08-31  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 	* demo/ping/ping-sub.cpp: 
