@@ -82,10 +82,9 @@ public:
 	}
 
 
-	::boost::shared_ptr<DataInstanceWriter<T> >
+	DataInstanceWriter<T>
 	register_instance(const T& key) {
-		boost::shared_ptr<DataInstanceWriter<T> >
-		iwriter(new DataInstanceWriter<T > (writer_, key));
+		DataInstanceWriter<T> iwriter(writer_, key);
 		return iwriter;
 	}
 

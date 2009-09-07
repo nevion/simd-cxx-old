@@ -7,10 +7,7 @@
 // -- Boost Includes
 #include <boost/shared_ptr.hpp>
 
-// -- OpenSplice DDS Includes
-#include <dds_dcps.h>
-#include <ccpp_dds_dcps.h>
-
+#include <simd/config.hpp>
 
 namespace simd {
 
