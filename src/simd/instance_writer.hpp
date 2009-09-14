@@ -43,7 +43,7 @@ public:
 	* @param data the sample.
 	*/
 	DDS::ReturnCode_t write(const T& data) {
-		writer_->write(data, handle_);
+		return writer_->write(data, handle_);
 	}
 
 	/**
@@ -53,23 +53,23 @@ public:
 	* @param timestamp the timestamp
 	*/
 	DDS::ReturnCode_t write(const T& sample, const DDS::Time_t& timestamp) {
-		writer_->write(sample, timestamp, handle_);
+		return writer_->write(sample, timestamp, handle_);
 	}
 
 	DDS::ReturnCode_t unregister() {
-		writer_->unregister_instance(key_, handle_);
+		return writer_->unregister_instance(key_, handle_);
 	}
 
 	DDS::ReturnCode_t unregister(const DDS::Time_t& timestamp) {
-		writer_->unregister_instance_w_timestamp(key_, handle_, timestamp);
+		return writer_->unregister_instance_w_timestamp(key_, handle_, timestamp);
 	}
 
 	DDS::ReturnCode_t dispose() {
-		writer_->dispose();
+		return writer_->dispose();
 	}
 
 	DDS::ReturnCode_t dispose(const DDS::Time_t& timestamp) {
-		writer_->dispose_instance_w_timestamp(key_, handle_, timestamp);
+		return writer_->dispose_instance_w_timestamp(key_, handle_, timestamp);
 	}
 
 	DDS::ReturnCode_t

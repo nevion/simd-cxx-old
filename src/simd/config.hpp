@@ -8,6 +8,10 @@
 // -- SIMD Includes
 #include <simd/assertion_impl.hpp>
 
+
+#define SIMD_UNUSED_ARG(x) \
+  do { } while (&x == 0)!
+
 namespace simd {
 #if (DISABLE_ASSERTION == 1)
   typedef AssertBase<NullAssertImpl> Assert;
