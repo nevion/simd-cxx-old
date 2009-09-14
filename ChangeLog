@@ -1,3 +1,20 @@
+2009-09-15  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+	* src/simd/reader.hpp: 
+	* src/simd/config.hpp: 
+	* src/simd/condition.hpp: 
+	* src/simd/condition.cpp: 
+
+	  Updated condition to simplify their creation and allow for safe
+	  downcasting when needed (e.g. when getting conditions out of a
+	  WaitSet).
+
+	* src/simd/instance_writer.hpp: Removed some warning due to some
+	missing return vals.
+	
+	* demo/ping/ping-sub.cpp: Updated to show the use of the extended
+	Condition API.
+
 2009-09-08  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 	* src/simd/runtime.hpp: 
