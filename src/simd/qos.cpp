@@ -3,7 +3,7 @@
 
 #include "config.hpp"
 
-simd::TopicQosInitializer::TopicQosInitializer(boost::shared_ptr<DDS::DomainParticipant> dp)
+simd::TopicQosInitializer::TopicQosInitializer(simd::DomainParticipant dp)
   : dp_(dp) { }
 
 simd::TopicQosInitializer::~TopicQosInitializer() { }
@@ -153,7 +153,7 @@ simd::DataReaderQos::set_time_filter(DDS::Duration_t min_separation)
 
 //////////////////////////////////////////////////////////////////////////////
 
-simd::PubQosInitializer::PubQosInitializer(boost::shared_ptr<DDS::DomainParticipant> dp) : 
+simd::PubQosInitializer::PubQosInitializer(simd::DomainParticipant dp) :
   dp_(dp) { }
 
 simd::PubQosInitializer::~PubQosInitializer() { }
@@ -166,7 +166,7 @@ simd::PubQosInitializer::operator()(DDS::PublisherQos& qos)
 
 //////////////////////////////////////////////////////////////////////////////
 
-simd::SubQosInitializer::SubQosInitializer(boost::shared_ptr<DDS::DomainParticipant> dp) : 
+simd::SubQosInitializer::SubQosInitializer(simd::DomainParticipant dp) :
   dp_(dp) { }
 
 simd::SubQosInitializer::~SubQosInitializer() { }

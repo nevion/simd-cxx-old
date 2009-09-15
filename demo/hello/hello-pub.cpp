@@ -70,8 +70,8 @@ int main(int argc, char* argv[]) {
   if (!parse_args(argc, argv))
     return 1;
 
-  // -- init the simd runtime
-  simd::Runtime::init();
+  // -- start the simd runtime
+  simd::Runtime::start();
   
   simd::TopicQos tqos;
   tqos.set_reliable();
@@ -102,5 +102,6 @@ int main(int argc, char* argv[]) {
     usleep(period*1000);
   }
   std::cout << "[done]" << std::endl;
+  simd::Runtime::stop();
   return 0;
 }

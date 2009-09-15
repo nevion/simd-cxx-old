@@ -15,27 +15,10 @@
 // -- SIMD Includes
 #include <simd/config.hpp>
 
-#define DEFINE_HANDLE_BODY_TRAITS(H, B)		\
-  template<> struct handle_body_ptr<H> {	\
-    typedef B* type;				\
-  };						\
-  template<> struct handle_body_type<H> {	\
-    typedef B type;				\
-  };						\
-  template<> struct handle_body_ref<H> {	\
-    typedef B& ref;				\
-  };
-
-
 namespace simd {
 
   class ActiveWaitSet;
   class ActiveCondition;
-
-  // -- Handle/Body Traits classes
-  template <typename E> struct handle_body_type { };
-  template <typename E> struct handle_body_ptr { };
-  template <typename E> struct handle_body_ref { };
 
 
   /**

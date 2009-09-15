@@ -91,8 +91,8 @@ int main(int argc, char* argv[]) {
   if (!parse_args(argc, argv))
     return 1;
 
-  // -- init the simd runtime
-  simd::Runtime::init("");
+  // -- start the simd runtime
+  simd::Runtime::start("");
 
   simd::TopicQos tqos;
   tqos.set_best_effort();
@@ -132,6 +132,6 @@ int main(int argc, char* argv[]) {
     }
   }
   
-
+  simd::Runtime::stop();
   return 0;
 }

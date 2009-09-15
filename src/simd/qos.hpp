@@ -10,7 +10,7 @@
 
 // -- simd Includes
 #include <simd/runtime.hpp>
-
+#include <simd/domain.hpp>
 
 namespace simd {
 
@@ -20,8 +20,8 @@ namespace simd {
   class BaseTopicQos : public DDS_QOS {
   public:
     BaseTopicQos() {
-      boost::shared_ptr<DDS::DomainParticipant> dp = 
-	Runtime::instance()->get_participant();
+   	 ::simd::DomainParticipant dp =
+   			 Runtime::instance()->get_participant();
       INITIALIZER initializer(dp);
       initializer(*this);
     }
@@ -110,13 +110,13 @@ namespace simd {
 
   class TopicQosInitializer {
   public:
-    TopicQosInitializer(boost::shared_ptr<DDS::DomainParticipant> dp);
+    TopicQosInitializer(simd::DomainParticipant dp);
     ~TopicQosInitializer();
   public:
     void operator()(DDS::TopicQos& qos);
 
   private:
-    boost::shared_ptr<DDS::DomainParticipant> dp_;
+    ::simd::DomainParticipant dp_;
   };
 
   //////////////////////////////////////////////////////////////////////////////
@@ -146,7 +146,7 @@ namespace simd {
 
   class NullInitializer {
   public:
-    NullInitializer(boost::shared_ptr<DDS::DomainParticipant>) { }
+    NullInitializer(::simd::DomainParticipant) { }
     ~NullInitializer() { }
   public:
     template <typename QOS> void operator()(QOS& qos) { }
@@ -204,8 +204,8 @@ namespace simd {
   class BasePubSubQos : public DDS_QOS {
   public:
     BasePubSubQos() {
-      boost::shared_ptr<DDS::DomainParticipant> dp = 
-	Runtime::instance()->get_participant();
+      ::simd::DomainParticipant dp =
+      		Runtime::instance()->get_participant();
       INITIALIZER initializer(dp);
       initializer(*this);
     }
@@ -250,13 +250,13 @@ namespace simd {
 
   class PubQosInitializer {
   public:
-    PubQosInitializer(boost::shared_ptr<DDS::DomainParticipant> dp);
+    PubQosInitializer(simd::DomainParticipant dp);
     ~PubQosInitializer();
   public:
     void operator()(DDS::PublisherQos& qos);
   
   private:
-    boost::shared_ptr<DDS::DomainParticipant> dp_;
+   ::simd::DomainParticipant dp_;
   };
 
   //////////////////////////////////////////////////////////////////////////////
@@ -271,13 +271,13 @@ namespace simd {
 
   class SubQosInitializer {
   public:
-    SubQosInitializer(boost::shared_ptr<DDS::DomainParticipant> dp);
+    SubQosInitializer(simd::DomainParticipant dp);
     ~SubQosInitializer();
   public:
     void operator()(DDS::SubscriberQos& qos);
 
   private:
-    boost::shared_ptr<DDS::DomainParticipant> dp_;
+    ::simd::DomainParticipant dp_;
   };
 
   //////////////////////////////////////////////////////////////////////////////

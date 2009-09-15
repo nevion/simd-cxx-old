@@ -75,9 +75,9 @@ int main(int argc, char* argv[]) {
   if (!parse_args(argc, argv))
     return 1;
 
-  // -- init the simd runtime to use the default DDS partition, which
+  // -- start the simd runtime to use the default DDS partition, which
   // -- as per the DDS standard is ""
-  simd::Runtime::init("");
+  simd::Runtime::start("");
   
   simd::TopicQos tqos;
   tqos.set_best_effort();
@@ -100,5 +100,6 @@ int main(int argc, char* argv[]) {
     usleep(period*1000);
   }
   std::cout << std::endl;
+  simd::Runtime::stop();
   return 0;
 }

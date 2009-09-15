@@ -59,8 +59,8 @@ int main(int argc, char* argv[]) {
   if (!parse_args(argc, argv)) 
     return 1;
   
-  // -- Init SIMD
-  simd::Runtime::init();
+  // -- Start SIMD
+  simd::Runtime::start();
   
   // -- Create a Topic
   simd::TopicQos tqos;
@@ -93,5 +93,6 @@ int main(int argc, char* argv[]) {
     usleep(period*1000);
   }
   
+  simd::Runtime::stop();
   return 0;
 }

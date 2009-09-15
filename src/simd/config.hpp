@@ -7,7 +7,7 @@
 
 // -- SIMD Includes
 #include <simd/assertion_impl.hpp>
-
+#include <simd/traits.hpp>
 
 #define SIMD_UNUSED_ARG(x) \
   do { } while (&x == 0)!
