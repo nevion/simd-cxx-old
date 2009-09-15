@@ -1,5 +1,31 @@
 2009-09-15  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
+	* src/simd/publisher.hpp: 
+	* src/simd/publisher.cpp: 
+	 
+	  SIMD Publisher.
+
+	* src/simd/traits.hpp: Moved handle_body_traits here from condition.hpp
+
+	* src/simd/topic.hpp: Now owns reference to DomainParticipant
+
+	* src/simd/runtime.hpp: * src/simd/runtime.cpp: Added finalization
+	method and changed <init> to <start>.
+
+	* src/simd/qos.hpp: 
+	* src/simd/qos.cpp: 
+
+	  Reformatting.
+
+	* demo/ping/ping-sub.cpp: 
+	* demo/ping/ping-pub.cpp: 
+	* demo/ping/ping-asub.cpp: 
+
+	* demo/hello/hello-sub.cpp: 
+	* demo/hello/hello-pub.cpp: 
+
+	  Updated demos to reflect changes into the Runtime API.
+
 	* src/simd/reader.hpp: 
 	* src/simd/config.hpp: 
 	* src/simd/condition.hpp: 
