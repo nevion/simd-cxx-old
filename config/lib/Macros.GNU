@@ -1,3 +1,4 @@
+#-*-Makefile-*-
 include $(SIMD_HOME)/config/lib/MACROS.COMMOM.GNU
 
 LD_FLAGS = --shared

@@ -6,14 +6,6 @@ cp ./simd.env ~/.simd.env
 chmod +x simd.env
 mkdir ./bin &>/dev/null
 mkdir ./lib &>/dev/null
-cp ./config/lib/LIBRARY.MACROS.GNU.org  ./config/lib/LIBRARY.MACROS.GNU
-echo "SIMD_LD_LIBS+=-l`basename /home/corsaro/Library/boost_1_39_0/libboost_signals-*-mt-*.so .so`" > ./config/lib/BOOST.MACROS.GNU
-echo "SIMD_LD_LIBS+=-l`basename /home/corsaro/Library/boost_1_39_0/libboost_program_options-*-mt-*.so .so`" >> ./config/lib/BOOST.MACROS.GNU
-echo "SIMD_LD_LIBS+=-l`basename /home/corsaro/Library/boost_1_39_0/libboost_thread-*-mt-*.so .so`" >> ./config/lib/BOOST.MACROS.GNU
-
-sed -i s/lib// ./config/lib/BOOST.MACROS.GNU
-
-cat ./config/lib/BOOST.MACROS.GNU >> ./config/lib/LIBRARY.MACROS.GNU
 
 echo ""
 echo SIMD configuration completed. 

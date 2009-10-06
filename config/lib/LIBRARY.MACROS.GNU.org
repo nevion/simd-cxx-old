@@ -1,3 +1,4 @@
+#-*-Makefile-*-
 #
 # C++ Macros
 # 
@@ -14,4 +15,15 @@ SIMD_INCLUDE_DIRS = \
              
 SIMD_LD_DIRS=-L$(OSPL_HOME)/lib -L$(BOOST_LIB) -L$(SIMD_HOME)/lib
 
+
+
+#
+# OpenSplice DDS Libs
+#
 SIMD_LD_LIBS=-lddsdatabase -ldcpsgapi -ldcpssacpp -lddsos
+
+#
+# BOOST Libs
+#
+include $(SIMD_HOME)/config/lib/BOOST.MACROS.GNU
+

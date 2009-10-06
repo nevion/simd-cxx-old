@@ -1,7 +1,10 @@
 INSTALL
 -------
 
-To install the SIMD source distribution you'll need to ensure that BOOST is properly installed in your machine and that two environment variable are pointing to the include and libraries directory for BOOST. Namely:
+To install the SIMD source distribution you'll need to ensure that
+BOOST is properly installed in your machine and that two environment
+variable are pointing to the include and libraries directory for
+BOOST. Namely:
 
 BOOST_INCLUDE: points at the include directory
 BOOST_LIB: points at the library directory

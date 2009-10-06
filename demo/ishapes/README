@@ -1,0 +1,39 @@
+What is it?
+----------
+ishapes is a demo that has been used to test interoperability among DDS vendors while being able to show something "moving on the screen".
+
+The demo is about shapes that bounce within a rectangular region.
+
+
+Building the Demo
+-----------------
+
+To build the demo you need to have installed a QT4 development
+environment. Assuming that this is the case, then you'll need to simply do the following:
+
+$ make
+
+
+GUI, IDL, and  Makefile Regeneration
+------------------------------------
+If you need to regenerate all the project, then do the  following:
+
+
+$ make Makefile.idl
+$ qmake ishapes.pro
+$ make
+
+
+Running ishapes
+---------------
+
+The ishapes demo allows you to publish and subscribe instances of
+various shapes. The demo is nicer if you run it as at least two
+instances, thus do:
+
+$ ./ishapes &
+$ ./ishapes &
+
+At this point let one of the application publish some shapes and the
+other application some other.
+ 

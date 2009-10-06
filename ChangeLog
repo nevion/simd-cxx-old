@@ -1,3 +1,23 @@
+2009-10-06  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+	* demo/ishapes:
+
+	  Added OpenSplice DDS ishapes demo which allows you to visually
+	  play with pub/sub. Notice that the demo does not allow yet to
+	  configure QoS (although a QoS button exist on the GUI).
+
+	* configure: 
+
+	  Removed generation of -l for BOOST libraries.
+
+	  Fixed erroneous hard-coded path included in the file
+
+	* config/lib/BOOST.MACROS.GNU: 
+
+	  This file includes defaults BOOST libraries include. Customize
+	  it if needed (esp. if using BOOST < 1.40).
+
+
 2009-09-15  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 	* src/simd/traits.hpp: Moved handle_body_traits here from condition.hpp
