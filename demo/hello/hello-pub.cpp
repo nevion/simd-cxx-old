@@ -7,10 +7,10 @@
 #include <boost/program_options.hpp>
 
 // -- SIMD Include
-#include <simd/runtime.hpp>
-#include <simd/topic.hpp>
-#include <simd/writer.hpp>
-#include <simd/traits.hpp>
+#include <dds/runtime.hpp>
+#include <dds/topic.hpp>
+#include <dds/writer.hpp>
+#include <dds/traits.hpp>
 
 // -- Hello Include
 #include "gen/ccpp_hello.h"
@@ -70,23 +70,23 @@ int main(int argc, char* argv[]) {
   if (!parse_args(argc, argv))
     return 1;
 
-  // -- start the simd runtime
-  simd::Runtime::start();
+  // -- start the dds runtime
+  dds::Runtime::start();
   
-  simd::TopicQos tqos;
+  dds::TopicQos tqos;
   tqos.set_reliable();
   tqos.set_transient();
   
   // -- create the DDS Topic
-  simd::Topic<swatch::hello> helloTopic("helloTopic", tqos);
+  dds::Topic<swatch::hello> helloTopic("helloTopic", tqos);
 
   
-  simd::DataWriterQos dwqos(tqos);
+  dds::DataWriterQos dwqos(tqos);
   dwqos.set_keep_last(history_depth);
   dwqos.set_auto_dispose(false);
   
   // -- create the DDS DataWriter
-  simd::DataWriter<swatch::hello> writer(helloTopic, dwqos);
+  dds::DataWriter<swatch::hello> writer(helloTopic, dwqos);
 
   
   swatch::hello sample;
@@ -98,10 +98,10 @@ int main(int argc, char* argv[]) {
     ss.str("");
     sample.name = DDS::string_dup(tmp.c_str());
     std::cout << "<<= " <<  sample.name << std::endl;
-    writer->write(sample);
+    writer.write(sample);
     usleep(period*1000);
   }
   std::cout << "[done]" << std::endl;
-  simd::Runtime::stop();
+  dds::Runtime::stop();
   return 0;
 }

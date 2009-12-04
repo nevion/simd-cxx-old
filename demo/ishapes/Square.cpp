@@ -27,13 +27,22 @@ Square::paint(QPainter& painter) {
 
     painter.setBrush(brush_);
     painter.setPen(pen_);
+    /*
     painter.drawRect(dynamics_->getPosition().x(),
                      dynamics_->getPosition().y(),
                      bounds_.width(),
                      bounds_.height());
-
+    */
    // std::cout << "SQUARE::paint" << std::endl;
-
+    std::vector<QPoint> plist = dynamics_->getPositionList();
+    std::vector<QPoint>::iterator idx = plist.begin();
+    while (idx != plist.end()) {
+      painter.drawRect(idx->x(),
+		       idx->y(),
+		       bounds_.width(),
+		       bounds_.height());
+      ++idx;
+    }
 }
 
 Square::~Square() {

@@ -7,10 +7,10 @@
 #include <boost/program_options.hpp>
 
 // -- SIMD Include
-#include <simd/runtime.hpp>
-#include <simd/topic.hpp>
-#include <simd/writer.hpp>
-#include <simd/traits.hpp>
+#include <dds/runtime.hpp>
+#include <dds/topic.hpp>
+#include <dds/writer.hpp>
+#include <dds/traits.hpp>
 
 // -- Hello Include
 #include <gen/ccpp_ping.h>
@@ -75,17 +75,12 @@ int main(int argc, char* argv[]) {
   if (!parse_args(argc, argv))
     return 1;
 
-  // -- start the simd runtime to use the default DDS partition, which
+  // -- start the dds runtime to use the default DDS partition, which
   // -- as per the DDS standard is ""
-  simd::Runtime::start("");
+  dds::Runtime::start("");
   
-  simd::TopicQos tqos;
-  tqos.set_best_effort();
-  tqos.set_volatile();
-  simd::Topic<PingType> pingTopic(topic, tqos);
-  
-  simd::DataWriterQos dwqos(tqos);
-  simd::DataWriter<PingType> writer(pingTopic, dwqos);
+  dds::Topic<PingType> pingTopic(topic);
+  dds::DataWriter<PingType> writer(pingTopic);
 
   PingType d;
   d.number = 0;
@@ -93,13 +88,13 @@ int main(int argc, char* argv[]) {
   d.vendor = name.c_str();
   for (int i = 0; i < N; ++i) {
     
-    writer->write(d);
+    writer.write(d);
     std::cout << ".";
     std::cout.flush();
     d.counter++;
     usleep(period*1000);
   }
   std::cout << std::endl;
-  simd::Runtime::stop();
+  dds::Runtime::stop();
   return 0;
 }

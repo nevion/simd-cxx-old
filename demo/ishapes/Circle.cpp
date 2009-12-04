@@ -6,7 +6,7 @@
  */
 
 #include <qt4/QtGui/qpainter.h>
-
+#include <vector>
 #include "Circle.hpp"
 
 
@@ -27,10 +27,21 @@ void
 Circle::paint(QPainter& painter) {
     painter.setBrush(brush_);
     painter.setPen(pen_);
-    painter.drawEllipse(dynamics_->getPosition().x(),
+    std::vector<QPoint> plist = dynamics_->getPositionList();
+    std::vector<QPoint>::iterator idx = plist.begin();
+    while (idx != plist.end()) {
+      painter.drawEllipse(idx->x(),
+			  idx->y(),
+			  bounds_.width(),
+			  bounds_.height());
+      ++idx;
+    }
+    /*
+     painter.drawEllipse(dynamics_->getPosition().x(),
                         dynamics_->getPosition().y(),
                         bounds_.width(),
                         bounds_.height());
+    */
 }
 
 Circle::~Circle() {

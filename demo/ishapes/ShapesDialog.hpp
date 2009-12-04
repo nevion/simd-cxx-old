@@ -12,65 +12,76 @@
 #include <QtGui>
 
 #include <ui_iShapesForm.h>
+#include <WriterQosDialog.hpp>
+#include <ReaderQosDialog.hpp>
+
 #include <ShapesWidget.hpp>
 #include <Circle.hpp>
 
-#include <simd/reader.hpp>
-#include <simd/runtime.hpp>
-#include <simd/topic.hpp>
-#include <simd/reader.hpp>
-#include <simd/writer.hpp>
-#include <simd/traits.hpp>
+#include <dds/reader.hpp>
+#include <dds/runtime.hpp>
+#include <dds/topic.hpp>
+#include <dds/reader.hpp>
+#include <dds/writer.hpp>
+#include <dds/traits.hpp>
 
 // -- Shaped Include
 #include <gen/ccpp_ishape.h>
 
-#define CN 8
+#define CN 9
 
 
 #include <topic-traits.hpp>
 class ShapesDialog : public QDialog {
-    Q_OBJECT
-public:
-    enum { CIRCLE = 0, SQUARE = 1, TRIANGLE = 2 };
+  Q_OBJECT
+  public:
+  enum { CIRCLE = 0, SQUARE = 1, TRIANGLE = 2 };
 
-    enum {
-        BLUE    = 0,
-        RED     = 1,
-        GREEN   = 2,
-        ORANGE  = 3,
-        YELLOW  = 4,
-        MAGENTA = 5,
-        CYAN    = 6,
-        BLACK   = 7
-    };
+  enum {
+    BLUE    = 0,
+    RED     = 1,
+    GREEN   = 2,
+    ORANGE  = 3,
+    YELLOW  = 4,
+    MAGENTA = 5,
+    CYAN    = 6,
+    GRAY    = 7,
+    BLACK   = 8
+  };
 
 public:
-    ShapesDialog();
-    virtual ~ShapesDialog();
+  ShapesDialog();
+  virtual ~ShapesDialog();
 
 public slots:
-    virtual void onPublishButtonClicked();
-    virtual void onSubscribeButtonClicked();
+  virtual void onPublishButtonClicked();
+  virtual void onSubscribeButtonClicked();
+  virtual void onReaderQosButtonClicked();
+  virtual void onWriterQosButtonClicked();
     
 private:
-    ShapesDialog(const ShapesDialog& orig);
+  ShapesDialog(const ShapesDialog& orig);
 
 private:
-    Ui::ShapesDialog  mainWidget;
-    ShapesWidget*     shapesWidget;
-    QTimer            timer;
-    simd::Topic<ShapeType>      circleTopic_;
-    simd::Topic<ShapeType>      squareTopic_;
-    simd::Topic<ShapeType>      triangleTopic_;
+  Ui::ShapesDialog  mainWidget;
+  ShapesWidget*     shapesWidget;
+  ReaderQosDialog    readerQos_;
+  WriterQosDialog    writerQos_;
 
-    simd::DataReader<ShapeType>    circleReader_;
-    simd::DataReader<ShapeType>    squareReader_;
-    simd::DataReader<ShapeType>   triangleReader_;
+  QTimer                     timer;
+  dds::Topic<ShapeType>      circleTopic_;
+  dds::Topic<ShapeType>      squareTopic_;
+  dds::Topic<ShapeType>      triangleTopic_;
 
-    simd::DataWriter<ShapeType>    circleWriter_;
-    simd::DataWriter<ShapeType>    squareWriter_;
-    simd::DataWriter<ShapeType>    triangleWriter_;
+  /*
+  dds::DataReader<ShapeType>    circleReader_;
+  dds::DataReader<ShapeType>    squareReader_;
+  dds::DataReader<ShapeType>   triangleReader_;
+
+  dds::DataWriter<ShapeType>    circleWriter_;
+  dds::DataWriter<ShapeType>    squareWriter_;
+  dds::DataWriter<ShapeType>    triangleWriter_;
+  */
 };
 
 #endif	/* _ISHAPESFORM_HPP */

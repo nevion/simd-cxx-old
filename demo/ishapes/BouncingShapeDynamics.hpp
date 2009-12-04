@@ -11,7 +11,7 @@
 #include <ShapeDynamics.hpp>
 #include <QRect>
 
-#include <simd/writer.hpp>
+#include <dds/writer.hpp>
 
 // -- Shaped Include
 #include <gen/ccpp_ishape.h>
@@ -25,7 +25,7 @@ public:
                           float speed,
                           float angle,
                           const ShapeType& shape,
-                          simd::DataWriter<ShapeType>& shapeWriter);
+                          dds::DataWriter<ShapeType> shapeWriter);
 
     virtual ~BouncingShapeDynamics();
 
@@ -45,7 +45,7 @@ private:
     float angle_;
     float speed_;
     ShapeType shape_;
-    simd::DataWriter<ShapeType> & shapeWriter_;
+    dds::DataWriter<ShapeType>  shapeWriter_;
 };
 
 #endif	/* _BOUNCINGSHAPEDYNAMICS_HPP */

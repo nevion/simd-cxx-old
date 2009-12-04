@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include <simd/runtime.hpp>
+#include <dds/runtime.hpp>
 
 int main(int argc, char *argv[]) {
     // initialize resources, if needed
@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
     if (argc > 1)
         partition = argv[1];
     
-    simd::Runtime::start(partition);
+    dds::Runtime::start(partition);
     srand(clock());
     QApplication app(argc, argv);
 
@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
     ShapesDialog shapes;
     shapes.show();
     int retval = app.exec();
-    simd::Runtime::stop();
+    dds::Runtime::stop();
     return retval;
 }
 

@@ -5,25 +5,23 @@
   <property name="windowModality">
    <enum>Qt::NonModal</enum>
   </property>
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>752</width>
-    <height>643</height>
-   </rect>
+  <property name="enabled">
+   <bool>true</bool>
   </property>
   <property name="minimumSize">
    <size>
-    <width>752</width>
-    <height>643</height>
+    <width>710</width>
+    <height>365</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>752</width>
-    <height>643</height>
+    <width>710</width>
+    <height>365</height>
    </size>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::ClickFocus</enum>
   </property>
   <property name="windowTitle">
    <string>OpenSplice|DDS Shapes Demo</string>
@@ -37,8 +35,8 @@
   <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>20</y>
+     <x>10</x>
+     <y>10</y>
      <width>181</width>
      <height>211</height>
     </rect>
@@ -55,7 +53,7 @@
       <x>10</x>
       <y>10</y>
       <width>161</width>
-      <height>191</height>
+      <height>193</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -168,7 +166,7 @@
            </item>
            <item>
             <property name="text">
-             <string>Black</string>
+             <string>Gray</string>
             </property>
            </item>
           </widget>
@@ -259,8 +257,8 @@
   <widget class="QFrame" name="frame_2">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>240</y>
+     <x>10</x>
+     <y>230</y>
      <width>181</width>
      <height>121</height>
     </rect>
@@ -277,7 +275,7 @@
       <x>10</x>
       <y>10</y>
       <width>161</width>
-      <height>97</height>
+      <height>99</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -334,10 +332,10 @@
   <widget class="QFrame" name="renderFrame">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>20</y>
+     <x>200</x>
+     <y>10</y>
      <width>500</width>
-     <height>600</height>
+     <height>341</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -345,6 +343,18 @@
      <horstretch>0</horstretch>
      <verstretch>0</verstretch>
     </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>500</width>
+     <height>341</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>500</width>
+     <height>341</height>
+    </size>
    </property>
    <property name="palette">
     <palette>
@@ -420,10 +430,6 @@
     <enum>QFrame::Raised</enum>
    </property>
   </widget>
-  <zorder>frame</zorder>
-  <zorder>frame_2</zorder>
-  <zorder>renderFrame</zorder>
-  <zorder>createReaderButton</zorder>
  </widget>
  <resources/>
  <connections>
@@ -434,8 +440,8 @@
    <slot>onPublishButtonClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>106</x>
-     <y>186</y>
+     <x>107</x>
+     <y>221</y>
     </hint>
     <hint type="destinationlabel">
      <x>111</x>
@@ -450,8 +456,8 @@
    <slot>onSubscribeButtonClicked()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>84</x>
-     <y>286</y>
+     <x>85</x>
+     <y>346</y>
     </hint>
     <hint type="destinationlabel">
      <x>89</x>
@@ -459,9 +465,43 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pubQosButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ShapesDialog</receiver>
+   <slot>onWriterQosButtonClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>172</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>181</x>
+     <y>425</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>subQosButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ShapesDialog</receiver>
+   <slot>onReaderQosButtonClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>143</x>
+     <y>292</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>522</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onPublishButtonClicked()</slot>
   <slot>onSubscribeButtonClicked()</slot>
+  <slot>onWriterQosButtonClicked()</slot>
+  <slot>onReaderQosButtonClicked()</slot>
  </slots>
 </ui>

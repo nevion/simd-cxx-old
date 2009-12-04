@@ -4,7 +4,7 @@
 //  
 //  File name: ishape.cpp
 //  Source: ishape.idl
-//  Generated: Mon Sep 28 02:15:12 2009
+//  Generated: Mon Nov 16 00:32:05 2009
 //  OpenSplice V4.2
 //  
 //******************************************************************

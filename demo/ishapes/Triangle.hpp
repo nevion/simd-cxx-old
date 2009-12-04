@@ -14,24 +14,25 @@
 
 class Triangle : public Shape {
 public:
-    Triangle(const QRect& bounds,
+  Triangle(const QRect& bounds,
            boost::shared_ptr<ShapeDynamics> dynamics,
            const QPen& pen,
            const QBrush& brush);
 
-    virtual ~Triangle();
+  virtual ~Triangle();
 
 public:
-    virtual void update();
-    virtual void paint(QPainter& painter);
+  virtual void update();
+  virtual void paint(QPainter& painter);
+  virtual void setBounds(const QRect& bounds);
 
 private:
-    Triangle(const Triangle&);
-    Triangle& operator=(const Triangle&);
+  Triangle(const Triangle&);
+  Triangle& operator=(const Triangle&);
 
 private:
-    boost::shared_ptr<ShapeDynamics> dynamics_;
-    QPolygon triangle_;
+  boost::shared_ptr<ShapeDynamics> dynamics_;
+  QPolygon triangle_;
 };
 
 #endif	/* _TRIANGLE_HPP */

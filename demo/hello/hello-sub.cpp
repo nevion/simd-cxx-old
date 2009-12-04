@@ -6,11 +6,11 @@
 // -- BOOST Include
 #include <boost/program_options.hpp>
 
-// -- SIMD Include
-#include <simd/runtime.hpp>
-#include <simd/topic.hpp>
-#include <simd/reader.hpp>
-#include <simd/traits.hpp>
+// -- DDS Include
+#include <dds/runtime.hpp>
+#include <dds/topic.hpp>
+#include <dds/reader.hpp>
+#include <dds/traits.hpp>
 
 // -- Hello Include
 #include "gen/ccpp_hello.h"
@@ -59,40 +59,40 @@ int main(int argc, char* argv[]) {
   if (!parse_args(argc, argv)) 
     return 1;
   
-  // -- Start SIMD
-  simd::Runtime::start();
+  // -- Start DDS
+  dds::Runtime::start();
   
   // -- Create a Topic
-  simd::TopicQos tqos;
+  dds::TopicQos tqos;
   tqos.set_reliable();
   tqos.set_transient();
-  simd::Topic<swatch::hello> helloTopic("helloTopic", tqos);
+  dds::Topic<swatch::hello> helloTopic("helloTopic", tqos);
 
   // Create a DataReader
-  simd::DataReaderQos drqos(tqos);  
+  dds::DataReaderQos drqos(tqos);  
   drqos.set_keep_last(history_depth);
-  simd::DataReader<swatch::hello> reader(helloTopic, drqos);
+  dds::DataReader<swatch::hello> reader(helloTopic, drqos);
 
   swatch::helloSeq samples;
   DDS::SampleInfoSeq infos;
   
   // Read the data
   while (true) {
-    reader->read(samples, infos);
+    reader.read(samples, infos);
     
     for (int i = 0; i < samples.length(); ++i) {
       std::cout << "=>> " <<  samples[i].name << std::endl;
     }
     if (samples.length() > 0)
-      std::cout << "--" << std::endl;
+      std::cout << "-------------<Batch>---------------" << std::endl;
 
     // Notice that since the container had initially a lengh of 0
     // (zero) we are loaning the memory and thus need to return it
     // back to the middleware.
-    reader->return_loan(samples, infos);
+    reader.return_loan(samples, infos);
     usleep(period*1000);
   }
   
-  simd::Runtime::stop();
+  dds::Runtime::stop();
   return 0;
 }

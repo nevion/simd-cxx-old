@@ -1,7 +1,8 @@
 #-*-Makefile-*-
 
 CONFIG += qt debug
-FORMS=iShapesForm.ui
+FORMS=iShapesForm.ui readerQosForm.ui writerQosForm.ui
+HEADERS = ShapesDialog.hpp WriterQosDialog.hpp ShapesWidget.hpp ReaderQosDialog.hpp
 
 SOURCES+=BouncingShapeDynamics.cpp \
 Circle.cpp \
@@ -13,13 +14,16 @@ ShapesWidget.cpp \
 Square.cpp \
 Triangle.cpp \
 main.cpp \
-moc_ShapesDialog.cpp \
-moc_ShapesWidget.cpp \
+WriterQosDialog.cpp \
+ReaderQosDialog.cpp \
 gen/ishape.cpp \
 gen/ishapeDcps.cpp  \
 gen/ishapeDcps_impl.cpp \
 gen/ishapeSplDcps.cpp
 
+#moc_ShapesDialog.cpp \
+#moc_ShapesWidget.cpp \
+#moc_WriterQosDialog.cpp\
 
 TARGET=ishapes
 
