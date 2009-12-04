@@ -12,8 +12,8 @@ REQUIREMENTS
 ------------
 The requirements for compiling and running SIMD are:
 
-    - OpenSplice DDS v4.1 (http:://www.opensplice.org)
-    - boost v1.39.0
+    - OpenSplice DDS v4.1 or higher (http:://www.opensplice.org)
+    - BOOST v1.40
     - GCC/G++ v4.1 (or higher)
 
 
@@ -32,6 +32,7 @@ $ ./configure
 $ source simd.env
 $ make
 
-Once you'll have done that check out one of the examples available under $SIMD_HOME/demo
+Once you'll have done that check out one of the examples available
+under $SIMD_HOME/demo
 
 

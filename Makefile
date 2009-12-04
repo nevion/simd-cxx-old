@@ -1,18 +1,18 @@
 
 simd:
-	make -C ./src/simd $*
+	make -C ./src/dds $*
 
 demo:
 	make -C ./demo $*
 
 all:
-	make -C ./src/simd $*
+	make -C ./src/dds $*
 	make -C ./demo $*
 
 clean:
-	make -C ./src/simd clean $*
+	make -C ./src/dds clean $*
 
 cleanall:
-	make -C ./src/simd clean $*
+	make -C ./src/dds clean $*
 	make -C ./demo clean $*
 

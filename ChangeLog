@@ -1,3 +1,15 @@
+2009-12-05  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+	* Updated:
+	     - namespace from "simd" to "dds"
+
+	     - updated internal implementation of the API to being to use
+	consistently the pimpl idiom while keeping the implementation in
+	a separate directory
+
+	      - updated ishapes demo
+	
+
 2009-10-06  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 	* demo/ishapes:
