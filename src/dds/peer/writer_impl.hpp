@@ -87,7 +87,7 @@ public:
   write(const T& sample, 
 	const DDS::Time_t& timestamp) 
   {
-    return writer_->write(sample, timestamp, DDS::HANDLE_NIL);
+    return writer_->write_w_timestamp(sample, DDS::HANDLE_NIL, timestamp);
   }
     
 
