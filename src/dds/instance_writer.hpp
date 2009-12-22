@@ -65,7 +65,7 @@ public:
 	}
 
 	DDS::ReturnCode_t dispose() {
-		return writer_->dispose();
+		return writer_->dispose(key_, handle_);
 	}
 
 	DDS::ReturnCode_t dispose(const DDS::Time_t& timestamp) {
