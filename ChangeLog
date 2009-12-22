@@ -1,3 +1,12 @@
+2009-12-22  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+	* src/dds/writer.hpp (DataWriter): Fixed mispelling in the
+	forwarding of the write with timestamp method.
+
+	* src/dds/peer/writer_impl.hpp (DataWriterImpl): Fixed method that
+	writes data with time-stamp to call the legacy API
+	write_w_timestamp.
+
 2009-12-05  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 	* Updated:
