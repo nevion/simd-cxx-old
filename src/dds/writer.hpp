@@ -60,7 +60,7 @@ public:
   write(const T& sample, 
 	const DDS::Time_t& timestamp) 
   {
-    return pimpl_->writer(sample, 
+    return pimpl_->write(sample, 
 			  timestamp);
   }
   
