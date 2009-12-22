@@ -64,8 +64,8 @@ namespace dds {
 
     inline static void postcondition(bool condition, 
 				     const std::string& what) {
-      AssertImpl::poscondition(condition,
-			       what);
+      AssertImpl::postcondition(condition,
+				what);
     }
 
     inline static void postcondition(bool condition, 
