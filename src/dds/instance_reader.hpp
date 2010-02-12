@@ -1,8 +1,6 @@
 #ifndef AC_SIMD_DDS_INSTANCE_READER_HPP
 #define AC_SIMD_DDS_INSTANCE_READER_HPP
 
-#include <iostream>
-
 // -- BOOST Include
 #include <boost/shared_ptr.hpp>
 
@@ -25,7 +23,7 @@ namespace dds {
  * @version 0.1
  */
 template <typename T>
-class dds::DataInstanceReader 
+class SIMD_EXPORT dds::DataInstanceReader 
 {
 public:
   typedef typename dds::peer::DataReaderImpl<T>::DR   DR;
@@ -53,7 +51,7 @@ public:
     int rv = DDS::RETCODE_NO_DATA;
     if (handle_ == DDS::HANDLE_NIL)
       handle_ = reader_->lookup_instance(key_);
-    std::cout << "DataInstanceReader::handle_ = " << handle_ << std::endl;
+    
     if (handle_ != DDS::HANDLE_NIL)
       rv = reader_->read(samples,
 			 infos,

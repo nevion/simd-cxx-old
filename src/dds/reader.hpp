@@ -14,7 +14,7 @@ namespace dds {
 #include <dds/peer/reader_impl.hpp>
 
 template <typename T>
-class dds::DataReader {
+class SIMD_EXPORT dds::DataReader {
 public:
 public:            
   typedef typename dds::peer::DataReaderImpl<T>::DR   DR;
@@ -78,6 +78,17 @@ public:
     pimpl_->set_datareader(this);
   }
 
+  DataReader(const ContentFilteredTopic<T>& topic) {
+    pimpl_.reset(new dds::peer::DataReaderImpl<T>(topic));
+    pimpl_->set_datareader(this);
+  }
+
+  DataReader(const ContentFilteredTopic<T>& topic,
+             const DataReaderQos& qos) {
+    pimpl_.reset(new dds::peer::DataReaderImpl<T>(topic, qos));
+    pimpl_->set_datareader(this);
+  }
+  
   virtual ~DataReader() { }
 
 public:

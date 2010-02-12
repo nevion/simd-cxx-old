@@ -1,0 +1,8 @@
+#ifndef SIMD_OS_LINUX_HPP_
+#define SIMD_OS_LINUX_HPP_
+
+#define SIMD_ON_LINUX   1
+#define LINUX_DLL_EXPORT
+#define SIMD_EXPORT LINUX_DLL_EXPORT
+
+#endif /* SIMD_OS_LINUX_HPP_ */

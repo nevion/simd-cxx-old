@@ -1,5 +1,5 @@
-#ifndef AC_SIMD_DDS_QOS_HPP_
-#define AC_SIMD_DDS_QOS_HPP_
+#ifndef AC_SIMD_DDS_QOS_DEFS_HPP_
+#define AC_SIMD_DDS_QOS_DEFS_HPP_
 
 // -- STD C++ Include
 #include <string>
@@ -9,7 +9,7 @@
 #include <boost/shared_ptr.hpp>
 
 // -- dds Includes
-#include <dds/runtime.hpp>
+#include <dds/peer/runtime_impl.hpp>
 #include <dds/domain.hpp>
 
 namespace dds {
@@ -17,11 +17,13 @@ namespace dds {
   //////////////////////////////////////////////////////////////////////////////
 
   template <typename DDS_QOS, typename INITIALIZER>
-  class BaseTopicQos : public DDS_QOS {
+  class SIMD_EXPORT BaseTopicQos : public DDS_QOS {
   public:
     BaseTopicQos() {
-   	 ::dds::DomainParticipant dp =
-   			 Runtime::instance()->get_participant();
+      // @AC: This really is a shortcut, the initializer should not
+      // rely on the DomainParticipant. Fix this in SIMD v1.0
+      ::dds::DomainParticipant dp = 
+	::dds::peer::RuntimeImpl::instance()->get_participant();
       INITIALIZER initializer(dp);
       initializer(*this);
     }
@@ -108,7 +110,7 @@ namespace dds {
 
   //////////////////////////////////////////////////////////////////////////////
 
-  class TopicQosInitializer {
+  class SIMD_EXPORT TopicQosInitializer {
   public:
     TopicQosInitializer(dds::DomainParticipant dp);
     ~TopicQosInitializer();
@@ -121,7 +123,7 @@ namespace dds {
 
   //////////////////////////////////////////////////////////////////////////////
 
-  class TopicQos : public BaseTopicQos<DDS::TopicQos, TopicQosInitializer> {
+  class SIMD_EXPORT TopicQos : public BaseTopicQos<DDS::TopicQos, TopicQosInitializer> {
   public:
     TopicQos();
     ~TopicQos();
@@ -144,7 +146,7 @@ namespace dds {
   //////////////////////////////////////////////////////////////////////////////
 
 
-  class NullInitializer {
+  class SIMD_EXPORT NullInitializer {
   public:
     NullInitializer(::dds::DomainParticipant) { }
     ~NullInitializer() { }
@@ -154,7 +156,7 @@ namespace dds {
   };
 
   //////////////////////////////////////////////////////////////////////////////
-  class DataWriterQos : public BaseTopicQos<DDS::DataWriterQos, NullInitializer> {
+  class SIMD_EXPORT DataWriterQos : public BaseTopicQos<DDS::DataWriterQos, NullInitializer> {
   public:
     DataWriterQos();
     DataWriterQos(const TopicQos& tqos);
@@ -181,7 +183,7 @@ namespace dds {
 
   //////////////////////////////////////////////////////////////////////////////
 
-  class DataReaderQos : public BaseTopicQos<DDS::DataReaderQos, NullInitializer> {
+  class SIMD_EXPORT DataReaderQos : public BaseTopicQos<DDS::DataReaderQos, NullInitializer> {
   public:
     DataReaderQos();
     DataReaderQos(const TopicQos& tqos);
@@ -208,11 +210,11 @@ namespace dds {
   //////////////////////////////////////////////////////////////////////////////
 
   template <typename DDS_QOS, typename INITIALIZER>
-  class BasePubSubQos : public DDS_QOS {
+  class SIMD_EXPORT BasePubSubQos : public DDS_QOS {
   public:
     BasePubSubQos() {
       ::dds::DomainParticipant dp =
-      		Runtime::instance()->get_participant();
+	::dds::peer::RuntimeImpl::instance()->get_participant();
       INITIALIZER initializer(dp);
       initializer(*this);
     }
@@ -255,7 +257,7 @@ namespace dds {
   //////////////////////////////////////////////////////////////////////////////
 
 
-  class PubQosInitializer {
+  class SIMD_EXPORT PubQosInitializer {
   public:
     PubQosInitializer(dds::DomainParticipant dp);
     ~PubQosInitializer();
@@ -263,12 +265,11 @@ namespace dds {
     void operator()(DDS::PublisherQos& qos);
   
   private:
-   ::dds::DomainParticipant dp_;
+    ::dds::DomainParticipant dp_;
   };
 
   //////////////////////////////////////////////////////////////////////////////
-
-  class PublisherQos : public BasePubSubQos<DDS::PublisherQos, PubQosInitializer> {
+  class SIMD_EXPORT PublisherQos : public BasePubSubQos<DDS::PublisherQos, PubQosInitializer> {
   public:
     PublisherQos();
     ~PublisherQos();
@@ -276,7 +277,7 @@ namespace dds {
 
   //////////////////////////////////////////////////////////////////////////////
 
-  class SubQosInitializer {
+  class SIMD_EXPORT SubQosInitializer {
   public:
     SubQosInitializer(dds::DomainParticipant dp);
     ~SubQosInitializer();
@@ -288,11 +289,11 @@ namespace dds {
   };
 
   //////////////////////////////////////////////////////////////////////////////
-  class SubscriberQos : public BasePubSubQos<DDS::SubscriberQos, SubQosInitializer> {
+  class SIMD_EXPORT SubscriberQos : public BasePubSubQos<DDS::SubscriberQos, SubQosInitializer> {
   public:
     SubscriberQos();
     ~SubscriberQos();
   };
 }
 
-#endif /* AC_SIMD_DDS_QOS_HPP_ */
+#endif /* AC_SIMD_DDS_QOS_DEFS_HPP_ */

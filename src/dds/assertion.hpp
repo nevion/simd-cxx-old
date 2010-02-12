@@ -1,18 +1,18 @@
 #ifndef AC_SIMD_DDS_ASSERTION_HPP
 #define AC_SIMD_DDS_ASSERTION_HPP
 
+#include <dds/osmacros.hpp>
 #include <dds/exception.hpp>
 
-
 #define DECLARE_EXCEPTION(ExceptionName)		\
-  class ExceptionName : public virtual Exception {	\
+  class SIMD_EXPORT ExceptionName : public virtual Exception {	\
   public:						\
   ExceptionName(const std::string& what) throw();	\
   ExceptionName(const std::string& what,		\
 		const std::string& where) throw();	\
   ExceptionName(const std::string& what,		\
 		const std::string& where,		\
-		int errno) throw();			\
+		int ecode) throw();			\
   virtual ~ExceptionName() throw();			\
   }; 
 
@@ -25,8 +25,8 @@
     : Exception(what, where) { }					\
   NP::ExceptionName::ExceptionName(const std::string& what,			\
 			       const std::string& where,		\
-			       int errno) throw()			\
-    : Exception(what, where, errno) { }					\
+			       int ecode) throw()			\
+    : Exception(what, where, ecode) { }					\
   NP::ExceptionName::~ExceptionName() throw() { }
 
 
@@ -37,9 +37,8 @@ namespace dds {
   DECLARE_EXCEPTION(StateInvariantViolation)
 
 
-
   template <typename AssertImpl>  
-  class AssertBase : public AssertImpl {
+  class SIMD_EXPORT AssertBase : public AssertImpl {
   public:
     inline static void precondition(bool condition) {
       AssertImpl::precondition(condition);

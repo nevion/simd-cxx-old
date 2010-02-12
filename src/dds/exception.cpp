@@ -4,7 +4,7 @@
 dds::Exception::Exception(const std::string& what) throw()
   : what_(what), 
     where_("NA"),
-    errno_(0) 
+    error_code_(0)
 
 {}
 
@@ -12,15 +12,15 @@ dds::Exception::Exception(const std::string& what,
 			   const std::string& where) throw()
   : what_(what),
     where_(where),
-    errno_(0)
+    error_code_(0)
 {}
 
 dds::Exception::Exception(const std::string& what,
-			   const std::string& where,
-			   int errno) throw()
+                          const std::string& where,
+                          int error_code) throw()
   : what_(what),
     where_(where),
-    errno_(errno)
+    error_code_(error_code)
 {}
 
 dds::Exception::~Exception() throw() { }
@@ -39,9 +39,9 @@ dds::Exception::where() const throw()
 }
 
 int
-dds::Exception::errno() const throw() 
+dds::Exception::error_code() const throw()
 {
-  return errno_;
+  return error_code_;
 }
 
 std::ostream&
@@ -49,7 +49,7 @@ operator<<(std::ostream& os, const dds::Exception& e)
 {
   os << "What: " << e.what()
      << "Where: " << e.where()
-     << "Errno:" << e.errno()
+     << "Errno:" << e.error_code()
      << std::endl;
 
   return os;

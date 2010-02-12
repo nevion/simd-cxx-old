@@ -18,7 +18,7 @@ namespace dds {
 * @version 1.0
 */
 template <typename T>
-class DataInstanceWriterImpl {
+class SIMD_EXPORT DataInstanceWriterImpl {
 public:
 	typedef typename topic_data_writer<T>::type DW;
 public:
