@@ -13,7 +13,8 @@ Once BOOST is properly installed and configured, simply do the following:
 
 $./configure
 $ . simd.env
-$ make
+$ cd build
+$ make install
 
 
 Then to see if you installation was successful try out a demo:

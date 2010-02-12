@@ -1,8 +1,8 @@
 OVERVIEW
 --------
-SIMD is an abstraction layer that provides a very compact way of
+SimD (Simple DDS) is an abstraction layer that provides a very compact way of
 programming implementation of the OMG DDS standard. The implementation
-of SIMD has currently been tested only with OpenSplice DDS, however
+of SimD has currently been tested only with OpenSplice DDS, however
 its code is practically implementation dependent
 
 For contribution, feedback or comments please contact 
@@ -10,27 +10,28 @@ Angelo Corsaro<angelo.corsaro@gmail.com>
 
 REQUIREMENTS
 ------------
-The requirements for compiling and running SIMD are:
+The requirements for compiling and running SimD are:
 
     - OpenSplice DDS v4.1 or higher (http:://www.opensplice.org)
-    - BOOST v1.40
+    - BOOST v1.40 (or higher)
     - GCC/G++ v4.1 (or higher)
 
 
 BOOST
 -----
-SIMD requires the BOOST_INCLUDE and BOOST_LIB environment variables to
+SimD requires the BOOST_INCLUDE and BOOST_LIB environment variables to
 point to the boost installation containing headers and libraries
 respectively.
 
 
 COMPILING
 ---------
-Once you've obtained a copy of SIMD  you need to do the following:
+Once you've obtained a copy of SimD  you need to do the following:
 
 $ ./configure
 $ source simd.env
-$ make
+$ cd build
+$ make install
 
 Once you'll have done that check out one of the examples available
 under $SIMD_HOME/demo

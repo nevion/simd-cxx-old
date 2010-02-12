@@ -1,4 +1,25 @@
-2009-12-22  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2010-02-08  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+	* Changed build system to CMake. This will allow to build SimD on
+	Linux, Windows and MacOS.
+
+	* Added support for content filtered topics
+
+	* src/dds/*.hpp: Added export macro required by microsoft compilers.
+
+	* src/dds/runtime.hpp/cpp: Removed start/stop method from the
+	Runtime class as this were not exception safe. Now your code
+	has simply to create a Runtime object whose constructor will call
+	"start" and distructor will call the "stop".
+
+
+2009-12-23  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+	* src/dds/instance_writer.hpp: Fixed dispose method to properly
+	pass key + instance handle.
+
+	* src/dds/assertion.hpp (dds): Fixed mispelling "poscondition" ->
+	"postcondition"
 
 	* src/dds/writer.hpp (DataWriter): Fixed mispelling in the
 	forwarding of the write with timestamp method.
@@ -136,13 +157,13 @@
 	* src/simd/simd.cpp: Main header file that application need to include.
 
 	* src/simd/waitset.hpp:
-	* src/simd/waitset.cpp: Implemented SIMD executable waitset.
+	* src/simd/waitset.cpp: Implemented SimD executable waitset.
 
 	* src/simd/reader.hpp: Added registration logic for listener events.
 
 2009-08-17  Angelo Corsaro  <angelocorsaro@gmail.com>
 
-	* demo/ping/ping-*.cpp: updated to reflect changes in the SIMD API.
+	* demo/ping/ping-*.cpp: updated to reflect changes in the SimD API.
 
 2009-08-16  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
@@ -150,7 +171,7 @@
 	* src/simd/condition.hpp:
 	* src/simd/reader.hpp
 
-	  Added support for waitset and conditions. SIMD also provides a
+	  Added support for waitset and conditions. SimD also provides a
 	  new kind of Condition which can dispatch call to a specified
 	  functor. 
 
@@ -174,5 +195,5 @@
 
 2009-07-20  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
-	* Release SIMD v0.1-alpha
+	* Release SimD v0.1-alpha
 
