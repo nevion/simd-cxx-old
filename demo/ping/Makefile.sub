@@ -1,8 +1,0 @@
-include $(SIMD_HOME)/config/apps/Macros.GNU
-
-TARGET := ping-sub
-
-SRCS := ping-sub.cpp
-SRCS += $(wildcard ./gen/*.cpp)
-include $(SIMD_HOME)/config/apps/Rules.GNU
-

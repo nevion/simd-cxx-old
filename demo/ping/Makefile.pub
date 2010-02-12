@@ -1,9 +1,0 @@
-include $(SIMD_HOME)/config/apps/Macros.GNU
-
-TARGET=ping-pub
-
-SRCS := ping-pub.cpp 
-SRCS += $(wildcard ./gen/*.cpp)
-
-include $(SIMD_HOME)/config/apps/Rules.GNU
-
