@@ -18,10 +18,13 @@ int main(int argc, char *argv[]) {
 
     std::string partition("");
 
-    if (argc > 1)
+    if (argc > 1) {
         partition = argv[1];
+	std::cout << "Connecting to partition: " << partition << std::endl;
+    }
     
-    dds::Runtime::start(partition);
+    dds::Runtime runtime(partition);
+    
     srand(clock());
     QApplication app(argc, argv);
 
@@ -29,7 +32,7 @@ int main(int argc, char *argv[]) {
     ShapesDialog shapes;
     shapes.show();
     int retval = app.exec();
-    dds::Runtime::stop();
+
     return retval;
 }
 

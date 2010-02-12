@@ -27,12 +27,12 @@ gen/ishapeSplDcps.cpp
 
 TARGET=ishapes
 
-INCLUDEPATH+=${SIMD_HOME}/src ${OSPL_HOME}/include $(BOOST_INCLUDE) \
+INCLUDEPATH+=${SIMD_INSTALL_DIR}/include ${OSPL_HOME}/include $(BOOST_INCLUDE) \
              $(OSPL_HOME)/include/dcps/C++/SACPP \
              $(OSPL_HOME)/include \
              $(OSPL_HOME)/include/sys 
 
-LIBS += -L${OSPL_HOME}/lib -L${BOOST_LIB} -L${SIMD_HOME}/lib\
+LIBS += -L${OSPL_HOME}/lib -L${BOOST_LIB} -L${SIMD_INSTALL_DIR}/lib\
         -lddsdatabase -ldcpsgapi -ldcpssacpp -lddsos \
-        -lboost_program_options  -lsimd 
+        -lboost_program_options  -lSimD 
 

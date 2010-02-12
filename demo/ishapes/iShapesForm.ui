@@ -8,16 +8,24 @@
   <property name="enabled">
    <bool>true</bool>
   </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>710</width>
+    <height>390</height>
+   </rect>
+  </property>
   <property name="minimumSize">
    <size>
     <width>710</width>
-    <height>365</height>
+    <height>390</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>710</width>
-    <height>365</height>
+    <height>390</height>
    </size>
   </property>
   <property name="focusPolicy">
@@ -260,7 +268,7 @@
      <x>10</x>
      <y>230</y>
      <width>181</width>
-     <height>121</height>
+     <height>151</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -275,7 +283,7 @@
       <x>10</x>
       <y>10</y>
       <width>161</width>
-      <height>99</height>
+      <height>131</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -320,6 +328,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="filterButton">
+       <property name="text">
+        <string>Filter</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="createReaderButton">
        <property name="text">
         <string>Subscribe</string>
@@ -335,7 +350,7 @@
      <x>200</x>
      <y>10</y>
      <width>500</width>
-     <height>341</height>
+     <height>370</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -347,13 +362,13 @@
    <property name="minimumSize">
     <size>
      <width>500</width>
-     <height>341</height>
+     <height>370</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
      <width>500</width>
-     <height>341</height>
+     <height>370</height>
     </size>
    </property>
    <property name="palette">

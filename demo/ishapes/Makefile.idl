@@ -1,5 +1,0 @@
-include $(SIMD_HOME)/config/apps/Macros-idl.GNU
-
-TARGET_IDL=ishape.idl
-
-include $(SIMD_HOME)/config/apps/Rules-idl.GNU

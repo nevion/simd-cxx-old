@@ -1,8 +1,8 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'ShapesDialog.hpp'
 **
-** Created: Thu Jul 16 10:20:30 2009
-**      by: The Qt Meta Object Compiler version 61 (Qt 4.5.0)
+** Created: Fri Feb 12 01:34:10 2010
+**      by: The Qt Meta Object Compiler version 61 (Qt 4.5.2)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -11,7 +11,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'ShapesDialog.hpp' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 61
-#error "This file was generated using the moc from 4.5.0. It"
+#error "This file was generated using the moc from 4.5.2. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -23,7 +23,7 @@ static const uint qt_meta_data_ShapesDialog[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   12, // methods
+       4,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -31,6 +31,8 @@ static const uint qt_meta_data_ShapesDialog[] = {
  // slots: signature, parameters, type, tag, flags
       14,   13,   13,   13, 0x0a,
       39,   13,   13,   13, 0x0a,
+      66,   13,   13,   13, 0x0a,
+      93,   13,   13,   13, 0x0a,
 
        0        // eod
 };
@@ -38,6 +40,8 @@ static const uint qt_meta_data_ShapesDialog[] = {
 static const char qt_meta_stringdata_ShapesDialog[] = {
     "ShapesDialog\0\0onPublishButtonClicked()\0"
     "onSubscribeButtonClicked()\0"
+    "onReaderQosButtonClicked()\0"
+    "onWriterQosButtonClicked()\0"
 };
 
 const QMetaObject ShapesDialog::staticMetaObject = {
@@ -67,9 +71,11 @@ int ShapesDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         switch (_id) {
         case 0: onPublishButtonClicked(); break;
         case 1: onSubscribeButtonClicked(); break;
+        case 2: onReaderQosButtonClicked(); break;
+        case 3: onWriterQosButtonClicked(); break;
         default: ;
         }
-        _id -= 2;
+        _id -= 4;
     }
     return _id;
 }
