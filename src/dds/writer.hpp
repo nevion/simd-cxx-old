@@ -21,7 +21,7 @@ namespace dds {
  */
 
 template <typename T>
-class dds::DataWriter
+class SIMD_EXPORT dds::DataWriter
 {
 public:
   typedef typename dds::peer::DataWriterImpl<T>::DW DW;
@@ -42,7 +42,7 @@ public:
 
   DataWriter(const dds::Topic<T>& topic, 
 	     const DataWriterQos& qos, 
-	     boost::shared_ptr<DDS::Publisher> pub) 
+	     dds::Publisher pub) 
   {
     pimpl_.reset(new dds::peer::DataWriterImpl<T>(topic, qos, pub));
   }
@@ -50,60 +50,59 @@ public:
   virtual ~DataWriter() { }
 
 public:
-  DDS::ReturnCode_t 
-  write(const T& sample) 
-  {
-    return pimpl_->write(sample);
-  }
+DDS::ReturnCode_t 
+write(const T& sample) 
+{
+  return pimpl_->write(sample);
+}
 
-  DDS::ReturnCode_t 
-  write(const T& sample, 
-	const DDS::Time_t& timestamp) 
-  {
-    return pimpl_->write(sample, 
-			  timestamp);
-  }
+DDS::ReturnCode_t 
+write(const T& sample, 
+      const DDS::Time_t& timestamp) 
+{
+  return pimpl_->write(sample, 
+		       timestamp);
+}
   
-  DataInstanceWriter<T>
-  register_instance(const T& key) 
-  {
-    return pimpl_->register_instance(key);
-  }
+DataInstanceWriter<T>
+register_instance(const T& key) 
+{
+  return pimpl_->register_instance(key);
+}
 
-  // -- QoS Getter/Setter
+// -- QoS Getter/Setter
     
-  DataWriterQos
-  get_qos() 
-  {
-    return pimpl_->get_qos();
-  }
+DataWriterQos
+get_qos() 
+{
+  return pimpl_->get_qos();
+}
 
-  DDS::ReturnCode_t
-  set_qos(const DataWriterQos &qos)  
-  {
-    return pimpl_->get_qoqs(qos);
-  }
+DDS::ReturnCode_t
+set_qos(const DataWriterQos &qos)  
+{
+  return pimpl_->get_qoqs(qos);
+}
 
-  boost::shared_ptr<dds::Topic<T> >
-  get_topic() 
-  {
-    return pimpl_->get_topic();
-  }
+boost::shared_ptr<dds::Topic<T> >
+get_topic() 
+{
+  return pimpl_->get_topic();
+}
     
-  boost::shared_ptr<DDS::Publisher>
-  get_publisher() 
-  {
-    return pimpl_->get_publisher();
-  }
+dds::Publisher get_publisher() 
+{
+  return pimpl_->get_publisher();
+}
 
-  DDS::ReturnCode_t
-  wait_for_acks(const DDS::Duration_t& timeout) 
-  {
-    return pimpl_->wait_for_acks(timeout);
-  }
+DDS::ReturnCode_t
+wait_for_acks(const DDS::Duration_t& timeout) 
+{
+  return pimpl_->wait_for_acks(timeout);
+}
 
 protected:
-  ::boost::shared_ptr< dds::peer::DataWriterImpl<T> > pimpl_;
+::boost::shared_ptr< dds::peer::DataWriterImpl<T> > pimpl_;
 };
 
 #endif /* AC_SIMD_DDS_WRITER_HPP */

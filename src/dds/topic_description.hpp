@@ -9,14 +9,14 @@ namespace dds {
   class TopicDescription;
 }
 
-class dds::TopicDescription {
+class SIMD_EXPORT dds::TopicDescription {
 public:
   virtual ~TopicDescription();
   
 public:
-  virtual std::string get_name() = 0;
-  virtual std::string get_type_name() = 0;
-  virtual dds::DomainParticipant get_participant() = 0;
+  virtual std::string get_name() const = 0;
+  virtual std::string get_type_name() const = 0;
+  virtual dds::DomainParticipant get_participant() const = 0;
 };
 
 #endif /* AC_SIMD_DDS_TOPIC_DESCRIPTION_HPP_*/

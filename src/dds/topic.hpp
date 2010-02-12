@@ -20,7 +20,7 @@ namespace dds {
 
 
 template<typename T>
-class dds::Topic : public dds::TopicDescription {
+class SIMD_EXPORT dds::Topic : public dds::TopicDescription {
 public:
   Topic() { }
 
@@ -66,19 +66,19 @@ public:
   }
 
   virtual std::string 
-  get_name() 
+  get_name() const
   {
     return pimpl_->get_name();
   }
 
   virtual std::string 
-  get_type_name() 
+  get_type_name() const
   {
     return pimpl_->get_type_name();
   }
 
   virtual dds::DomainParticipant 
-  get_participant() 
+  get_participant() const
   {
     return pimpl_->get_participant();
   }

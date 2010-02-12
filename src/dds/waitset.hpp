@@ -19,7 +19,7 @@ namespace dds {
  *
  * @author Angelo Corsaro <mailto:angelo.corsaro@gmail.com>
  */
-class dds::ActiveWaitSet : public ::boost::noncopyable {
+class SIMD_EXPORT dds::ActiveWaitSet : public ::boost::noncopyable {
 public:
 	typedef ::dds::ActiveConditionVector::iterator iterator;
 
