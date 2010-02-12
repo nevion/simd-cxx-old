@@ -1,0 +1,17 @@
+SimD on Windows
+----------------
+
+Starting from version 0.6 SimD uses the CMake platform independent compilation framework.
+This should make it pretty straightforward for Windows User to get SimD compiled on
+Windows and even generate Visual Studio projects.
+
+The steps required to build SimD on Windows are pretty simple, first of all you need to
+properly configure the file src/dds/osmacros.hpp to include the proper OS specific file.
+For windows this file is os-win32.hpp.
+
+Then, starting from the SimD root directory you should do the following:
+
+$ cmake -DWIN32=1 -DCMAKE -DCMAKE_INSTALL_PREFIX=%SIMD_INSTALL_DIR% .
+
+Notice that this assumes you've set the SIMD_INSTALL_DIR to point to the place where you
+want SimD to be installed.s
