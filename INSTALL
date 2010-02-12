@@ -8,12 +8,14 @@ BOOST. Namely:
 
 BOOST_INCLUDE: points at the include directory
 BOOST_LIB: points at the library directory
+SIMD_INSTALL_DIR: points to the place were you want to install SimD.
+If you don't set it then SimD will install under the ./local folder.
 
 Once BOOST is properly installed and configured, simply do the following:
 
-$./configure
-$ . simd.env
+$ mkdir build
 $ cd build
+$ cmake -DCMAKE_INSTALL_PREFIX=$SIMD_INSTALL_DIR ..
 $ make install
 
 
@@ -21,6 +23,7 @@ Then to see if you installation was successful try out a demo:
 
 cd ./demo/ping
 
+$ cmake .
 $ make
 
 $ ./ping-pub --period 100

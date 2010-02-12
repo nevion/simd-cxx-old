@@ -1,4 +1,4 @@
-2010-02-08  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2010-02-12  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 	* Changed build system to CMake. This will allow to build SimD on
 	Linux, Windows and MacOS.
