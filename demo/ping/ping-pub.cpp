@@ -25,22 +25,21 @@ std::string URI;
 
 bool parse_args(int argc, char* argv[])
 {
- po::options_description desc("Available options for <ping> are:");
- desc.add_options()
-   ("help", "produce help message")
-   ("name", po::value<std::string>(), "name for this ping application")
-   ("samples", po::value<int>(), "number of samples published")
-   ("period", po::value<int>(), "period with which samples will be written")
-   ("topic", po::value<std::string>(), "topic name for this ping application")
-   ("URI", po::value<std::string>(), "OpenSplice DDS configuration URI")
-   ;
+  po::options_description desc("Available options for <ping> are");
+  desc.add_options()
+    ("help", "produce help message")
+    ("name", po::value<std::string>(), "name for this ping application")
+    ("samples", po::value<int>(), "number of samples published")
+    ("period", po::value<int>(), "period with which samples will be written")
+    ("topic", po::value<std::string>(), "topic name for this ping application")
+    ("URI", po::value<std::string>(), "OpenSplice DDS configuration URI")
+    ;
  
-  po::variables_map vm;        
-  po::store(po::parse_command_line(argc, argv, desc), vm);
-  po::notify(vm);    
-  
   try {
-    
+    po::variables_map vm;        
+    po::store(po::parse_command_line(argc, argv, desc), vm);
+    po::notify(vm);    
+   
     if (vm.count("help") || argc == 1) {
       std::cout << desc << "\n";
       return false;
@@ -77,7 +76,7 @@ int main(int argc, char* argv[]) {
 
   // -- start the dds runtime to use the default DDS partition, which
   // -- as per the DDS standard is ""
-  dds::Runtime::start("");
+  dds::Runtime runtime("");
   
   dds::Topic<PingType> pingTopic(topic);
   dds::DataWriter<PingType> writer(pingTopic);
@@ -95,6 +94,5 @@ int main(int argc, char* argv[]) {
     usleep(period*1000);
   }
   std::cout << std::endl;
-  dds::Runtime::stop();
   return 0;
 }

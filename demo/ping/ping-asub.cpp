@@ -34,26 +34,24 @@ std::string type("PingType");
 
 bool parse_args(int argc, char* argv[])
 {
- po::options_description desc("Available options for <ping-sub> are:");
- desc.add_options()
-   ("help", "produce help message")
-   ("topic", po::value<std::string>(), "topic name for this ping application")
-   ("reader-history", po::value<int>(), "reader history QoS")
-   ("samples", po::value<int>(), "number of samples reade by the reader")
-   ;
+  po::options_description desc("Available options for <ping-sub> are");
+  desc.add_options()
+    ("help", "produce help message")
+    ("topic", po::value<std::string>(), "topic name for this ping application")
+    ("reader-history", po::value<int>(), "reader history QoS")
+    ("samples", po::value<int>(), "number of samples reade by the reader")
+    ;
  
-  po::variables_map vm;        
-  po::store(po::parse_command_line(argc, argv, desc), vm);
-  po::notify(vm);    
-  
   try {
-    
+    po::variables_map vm;        
+    po::store(po::parse_command_line(argc, argv, desc), vm);
+    po::notify(vm);    
+ 
     if (vm.count("help") || argc == 1) {
       std::cout << desc << "\n";
       return false;
     }
-    
-    
+
     if (vm.count("topic")) 
       topic = vm["topic"].as<std::string>();
     
@@ -103,7 +101,7 @@ int main(int argc, char* argv[]) {
     return 1;
 
   // -- start the dds runtime
-  dds::Runtime::start("");
+  dds::Runtime runtime("");
 
   dds::Topic<PingType> pingTopic(topic);
   dds::DataReader<PingType> reader(pingTopic);
@@ -113,18 +111,17 @@ int main(int argc, char* argv[]) {
     reader.on_data_available_signal_connect(boost::bind(&DataHandler::handle_data,
 							&dh, 
 							_1));
-
+  
 
   dds::sigcon_t con_liv = 
     reader.on_liveliness_changed_signal_connect(boost::bind(&DataHandler::handle_liveliness_change, 
-						    &dh, 
-						    _1, 
-						    _2));
+							    &dh, 
+							    _1, 
+							    _2));
   
   
   completion_barrier.wait();
   con_data.disconnect();
   con_liv.disconnect();
-  dds::Runtime::stop();
   return 0;
 }

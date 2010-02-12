@@ -28,7 +28,7 @@ std::string type("PingType");
 
 bool parse_args(int argc, char* argv[])
 {
-  po::options_description desc("Available options for <ping-sub> are:");
+  po::options_description desc("Available options for <ping-sub> are");
   desc.add_options()
     ("help", "produce help message")
     ("topic", po::value<std::string>(), "topic name for this ping application")
@@ -36,17 +36,15 @@ bool parse_args(int argc, char* argv[])
     ("deadline", po::value<int>(), "deadline QoS (in sec)")
     ;
 
-  po::variables_map vm;
-  po::store(po::parse_command_line(argc, argv, desc), vm);
-  po::notify(vm);
-
   try {
+    po::variables_map vm;
+    po::store(po::parse_command_line(argc, argv, desc), vm);
+    po::notify(vm);
 
     if (vm.count("help") || argc == 1) {
       std::cout << desc << "\n";
       return false;
     }
-
 
     if (vm.count("topic"))
       topic = vm["topic"].as<std::string>();
@@ -75,7 +73,6 @@ public:
     for (unsigned int i = 0; i < samples.length(); ++i) {
       std::cout << samples[i].vendor << " . " << samples[i].counter
 		<< std::endl;
-      
     }
     reader.return_loan(samples, infos);
   }
@@ -87,7 +84,7 @@ int main(int argc, char* argv[]) {
     return 1;
 
   // -- start the dds runtime
-  dds::Runtime::start("");
+  dds::Runtime runtime("");
 
   dds::Topic<PingType> pingTopic(topic);
   dds::DataReader<PingType> reader(pingTopic);
@@ -107,6 +104,5 @@ int main(int argc, char* argv[]) {
     ws.dispatch(timeout);
   }
   
-  dds::Runtime::stop();
   return 0;
 }
