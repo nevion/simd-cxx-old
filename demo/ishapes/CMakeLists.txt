@@ -45,10 +45,19 @@ set (QT_MOC_HEADERS
   WriterQosDialog.hpp
 )
 
+set (QT_UI_SOURCES
+  iShapesForm.ui  
+  qosForm.ui
+  readerQosForm.ui
+  writerQosForm.ui
+)
+
 QT4_WRAP_CPP(QT_MOC_SOURCES ${QT_MOC_HEADERS})
+QT4_WRAP_UI(QT_UI_HEADERS ${QT_UI_SOURCES})
 
 set (ISHAPES_SOURCES
  ${QT_MOC_SOURCES}
+ ${QT_UI_SOURCES}
  BouncingShapeDynamics.cpp
  Circle.cpp
  DDSShapeDynamics.cpp
