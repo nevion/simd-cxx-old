@@ -14,6 +14,8 @@
 #include <dds/traits.hpp>
 #include <dds/topic.hpp>
 #include <dds/condition.hpp>
+#include <dds/subscriber.hpp>
+#include <dds/content_filtered_topic.hpp>
 
 
 namespace dds {
@@ -24,7 +26,7 @@ namespace dds {
 }
   
 template<typename T>
-class dds::peer::DataReaderImpl : public DDS::DataReaderListener 
+class SIMD_EXPORT dds::peer::DataReaderImpl : public DDS::DataReaderListener 
 {
 public:
   typedef typename topic_data_reader<T>::type DR;
@@ -32,8 +34,8 @@ public:
   
 public:
   // -- on_data_available signal/slot
-  typedef boost::signals2::signal1<void, 
-				   dds::DataReader<T>& >
+  typedef typename boost::signals2::signal1<void, 
+                                            dds::DataReader<T>& >
   on_data_available_signal_t;
   
   typedef typename boost::signals2::signal1<void, 
@@ -41,7 +43,7 @@ public:
   on_data_available_slot_t;
   
   // -- on_requested_incompatible_qos signal/slot
-  typedef boost::signals2::signal2<void, 
+  typedef typename boost::signals2::signal2<void, 
 				   dds::DataReader<T>&,
 				   const DDS::RequestedIncompatibleQosStatus&>
   on_requested_incompatible_qos_signal_t;
@@ -52,7 +54,7 @@ public:
   on_requested_incompatible_qos_slot_t;
 
   // -- on_liveliness_changed signal/slot
-  typedef boost::signals2::signal2<void, 
+  typedef typename boost::signals2::signal2<void, 
 				   dds::DataReader<T>&,
 				   const DDS::LivelinessChangedStatus&> 
   on_liveliness_changed_signal_t;
@@ -63,7 +65,7 @@ public:
   on_liveliness_changed_slot_t;
 
   // -- on_deadline_missed_status_signal_t
-  typedef boost::signals2::signal2<void, 
+  typedef typename boost::signals2::signal2<void,
 				   dds::DataReader<T>&,
 				   const DDS::RequestedDeadlineMissedStatus&>
   on_requested_deadline_missed_signal_t;
@@ -74,7 +76,7 @@ public:
   on_requested_deadline_missed_slot_t;
 
   // -- on_sample_rejected_signal_t
-  typedef boost::signals2::signal2<void, 
+  typedef typename boost::signals2::signal2<void, 
 				   dds::DataReader<T>&,
 				   const DDS::SampleRejectedStatus&> 
   on_sample_rejected_signal_t;
@@ -85,7 +87,7 @@ public:
   on_sample_rejected_slot_t;
   
   //-- on_subscription_matched_signal_t
-  typedef boost::signals2::signal2<void, 
+  typedef typename boost::signals2::signal2<void, 
 				   dds::DataReader<T>&,
 				   const DDS::SubscriptionMatchedStatus&>
   on_subscription_matched_signal_t;
@@ -96,7 +98,7 @@ public:
   on_subscription_matched_slot_t;
   
   // on_sample_lost_signal_t
-  typedef boost::signals2::signal2<void, 
+  typedef typename boost::signals2::signal2<void,
 				   dds::DataReader<T>&,
 				   const DDS::SampleLostStatus&> 
   on_sample_lost_signal_t;
@@ -112,15 +114,12 @@ public:
     topic_(topic),
     drqos_(topic_.get_qos())
   {
-    sub_ = Runtime::instance()->get_subscriber();
-    // @TODO: The Listener should be attached only when a signal is
-    // connected to a slot and the mask should be updated likewise.
+    sub_ = ::dds::peer::RuntimeImpl::instance()->get_subscriber();
     DDS::DataReader* r =
       sub_->create_datareader(topic_->get_dds_topic(),
 			      drqos_,
 			      0,
 			      0);
-    //			      DDS::ANY_STATUS);
     
     boost::shared_ptr<DR> tmp(DR::_narrow(r), mem::DRDeleter(sub_));
     reader_ = tmp;
@@ -131,9 +130,7 @@ public:
     topic_(topic),
     drqos_(qos)
   {
-    sub_ = Runtime::instance()->get_subscriber();
-    // @TODO: The Listener should be attached only when a signal is
-    // connected to a slot and the mask should be updated likewise.
+    sub_ = ::dds::peer::RuntimeImpl::instance()->get_subscriber();
     DDS::DataReader* r =
       sub_->create_datareader(topic_->get_dds_topic(),
 			      drqos_,
@@ -144,6 +141,38 @@ public:
     reader_ = tmp;
   }
 
+  DataReaderImpl(const ContentFilteredTopic<T>& cftopic)
+    : topic_(cftopic.get_related_topic()),
+      cftopic_(cftopic),
+      drqos_(topic_.get_qos())
+  {
+    sub_ = ::dds::peer::RuntimeImpl::instance()->get_subscriber();
+    DDS::DataReader* r =
+    sub_->create_datareader(cftopic_->get_dds_topic(),
+                            drqos_,
+                            0,
+                            0);
+ 
+    boost::shared_ptr<DR> tmp(DR::_narrow(r), mem::DRDeleter(sub_));
+    reader_ = tmp;
+  }
+
+  DataReaderImpl(const dds::ContentFilteredTopic<T>& cftopic,
+             const dds::DataReaderQos& qos)
+    : topic_(cftopic.get_related_topic()),
+      cftopic_(cftopic),
+      drqos_(qos)
+  {
+    sub_ = ::dds::peer::RuntimeImpl::instance()->get_subscriber();
+    DDS::DataReader* r =
+    sub_->create_datareader(cftopic_->get_dds_topic(),
+                            drqos_,
+                            0,
+                            0);
+
+    boost::shared_ptr<DR> tmp(DR::_narrow(r), mem::DRDeleter(sub_));
+    reader_ = tmp;
+  }
   virtual ~DataReaderImpl() {
     reader_->set_listener(0, 0);
   }
@@ -283,7 +312,7 @@ public:
   // -- Qos Getter/Setter
 
   dds::DataReaderQos 
-  get_qos() 
+  get_qos() const
   {
     return drqos_;
   }
@@ -298,12 +327,12 @@ public:
   }
 
   boost::shared_ptr<DDS::Subscriber> 
-  get_subscriber() {
+  get_subscriber() const {
     return sub_;
   }
 
   dds::Topic<T> 
-  get_topic() 
+  get_topic() const
   {
     return topic_;
   }
@@ -436,6 +465,7 @@ protected:
 
 protected:
   dds::Topic<T>                               topic_;
+  dds::ContentFilteredTopic<T>                cftopic_;
   boost::shared_ptr<DDS::Subscriber>          sub_;
   boost::shared_ptr<DR>                       reader_;
   dds::DataReaderQos                          drqos_;

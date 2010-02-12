@@ -5,7 +5,7 @@
 #include <dds/runtime.hpp>
 #include <dds/qos.hpp>
 #include <dds/topic_description.hpp>
-
+#include <dds/peer/runtime_impl.hpp>
 namespace dds {
   class TopicDescription;
 
@@ -17,18 +17,18 @@ namespace dds {
 
 
 template <typename T>
-class dds::peer::TopicImpl : public dds::TopicDescription {
+class SIMD_EXPORT dds::peer::TopicImpl : public dds::TopicDescription {
 public:
 
   TopicImpl(const std::string& name, const std::string type_name) 
-    : name_(name), dp_(::dds::Runtime::instance()->get_participant()) 
+    : name_(name), dp_(::dds::peer::RuntimeImpl::instance()->get_participant()) 
   {
     TopicQos qos;
     this->init(name, type_name, qos);
   }
 
   TopicImpl(const std::string& name) 
-    : name_(name), dp_(::dds::Runtime::instance()->get_participant()) 
+    : name_(name), dp_(::dds::peer::RuntimeImpl::instance()->get_participant()) 
   {
     TopicQos qos;
     std::string type_name(ts_.get_type_name());
@@ -38,7 +38,7 @@ public:
   TopicImpl(const std::string& name, const TopicQos& qos) 
     : name_(name), 
       qos_(qos), 
-      dp_(::dds::Runtime::instance()->get_participant()) 
+      dp_(::dds::peer::RuntimeImpl::instance()->get_participant()) 
   {
     std::string type_name(ts_.get_type_name());
     this->init(name, type_name, qos);
@@ -49,7 +49,7 @@ public:
 	    const TopicQos& qos) 
     : name_(name), 
       qos_(qos), 
-      dp_(::dds::Runtime::instance()->get_participant()) 
+      dp_(::dds::peer::RuntimeImpl::instance()->get_participant()) 
   {
     this->init(name, type_name, qos);
   }
@@ -71,11 +71,13 @@ private:
 
 public:
 
-  TopicQos get_qos() const {
+  TopicQos
+  get_qos() const {
     return qos_;
   }
 
-  DDS::ReturnCode_t set_qos(const TopicQos& qos) {
+  DDS::ReturnCode_t
+  set_qos(const TopicQos& qos) {
     DDS::ReturnCode_t rc = t_->set_qos(qos);
     if (rc == DDS::RETCODE_OK)
       qos_ = qos;
@@ -96,21 +98,25 @@ public:
 
 public:
   // -- Methods inherited from TopicDescription
-  virtual std::string get_name() {
+  virtual std::string
+  get_name() const {
     return name_;
   }
 
-  virtual std::string get_type_name() {
+  virtual std::string
+  get_type_name() const {
     return std::string(ts_.get_type_name());
   }
 
-  virtual dds::DomainParticipant get_participant() {
+  virtual dds::DomainParticipant
+  get_participant() const {
     return dp_;
   }
+  
 private:
   std::string name_;
   TopicQos qos_;
-  typename topic_type_support<T>::type ts_;
+  mutable typename topic_type_support<T>::type ts_;
   DDS::Topic* t_;
   dds::DomainParticipant dp_;
 

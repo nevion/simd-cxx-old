@@ -5,6 +5,7 @@
 #include <dds/memory.hpp>
 #include <dds/traits.hpp>
 #include <dds/topic.hpp>
+#include <dds/publisher.hpp>
 
 namespace dds {
   namespace peer {
@@ -14,19 +15,19 @@ namespace dds {
 }
 
 template <typename T>
-class dds::peer::DataWriterImpl 
+class SIMD_EXPORT dds::peer::DataWriterImpl 
 {
 public:
   typedef typename topic_data_writer<T>::type DW;
   
 public:
-
+  
   DataWriterImpl(const dds::Topic<T>& topic)
     : topic_(topic),
       dwqos_(topic_->get_qos())
   {
     pub_ =
-      Runtime::instance()->get_publisher();
+      ::dds::peer::RuntimeImpl::instance()->get_publisher();
     
     DDS::DataWriter* w = 
       pub_->create_datawriter(topic_->get_dds_topic(),
@@ -41,7 +42,8 @@ public:
   DataWriterImpl(const dds::Topic<T>& topic, const dds::DataWriterQos& qos)
     : topic_(topic), dwqos_(qos)
   {
-    pub_ = Runtime::instance()->get_publisher();
+    pub_ = 
+      ::dds::peer::RuntimeImpl::instance()->get_publisher();
     DDS::DataWriter* w =
       pub_->create_datawriter(topic_->get_dds_topic(),
 			      dwqos_,
@@ -121,8 +123,7 @@ public:
     return topic_;
   }
     
-  boost::shared_ptr<DDS::Publisher>
-  get_publisher() 
+  dds::Publisher get_publisher() 
   {
     return pub_;
   }
@@ -134,10 +135,10 @@ public:
   }
 
 protected:
-  dds::Topic<T>                       topic_;
-  ::boost::shared_ptr<DDS::Publisher> pub_;
-  ::boost::shared_ptr<DW>             writer_;
-  dds::DataWriterQos                  dwqos_;
+  dds::Topic<T>              topic_;
+  dds::Publisher             pub_;
+  ::boost::shared_ptr<DW>    writer_;
+  dds::DataWriterQos         dwqos_;
 };
 
 #endif /* AC_SIMD_DDS_WRITER_IMPL_HPP */
