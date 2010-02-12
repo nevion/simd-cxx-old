@@ -71,7 +71,7 @@ int main(int argc, char* argv[]) {
     return 1;
 
   // -- start the dds runtime
-  dds::Runtime::start();
+  dds::Runtime runtime();
   
   dds::TopicQos tqos;
   tqos.set_reliable();
@@ -99,9 +99,10 @@ int main(int argc, char* argv[]) {
     sample.name = DDS::string_dup(tmp.c_str());
     std::cout << "<<= " <<  sample.name << std::endl;
     writer.write(sample);
+    DDS::Time_t ts = {0, 0};
+    writer.write(sample, ts);
     usleep(period*1000);
   }
   std::cout << "[done]" << std::endl;
-  dds::Runtime::stop();
   return 0;
 }

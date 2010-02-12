@@ -60,7 +60,7 @@ int main(int argc, char* argv[]) {
     return 1;
   
   // -- Start DDS
-  dds::Runtime::start();
+  dds::Runtime runtime();
   
   // -- Create a Topic
   dds::TopicQos tqos;
@@ -93,6 +93,5 @@ int main(int argc, char* argv[]) {
     usleep(period*1000);
   }
   
-  dds::Runtime::stop();
   return 0;
 }
