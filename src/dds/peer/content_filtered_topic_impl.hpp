@@ -14,7 +14,7 @@ namespace dds {
 }
 
 template <typename T>
-class SIMD_EXPORT dds::peer::ContentFilteredTopicImpl {
+class dds::peer::ContentFilteredTopicImpl {
 public:
   /**
    * Creates a <code>ContentFilteredTopicImpl</code>.

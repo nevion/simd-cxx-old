@@ -5,7 +5,7 @@
 #include <dds/exception.hpp>
 
 #define DECLARE_EXCEPTION(ExceptionName)		\
-  class SIMD_EXPORT ExceptionName : public virtual Exception {	\
+  class SIMD_API ExceptionName : public virtual Exception {	\
   public:						\
   ExceptionName(const std::string& what) throw();	\
   ExceptionName(const std::string& what,		\
@@ -38,7 +38,7 @@ namespace dds {
 
 
   template <typename AssertImpl>  
-  class SIMD_EXPORT AssertBase : public AssertImpl {
+  class SIMD_API AssertBase : public AssertImpl {
   public:
     inline static void precondition(bool condition) {
       AssertImpl::precondition(condition);

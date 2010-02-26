@@ -11,14 +11,14 @@ namespace dds {
 
   namespace mem {
 
-    class SIMD_EXPORT DPDeleter {
+    class SIMD_API DPDeleter {
     public:
       void  operator()(DDS::DomainParticipant* dp);
     };
 
     // The following class should be written using boost::bind
 
-    class SIMD_EXPORT PubDeleter {
+    class SIMD_API PubDeleter {
     public:
       PubDeleter(boost::shared_ptr<DDS::DomainParticipant> dp);
 
@@ -31,7 +31,7 @@ namespace dds {
     };
 
 
-    class SIMD_EXPORT SubDeleter {
+    class SIMD_API SubDeleter {
     public:
       SubDeleter(boost::shared_ptr<DDS::DomainParticipant> dp);
 
@@ -43,7 +43,7 @@ namespace dds {
       boost::shared_ptr<DDS::DomainParticipant> dp_;
     };
 
-    class SIMD_EXPORT DWDeleter {
+    class SIMD_API DWDeleter {
     public:
       DWDeleter(boost::shared_ptr<DDS::Publisher> pub);
       ~DWDeleter();
@@ -53,7 +53,7 @@ namespace dds {
       boost::shared_ptr<DDS::Publisher> pub_;  
     };
 
-    class SIMD_EXPORT DRDeleter {
+    class SIMD_API DRDeleter {
     public:
       DRDeleter(boost::shared_ptr<DDS::Subscriber> sub);
       ~DRDeleter();
@@ -64,7 +64,7 @@ namespace dds {
     };
 
     template <typename DR>
-    class SIMD_EXPORT RCondDeleter {
+    class RCondDeleter {
     public:
        RCondDeleter(boost::shared_ptr<DR> reader) : reader_(reader) { }
        ~RCondDeleter() { }

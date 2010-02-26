@@ -7,7 +7,7 @@
 #include <dds/topic_description.hpp>
 #include <dds/peer/runtime_impl.hpp>
 namespace dds {
-  class TopicDescription;
+  class SIMD_API TopicDescription;
 
   namespace peer {
     template <typename T>
@@ -17,7 +17,7 @@ namespace dds {
 
 
 template <typename T>
-class SIMD_EXPORT dds::peer::TopicImpl : public dds::TopicDescription {
+class dds::peer::TopicImpl : public dds::TopicDescription {
 public:
 
   TopicImpl(const std::string& name, const std::string type_name) 

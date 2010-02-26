@@ -15,7 +15,7 @@ namespace dds {
 }
 
 template <typename T>
-class SIMD_EXPORT dds::peer::DataWriterImpl 
+class dds::peer::DataWriterImpl 
 {
 public:
   typedef typename topic_data_writer<T>::type DW;

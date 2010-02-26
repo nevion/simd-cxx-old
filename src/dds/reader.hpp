@@ -14,7 +14,7 @@ namespace dds {
 #include <dds/peer/reader_impl.hpp>
 
 template <typename T>
-class SIMD_EXPORT dds::DataReader {
+class dds::DataReader {
 public:
 public:            
   typedef typename dds::peer::DataReaderImpl<T>::DR   DR;

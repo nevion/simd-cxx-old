@@ -11,7 +11,7 @@ namespace dds {
   }
 }
 
-class SIMD_EXPORT dds::Runtime {
+class SIMD_API dds::Runtime {
 public:
   Runtime();
   Runtime(const std::string& partition);

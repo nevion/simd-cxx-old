@@ -12,12 +12,12 @@
 // #include <dds/subscriber.hpp>
 
 namespace dds {
-  class Publisher;
-  class Subscriber;
+  class SIMD_API Publisher;
+  class SIMD_API Subscriber;
 
   namespace peer {
 
-    class SIMD_EXPORT RuntimeImpl {
+    class SIMD_API RuntimeImpl {
 
   public:
     static const std::string DEFAULT_DOMAIN;

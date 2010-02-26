@@ -27,9 +27,11 @@ DESTINATION . PATTERN "*~" EXCLUDE PATTERN "*svn*" EXCLUDE )
 
 # C++ Options
 add_definitions( ${DEFINITIONS} )
+# Options specifically for building the library
+add_definitions( -DSIMD_API_BUILD )
 
 # library setup
-add_library(lib${PROJECT_NAME}  ${SimD_SOURCES})
+add_library(lib${PROJECT_NAME}  ${SimD_SOURCES} ${OpenSplice_LIBRARIES})
 
 add_custom_target( lib DEPENDS lib${PROJECT_NAME} )
 

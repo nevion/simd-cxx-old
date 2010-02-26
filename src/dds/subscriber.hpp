@@ -13,7 +13,7 @@
 
 namespace dds {
 
-  class SIMD_EXPORT Subscriber: public boost::shared_ptr<DDS::Subscriber> {
+  class SIMD_API Subscriber: public boost::shared_ptr<DDS::Subscriber> {
   public:
     /**
      * Creates a <code>Subscriber</code> on the default <code>DomainParticipant</code>

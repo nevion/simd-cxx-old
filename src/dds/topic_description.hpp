@@ -9,7 +9,7 @@ namespace dds {
   class TopicDescription;
 }
 
-class SIMD_EXPORT dds::TopicDescription {
+class SIMD_API dds::TopicDescription {
 public:
   virtual ~TopicDescription();
   

@@ -23,7 +23,7 @@ namespace dds {
  * @version 0.1
  */
 template <typename T>
-class SIMD_EXPORT dds::DataInstanceReader 
+class dds::DataInstanceReader 
 {
 public:
   typedef typename dds::peer::DataReaderImpl<T>::DR   DR;

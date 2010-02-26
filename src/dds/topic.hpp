@@ -20,7 +20,7 @@ namespace dds {
 
 
 template<typename T>
-class SIMD_EXPORT dds::Topic : public dds::TopicDescription {
+class dds::Topic : public dds::TopicDescription {
 public:
   Topic() { }
 

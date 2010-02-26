@@ -13,7 +13,7 @@
 
 namespace dds {
 
-  class SIMD_EXPORT Publisher: public boost::shared_ptr<DDS::Publisher> {
+  class SIMD_API Publisher: public boost::shared_ptr<DDS::Publisher> {
   public:
     /**
      * Creates a <code>Publisher</code> on the default <code>DomainParticipant</code>

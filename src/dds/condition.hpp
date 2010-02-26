@@ -17,8 +17,8 @@
 
 namespace dds {
 
-  class ActiveWaitSet;
-  class ActiveCondition;
+  class SIMD_API ActiveWaitSet;
+  class SIMD_API ActiveCondition;
 
 
   /**
@@ -34,7 +34,7 @@ namespace dds {
    * @version 1.0
    */
   /////////////////////////////////////////////////////////////////////////////
-  class SIMD_EXPORT ActiveConditionImpl {
+  class SIMD_API ActiveConditionImpl {
   public:
     virtual ~ActiveConditionImpl();
   public:
@@ -47,7 +47,7 @@ namespace dds {
     virtual DDS::Condition* get_dds_condition() const = 0;
   };
 
-  class SIMD_EXPORT ActiveCondition {
+  class SIMD_API ActiveCondition {
   public:
     ActiveCondition(ActiveConditionImpl* ac);
     virtual ~ActiveCondition();
@@ -72,7 +72,7 @@ namespace dds {
   DEFINE_HANDLE_BODY_TRAITS(ActiveCondition, ActiveConditionImpl)
 
   /////////////////////////////////////////////////////////////////////////////
-  class SIMD_EXPORT ActiveReadConditionImpl: public ActiveConditionImpl {
+  class SIMD_API ActiveReadConditionImpl: public ActiveConditionImpl {
   public:
     virtual ~ActiveReadConditionImpl();
   public:
@@ -81,7 +81,7 @@ namespace dds {
     virtual DDS::InstanceStateMask get_instance_state_mask() = 0;
   };
 
-  class SIMD_EXPORT ActiveReadCondition: public ActiveCondition {
+  class SIMD_API ActiveReadCondition: public ActiveCondition {
   public:
     ActiveReadCondition(ActiveReadConditionImpl* arci);
     virtual ~ActiveReadCondition();
@@ -108,7 +108,7 @@ namespace dds {
   DEFINE_HANDLE_BODY_TRAITS(ActiveReadCondition, ActiveReadConditionImpl)
 
   /////////////////////////////////////////////////////////////////////////////
-  class SIMD_EXPORT ActiveQueryConditionImpl: public ActiveReadConditionImpl {
+  class SIMD_API ActiveQueryConditionImpl: public ActiveReadConditionImpl {
   public:
     virtual ~ActiveQueryConditionImpl();
 
@@ -118,7 +118,7 @@ namespace dds {
     virtual void set_querly_parameters(const std::string& params) = 0;
   };
 
-  class SIMD_EXPORT ActiveQueryCondition: public ActiveReadCondition {
+  class SIMD_API ActiveQueryCondition: public ActiveReadCondition {
   protected:
     ActiveQueryCondition(ActiveQueryConditionImpl* qcond);
     virtual ~ActiveQueryCondition();
@@ -151,7 +151,7 @@ namespace dds {
   // dependent, thus one potential approach is to add it as an extra template parameter that
   // will be bound by for each specific DDS implementation.
   template<typename ARG, typename FUNCTOR>
-  class SIMD_EXPORT iActiveReadConditionImpl: public ActiveReadConditionImpl {
+  class iActiveReadConditionImpl: public ActiveReadConditionImpl {
   public:
     // @TODO: Make this ctor protected and add ActiveReadCondition/DataReader as
     // friend classes
@@ -203,7 +203,7 @@ namespace dds {
   };
 
   template<typename ARG, typename FUNCTOR>
-  class SIMD_EXPORT iActiveReadCondition: public ActiveReadCondition {
+  class iActiveReadCondition: public ActiveReadCondition {
   public:
     iActiveReadCondition(boost::shared_ptr<DDS::ReadCondition> rcond,
 			 const ARG& arg, const FUNCTOR& f) :

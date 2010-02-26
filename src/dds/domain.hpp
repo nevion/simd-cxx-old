@@ -22,7 +22,7 @@ namespace dds {
    * @author Angelo Corsaro <mailto:angelo.corsaro@gmail.com>
    * @version 1.0
    */
-  class SIMD_EXPORT DomainParticipant : public boost::shared_ptr<DDS::DomainParticipant> {
+  class SIMD_API DomainParticipant : public boost::shared_ptr<DDS::DomainParticipant> {
   public:
     DomainParticipant();
     DomainParticipant(const std::string& partition);

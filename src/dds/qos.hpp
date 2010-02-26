@@ -17,7 +17,7 @@ namespace dds {
   //////////////////////////////////////////////////////////////////////////////
 
   template <typename DDS_QOS, typename INITIALIZER>
-  class SIMD_EXPORT BaseTopicQos : public DDS_QOS {
+  class BaseTopicQos : public DDS_QOS {
   public:
     BaseTopicQos() {
       // @AC: This really is a shortcut, the initializer should not
@@ -37,7 +37,7 @@ namespace dds {
     }
     void set_reliable(DDS::Duration_t timeout) {
       this->reliability.kind = DDS::BEST_EFFORT_RELIABILITY_QOS;
-      this->reliability.max_bloking_time = timeout;
+      this->reliability.max_blocking_time = timeout;
     }
     void set_best_effort() {
       this->reliability.kind = DDS::BEST_EFFORT_RELIABILITY_QOS;
@@ -91,10 +91,10 @@ namespace dds {
     }
 
     // -- Resource Limits
-    void set_resource_limits(long max_samples, long max_instances, long max_sample_per_instances) {
+    void set_resource_limits(long max_samples, long max_instances, long max_samples_per_instance) {
       this->resource_limits.max_samples = max_samples;
       this->resource_limits.max_instances = max_instances;
-      this->resource_limits.max_sample_per_instances = max_sample_per_instances;
+      this->resource_limits.max_samples_per_instance = max_samples_per_instance;
     }
 
     // -- Ownership Qos
@@ -110,7 +110,7 @@ namespace dds {
 
   //////////////////////////////////////////////////////////////////////////////
 
-  class SIMD_EXPORT TopicQosInitializer {
+  class SIMD_API TopicQosInitializer {
   public:
     TopicQosInitializer(dds::DomainParticipant dp);
     ~TopicQosInitializer();
@@ -123,7 +123,7 @@ namespace dds {
 
   //////////////////////////////////////////////////////////////////////////////
 
-  class SIMD_EXPORT TopicQos : public BaseTopicQos<DDS::TopicQos, TopicQosInitializer> {
+  class TopicQos : public BaseTopicQos<DDS::TopicQos, TopicQosInitializer> {
   public:
     TopicQos();
     ~TopicQos();
@@ -146,7 +146,7 @@ namespace dds {
   //////////////////////////////////////////////////////////////////////////////
 
 
-  class SIMD_EXPORT NullInitializer {
+  class SIMD_API NullInitializer {
   public:
     NullInitializer(::dds::DomainParticipant) { }
     ~NullInitializer() { }
@@ -156,7 +156,7 @@ namespace dds {
   };
 
   //////////////////////////////////////////////////////////////////////////////
-  class SIMD_EXPORT DataWriterQos : public BaseTopicQos<DDS::DataWriterQos, NullInitializer> {
+  class DataWriterQos : public BaseTopicQos<DDS::DataWriterQos, NullInitializer> {
   public:
     DataWriterQos();
     DataWriterQos(const TopicQos& tqos);
@@ -183,7 +183,7 @@ namespace dds {
 
   //////////////////////////////////////////////////////////////////////////////
 
-  class SIMD_EXPORT DataReaderQos : public BaseTopicQos<DDS::DataReaderQos, NullInitializer> {
+  class DataReaderQos : public BaseTopicQos<DDS::DataReaderQos, NullInitializer> {
   public:
     DataReaderQos();
     DataReaderQos(const TopicQos& tqos);
@@ -210,7 +210,7 @@ namespace dds {
   //////////////////////////////////////////////////////////////////////////////
 
   template <typename DDS_QOS, typename INITIALIZER>
-  class SIMD_EXPORT BasePubSubQos : public DDS_QOS {
+  class BasePubSubQos : public DDS_QOS {
   public:
     BasePubSubQos() {
       ::dds::DomainParticipant dp =
@@ -224,20 +224,20 @@ namespace dds {
   public:
     void set_instance_presentation(bool coherent, bool ordered) {
       this->presentation.access_scope = DDS::INSTANCE_PRESENTATION_QOS;
-      this->coherent_access = coherent;
-      this->ordered_access = ordered;
+      this->presentation.coherent_access = coherent;
+      this->presentation.ordered_access = ordered;
     }
 
     void set_topic_presentation(bool coherent, bool ordered) {
       this->presentation.access_scope = DDS::TOPIC_PRESENTATION_QOS;
-      this->coherent_access = coherent;
-      this->ordered_access = ordered;
+      this->presentation.coherent_access = coherent;
+      this->presentation.ordered_access = ordered;
     }
   
     void set_group_presentation(bool coherent, bool ordered) {
       this->presentation.access_scope = DDS::GROUP_PRESENTATION_QOS;
-      this->coherent_access = coherent;
-      this->ordered_access = ordered;
+      this->presentation.coherent_access = coherent;
+      this->presentation.ordered_access = ordered;
     }
 
   
@@ -257,7 +257,7 @@ namespace dds {
   //////////////////////////////////////////////////////////////////////////////
 
 
-  class SIMD_EXPORT PubQosInitializer {
+  class SIMD_API PubQosInitializer {
   public:
     PubQosInitializer(dds::DomainParticipant dp);
     ~PubQosInitializer();
@@ -269,7 +269,7 @@ namespace dds {
   };
 
   //////////////////////////////////////////////////////////////////////////////
-  class SIMD_EXPORT PublisherQos : public BasePubSubQos<DDS::PublisherQos, PubQosInitializer> {
+  class PublisherQos : public BasePubSubQos<DDS::PublisherQos, PubQosInitializer> {
   public:
     PublisherQos();
     ~PublisherQos();
@@ -277,7 +277,7 @@ namespace dds {
 
   //////////////////////////////////////////////////////////////////////////////
 
-  class SIMD_EXPORT SubQosInitializer {
+  class SIMD_API SubQosInitializer {
   public:
     SubQosInitializer(dds::DomainParticipant dp);
     ~SubQosInitializer();
@@ -289,7 +289,7 @@ namespace dds {
   };
 
   //////////////////////////////////////////////////////////////////////////////
-  class SIMD_EXPORT SubscriberQos : public BasePubSubQos<DDS::SubscriberQos, SubQosInitializer> {
+  class SubscriberQos : public BasePubSubQos<DDS::SubscriberQos, SubQosInitializer> {
   public:
     SubscriberQos();
     ~SubscriberQos();

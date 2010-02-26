@@ -7,7 +7,7 @@
 
 namespace dds {
 
-  class SIMD_EXPORT Exception : public virtual std::exception {
+  class SIMD_API Exception : public virtual std::exception {
   public:
     Exception(const std::string& what) throw();
   
@@ -32,6 +32,6 @@ namespace dds {
   };
 }
 
-std::ostream& operator<<(std::ostream& os, const dds::Exception& e);
+SIMD_API std::ostream& operator<<(std::ostream& os, const dds::Exception& e);
 
 #endif /* AC_SIMD_DDS_EXCEPTION_HPP_ */

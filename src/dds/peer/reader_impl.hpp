@@ -26,7 +26,7 @@ namespace dds {
 }
   
 template<typename T>
-class SIMD_EXPORT dds::peer::DataReaderImpl : public DDS::DataReaderListener 
+class dds::peer::DataReaderImpl : public DDS::DataReaderListener 
 {
 public:
   typedef typename topic_data_reader<T>::type DR;
