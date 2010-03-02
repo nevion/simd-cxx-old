@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 2.6)
 set(CMAKE_MODULE_PATH ../../cmake)
-project (tshapes)
+project (hello)
 include (MacroOpenSplice)
 include (osmacros)
 find_package (OpenSplice REQUIRED)
@@ -15,7 +15,7 @@ include_directories(
 )
 
 
-set (idls ishape.idl)
+set (idls hello.idl)
 
 
 foreach(idl ${idls})
@@ -33,27 +33,18 @@ foreach(idl ${idls})
 endforeach(idl)
 
 set (PUB_SOURCES
- tspub.cpp
- util.cpp
+ hello-pub.cpp
 )
 set (SUB_SOURCES
- tssub.cpp
- util.cpp
+ hello-sub.cpp
 )
 
-set (ASUB_SOURCES
-  tssub-async.cpp
-  util.cpp
-)
-
-set (PUB_EXE tspub)
-set (SUB_EXE tssub)
-set (ASUB_EXE tssub-async)
+set (PUB_EXE hello-pub)
+set (SUB_EXE hello-sub)
 set (DATAMODEL datamodel)
 
 add_executable (${PUB_EXE} ${PUB_SOURCES})
 add_executable (${SUB_EXE} ${SUB_SOURCES})
-add_executable (${ASUB_EXE} ${ASUB_SOURCES})
 add_library (${DATAMODEL} SHARED ${OpenSplice_DATAMODEL})
 
 add_definitions (
@@ -79,10 +70,4 @@ target_link_libraries (${SUB_EXE}
  ${OpenSplice_LIBRARIES}
  ${BOOST_LIBRARIES}
  ${DATAMODEL}
-)
-
-target_link_libraries (${ASUB_EXE}
-${OpenSplice_LIBRARIES}
-${BOOST_LIBRARIES}
-${DATAMODEL}
 )
