@@ -24,7 +24,7 @@ namespace dds {
  * @author Angelo Corsaro <angelo.corsaro@gmail.com>
  */
 template <typename T>
-class SIMD_API dds::ContentFilteredTopic : public dds::TopicDescription {
+class dds::ContentFilteredTopic : public dds::TopicDescription {
 public:
   /**
    * Creates a void <code>ContentFilteredTopic</code>

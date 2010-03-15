@@ -14,6 +14,14 @@
 
 // -- Hello Include
 #include <gen/ccpp_ping.h>
+
+#ifdef WIN32
+#include "Windows.h"
+#define msecSleep(msec) Sleep(msec)
+#else
+#define msecSleep(msec) usleep(1000*(msec))
+#endif
+
 namespace po = boost::program_options;
 
 int period = 1;
@@ -91,7 +99,7 @@ int main(int argc, char* argv[]) {
     std::cout << ".";
     std::cout.flush();
     d.counter++;
-    usleep(period*1000);
+    msecSleep(period);
   }
   std::cout << std::endl;
   return 0;

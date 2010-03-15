@@ -123,7 +123,7 @@ namespace dds {
 
   //////////////////////////////////////////////////////////////////////////////
 
-  class TopicQos : public BaseTopicQos<DDS::TopicQos, TopicQosInitializer> {
+  class SIMD_API TopicQos : public BaseTopicQos<DDS::TopicQos, TopicQosInitializer> {
   public:
     TopicQos();
     ~TopicQos();
@@ -156,7 +156,7 @@ namespace dds {
   };
 
   //////////////////////////////////////////////////////////////////////////////
-  class DataWriterQos : public BaseTopicQos<DDS::DataWriterQos, NullInitializer> {
+  class SIMD_API DataWriterQos : public BaseTopicQos<DDS::DataWriterQos, NullInitializer> {
   public:
     DataWriterQos();
     DataWriterQos(const TopicQos& tqos);
@@ -183,7 +183,7 @@ namespace dds {
 
   //////////////////////////////////////////////////////////////////////////////
 
-  class DataReaderQos : public BaseTopicQos<DDS::DataReaderQos, NullInitializer> {
+  class SIMD_API DataReaderQos : public BaseTopicQos<DDS::DataReaderQos, NullInitializer> {
   public:
     DataReaderQos();
     DataReaderQos(const TopicQos& tqos);
@@ -269,7 +269,7 @@ namespace dds {
   };
 
   //////////////////////////////////////////////////////////////////////////////
-  class PublisherQos : public BasePubSubQos<DDS::PublisherQos, PubQosInitializer> {
+  class SIMD_API PublisherQos : public BasePubSubQos<DDS::PublisherQos, PubQosInitializer> {
   public:
     PublisherQos();
     ~PublisherQos();
@@ -289,7 +289,7 @@ namespace dds {
   };
 
   //////////////////////////////////////////////////////////////////////////////
-  class SubscriberQos : public BasePubSubQos<DDS::SubscriberQos, SubQosInitializer> {
+  class SIMD_API SubscriberQos : public BasePubSubQos<DDS::SubscriberQos, SubQosInitializer> {
   public:
     SubscriberQos();
     ~SubscriberQos();

@@ -76,7 +76,8 @@ set (ISHAPES_EXE ishapes)
 set (DATAMODEL datamodel)
 
 add_executable (${ISHAPES_EXE} ${ISHAPES_SOURCES})
-add_library (${DATAMODEL} SHARED ${OpenSplice_DATAMODEL} )
+#add_library (${DATAMODEL} SHARED ${OpenSplice_DATAMODEL} )
+add_library (${DATAMODEL} STATIC ${OpenSplice_DATAMODEL} )
 
 add_definitions (
  ${OpenSplice_DEFINITIONS}

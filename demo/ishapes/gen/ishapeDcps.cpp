@@ -4,8 +4,8 @@
 //  
 //  File name: ishapeDcps.cpp
 //  Source: gen/ishapeDcps.idl
-//  Generated: Mon Nov 16 00:32:05 2009
-//  OpenSplice V4.2
+//  Generated: Mon Mar 15 16:10:44 2010
+//  OpenSplice V4.3
 //  
 //******************************************************************
 

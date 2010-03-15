@@ -5,7 +5,7 @@
  * Created on July 12, 2009, 10:55 PM
  */
 
-#include <qt4/QtGui/qpainter.h>
+#include <QtGui/qpainter.h>
 #include <vector>
 #include "Circle.hpp"
 

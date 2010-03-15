@@ -54,7 +54,8 @@ set (DATAMODEL datamodel)
 add_executable (${PUB_EXE} ${PUB_SOURCES})
 add_executable (${SUB_EXE} ${SUB_SOURCES})
 add_executable (${ASUB_EXE} ${ASUB_SOURCES})
-add_library (${DATAMODEL} SHARED ${OpenSplice_DATAMODEL})
+add_library (${DATAMODEL} STATIC ${OpenSplice_DATAMODEL})
+#add_library (${DATAMODEL} SHARED ${OpenSplice_DATAMODEL})
 
 add_definitions (
  ${OpenSplice_DEFINITIONS}

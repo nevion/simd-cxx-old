@@ -464,4 +464,4 @@ swatch::helloDataReader_impl::check_preconditions(
     }
     return status;
 }
-const char * swatch::helloTypeSupport::metaDescriptor = "<MetaData version=\"1.0.0\"><Module name=\"swatch\"><Struct name=\"hello\"><Member name=\"name\"><String length=\"256\"/></Member></Struct></Module></MetaData>";
+const char * ::swatch::helloTypeSupport::metaDescriptor = "<MetaData version=\"1.0.0\"><Module name=\"swatch\"><Struct name=\"hello\"><Member name=\"name\"><String length=\"256\"/></Member></Struct></Module></MetaData>";

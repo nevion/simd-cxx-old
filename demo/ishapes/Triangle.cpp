@@ -5,7 +5,7 @@
  * Created on July 13, 2009, 1:57 AM
  */
 
-#include <qt4/QtGui/qpainter.h>
+#include <QtGui/qpainter.h>
 
 #include "Triangle.hpp"
 

@@ -16,6 +16,14 @@
 #include "gen/ccpp_hello.h"
 #include "hello-traits.hpp"
 
+#ifdef WIN32
+#include "Windows.h"
+#define msecSleep(msec) Sleep(msec)
+#else
+#define msecSleep(msec) usleep(1000*(msec))
+#endif
+
+
 namespace po = boost::program_options;
 
 int period = 1;
@@ -101,7 +109,7 @@ int main(int argc, char* argv[]) {
     writer.write(sample);
     DDS::Time_t ts = {0, 0};
     writer.write(sample, ts);
-    usleep(period*1000);
+    msecSleep(period);
   }
   std::cout << "[done]" << std::endl;
   return 0;

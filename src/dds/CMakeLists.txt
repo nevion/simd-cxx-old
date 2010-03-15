@@ -18,8 +18,10 @@ include_directories(
 file (GLOB SimD_SOURCES *.cpp ./peer/*.cpp)
 
 # install include files
+#install (DIRECTORY "${PROJECT_SOURCE_DIR}/src/dds"
+#     DESTINATION include PATTERN "*~" EXCLUDE PATTERN "*svn*" EXCLUDE )
 install (DIRECTORY "${PROJECT_SOURCE_DIR}/src/dds"
-     DESTINATION include PATTERN "*~" EXCLUDE PATTERN "*svn*" EXCLUDE )
+     DESTINATION include FILES_MATCHING PATTERN "*.hpp")
 
 #install documentation
 install (DIRECTORY "${PROJECT_SOURCE_DIR}/docs"

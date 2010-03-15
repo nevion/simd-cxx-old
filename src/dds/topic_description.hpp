@@ -6,7 +6,7 @@
 #include <dds/domain.hpp>
 
 namespace dds {
-  class TopicDescription;
+  class SIMD_API TopicDescription;
 }
 
 class SIMD_API dds::TopicDescription {

@@ -16,6 +16,12 @@
 #include "gen/ccpp_hello.h"
 #include "hello-traits.hpp"
 
+#ifdef WIN32
+#include "Windows.h"
+#define msecSleep(msec) Sleep(msec)
+#else
+#define msecSleep(msec) usleep(1000*(msec))
+#endif
 
 namespace po = boost::program_options;
 
@@ -90,7 +96,7 @@ int main(int argc, char* argv[]) {
     // (zero) we are loaning the memory and thus need to return it
     // back to the middleware.
     reader.return_loan(samples, infos);
-    usleep(period*1000);
+    msecSleep(period);
   }
   
   return 0;
