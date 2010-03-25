@@ -1,3 +1,12 @@
+2010-03-25  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+	* CMakeLists.txt: Changed order for doc documentation
+	
+	* README, INSTALL: Updated to reflect CMake build system
+
+2010-03-02  Angelo Corsaro  <angelo.corsaro@gmail.com>
+	* src/dds/qos.hpp: Fixed typo in the set_reliable(DDS::Duration_t timeout).
+
 2010-02-12  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 	* Changed build system to CMake. This will allow to build SimD on
