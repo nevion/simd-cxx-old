@@ -16,11 +16,12 @@ The requirements for compiling and running SimD are:
     - BOOST v1.40 (or higher)
     - GCC/G++ v4.1 (or higher)
     - CMake v2.6 (or higher)
-
+    - Doxygen
+ 
 
 BOOST
 -----
-SimD requires the BOOST_INCLUDE and BOOST_LIB environment variables to
+SimD requires the BOOST_INCLUDE_DIR and BOOST_LIB_DIR environment variables to
 point to the boost installation containing headers and libraries
 respectively.
 
@@ -45,5 +46,4 @@ The demo are compiled as follows:
 
 $ cmake .
 $ make
-
 

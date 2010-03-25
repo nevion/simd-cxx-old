@@ -15,12 +15,20 @@ SET( ${PROJECT_NAME}_SOVERSION 0.6.0)
 OPTION( BUILD_SHARED_LIBS "Set to OFF to build static libraries" ON )
 OPTION( INSTALL_DOC "Set to OFF to skip build/install Documentation" ON )
 
+
 # set default install prefix to project root directory
 IF( CMAKE_INSTALL_PREFIX STREQUAL "/usr/local" )
     SET( CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/local" )
 ENDIF()
 
+find_package (Doxygen)
+
+if (DOXYGEN_FOUND)
+  message(STATUS "Generating SimD Documentation")
+  exec_program("cd ..; ${DOXYGEN_EXECUTABLE} doxygen.cfg")
+else (DOXYGEN_FOUND)
+message(STATUS "Doxygen not found, I cannot generate the documentation")
+endif (DOXYGEN_FOUND)
 
 add_subdirectory (src/dds)
-
 

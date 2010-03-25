@@ -6,8 +6,8 @@ BOOST is properly installed in your machine and that two environment
 variable are pointing to the include and libraries directory for
 BOOST. Namely:
 
-BOOST_INCLUDE: points at the include directory
-BOOST_LIB: points at the library directory
+BOOST_INCLUDE_DIR: points at the include directory
+BOOST_LIB_DIR: points at the library directory
 SIMD_INSTALL_DIR: points to the place were you want to install SimD.
 If you don't set it then SimD will install under the ./local folder.
 
