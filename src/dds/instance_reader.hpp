@@ -193,7 +193,7 @@ public:
 private:
   boost::shared_ptr<DR> reader_;
   T key_;
-  dds::ihandle_t handle_;
+  dds::handle_t handle_;
 
 };
 
