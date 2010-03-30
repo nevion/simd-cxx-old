@@ -14,6 +14,7 @@
 #include <ui_iShapesForm.h>
 #include <WriterQosDialog.hpp>
 #include <ReaderQosDialog.hpp>
+#include <FilterDialog.hpp>
 
 #include <ShapesWidget.hpp>
 #include <Circle.hpp>
@@ -58,6 +59,7 @@ public slots:
   virtual void onSubscribeButtonClicked();
   virtual void onReaderQosButtonClicked();
   virtual void onWriterQosButtonClicked();
+  virtual void onFilterButtonClicked();
     
 private:
   ShapesDialog(const ShapesDialog& orig);
@@ -67,12 +69,14 @@ private:
   ShapesWidget*     shapesWidget;
   ReaderQosDialog    readerQos_;
   WriterQosDialog    writerQos_;
+  FilterDialog*       filterDialog_;
 
   QTimer                     timer;
   dds::Topic<ShapeType>      circleTopic_;
   dds::Topic<ShapeType>      squareTopic_;
   dds::Topic<ShapeType>      triangleTopic_;
-
+  std::string 		     filterExpression_;
+  std::vector<std::string>   filterParams_;
   /*
   dds::DataReader<ShapeType>    circleReader_;
   dds::DataReader<ShapeType>    squareReader_;

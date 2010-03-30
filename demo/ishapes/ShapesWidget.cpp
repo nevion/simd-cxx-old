@@ -12,7 +12,8 @@
 
 
 ShapesWidget::ShapesWidget(QWidget *parent)
-: QWidget(parent)
+: QWidget(parent),
+  showCurrentFilter_(false)
 {
     this->setBackgroundRole(QPalette::Base);
     this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -40,41 +41,25 @@ ShapesWidget::nextAnimationFrame() {
 void
 ShapesWidget::paintEvent(QPaintEvent*) {
     QPainter painter(this);
+    if (showCurrentFilter_) {
+      QBrush brush(QColor(0x99,0x99,0x99,0x99), Qt::SolidPattern);
+      painter.setBrush(brush);
+      painter.drawRect(currentFilter_);
+    }
     ShapeList::iterator index = shapeList_.begin();
     while (index != shapeList_.end()) {
         (*index)->paint(painter);
         ++index;
     }
-    /*
-    int x = 10;
-    int y = 10;
-    int diameter = 100;
+}
 
-    QPainterPath ellipsePath;
-    ellipsePath.addEllipse(x, y, diameter, diameter);
-    
-    QPoint p1(diameter/2, 0);
-    QPoint p2(0, diameter);
-    QPoint p3(diameter, diameter);
+void
+ShapesWidget::addFilter(const QRect& filter) {
+  filterList_.push_back(filter);
+}
 
-    QPolygon triangle;
-    triangle << p1 << p2 << p3;
-    QPainterPath trianglePath;
-    trianglePath.addPolygon(triangle);
-
-    QPainter painter(this);
-    QBrush brush(Qt::red);
-    QPen pen(Qt::blue, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-
-    painter.setBrush(brush);
-    painter.setPen(pen);
-    painter.setRenderHint(QPainter::Antialiasing, true);
-    // painter.drawRect(diameter, diameter, diameter, diameter);
-    // painter.drawPath(ellipsePath);
-    painter.drawPath(ellipsePath);
-    painter.drawEllipse(100, 100, 200, 200);
-    painter.drawRect(10, 10, 50, 60);
-    painter.translate(100, 100);
-    painter.drawPolygon(triangle);
-     */
+void ShapesWidget::displayFilter(const QRect& currentFilter) {
+  currentFilter_ = currentFilter;
+  showCurrentFilter_ = true;
+  this->update();
 }

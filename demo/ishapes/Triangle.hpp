@@ -17,7 +17,8 @@ public:
   Triangle(const QRect& bounds,
            boost::shared_ptr<ShapeDynamics> dynamics,
            const QPen& pen,
-           const QBrush& brush);
+           const QBrush& brush,
+           bool targeted = false);
 
   virtual ~Triangle();
 

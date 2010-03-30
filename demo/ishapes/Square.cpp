@@ -11,8 +11,9 @@
 Square::Square(const QRect& bounds,
                boost::shared_ptr<ShapeDynamics> dynamics,
                const QPen& pen,
-               const QBrush& brush)
-    :   Shape(bounds, pen, brush),
+               const QBrush& brush,
+               bool targeted)
+    :   Shape(bounds, pen, brush, targeted),
         dynamics_(dynamics)
 { }
 
@@ -36,11 +37,25 @@ Square::paint(QPainter& painter) {
    // std::cout << "SQUARE::paint" << std::endl;
     std::vector<QPoint> plist = dynamics_->getPositionList();
     std::vector<QPoint>::iterator idx = plist.begin();
+    QBrush brush( QColor(0x33, 0x33, 0x33), Qt::SolidPattern);
     while (idx != plist.end()) {
       painter.drawRect(idx->x(),
 		       idx->y(),
 		       bounds_.width(),
 		       bounds_.height());
+      if (targeted_) {
+        painter.setBrush(brush);
+        int X0 = idx->x() + (bounds_.width()/2);
+        int Y0 = idx->y() + (bounds_.height()/2);
+        int W = bounds_.width()/3;
+        int H = bounds_.height()/3;
+        painter.setBrush(brush);
+        painter.drawRect(X0 - W/2,
+                            Y0 - H/2,
+                            W,
+                            H);
+        painter.setBrush(brush_);
+      }
       ++idx;
     }
 }

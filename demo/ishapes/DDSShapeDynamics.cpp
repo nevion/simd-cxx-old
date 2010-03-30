@@ -78,19 +78,14 @@ DDSShapeDynamics::simulate() {
             
       if (attached_ == false) {
 	attached_ = true;
-	// std::cout << "Setting Brush to Paint in " << colorIdx_ << std::endl;
-	//QBrush brush = QBrush(colorList_[colorIdx_], Qt::DiagCrossPattern);
 	QBrush brush = QBrush(colorList_[colorIdx_], Qt::SolidPattern);
-	shape_->setBrush(brush);             
+	shape_->setBrush(brush);
       }
-      //      if (updateBounds_){
-	QRect bounds(0,
-		     0, 
-		     samples[sampleIndex].shapesize, 
-		     samples[sampleIndex].shapesize);
-	shape_->setBounds(bounds);
-	//updateBounds_ = false;
-	//      }
+      QRect bounds(0,
+                    0, 
+                    samples[sampleIndex].shapesize, 
+                    samples[sampleIndex].shapesize);
+      shape_->setBounds(bounds);
     }
   }
   shapeReader_.return_loan(samples, infos);

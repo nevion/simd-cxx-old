@@ -18,14 +18,14 @@ public:
     Circle(const QRect& bounds,
            boost::shared_ptr<ShapeDynamics> dynamics,
            const QPen& pen,
-           const QBrush& brush);
-    
+           const QBrush& brush,
+           bool targeted = false);
+
     virtual ~Circle();
 
 public:
     virtual void update();
-    virtual void paint(QPainter& painter);
-    
+    virtual void paint(QPainter& painter);    
 private:
     Circle(const Circle&);
     Circle& operator=(Circle&);

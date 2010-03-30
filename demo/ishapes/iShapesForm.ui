@@ -13,19 +13,19 @@
     <x>0</x>
     <y>0</y>
     <width>710</width>
-    <height>390</height>
+    <height>380</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>710</width>
-    <height>390</height>
+    <height>380</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>710</width>
-    <height>390</height>
+    <height>380</height>
    </size>
   </property>
   <property name="focusPolicy">
@@ -46,7 +46,7 @@
      <x>10</x>
      <y>10</y>
      <width>181</width>
-     <height>211</height>
+     <height>201</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -61,7 +61,7 @@
       <x>10</x>
       <y>10</y>
       <width>161</width>
-      <height>193</height>
+      <height>181</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -266,7 +266,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>230</y>
+     <y>220</y>
      <width>181</width>
      <height>151</height>
     </rect>
@@ -350,7 +350,7 @@
      <x>200</x>
      <y>10</y>
      <width>500</width>
-     <height>370</height>
+     <height>360</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -362,13 +362,13 @@
    <property name="minimumSize">
     <size>
      <width>500</width>
-     <height>370</height>
+     <height>360</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
      <width>500</width>
-     <height>370</height>
+     <height>360</height>
     </size>
    </property>
    <property name="palette">
@@ -512,11 +512,28 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>filterButton</sender>
+   <signal>clicked()</signal>
+   <receiver>ShapesDialog</receiver>
+   <slot>onFilterButtonClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>100</x>
+     <y>312</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>354</x>
+     <y>189</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onPublishButtonClicked()</slot>
   <slot>onSubscribeButtonClicked()</slot>
   <slot>onWriterQosButtonClicked()</slot>
   <slot>onReaderQosButtonClicked()</slot>
+  <slot>onFilterButtonClicked()</slot>
  </slots>
 </ui>

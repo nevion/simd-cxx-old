@@ -16,6 +16,7 @@
 #include <Triangle.hpp>
 #include <BouncingShapeDynamics.hpp>
 #include <DDSShapeDynamics.hpp>
+#include <boost/lexical_cast.hpp>
 
 static const float PI = 3.1415926535F;
 
@@ -42,11 +43,13 @@ ShapesDialog::ShapesDialog()
   :   timer(this),
       circleTopic_(circleTopicName),
       squareTopic_(squareTopicName),
-      triangleTopic_(triangleTopicName)
+      triangleTopic_(triangleTopicName),
+      filterExpression_("(x BETWEEN %0 AND %1) AND (y BETWEEN %2 AND %3)")
 {
   mainWidget.setupUi(this);
   shapesWidget = new ShapesWidget(mainWidget.renderFrame);
   shapesWidget->resize(mainWidget.renderFrame->size());
+  filterDialog_ = new FilterDialog(shapesWidget);
   connect(&timer, SIGNAL(timeout()),
 	  shapesWidget, SLOT(nextAnimationFrame()));
 
@@ -70,13 +73,14 @@ ShapesDialog::onPublishButtonClicked() {
   int d = mainWidget.sizeSlider->value();
   float speed = ((float)mainWidget.speedSlider->value()) / 9;
   QRect rect(0, 0, d, d);
-  QRect constr(0, 0, 500, 340);
+  // TODO: This should be retrieved from the canvas...
+  QRect constr(0, 0, 500, 360);
   // QRect constr = this->geometry();
   int x = constr.width() * ((float)rand() / RAND_MAX);
   int y = constr.height() * ((float)rand() / RAND_MAX);
   int cIdx = mainWidget.colorList->currentIndex();
   int sIdx = mainWidget.wShapeList->currentIndex();
-
+  
   QBrush brush(color_[cIdx], Qt::SolidPattern);
   //  QPen pen(color_[(cIdx+1)%(CN-1)], 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
   QPen pen(color_[cIdx], 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
@@ -88,9 +92,8 @@ ShapesDialog::onPublishButtonClicked() {
     shape.shapesize = rect.width();
     shape.x = x;
     shape.y = y;
-	    
     dds::DataWriter<ShapeType> dw(circleTopic_ , writerQos_.get_qos());
-	    
+
     boost::shared_ptr<BouncingShapeDynamics>
       dynamics(new BouncingShapeDynamics(x, y, rect, constr, PI/6, speed,
 					 shape, dw));
@@ -153,17 +156,50 @@ ShapesDialog::onSubscribeButtonClicked() {
   //  QBrush brush(color_[BLACK], Qt::FDiagPattern);
   QBrush brush(gray, Qt::SolidPattern);
 
-  QPen pen(color_[BLACK], 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+  QPen pen(Qt::white, 0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
   switch (sIdx) {
   case CIRCLE: {
+    std::vector<std::string> empty;
+    filterParams_ = empty;
+    if (filterDialog_->isEnabled()) {
+	QRect rect =  filterDialog_->getFilterBounds();	
+	std::string x0 = 
+	  boost::lexical_cast<std::string>(rect.x());
+	std::string x1 = 
+	  boost::lexical_cast<std::string>(rect.x() + rect.width() -d);
+
+	std::string y0 = 
+	  boost::lexical_cast<std::string>(rect.y());
+	std::string y1 = 
+	  boost::lexical_cast<std::string>(rect.x() + rect.height()-d);
+	filterParams_.push_back(x0);
+	filterParams_.push_back(x1);
+	filterParams_.push_back(y0);
+	filterParams_.push_back(y1);
+    }
     for (int i = 0; i < CN; ++i) {
       std::string colorStr(colorString_[i]);
-      dds::DataReader<ShapeType> dr(circleTopic_, readerQos_.get_qos());
+      dds::DataReader<ShapeType> dr;
+      if (filterDialog_->isEnabled()) {
+	std::string tname = "CFCircle" + boost::lexical_cast<std::string>(i);
+	std::cout <<"Creating CFTopic: " << tname << std::endl;
+	dds::ContentFilteredTopic<ShapeType> cfTopic(tname, 
+						    circleTopic_, 
+						    filterExpression_,
+						    filterParams_);
+	dds::DataReader<ShapeType> cfdr(cfTopic , readerQos_.get_qos());
+	dr = cfdr;	    
+      }
+      else {
+	dds::DataReader<ShapeType> rdr(circleTopic_, readerQos_.get_qos());
+	dr = rdr;
+      }
+     // dds::DataReader<ShapeType> dr(circleTopic_, readerQos_.get_qos());
       boost::shared_ptr<DDSShapeDynamics>
 	dynamics(new DDSShapeDynamics(x, y, dr, colorStr, i));
       boost::shared_ptr<Shape>
-	circle(new Circle(rect, dynamics, pen, brush));
+	circle(new Circle(rect, dynamics, pen, brush, true));
       dynamics->setShape(circle);
       shapesWidget->addShape(circle);
     }
@@ -177,7 +213,7 @@ ShapesDialog::onSubscribeButtonClicked() {
       boost::shared_ptr<DDSShapeDynamics>
 	dynamics(new DDSShapeDynamics(x, y, dr, colorStr, i));
       boost::shared_ptr<Shape>
-	square(new Square(rect, dynamics, pen, brush));
+	square(new Square(rect, dynamics, pen, brush, true));
       dynamics->setShape(square);
       shapesWidget->addShape(square);
     }
@@ -190,7 +226,7 @@ ShapesDialog::onSubscribeButtonClicked() {
       boost::shared_ptr<DDSShapeDynamics>
 	dynamics(new DDSShapeDynamics(x, y, dr, colorStr, i));
       boost::shared_ptr<Shape>
-	triangle(new Triangle(rect, dynamics, pen, brush));
+	triangle(new Triangle(rect, dynamics, pen, brush,true));
       dynamics->setShape(triangle);
       shapesWidget->addShape(triangle);
     }
@@ -212,4 +248,11 @@ void
 ShapesDialog::onWriterQosButtonClicked()
 {
   writerQos_.setVisible(true);
+}
+
+void
+ShapesDialog::onFilterButtonClicked()
+{
+  // std::cout << "FilterButton Clicked" << std::endl;
+  filterDialog_->setVisible(true);
 }

@@ -43,6 +43,7 @@ set (QT_MOC_HEADERS
   ShapesDialog.hpp
   ShapesWidget.hpp
   WriterQosDialog.hpp
+  FilterDialog.hpp
 )
 
 set (QT_UI_SOURCES
@@ -50,6 +51,7 @@ set (QT_UI_SOURCES
   qosForm.ui
   readerQosForm.ui
   writerQosForm.ui
+  filterForm.ui
 )
 
 QT4_WRAP_CPP(QT_MOC_SOURCES ${QT_MOC_HEADERS})
@@ -70,6 +72,7 @@ set (ISHAPES_SOURCES
  Square.cpp
  Triangle.cpp
  WriterQosDialog.cpp
+ FilterDialog.cpp
 )
 
 set (ISHAPES_EXE ishapes)
@@ -84,7 +87,6 @@ add_definitions (
  ${DEFINITIONS}
 )
 
-# Linkar contra librerias deseadas.
 target_link_libraries (
   ${DATAMODEL} 
   ${OpenSplice_LIBRARIES}

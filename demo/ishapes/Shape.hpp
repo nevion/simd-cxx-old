@@ -14,7 +14,11 @@
 
 class Shape {
 public:
-    Shape(const QRect& bounds, const QPen& pen, const QBrush& brush);
+    Shape(const QRect& bounds,
+          const QPen& pen,
+          const QBrush& brush,
+          bool targeted = false);
+          
     virtual ~Shape();
 public:
     virtual void update() = 0;
@@ -24,6 +28,7 @@ public:
     virtual void setPen(const QPen& pen);
     virtual void setBrush(const QBrush& brush);
     virtual void setBounds(const QRect& bounds);
+    virtual void set_targeted(bool b);
     
 private:
     Shape(const Shape&);
@@ -33,6 +38,7 @@ protected:
     QRect bounds_;
     QPen pen_;
     QBrush brush_;
+    bool targeted_;
 };
 
 #endif	/* _SHAPE_HPP */

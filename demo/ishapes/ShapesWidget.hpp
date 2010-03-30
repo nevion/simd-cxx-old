@@ -9,6 +9,7 @@
 #define	_SHAPESWIDGET_HPP
 
 #include <QWidget>
+#include <QRect>
 
 #include <vector>
 #include <boost/shared_ptr.hpp>
@@ -20,12 +21,16 @@ class ShapesWidget  : public QWidget
     Q_OBJECT
 public:
     typedef std::vector<boost::shared_ptr<Shape> > ShapeList;
-    
+    typedef std::vector<QRect> FilterList;
 public:
 
     ShapesWidget(QWidget *parent = 0);
     virtual ~ShapesWidget();
 
+public:
+  void addFilter(const QRect& filter);
+  void displayFilter(const QRect& currentFilter);
+  
 public slots:
     void nextAnimationFrame();
     void addShape(boost::shared_ptr<Shape> shape);
@@ -38,6 +43,9 @@ private:
 
 private:
     ShapeList shapeList_;
+    FilterList filterList_;
+    QRect currentFilter_;
+    bool showCurrentFilter_;
 };
 
 #endif	/* _SHAPESWIDGET_HPP */
