@@ -6,6 +6,7 @@ include (osmacros)
 find_package (OpenSplice REQUIRED)
 find_package (Boost REQUIRED)
 
+
 # Set includes directories
 include_directories(
   ${PROJECT_SOURCE_DIR}/src
