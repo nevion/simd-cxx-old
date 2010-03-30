@@ -36,7 +36,7 @@ namespace dds {
       this->reliability.kind = DDS::RELIABLE_RELIABILITY_QOS;
     }
     void set_reliable(DDS::Duration_t timeout) {
-      this->reliability.kind = DDS::BEST_EFFORT_RELIABILITY_QOS;
+      this->reliability.kind = DDS::RELIABLE_RELIABILITY_QOS;
       this->reliability.max_blocking_time = timeout;
     }
     void set_best_effort() {
