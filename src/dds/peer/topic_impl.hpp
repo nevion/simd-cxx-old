@@ -20,7 +20,7 @@ template <typename T>
 class dds::peer::TopicImpl : public dds::TopicDescription {
 public:
 
-  TopicImpl(const std::string& name, const std::string type_name) 
+  TopicImpl(const std::string& name, const std::string& type_name) 
     : name_(name), dp_(::dds::peer::RuntimeImpl::instance()->get_participant()) 
   {
     TopicQos qos;
@@ -60,7 +60,7 @@ public:
 
 private:
 
-  void init(const std::string& name, const std::string type_name,
+  void init(const std::string& name, const std::string& type_name,
 	    const TopicQos& qos) {
 
     ts_.register_type(dp_.get(), type_name.c_str());
