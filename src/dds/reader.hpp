@@ -195,7 +195,7 @@ public:
   template <typename DataOutputIterator, typename InfoOutputIterator> 
   uint32_t
   read(DataOutputIterator data_begin, 
-       InfoOutputIteratord info_begin,
+       InfoOutputIterator info_begin,
        DDS::SampleStateMask samples_state,
        DDS::ViewStateMask views_state,
        DDS::InstanceStateMask instances_state) {
@@ -211,7 +211,7 @@ public:
   template <typename DataOutputIterator, typename InfoOutputIterator> 
   uint32_t
   take(DataOutputIterator data_begin, 
-       InfoOutputIteratord info_begin,
+       InfoOutputIterator info_begin,
        DDS::SampleStateMask samples_state,
        DDS::ViewStateMask views_state,
        DDS::InstanceStateMask instances_state) {
