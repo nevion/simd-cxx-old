@@ -455,9 +455,107 @@ namespace dds {
 	return_loan(data, info);
 	return size;
       }
-
       //
       ////////////////////////////////////////////////////////////////////////
+
+      ////////////////////////////////////////////////////////////////////////////
+      // -- Vector read/take
+      void read(std::vector<T>& data, 
+		std::vector<DDS::SampleInfo> info,
+		DDS::SampleStateMask samples_state,
+		DDS::ViewStateMask views_state,
+		DDS::InstanceStateMask instances_state) {
+	TSeq dat;
+	DDS::SampleInfoSeq inf;
+	reader_->read(dat, 
+		      inf, 
+		      DDS::LENGTH_UNLIMITED,
+		      samples_state, 
+		      views_state,
+		      instances_state);
+	
+	for (int i = 0; i < dat.length(); ++i) {
+	  data.push_back(dat[i]);
+	  info.push_back(inf[i]);
+	}
+	return_loan(dat, inf);
+      }
+
+      void read(std::vector<T>& data, 
+		std::vector<DDS::SampleInfo> info) {
+	this->read(data, 
+		   info, 
+		   DDS::LENGTH_UNLIMITED,
+		   DDS::ANY_SAMPLE_STATE, 
+		   DDS::ANY_VIEW_STATE,
+		   DDS::ALIVE_INSTANCE_STATE);		   
+      }
+
+      void read(std::vector<T>& data) {
+	TSeq dat;
+	DDS::SampleInfoSeq inf;
+	reader_->read(dat, 
+		      inf, 
+		      DDS::LENGTH_UNLIMITED,
+		      DDS::ANY_SAMPLE_STATE, 
+		      DDS::ANY_VIEW_STATE,
+		      DDS::ALIVE_INSTANCE_STATE);
+	
+	for (int i = 0; i < dat.length(); ++i) {
+	  data.push_back(dat[i]);
+	}
+	return_loan(dat, inf);
+      }
+      
+      void take(std::vector<T>& data, 
+		std::vector<DDS::SampleInfo> info,
+		DDS::SampleStateMask samples_state,
+		DDS::ViewStateMask views_state,
+		DDS::InstanceStateMask instances_state) {
+	TSeq dat;
+	DDS::SampleInfoSeq inf;
+	reader_->take(dat, 
+		      inf, 
+		      DDS::LENGTH_UNLIMITED,
+		      samples_state, 
+		      views_state,
+		      instances_state);
+	
+	for (int i = 0; i < dat.length(); ++i) {
+	  data.push_back(dat[i]);
+	  info.push_back(inf[i]);
+	}
+	return_loan(dat, inf);
+      }
+
+
+      void take(std::vector<T>& data, 
+		std::vector<DDS::SampleInfo> info) {
+	this->take(data, 
+		   info, 
+		   DDS::LENGTH_UNLIMITED,
+		   DDS::ANY_SAMPLE_STATE, 
+		   DDS::ANY_VIEW_STATE,
+		   DDS::ALIVE_INSTANCE_STATE);		   
+      }
+
+      void take(std::vector<T>& data) {
+	TSeq dat;
+	DDS::SampleInfoSeq inf;
+	reader_->take(dat, 
+		      inf, 
+		      DDS::LENGTH_UNLIMITED,
+		      DDS::ANY_SAMPLE_STATE, 
+		      DDS::ANY_VIEW_STATE,
+		      DDS::ALIVE_INSTANCE_STATE);
+	
+	for (int i = 0; i < dat.length(); ++i) {
+	  data.push_back(dat[i]);
+	}
+	return_loan(dat, inf);
+      }
+      //
+      ////////////////////////////////////////////////////////////////////////////
       boost::shared_ptr<DataInstanceReader<T> > 
       get_instance_reader(const T& key) 
       {
