@@ -4,9 +4,13 @@
 #include <dds/config.hpp>
 #include <dds/traits.hpp>
 #include <dds/runtime.hpp>
+#include <dds/signals.hpp>
 #include <dds/reader.hpp>
+//#include <dds/instance_reader.hpp>
 #include <dds/writer.hpp>
+#include <dds/instance_writer.hpp>
 #include <dds/waitset.hpp>
+
 
 namespace dds {
 const std::string& retcode2string(::DDS::ReturnCode_t rc);
