@@ -1,3 +1,68 @@
+2010-03-31  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+
+	* cppcheck: Run cppcheck over SimD and detected a few small
+	issues, such as some missing "&" here and there. The detected
+	issues have all been fixed as noted below.
+
+	* src/dds/peer/topic_impl.hpp: 	
+	* src/dds/topic.hpp: 
+
+	Added missing "&" from ctor and init method.
+
+	* src/dds/signals.hpp: New file defining DDS-related events.  
+
+	* src/dds/peer/reader_impl.hpp: 
+	* src/dds/reader.hpp:  
+
+	- Refactored the signal-handling to use a templetized connect
+	method to connects signals to slots. The implementation now should
+	not be simpler to read and the slight API change should also
+	improve the user experience. The downside is that existing
+	applications will have to change the slot-registration call. 
+
+	NOTE: for those folks that are already using GCC 4.5, you can use
+	lambdas to connect slots to SimD defined signals.
+
+	- Added iterator-based read/take
+
+	* src/dds/peer/instance_writer_impl.hpp: Refeactored the instance
+	data writer so to move the implementation under the peer folder.
+
+	
+	* demo/ping/ping-sub.cpp: 
+	* demo/ping/ping-asub.cpp: 
+	  
+	  Updated the demo to reflect the changes in the signal/slog API
+	  and to take advantage of the new Iterator-based read/take.
+
+	* cmake/osmacros.cmake: Added -std=c++0x option to allow some
+	C++0x extensions that are supported by both GCC and MS compilers.
+
+	* demo/ishapes/Circle.cpp: 
+	* demo/ishapes/Circle.hpp:
+	* demo/ishapes/DDSShapeDynamics.cpp
+	* demo/ishapes/Shape.cpp
+	* demo/ishapes/Shape.hpp
+	* demo/ishapes/Square.cpp
+	* demo/ishapes/Square.hpp
+	* demo/ishapes/Triangle.cpp
+	* demo/ishapes/Triangle.hpp
+	  
+	  New graphics.
+
+	* demo/ishapes/ShapesDialog.cpp
+	* demo/ishapes/ShapesDialog.hpp
+	* demo/ishapes/ShapesWidget.cpp
+	* demo/ishapes/ShapesWidget.hpp
+	* demo/ishapes/FilterDialog.cpp: 
+	* demo/ishapes/FilterDialog.hpp: 
+
+	Dialog that allow to set-up a content filter in the shapes demo.
+
+	NOTE: The support for content-filtering in the demo is not
+	complete yet.
+	
 2010-03-25  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 	* CMakeLists.txt: Changed order for doc documentation
