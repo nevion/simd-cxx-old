@@ -67,6 +67,18 @@ bool parse_args(int argc, char* argv[])
 class PingDataHandler {
 public:
   void operator() (dds::DataReader<PingType>& reader) {
+    const uint32_t max_size = 32;
+    std::vector<PingType> data(max_size) ;
+    std::vector<DDS::SampleInfo> info(max_size);
+    
+    uint32_t length = reader.read(data.begin(), info.begin(), max_size);
+    
+    auto end = data.begin() + length;
+    for (auto index = data.begin(); index < end; ++index) {
+      std::cout << index->vendor << " . " << index->counter
+		<< std::endl;
+    }
+    /*
     PingTypeSeq samples;
     DDS::SampleInfoSeq infos;
     reader.read(samples, infos);
@@ -75,6 +87,7 @@ public:
 		<< std::endl;
     }
     reader.return_loan(samples, infos);
+    */
   }
 };
 

@@ -18,6 +18,8 @@
 // -- Hello Include
 #include <gen/ccpp_ping.h>
 
+#include <functional>
+
 REGISTER_TOPIC_TRAITS(PingType);
 
 namespace po = boost::program_options;
@@ -99,26 +101,27 @@ int main(int argc, char* argv[]) {
   DataHandler dh;
   if (!parse_args(argc, argv))
     return 1;
-
+  
   // -- start the dds runtime
   dds::Runtime runtime("");
 
   dds::Topic<PingType> pingTopic(topic);
   dds::DataReader<PingType> reader(pingTopic);
   
-
+  
+  auto func = 
+    boost::bind(&DataHandler::handle_data, &dh, _1);
+  
   dds::sigcon_t con_data = 
-    reader.on_data_available_signal_connect(boost::bind(&DataHandler::handle_data,
-							&dh, 
-							_1));
+    reader.connect<dds::on_data_available>(func);
   
-
+  auto liveliness_handler = boost::bind(&DataHandler::handle_liveliness_change, 
+					&dh, 
+					_1, 
+					_2);
+  
   dds::sigcon_t con_liv = 
-    reader.on_liveliness_changed_signal_connect(boost::bind(&DataHandler::handle_liveliness_change, 
-							    &dh, 
-							    _1, 
-							    _2));
-  
+    reader.connect<dds::on_liveliness_changed>(liveliness_handler);
   
   completion_barrier.wait();
   con_data.disconnect();
