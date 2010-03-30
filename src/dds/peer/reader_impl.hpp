@@ -273,9 +273,9 @@ namespace dds {
 	reader_->read(data, 
 		      info, 
 		      max_samples,
-		      samples_state, 
-		      views_state,
-		      instances_state);
+		      DDS::NOT_READ_SAMPLE_STATE, 
+		      DDS::ANY_VIEW_STATE,
+		      DDS::ALIVE_INSTANCE_STATE);
 	
 	size = data.length();
 	for (uint32_t i = 0; i < size; ++i) {
@@ -339,9 +339,8 @@ namespace dds {
 	reader_->take(data, 
 		      info, 
 		      max_samples,
-		      samples_state, 
-		      views_state,
-		      instances_state);
+		      DDS::ANY_VIEW_STATE,
+		      DDS::ALIVE_INSTANCE_STATE);
 	
 	size = data.length();
 	for (uint32_t i = 0; i < size; ++i) {
@@ -356,7 +355,7 @@ namespace dds {
       template <typename DataOutputIterator, typename InfoOutputIterator> 
       uint32_t
       read(DataOutputIterator data_begin, 
-	   InfoOutputIteratord info_begin,
+	   InfoOutputIterator info_begin,
 	   DDS::SampleStateMask samples_state,
 	   DDS::ViewStateMask views_state,
 	   DDS::InstanceStateMask instances_state) {
@@ -408,7 +407,7 @@ namespace dds {
       template <typename DataOutputIterator, typename InfoOutputIterator> 
       uint32_t
       take(DataOutputIterator data_begin, 
-	   InfoOutputIteratord info_begin,
+	   InfoOutputIterator info_begin,
 	   DDS::SampleStateMask samples_state,
 	   DDS::ViewStateMask views_state,
 	   DDS::InstanceStateMask instances_state) {
