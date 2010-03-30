@@ -225,6 +225,43 @@ public:
   }
   //
   ////////////////////////////////////////////////////////////////////////////
+
+  ////////////////////////////////////////////////////////////////////////////
+  // -- Vector read/take
+  void read(std::vector<T>& data, 
+	    std::vector<DDS::SampleInfo> info,
+	    DDS::SampleStateMask samples_state,
+	    DDS::ViewStateMask views_state,
+	    DDS::InstanceStateMask instances_state) {
+    pimpl_->read(data, info, samples_state, views_state, instances_state);
+  }
+  
+  void read(std::vector<T>& data, 
+	    std::vector<DDS::SampleInfo> info) {
+    pimpl_->read(data, info);
+  }
+
+  void read(std::vector<T>& data) {
+    pimpl_->read(data);
+  }
+
+  void take(std::vector<T>& data, 
+	    std::vector<DDS::SampleInfo> info,
+	    DDS::SampleStateMask samples_state,
+	    DDS::ViewStateMask views_state,
+	    DDS::InstanceStateMask instances_state) {
+    pimpl_->take(data, info, samples_state, views_state, instances_state);
+  }
+  
+  void take(std::vector<T>& data, 
+	    std::vector<DDS::SampleInfo> info) {
+    pimpl_->take(data, info);
+  }
+
+  void take(std::vector<T>& data) {
+    pimpl_->take(data);
+  }
+
 public:
   // -- Qos Getter/Setter
   DataReaderQos 
