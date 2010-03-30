@@ -19,48 +19,6 @@ public:
 public:            
   typedef typename dds::peer::DataReaderImpl<T>::DR   DR;
   typedef typename dds::peer::DataReaderImpl<T>::TSeq TSeq;
-public:
-  typedef typename dds::peer::DataReaderImpl<T>::on_data_available_signal_t 
-  on_data_available_signal_t;
-  
-  typedef typename dds::peer::DataReaderImpl<T>::on_data_available_slot_t 
-  on_data_available_slot_t; 
-
-  typedef typename dds::peer::DataReaderImpl<T>::on_requested_incompatible_qos_signal_t 
-  on_requested_incompatible_qos_signal_t;
-
-  typedef typename dds::peer::DataReaderImpl<T>::on_requested_incompatible_qos_slot_t
-  on_requested_incompatible_qos_slot_t;
-
-  typedef typename dds::peer::DataReaderImpl<T>::on_liveliness_changed_signal_t
-  on_liveliness_changed_signal_t;
-
-  typedef typename dds::peer::DataReaderImpl<T>::on_liveliness_changed_slot_t
-  on_liveliness_changed_slot_t;
-
-  typedef typename dds::peer::DataReaderImpl<T>::on_requested_deadline_missed_signal_t
-  on_requested_deadline_missed_signal_t;
-
-  typedef typename dds::peer::DataReaderImpl<T>::on_requested_deadline_missed_slot_t
-  on_requested_deadline_missed_slot_t;
-
-  typedef typename dds::peer::DataReaderImpl<T>::on_sample_rejected_signal_t
-  on_sample_rejected_signal_t;
-
-  typedef typename dds::peer::DataReaderImpl<T>::on_sample_rejected_slot_t
-  on_sample_rejected_slot_t;
-
-  typedef typename dds::peer::DataReaderImpl<T>::on_subscription_matched_signal_t
-  on_subscription_matched_signal_t;
-
-  typedef typename dds::peer::DataReaderImpl<T>::on_subscription_matched_slot_t
-  on_subscription_matched_slot_t;
-
-  typedef typename dds::peer::DataReaderImpl<T>::on_sample_lost_signal_t
-  on_sample_lost_signal_t;
-
-  typedef typename dds::peer::DataReaderImpl<T>::on_sample_lost_slot_t
-  on_sample_lost_slot_t;
 
 public:
   DataReader() { }
@@ -187,7 +145,86 @@ public:
   {
     return pimpl_->return_loan(samples, infos);
   }
+  ////////////////////////////////////////////////////////////////////////////
+  // -- ForwardIterator read/take
+  template <typename DataForwardIterator, typename InfoForwardIterator> 
+  uint32_t
+  read(DataForwardIterator data_begin, 
+       InfoForwardIterator info_begin,
+       uint32_t max_samples, 
+       DDS::SampleStateMask samples_state,
+       DDS::ViewStateMask views_state,
+       DDS::InstanceStateMask instances_state) {
+    return pimpl_->read(data_begin, info_begin, max_samples,
+			samples_state, views_state, instances_state);
+  }
 
+  template <typename DataForwardIterator, typename InfoForwardIterator> 
+  uint32_t
+  read(DataForwardIterator data_begin, 
+       InfoForwardIterator info_begin,
+       uint32_t max_samples) {
+    return pimpl_->read(data_begin, info_begin, max_samples);
+  }
+
+  //--------------------------------------------------------------------------
+  template <typename DataForwardIterator, typename InfoForwardIterator> 
+  uint32_t
+  take(DataForwardIterator data_begin, 
+       InfoForwardIterator info_begin,
+       uint32_t max_samples) {
+    return pimpl_->take(data_begin, info_begin, max_samples);
+  }
+
+  template <typename DataForwardIterator, typename InfoForwardIterator> 
+  uint32_t
+  take(DataForwardIterator data_begin, 
+       InfoForwardIterator info_begin,
+       uint32_t max_samples, 
+       DDS::SampleStateMask samples_state,
+       DDS::ViewStateMask views_state,
+       DDS::InstanceStateMask instances_state) {
+    return pimpl_->take(data_begin, info_begin, max_samples,
+			samples_state, views_state, instances_state);
+  }
+  //
+  ////////////////////////////////////////////////////////////////////////////
+
+  ////////////////////////////////////////////////////////////////////////////
+  // -- OutputIterator read/take
+  template <typename DataOutputIterator, typename InfoOutputIterator> 
+  uint32_t
+  read(DataOutputIterator data_begin, 
+       InfoOutputIteratord info_begin,
+       DDS::SampleStateMask samples_state,
+       DDS::ViewStateMask views_state,
+       DDS::InstanceStateMask instances_state) {
+    return pimpl_->read(data_begin, info_begin, samples_state, views_state, instances_state);
+  }
+  
+  template <typename DataOutputIterator> 
+  uint32_t
+  read(DataOutputIterator data_begin) {
+    return pimpl_->read(data_begin);
+  }
+  //--------------------------------------------------------------------------
+  template <typename DataOutputIterator, typename InfoOutputIterator> 
+  uint32_t
+  take(DataOutputIterator data_begin, 
+       InfoOutputIteratord info_begin,
+       DDS::SampleStateMask samples_state,
+       DDS::ViewStateMask views_state,
+       DDS::InstanceStateMask instances_state) {
+    return pimpl_->read(data_begin, info_begin, samples_state, views_state, instances_state);
+  }
+  
+  template <typename DataOutputIterator> 
+  uint32_t
+  take(DataOutputIterator data_begin) {
+    return pimpl_->read(data_begin);
+  }
+  //
+  ////////////////////////////////////////////////////////////////////////////
 public:
   // -- Qos Getter/Setter
   DataReaderQos 
@@ -228,49 +265,11 @@ public:
 
 public:
   // Signal/Slot API
-
-  dds::sigcon_t
-  on_data_available_signal_connect(on_data_available_slot_t slot) 
-  {
-    return pimpl_->on_data_available_signal_connect(slot);
-  }
-
-  dds::sigcon_t
-  on_requested_incompatible_qos_signal_connect(on_requested_incompatible_qos_slot_t slot) 
-  {
-    return pimpl_->on_requested_incompatible_qos_signal_connect(slot);
-  }
-
-  dds::sigcon_t 
-  on_liveliness_changed_signal_connect(on_liveliness_changed_slot_t slot) 
-  {
-    return pimpl_->on_liveliness_changed_signal_connect(slot);
+  
+  template <typename Signal> dds::sigcon_t connect(typename Signal::template traits<T>::slot_type slot) {
+    return pimpl_->connect<Signal>(slot);
   }
   
-  dds::sigcon_t 
-  on_requested_deadline_missed_signal_connect(on_requested_deadline_missed_slot_t slot) 
-  {
-    return pimpl_->on_requested_deadline_missed_signal_connect(slot);
-  }
-
-  dds::sigcon_t 
-  on_sample_rejected_signal_connect(on_sample_rejected_slot_t slot) 
-  {
-    return pimpl_->on_sample_rejected_signal_connect(slot);
-  }
-
-  dds::sigcon_t 
-  on_subscription_matched_signal_connect(on_subscription_matched_slot_t slot) 
-  {
-    return pimpl_->on_subscription_matched_signal_connect(slot);
-  }
-
-  dds::sigcon_t 
-  on_sample_lost_signal_connect(on_sample_lost_slot_t slot) 
-  {
-    return pimpl_->on_sample_lost_signal_connect(slot);
-  }
-
 protected:
   boost::shared_ptr<dds::peer::DataReaderImpl<T> > pimpl_;
 };

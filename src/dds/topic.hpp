@@ -25,7 +25,7 @@ public:
   Topic() { }
 
   Topic(const std::string& name, 
-	const std::string type_name) 
+	const std::string& type_name) 
   {
     pimpl_.reset(new dds::peer::TopicImpl<T>(name, type_name));
   }

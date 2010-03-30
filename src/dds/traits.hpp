@@ -54,5 +54,4 @@ namespace dds { \
     typedef B& ref;				\
   };
 
-
 #endif /* AC_SIMD_DDS_TRAITS_HPP */
