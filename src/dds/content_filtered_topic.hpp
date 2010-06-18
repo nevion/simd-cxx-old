@@ -119,7 +119,7 @@ public:
   }
 
 
-  DDS::ReturnCode_t
+  dds::ReturnCode_t
   set_qos(const TopicQos& qos)
   {
     return pimpl_->set_qos(qos);

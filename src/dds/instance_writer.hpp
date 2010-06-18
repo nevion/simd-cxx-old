@@ -28,7 +28,7 @@ public:
        *
        * @param data the sample.
        */
-      DDS::ReturnCode_t write(const T& data) {
+  dds::ReturnCode_t write(const T& data) {
 	return pimpl_->write(data);
       }
 
@@ -38,27 +38,27 @@ public:
        * @param data the sample.
        * @param timestamp the timestamp
        */
-      DDS::ReturnCode_t write(const T& sample, const DDS::Time_t& timestamp) {
+      dds::ReturnCode_t write(const T& sample, const DDS::Time_t& timestamp) {
 	return pimpl_->write(sample, timestamp);
       }
 
-      DDS::ReturnCode_t unregister() {
+      dds::ReturnCode_t unregister() {
 	return pimpl_->unregister();
       }
 
-      DDS::ReturnCode_t unregister(const DDS::Time_t& timestamp) {
+      dds::ReturnCode_t unregister(const DDS::Time_t& timestamp) {
 	return pimpl_->unregister(timestamp);
       }
 
-      DDS::ReturnCode_t dispose() {
+      dds::ReturnCode_t dispose() {
 	return pimpl_->dispose();
       }
 
-      DDS::ReturnCode_t dispose(const DDS::Time_t& timestamp) {
+      dds::ReturnCode_t dispose(const DDS::Time_t& timestamp) {
 	return pimpl_->dispose(timestamp);
       }
 
-      DDS::ReturnCode_t
+      dds::ReturnCode_t
       wait_for_acks(const DDS::Duration_t& timeout) {
 	return pimpl_->wait_for_acks(timeout);
       }

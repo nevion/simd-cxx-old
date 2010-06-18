@@ -50,15 +50,15 @@ public:
   virtual ~DataWriter() { }
 
 public:
-DDS::ReturnCode_t 
+dds::ReturnCode_t 
 write(const T& sample) 
 {
   return pimpl_->write(sample);
 }
 
-DDS::ReturnCode_t 
+dds::ReturnCode_t 
 write(const T& sample, 
-      const DDS::Time_t& timestamp) 
+      const dds::Time_t& timestamp) 
 {
   return pimpl_->write(sample, 
 		       timestamp);
@@ -78,7 +78,7 @@ get_qos()
   return pimpl_->get_qos();
 }
 
-DDS::ReturnCode_t
+dds::ReturnCode_t
 set_qos(const DataWriterQos &qos)  
 {
   return pimpl_->get_qoqs(qos);
@@ -95,8 +95,8 @@ dds::Publisher get_publisher()
   return pimpl_->get_publisher();
 }
 
-DDS::ReturnCode_t
-wait_for_acks(const DDS::Duration_t& timeout) 
+dds::ReturnCode_t
+wait_for_acks(const dds::Duration_t& timeout) 
 {
   return pimpl_->wait_for_acks(timeout);
 }

@@ -1,53 +1,43 @@
 #include <dds/condition.hpp>
 
-/////////////////////////////////////////////////////////////////////////////
-dds::ActiveConditionImpl::~ActiveConditionImpl() {
-}
 
 /////////////////////////////////////////////////////////////////////////////
-dds::ActiveCondition::ActiveCondition(ActiveConditionImpl* aci) :
+dds::Condition::Condition(dds::peer::ConditionImpl* aci) :
 	cond_(aci) {
 }
-dds::ActiveCondition::~ActiveCondition() {
+dds::Condition::~Condition() {
 }
 
 
 bool
-dds::ActiveCondition::operator==(const ActiveCondition& other)
+dds::Condition::operator==(const dds::Condition& other)
 {
 	return cond_ == other.cond_;
 }
 
 /////////////////////////////////////////////////////////////////////////////
-dds::ActiveReadConditionImpl::~ActiveReadConditionImpl() {
-}
-
-/////////////////////////////////////////////////////////////////////////////
-dds::ActiveReadCondition::ActiveReadCondition(dds::ActiveReadConditionImpl* arc)
-: ActiveCondition(arc), pcond_(arc)
+dds::ReadCondition::ReadCondition(dds::peer::ReadConditionImpl* arc)
+: Condition(arc), pcond_(arc)
 { }
 
-dds::ActiveReadCondition::ActiveReadCondition()
-: ActiveCondition(0), pcond_(0)
+dds::ReadCondition::ReadCondition()
+: Condition(0), pcond_(0)
 {
 
 }
 
-dds::ActiveReadCondition::~ActiveReadCondition() {
+dds::ReadCondition::~ReadCondition() {
 }
 
-/////////////////////////////////////////////////////////////////////////////
-dds::ActiveQueryConditionImpl::~ActiveQueryConditionImpl() {
-}
 
 /////////////////////////////////////////////////////////////////////////////
-dds::ActiveQueryCondition::ActiveQueryCondition(dds::ActiveQueryConditionImpl* qcond)
-	: ActiveReadCondition(qcond), pcond_(qcond)
+dds::QueryCondition::QueryCondition(dds::peer::QueryConditionImpl* qcond)
+	: ReadCondition(qcond), pcond_(qcond)
 	{ }
 
-dds::ActiveQueryCondition::ActiveQueryCondition()
-	: ActiveReadCondition(0), pcond_(0)
+dds::QueryCondition::QueryCondition()
+	: ReadCondition(0), pcond_(0)
 	{ }
 
-dds::ActiveQueryCondition::~ActiveQueryCondition() {
+dds::QueryCondition::~QueryCondition() {
 }

@@ -2,6 +2,7 @@
 #define AC_SIMD_DDS_TOPIC_HPP
 
 #include <string>
+#include <dds/types.hpp>
 
 // -- Boost Include
 #include <boost/shared_ptr.hpp>
@@ -59,7 +60,7 @@ public:
   }
 
 
-  DDS::ReturnCode_t 
+  dds::ReturnCode_t 
   set_qos(const TopicQos& qos) 
   {
     return pimpl_->set_qos(qos);

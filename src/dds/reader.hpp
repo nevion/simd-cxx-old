@@ -1,6 +1,9 @@
 #ifndef AC_SIMD_DDS_READER_HPP
 #define AC_SIMD_DDS_READER_HPP
 
+#include <dds/types.hpp>
+#include <dds/condition.hpp>
+
 
 namespace dds {
 
@@ -57,9 +60,9 @@ public:
    * well as the <conde>infos</code> containers, thus will require a
    * return_loan.
    */
-  DDS::ReturnCode_t 
+  dds::ReturnCode_t 
   read(TSeq& samples, 
-       DDS::SampleInfoSeq& infos) 
+       dds::SampleInfoSeq& infos) 
   {
     return pimpl_->read(samples, infos);
   }
@@ -70,9 +73,9 @@ public:
    * well as the <conde>infos</code> containers, thus will require a
    * return_loan.
    */
-  DDS::ReturnCode_t 
+  dds::ReturnCode_t 
   take(TSeq& samples, 
-       DDS::SampleInfoSeq& infos) 
+       dds::SampleInfoSeq& infos) 
   {
     return pimpl_->take(samples, infos);
   }
@@ -81,7 +84,7 @@ public:
    * Reads at most <code>max_samples</code> samples that have not been
    * read yet from all vies and alive instances.
    */
-  DDS::ReturnCode_t 
+  dds::ReturnCode_t 
   read(TSeq& samples, 
        long max_samples) 
   {
@@ -92,7 +95,7 @@ public:
    * Takes at most <code>max_samples</code> samples that have not been
    * read yet from all vies and alive instances.
    */
-  DDS::ReturnCode_t 
+  dds::ReturnCode_t 
   take(TSeq& samples, 
        long max_samples) 
   {
@@ -103,13 +106,13 @@ public:
    * Most generic <code>read</code> exposing all the knobs provided by
    * the OMG DDS API.
    */
-  DDS::ReturnCode_t 
+  dds::ReturnCode_t 
   read(TSeq& samples, 
-       DDS::SampleInfoSeq& infos,
+       dds::SampleInfoSeq& infos,
        long max_samples, 
-       DDS::SampleStateMask samples_state,
-       DDS::ViewStateMask views_state,
-       DDS::InstanceStateMask instances_state) 
+       dds::SampleStateMask samples_state,
+       dds::ViewStateMask views_state,
+       dds::InstanceStateMask instances_state) 
   {
     return pimpl_->read(samples, 
 			infos, 
@@ -123,13 +126,13 @@ public:
    * Most generic <code>take</code> exposing all the knobs provided by
    * the OMG DDS API.
    */
-  DDS::ReturnCode_t 
+  dds::ReturnCode_t 
   take(TSeq& samples, 
-       DDS::SampleInfoSeq& infos,
+       dds::SampleInfoSeq& infos,
        long max_samples, 
-       DDS::SampleStateMask samples_state,
-       DDS::ViewStateMask views_state,
-       DDS::InstanceStateMask instances_state) 
+       dds::SampleStateMask samples_state,
+       dds::ViewStateMask views_state,
+       dds::InstanceStateMask instances_state) 
   {
     return pimpl_->take(samples, 
 			infos, 
@@ -139,9 +142,9 @@ public:
 			instances_state);
   }
 
-  DDS::ReturnCode_t 
+  dds::ReturnCode_t 
   return_loan(TSeq& samples, 
-	      DDS::SampleInfoSeq& infos) 
+	      dds::SampleInfoSeq& infos) 
   {
     return pimpl_->return_loan(samples, infos);
   }
@@ -152,9 +155,9 @@ public:
   read(DataForwardIterator data_begin, 
        InfoForwardIterator info_begin,
        uint32_t max_samples, 
-       DDS::SampleStateMask samples_state,
-       DDS::ViewStateMask views_state,
-       DDS::InstanceStateMask instances_state) {
+       dds::SampleStateMask samples_state,
+       dds::ViewStateMask views_state,
+       dds::InstanceStateMask instances_state) {
     return pimpl_->read(data_begin, info_begin, max_samples,
 			samples_state, views_state, instances_state);
   }
@@ -181,9 +184,9 @@ public:
   take(DataForwardIterator data_begin, 
        InfoForwardIterator info_begin,
        uint32_t max_samples, 
-       DDS::SampleStateMask samples_state,
-       DDS::ViewStateMask views_state,
-       DDS::InstanceStateMask instances_state) {
+       dds::SampleStateMask samples_state,
+       dds::ViewStateMask views_state,
+       dds::InstanceStateMask instances_state) {
     return pimpl_->take(data_begin, info_begin, max_samples,
 			samples_state, views_state, instances_state);
   }
@@ -196,9 +199,9 @@ public:
   uint32_t
   read(DataOutputIterator data_begin, 
        InfoOutputIterator info_begin,
-       DDS::SampleStateMask samples_state,
-       DDS::ViewStateMask views_state,
-       DDS::InstanceStateMask instances_state) {
+       dds::SampleStateMask samples_state,
+       dds::ViewStateMask views_state,
+       dds::InstanceStateMask instances_state) {
     return pimpl_->read(data_begin, info_begin, samples_state, views_state, instances_state);
   }
   
@@ -212,9 +215,9 @@ public:
   uint32_t
   take(DataOutputIterator data_begin, 
        InfoOutputIterator info_begin,
-       DDS::SampleStateMask samples_state,
-       DDS::ViewStateMask views_state,
-       DDS::InstanceStateMask instances_state) {
+       dds::SampleStateMask samples_state,
+       dds::ViewStateMask views_state,
+       dds::InstanceStateMask instances_state) {
     return pimpl_->read(data_begin, info_begin, samples_state, views_state, instances_state);
   }
   
@@ -225,19 +228,19 @@ public:
   }
   //
   ////////////////////////////////////////////////////////////////////////////
-
+  
   ////////////////////////////////////////////////////////////////////////////
   // -- Vector read/take
   void read(std::vector<T>& data, 
-	    std::vector<DDS::SampleInfo> info,
-	    DDS::SampleStateMask samples_state,
-	    DDS::ViewStateMask views_state,
-	    DDS::InstanceStateMask instances_state) {
+	    std::vector<dds::SampleInfo> info,
+	    dds::SampleStateMask samples_state,
+	    dds::ViewStateMask views_state,
+	    dds::InstanceStateMask instances_state) {
     pimpl_->read(data, info, samples_state, views_state, instances_state);
   }
   
   void read(std::vector<T>& data, 
-	    std::vector<DDS::SampleInfo> info) {
+	    std::vector<dds::SampleInfo> info) {
     pimpl_->read(data, info);
   }
 
@@ -246,15 +249,15 @@ public:
   }
 
   void take(std::vector<T>& data, 
-	    std::vector<DDS::SampleInfo> info,
-	    DDS::SampleStateMask samples_state,
-	    DDS::ViewStateMask views_state,
-	    DDS::InstanceStateMask instances_state) {
+	    std::vector<dds::SampleInfo> info,
+	    dds::SampleStateMask samples_state,
+	    dds::ViewStateMask views_state,
+	    dds::InstanceStateMask instances_state) {
     pimpl_->take(data, info, samples_state, views_state, instances_state);
   }
   
   void take(std::vector<T>& data, 
-	    std::vector<DDS::SampleInfo> info) {
+	    std::vector<dds::SampleInfo> info) {
     pimpl_->take(data, info);
   }
 
@@ -265,12 +268,11 @@ public:
 public:
   // -- Qos Getter/Setter
   DataReaderQos 
-  get_qos() 
-  {
+  get_qos() {
     return pimpl_->get_qos();
   }
 
-  DDS::ReturnCode_t 
+  dds::ReturnCode_t 
   set_qos(const DataReaderQos& qos) 
   {
     return pimpl_->set_qos(qos);
@@ -282,28 +284,40 @@ public:
     return pimpl_->get_topic();
   }
 
-  DDS::ReturnCode_t 
-  wait_for_historical_data(const DDS::Duration_t& timeout) 
+  dds::ReturnCode_t 
+  wait_for_historical_data(const dds::Duration_t& timeout) 
   {
     return pimpl_->wait_for_historical_data(timeout);
   }
 
   // -- Condition API
   /**
-   * Creates an <code>ActiveReadCondition</code> that waits for new samples to
+   * Creates an <code>ReadCondition</code> that waits for new samples to
    * be arriving in order to notify.
    */
   template <typename F>
-  ::dds::ActiveReadCondition
+  ::dds::ReadCondition
   create_readcondition(const F& f)
   {
     return pimpl_->create_readcondition(f);
   }
 
+  /*
+  ::dds::QueryCondition
+  create_querycondition(const dds::SampleStateMask&     ssm,
+			const dds::ViewStateMask&       vsm,
+			const dds::InstanceStateMask&   ism,
+			const std::string&              query_expr,
+			const std::vector<std::string>& params) {
+    return pimpl_->create_querycondition(ssm, vsm, ism, query_expre, params);
+  }
+  */
 public:
   // Signal/Slot API
   
-  template <typename Signal> dds::sigcon_t connect(typename Signal::template traits<T>::slot_type slot) {
+  template <typename Signal> 
+  dds::sigcon_t 
+  connect(typename Signal::template traits<T>::slot_type slot) {
     return pimpl_->connect<Signal>(slot);
   }
   

@@ -34,7 +34,12 @@ dds::TopicQos::set_durability_service(DDS::Duration_t service_cleanup_delay,
 				       DDS::Long max_instances,
 				       DDS::Long max_samples_per_instance)
 {
-  dds::Assert::precondition(false, "<TopicQoS::set_durability_service>: not implemented yet", __FILE__);
+  this->durability_service.service_cleanup_delay = service_cleanup_delay;
+  this->durability_service.history_kind = history_kind;
+  this->durability_service.history_depth = history_depth;
+  this->durability_service.max_samples = max_samples;
+  this->durability_service.max_instances = max_instances;
+  this->durability_service.max_samples_per_instance = max_samples_per_instance;
 }
 
 //////////////////////////////////////////////////////////////////////////////

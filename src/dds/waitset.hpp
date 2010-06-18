@@ -5,44 +5,45 @@
 #include <boost/noncopyable.hpp>
 
 // -- SIMD_DDS Include
+#include <dds/types.hpp>
 #include <dds/condition.hpp>
 
 
 namespace dds {
-	class ActiveWaitSet;
+	class WaitSet;
 }
 
 /**
- * The <code>ActiveWaitSet</code> can be used in
+ * The <code>WaitSet</code> can be used in
  * alternative to <code>DDS::WaitSet</code> to leverage
- * the automatic dispatching provided by <code>ActiveCondition</code>.
+ * the automatic dispatching provided by <code>Condition</code>.
  *
  * @author Angelo Corsaro <mailto:angelo.corsaro@gmail.com>
  */
-class SIMD_API dds::ActiveWaitSet : public ::boost::noncopyable {
+class SIMD_API dds::WaitSet : public ::boost::noncopyable {
 public:
-	typedef ::dds::ActiveConditionVector::iterator iterator;
+	typedef ::dds::ConditionVector::iterator iterator;
 
 public:
 	/**
-	 * Creates a new <code>ActiveWaitSet</code> which has not
+	 * Creates a new <code>WaitSet</code> which has not
 	 * condition attached to it.
 	 */
-	ActiveWaitSet();
+	WaitSet();
 
 	/**
-	 * Creates a new <code>ActiveWaitSet</code> and attaches the
+	 * Creates a new <code>WaitSet</code> and attaches the
 	 * condition passed to the ctor.
 	 *
 	 * @param cond the condition to be attached to this wait-set.
 	 */
-	ActiveWaitSet(const ::dds::ActiveCondition& cond);
+	WaitSet(const ::dds::Condition& cond);
 
 	/**
 	 * Destroys this and unregisters all the conditions that are
 	 * still attached.
 	 */
-	~ActiveWaitSet();
+	~WaitSet();
 
 public:
 	/**
@@ -57,14 +58,14 @@ public:
 	 * @return a vector containing the triggered conditions
 	 *
 	 */
-	::dds::ActiveConditionVector wait(const DDS::Duration_t& timeout);
+	::dds::ConditionVector wait(const dds::Duration_t& timeout);
 
 	/**
 	 * Waits for one of the attached conditions to trigger.
 	 *
 	 * @return a vector containing the triggered conditions
 	 */
-	::dds::ActiveConditionVector wait();
+	::dds::ConditionVector wait();
 
 	/**
 	 * Waits for at least one of the attached conditions to  trigger and then
@@ -78,20 +79,20 @@ public:
 	 * dispatches the events, or, times out and unblocks.
 	 *
 	 */
-	void dispatch(const ::DDS::Duration_t& timeout);
+	void dispatch(const ::dds::Duration_t& timeout);
 
-	ActiveWaitSet& operator +=(const ::dds::ActiveCondition& cond);
-	ActiveWaitSet& operator -=(const ::dds::ActiveCondition& cond);
+	WaitSet& operator +=(const ::dds::Condition& cond);
+	WaitSet& operator -=(const ::dds::Condition& cond);
 
-	DDS::ReturnCode_t attach(const ::dds::ActiveCondition& cond);
-	DDS::ReturnCode_t detach(const ::dds::ActiveCondition& cond);
+	dds::ReturnCode_t attach(const ::dds::Condition& cond);
+	dds::ReturnCode_t detach(const ::dds::Condition& cond);
 
 	iterator begin();
 	iterator end();
 
 private:
 	::DDS::WaitSet waitset_;
-	::dds::ActiveConditionVector cond_vec_;
+	::dds::ConditionVector cond_vec_;
 };
 
 

@@ -47,7 +47,7 @@ public:
    * well as the <conde>infos</code> containers, thus will require a
    * return_loan.
    */
-  DDS::ReturnCode_t read(TSeq& samples, DDS::SampleInfoSeq& infos) {
+  dds::ReturnCode_t read(TSeq& samples, dds::SampleInfoSeq& infos) {
     int rv = DDS::RETCODE_NO_DATA;
     if (handle_ == DDS::HANDLE_NIL)
       handle_ = reader_->lookup_instance(key_);
@@ -69,7 +69,7 @@ public:
    * well as the <conde>infos</code> containers, thus will require a
    * return_loan.
    */ 
-  DDS::ReturnCode_t take(TSeq& samples, DDS::SampleInfoSeq& infos) {
+  dds::ReturnCode_t take(TSeq& samples, dds::SampleInfoSeq& infos) {
     int rv = DDS::RETCODE_NO_DATA;;
     if (handle_ == DDS::HANDLE_NIL)
       handle_ = reader_->lookup_instance(key_);
@@ -89,7 +89,7 @@ public:
    * Reads at most <code>max_samples</code> samples that have not been
    * read yet from all vies and alive instances.
    */ 
-  DDS::ReturnCode_t read(TSeq& samples, 
+  dds::ReturnCode_t read(TSeq& samples, 
 			 long max_samples) {
     int rv = DDS::RETCODE_NO_DATA;;
 
@@ -97,7 +97,7 @@ public:
       handle_ = reader_->lookup_instance(key_);
       
     if (handle_ != DDS::HANDLE_NIL) {
-      DDS::SampleInfoSeq infos(max_samples);
+      dds::SampleInfoSeq infos(max_samples);
       rv = reader_->read(samples,
 			 infos,
 			 max_samples,
@@ -113,7 +113,7 @@ public:
    * Takes at most <code>max_samples</code> samples that have not been
    * read yet from all vies and alive instances.
    */ 
-  DDS::ReturnCode_t take(TSeq& samples, 
+  dds::ReturnCode_t take(TSeq& samples, 
 			 long max_samples) {
 
     int rv = DDS::RETCODE_NO_DATA;;
@@ -122,7 +122,7 @@ public:
       handle_ = reader_->lookup_instance(key_);
 
     if (handle_ != DDS::HANDLE_NIL) {
-      DDS::SampleInfoSeq infos(max_samples);
+      dds::SampleInfoSeq infos(max_samples);
       rv = reader_->take_instance(samples,
 				  infos,
 				  max_samples,
@@ -137,12 +137,12 @@ public:
    * Most generic <code>read</code> exposing all the knobs provided by
    * the OMG DDS API.
    */ 
-  DDS::ReturnCode_t read(TSeq& samples, 
-			 DDS::SampleInfoSeq& infos,
+  dds::ReturnCode_t read(TSeq& samples, 
+			 dds::SampleInfoSeq& infos,
 			 long max_samples,
-			 DDS::SampleStateMask samples_state,
-			 DDS::ViewStateMask   views_state,
-			 DDS::InstanceStateMask instances_state) {
+			 dds::SampleStateMask samples_state,
+			 dds::ViewStateMask   views_state,
+			 dds::InstanceStateMask instances_state) {
     int rv = DDS::RETCODE_NO_DATA;;
     if (handle_ == DDS::HANDLE_NIL)
       handle_ = reader_->lookup_instance(key_);
@@ -163,12 +163,12 @@ public:
    * Most generic <code>take</code> exposing all the knobs provided by
    * the OMG DDS API.
    */ 
-  DDS::ReturnCode_t take(TSeq& samples, 
-			 DDS::SampleInfoSeq& infos,
+  dds::ReturnCode_t take(TSeq& samples, 
+			 dds::SampleInfoSeq& infos,
 			 long max_samples,
-			 DDS::SampleStateMask samples_state,
-			 DDS::ViewStateMask   views_state,
-			 DDS::InstanceStateMask instances_state) {
+			 dds::SampleStateMask samples_state,
+			 dds::ViewStateMask   views_state,
+			 dds::InstanceStateMask instances_state) {
       
     int rv = DDS::RETCODE_NO_DATA;;
 
@@ -186,7 +186,7 @@ public:
     }
     return rv;
   }
-  DDS::ReturnCode_t return_loan(TSeq& samples, DDS::SampleInfoSeq& infos) {
+  dds::ReturnCode_t return_loan(TSeq& samples, dds::SampleInfoSeq& infos) {
     return reader_->return_loan(samples, infos);
   }
   

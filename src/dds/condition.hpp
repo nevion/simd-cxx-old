@@ -14,15 +14,19 @@
 
 // -- SIMD_DDS Includes
 #include <dds/config.hpp>
+#include <dds/peer/condition_impl.hpp>
 
 namespace dds {
 
-  class SIMD_API ActiveWaitSet;
-  class SIMD_API ActiveCondition;
-
-
+  class SIMD_API WaitSet;
+  class SIMD_API Condition;
+  // namespace peer {
+  //   class SIMD_API ConditionImpl;
+  //   class SIMD_API ReadConditionImpl;
+  //   class SIMD_API QueryConditionImpl;
+  // }
   /**
-   * The <code>ActiveCondition</code> class allows provides a generic
+   * The <code>Condition</code> class allows provides a generic
    * interface for all those class that want to provide a command like
    * behviour. This command interfance is implemented by the
    * <b>SIMD_DDS</b> classes providing the condition behaviour. The
@@ -34,66 +38,42 @@ namespace dds {
    * @version 1.0
    */
   /////////////////////////////////////////////////////////////////////////////
-  class SIMD_API ActiveConditionImpl {
+  class SIMD_API Condition {
   public:
-    virtual ~ActiveConditionImpl();
-  public:
-    virtual void execute() = 0;
-    virtual DDS::Boolean get_trigger_value() = 0;
-
-  protected:
-    friend class ::dds::ActiveWaitSet;
-    friend class ::dds::ActiveCondition;
-    virtual DDS::Condition* get_dds_condition() const = 0;
-  };
-
-  class SIMD_API ActiveCondition {
-  public:
-    ActiveCondition(ActiveConditionImpl* ac);
-    virtual ~ActiveCondition();
+    Condition(dds::peer::ConditionImpl* ac);
+    virtual ~Condition();
 
   public:
     bool
-    operator==(const ActiveCondition& other);
+    operator==(const Condition& other);
 
-    inline ActiveConditionImpl*
+    inline dds::peer::ConditionImpl*
     operator->() { return cond_.get(); }
 
-    inline const ActiveConditionImpl*
+    inline const dds::peer::ConditionImpl*
     operator->() const { return cond_.get(); }
 
   protected:
     template <typename CT2, typename CT1> friend CT2 downcast(CT1&);
     template <typename CT2, typename CT1> bool can_downcast(CT1& orig);
-    ::boost::shared_ptr<ActiveConditionImpl> cond_;
-
+    ::boost::shared_ptr<dds::peer::ConditionImpl> cond_;
   };
 
-  DEFINE_HANDLE_BODY_TRAITS(ActiveCondition, ActiveConditionImpl)
-
-  /////////////////////////////////////////////////////////////////////////////
-  class SIMD_API ActiveReadConditionImpl: public ActiveConditionImpl {
+  DEFINE_HANDLE_BODY_TRAITS(Condition, dds::peer::ConditionImpl)
+    
+  class SIMD_API ReadCondition: public Condition {
   public:
-    virtual ~ActiveReadConditionImpl();
-  public:
-    virtual DDS::SampleStateMask get_sample_state_mask() = 0;
-    virtual DDS::ViewStateMask get_view_state_mask() = 0;
-    virtual DDS::InstanceStateMask get_instance_state_mask() = 0;
-  };
-
-  class SIMD_API ActiveReadCondition: public ActiveCondition {
-  public:
-    ActiveReadCondition(ActiveReadConditionImpl* arci);
-    virtual ~ActiveReadCondition();
+    ReadCondition(dds::peer::ReadConditionImpl* arci);
+    virtual ~ReadCondition();
 
   public:
     bool
-    operator==(const ActiveReadCondition& other);
+    operator==(const ReadCondition& other);
 
-    inline ActiveReadConditionImpl*
+    inline dds::peer::ReadConditionImpl*
     operator->() { return pcond_; }
 
-    inline const ActiveReadConditionImpl*
+    inline const dds::peer::ReadConditionImpl*
     operator->() const { return pcond_; }
 
   protected:
@@ -101,130 +81,41 @@ namespace dds {
     // maintained by the parent class.
     template <typename CT2, typename CT1> friend CT2 downcast(CT1&);
     template <typename CT2, typename CT1> bool can_downcast(CT1& orig);
-    ActiveReadCondition();
-    ActiveReadConditionImpl* pcond_;
+    ReadCondition();
+    dds::peer::ReadConditionImpl* pcond_;
   };
 
-  DEFINE_HANDLE_BODY_TRAITS(ActiveReadCondition, ActiveReadConditionImpl)
+  DEFINE_HANDLE_BODY_TRAITS(ReadCondition, dds::peer::ReadConditionImpl)
 
-  /////////////////////////////////////////////////////////////////////////////
-  class SIMD_API ActiveQueryConditionImpl: public ActiveReadConditionImpl {
-  public:
-    virtual ~ActiveQueryConditionImpl();
-
-  public:
-    virtual std::string get_query_expression() = 0;
-    virtual std::string get_query_parameters() = 0;
-    virtual void set_querly_parameters(const std::string& params) = 0;
-  };
-
-  class SIMD_API ActiveQueryCondition: public ActiveReadCondition {
+  class SIMD_API QueryCondition: public ReadCondition {
   protected:
-    ActiveQueryCondition(ActiveQueryConditionImpl* qcond);
-    virtual ~ActiveQueryCondition();
+    QueryCondition(dds::peer::QueryConditionImpl* qcond);
+    virtual ~QueryCondition();
 
   public:
     bool
-    operator==(const ActiveReadCondition& other);
+    operator==(const ReadCondition& other);
 
-    inline ActiveQueryConditionImpl*
+    inline dds::peer::QueryConditionImpl*
     operator->() { return pcond_; }
 
-    inline const ActiveQueryConditionImpl*
+    inline const dds::peer::QueryConditionImpl*
     operator->() const { return pcond_; }
 
   protected:
     // Refcount maintained by the root class.
     template <typename CT2, typename CT1> friend CT2 downcast(CT1&);
     template <typename CT2, typename CT1> bool can_downcast(CT1& orig);
-    ActiveQueryCondition();
-    ActiveQueryConditionImpl* pcond_;
+    QueryCondition();
+    dds::peer::QueryConditionImpl* pcond_;
   };
 
-  DEFINE_HANDLE_BODY_TRAITS(ActiveQueryCondition, ActiveQueryConditionImpl)
+  DEFINE_HANDLE_BODY_TRAITS(QueryCondition, dds::peer::QueryConditionImpl)
 
-  /////////////////////////////////////////////////////////////////////////////
-  //@TODO: Instead of inheriting the DDS::ReadCondition this should be inheriting
-  // the proper actual class implementing the ReadCondition behaviour. Otherwise,
-  // it won't be possible to pass instances of this class to the legacy waitset.
-  // The caveat here is that the class implementing the ReadCondition is implementation
-  // dependent, thus one potential approach is to add it as an extra template parameter that
-  // will be bound by for each specific DDS implementation.
-  template<typename ARG, typename FUNCTOR>
-  class iActiveReadConditionImpl: public ActiveReadConditionImpl {
-  public:
-    // @TODO: Make this ctor protected and add ActiveReadCondition/DataReader as
-    // friend classes
-    iActiveReadConditionImpl(::boost::shared_ptr<DDS::ReadCondition> rcond,
-			     const ARG& arg, const FUNCTOR& f) :
-      rcond_(rcond), arg_(arg), f_(f) {
-    }
-  public:
-    virtual ~iActiveReadConditionImpl() {
-    }
-
-  public:
-    virtual DDS::SampleStateMask get_sample_state_mask() {
-      return rcond_->get_sample_state_mask();
-    }
-
-    virtual DDS::ViewStateMask get_view_state_mask() {
-      return rcond_->get_view_state_mask();
-    }
-
-    virtual DDS::InstanceStateMask get_instance_state_mask() {
-      return rcond_->get_instance_state_mask();
-    }
-
-    virtual DDS::DataReader_ptr get_datareader() {
-      return rcond_->get_datareader();
-    }
-
-  public:
-    virtual void execute() {
-      f_(arg_);
-    }
-
-    virtual DDS::Boolean get_trigger_value() {
-      return rcond_->get_trigger_value();
-    }
-
-  protected:
-    friend class ActiveWaitSet;
-    DDS::Condition*
-    get_dds_condition() const {
-      return rcond_.get();
-    }
-
-  protected:
-    ::boost::shared_ptr<DDS::ReadCondition> rcond_;
-    ARG arg_;
-    FUNCTOR f_;
-  };
-
-  template<typename ARG, typename FUNCTOR>
-  class iActiveReadCondition: public ActiveReadCondition {
-  public:
-    iActiveReadCondition(boost::shared_ptr<DDS::ReadCondition> rcond,
-			 const ARG& arg, const FUNCTOR& f) :
-      ActiveReadCondition(new ::dds::iActiveReadConditionImpl<ARG, FUNCTOR>(
-									    rcond, arg, f)) {
-    }
-
-    virtual ~iActiveReadCondition() {
-    }
-
-  public:
-    inline ActiveReadConditionImpl*
-    operator->() { return pcond_; }
-
-    inline const ActiveReadConditionImpl*
-    operator->() const { return pcond_; }
-  };
 
   // -- Type definitions
 
-  typedef ::std::vector<ActiveCondition> ActiveConditionVector;
+  typedef ::std::vector<Condition> ConditionVector;
 
 
   // @TODO: This is a quick and dirty hack which should be implemented
@@ -252,6 +143,27 @@ namespace dds {
     return b2 != 0;
   }
 
+  template<typename ARG, typename FUNCTOR>
+  class TReadCondition: public ReadCondition {
+  public:
+    TReadCondition(boost::shared_ptr<DDS::ReadCondition> rcond,
+		   const ARG& arg, const FUNCTOR& f) :
+      ReadCondition(new ::dds::peer::TReadConditionImpl<ARG, FUNCTOR>(rcond, arg, f)) {
+      }
+      
+      virtual ~TReadCondition() {
+      }
+      
+    public:
+    inline dds::peer::ReadConditionImpl*
+      operator->() { return pcond_; }
+    
+    inline const dds::peer::ReadConditionImpl*
+    operator->() const { return pcond_; }
+  };
+
 }
+#include <dds/peer/condition_impl.hpp>
+
 #endif	/* AC_SIMD_DDS_CONDITION_HPP */
 
