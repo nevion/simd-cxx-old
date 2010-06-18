@@ -1,0 +1,51 @@
+[SimD v0.8]
+
+New Features
+------------
+
+- New Iterators and std::vector api for reading samples.  (WARNING:
+  When using std::vector beware of topics containing strings, at least
+  up to the point when we won't have updated the IDL compiler to map
+  IDL string to std::string)
+
+- Automatic start-up of the ospl service. In essence you don't need
+  any more do do "ospl start" before running SimD applications
+
+- Public types are now belonging to the "dds" namespace. Earlier
+  version where mixin a bit of "dds" and "DDS", where the latter was
+  coming straight from OpenSplice
+
+- Refactored listeners to provide a more compact and simple
+  sintax. Each DDS entity now has associated a set of event types and
+  connecting a "listener" to and event is done by calling a method
+  such as entity.connect<on_data_available(slot); See the Ping demo
+  for an example.
+
+
+- SimD now relies on BOOST Process (shipped with SimD) in order to do
+  platform independent process management. This is needed to start and
+  stop in a portable manner the OpenSplice DDS service.
+
+
+API Changes
+----------
+
+- Conditions have been renamed to drop the "Active" portion and let
+  them look like DDS condition
+
+- The API for connecting listener has changed (see new features).
+
+
+
+Bug Fixes
+---------
+
+- The following open issues were fixed: 10, 11
+
+Future Changes / Extensions
+---------------------------
+
+- Return codes will be migrated to exceptions to be aligned to the
+  upcoming ISO C++ PSM for DDS
+
+- Support for Query Conditions will be added

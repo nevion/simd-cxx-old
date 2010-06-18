@@ -14,6 +14,7 @@ The requirements for compiling and running SimD are:
 
     - OpenSplice DDS v4.1 or higher (http:://www.opensplice.org)
     - BOOST v1.40 (or higher)
+    - BOOST Process (Already shipped with SimD)
     - GCC/G++ v4.1 (or higher)
     - CMake v2.6 (or higher)
     - Doxygen

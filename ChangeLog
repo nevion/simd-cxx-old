@@ -1,3 +1,14 @@
+2010-06-18  Angelo Corsaro  <corsaro@awu>
+
+	* v0.8 Released see RELEASE_NOTES to detailed changes/additions.
+	
+	* src/dds/waitset.cpp: Fixed issue #10
+
+	* src/dds/peer/runtime_impl.cpp: Fixed issue #11
+
+	* src/dds/types.hpp: New file mapping types from DDS => dds 
+	* src/dds/*: Homogenized public types to belong to the "dds" namespace.
+
 2010-03-31  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 
