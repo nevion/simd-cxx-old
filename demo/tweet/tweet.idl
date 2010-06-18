@@ -1,0 +1,5 @@
+struct TweetType {
+  string userId;
+  string tweet;
+};
+#pragma keylist TweetType userId
