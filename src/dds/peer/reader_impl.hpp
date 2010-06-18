@@ -4,10 +4,12 @@
 #include <iostream>
 
 // -- SIMD_DDS Includes
+#include <dds/dds.hpp>
 #include <dds/runtime.hpp>
 #include <dds/memory.hpp>
 #include <dds/traits.hpp>
 #include <dds/topic.hpp>
+#include <dds/peer/condition_impl.hpp>
 #include <dds/condition.hpp>
 #include <dds/subscriber.hpp>
 #include <dds/content_filtered_topic.hpp>
@@ -599,12 +601,12 @@ namespace dds {
       
       // -- Condition API
       /**
-       * Creates an <code>ActiveReadCondition</code> that waits for new samples to
+       * Creates an <code>ReadCondition</code> that waits for new samples to
        * be arriving in order to notify.
        */
-      // ::dds::ActiveReadCondition
+      // ::dds::ReadCondition
       template <typename F>
-      ::dds::ActiveReadCondition
+      ::dds::ReadCondition
       create_readcondition(const F& f)
       {
 	DDS::ReadCondition* rc =
@@ -614,12 +616,28 @@ namespace dds {
 	
 	::dds::mem::RCondDeleter<DR> deleter(reader_);
 	::boost::shared_ptr <DDS::ReadCondition> rrc(rc, deleter);
-	::dds::iActiveReadCondition < dds::DataReader<T>, F> ardc(rrc, 
-								  *dds_reader_, 
-								  f);
+	::dds::TReadCondition < dds::DataReader<T>, F> ardc(rrc, 
+							    *dds_reader_, 
+							    f);
 	return ardc;
       }
-      
+      /*      
+      ::dds::QueryCondition
+      create_querycondition(const dds::SampleStateMask&     ssm,
+			    const dds::ViewStateMask&       vsm,
+			    const dds::InstanceStateMask&   ism,
+			    const std::string&              query_expr,
+			    const std::vector<std::string>& params)  {
+
+	DDS::QueryCondition* qc = 
+	  reader_->create_querycondition(ssm,
+					 vsm,
+					 ism,
+					 query_expr,
+					 params);
+
+      }
+      */
     public:
       
       void on_requested_deadline_missed(DDS::DataReader*,

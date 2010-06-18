@@ -4,9 +4,30 @@
 #include <dds/memory.hpp>
 #include <dds/publisher.hpp>
 #include <dds/subscriber.hpp>
+#include <boost/process.hpp>
+#include <string>
+#include <vector>
+
 const std::string dds::peer::RuntimeImpl::DEFAULT_DOMAIN = "dds_domain";
 const std::string dds::peer::RuntimeImpl::DEFAULT_PARTITION = "dds_partition";
 dds::peer::RuntimeImpl* dds::peer::RuntimeImpl::this_;
+
+namespace bp = boost::process;
+
+int startOpenSplice() {
+  std::string exec(bp::find_executable_in_path("ospl"));
+  std::vector<std::string> args;
+  args.push_back(exec);
+  args.push_back("start");
+
+  bp::context ctx;
+  ctx.environment = bp::self::get_environment(); 
+  ctx.stdout_behavior = bp::silence_stream();
+  bp::child c = bp::launch(exec, args, ctx); 
+  bp::status s = c.wait();
+  return s.exited() ? s.exit_status() : 1;
+}
+
 
 dds::peer::RuntimeImpl::RuntimeImpl(const std::string& domain) :
   dp_(domain) {
@@ -21,18 +42,21 @@ dds::peer::RuntimeImpl::~RuntimeImpl() {
 }
 
 void dds::peer::RuntimeImpl::start() {
+  startOpenSplice();
   this_ = new RuntimeImpl();
   this_->init(DEFAULT_PARTITION);
 }
 
 void dds::peer::RuntimeImpl::start(const std::string& partition) {
+  startOpenSplice();
   this_ = new RuntimeImpl();
   this_->init(partition);
 }
 
-void dds::peer::RuntimeImpl::start(const std::string& domain,
-			 const std::string& partition)
+void dds::peer::RuntimeImpl::start(const std::string& partition,
+			 const std::string& domain)
 {
+  startOpenSplice();
   this_ = new RuntimeImpl(domain);
   this_->init(partition);
 }

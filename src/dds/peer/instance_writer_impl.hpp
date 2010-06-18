@@ -5,9 +5,10 @@ namespace dds {
   namespace peer {
     
     /**
-     * The <code>DataInstanceWriter</code> class takes care of writing a specific
-     * Topic instance. The instance is automatically unregistered once the
-     * <code>DataInstanceWriter</code> is destroyed.
+     * The <code>DataInstanceWriter</code> class takes care of writing
+     * a specific Topic instance. The instance is automatically
+     * unregistered once the <code>DataInstanceWriter</code> is
+     * destroyed.
      *
      * @author Angelo Corsaro <mailto:angelo.corsaro@gmail.com>
      * @version 1.0
