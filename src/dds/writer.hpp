@@ -81,7 +81,7 @@ get_qos()
 dds::ReturnCode_t
 set_qos(const DataWriterQos &qos)  
 {
-  return pimpl_->get_qoqs(qos);
+  return pimpl_->set_qos(qos);
 }
 
 boost::shared_ptr<dds::Topic<T> >

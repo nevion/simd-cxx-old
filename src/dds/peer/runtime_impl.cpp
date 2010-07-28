@@ -8,8 +8,7 @@
 #include <string>
 #include <vector>
 
-const std::string dds::peer::RuntimeImpl::DEFAULT_DOMAIN = "dds_domain";
-const std::string dds::peer::RuntimeImpl::DEFAULT_PARTITION = "dds_partition";
+const std::string dds::peer::RuntimeImpl::DEFAULT_PARTITION = "";
 dds::peer::RuntimeImpl* dds::peer::RuntimeImpl::this_;
 
 namespace bp = boost::process;
@@ -29,11 +28,11 @@ int startOpenSplice() {
 }
 
 
-dds::peer::RuntimeImpl::RuntimeImpl(const std::string& domain) :
-  dp_(domain) {
-}
-dds::peer::RuntimeImpl::RuntimeImpl() {
-}
+dds::peer::RuntimeImpl::RuntimeImpl(const std::string& domain) 
+ : dp_(domain) 
+{ }
+
+dds::peer::RuntimeImpl::RuntimeImpl() { }
 
 dds::peer::RuntimeImpl::~RuntimeImpl() {
   delete pub_;
@@ -44,29 +43,47 @@ dds::peer::RuntimeImpl::~RuntimeImpl() {
 void dds::peer::RuntimeImpl::start() {
   startOpenSplice();
   this_ = new RuntimeImpl();
-  this_->init(DEFAULT_PARTITION);
+  std::vector<std::string> partitions;
+  partitions.push_back(DEFAULT_PARTITION);
+  this_->init(partitions);
 }
 
 void dds::peer::RuntimeImpl::start(const std::string& partition) {
   startOpenSplice();
   this_ = new RuntimeImpl();
-  this_->init(partition);
+  std::vector<std::string> partitions;
+  partitions.push_back(partition);
+  this_->init(partitions);
 }
 
+void dds::peer::RuntimeImpl::start(const std::vector<std::string>& partitions) {
+  startOpenSplice();
+  this_ = new RuntimeImpl();
+  this_->init(partitions);
+}
+
+
 void dds::peer::RuntimeImpl::start(const std::string& partition,
-			 const std::string& domain)
+				   const std::string& domain)
 {
   startOpenSplice();
   this_ = new RuntimeImpl(domain);
-  this_->init(partition);
+  std::vector<std::string> partitions;
+  partitions.push_back(partition);
+  this_->init(partitions);
 }
 
-void dds::peer::RuntimeImpl::init(const std::string& partition) {
-  dds::PublisherQos pubQos;
-  pubQos.set_partition(partition);
-  
-  pub_ = new dds::Publisher(partition);
-  sub_ = new dds::Subscriber(partition);
+void dds::peer::RuntimeImpl::start(const std::vector<std::string>& partitions,
+				   const std::string& domain)
+{
+  startOpenSplice();
+  this_ = new RuntimeImpl(domain);
+  this_->init(partitions);
+}
+
+void dds::peer::RuntimeImpl::init(const std::vector<std::string>& partitions) {
+  pub_ = new dds::Publisher(partitions);
+  sub_ = new dds::Subscriber(partitions);
 }
 
 /*
@@ -79,23 +96,23 @@ void dds::peer::RuntimeImpl::init(const std::string& partition) {
   Assert::precondition(false, "Method Not Implemented Yet", __FILE__);
   }
 */
-dds::DomainParticipant dds::peer::RuntimeImpl::get_participant()  throw () {
+dds::DomainParticipant dds::peer::RuntimeImpl::get_participant() {
   return dp_;
 }
 
 dds::Publisher 
-dds::peer::RuntimeImpl::get_publisher()  throw () {
+dds::peer::RuntimeImpl::get_publisher() {
   return *pub_;
 }
 
 dds::Subscriber 
-dds::peer::RuntimeImpl::get_subscriber()  throw () {
+dds::peer::RuntimeImpl::get_subscriber() {
   return *sub_;
 }
 
-dds::peer::RuntimeImpl* 
-dds::peer::RuntimeImpl::instance() throw () {
-  return this_;
+dds::peer::RuntimeImpl& 
+dds::peer::RuntimeImpl::instance() {
+  return *this_;
 }
 
 void

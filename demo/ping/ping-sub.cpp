@@ -67,13 +67,20 @@ bool parse_args(int argc, char* argv[])
 class PingDataHandler {
 public:
   void operator() (dds::DataReader<PingType>& reader) {
+    /*
     const uint32_t max_size = 32;
     std::vector<PingType> data(max_size) ;
     std::vector<DDS::SampleInfo> info(max_size);
     
     uint32_t length = reader.read(data.begin(), info.begin(), max_size);
-    
-    auto end = data.begin() + length;
+    */
+    std::vector<PingType> data;
+    /*
+    std::back_insert_iterator<std::vector<PingType>> bit(data);
+    reader.read(bit);
+    */
+    reader.read(data);
+    auto end = data.end();
     for (auto index = data.begin(); index < end; ++index) {
       std::cout << index->vendor << " . " << index->counter
 		<< std::endl;
@@ -103,11 +110,11 @@ int main(int argc, char* argv[]) {
   dds::DataReader<PingType> reader(pingTopic);
 
   PingDataHandler handler;
-  dds::ActiveReadCondition arc = reader.create_readcondition(handler);
+  dds::ReadCondition arc = reader.create_readcondition(handler);
   
-  ::dds::ActiveWaitSet ws;
+  ::dds::WaitSet ws;
   DDS::ReturnCode_t retc = ws.attach(arc);
-
+  
   std::cout << ">> Attach Condition: " 
 	    << dds::retcode2string(retc) << std::endl;
 

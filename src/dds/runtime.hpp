@@ -3,6 +3,8 @@
 
 #include <string>
 #include <dds/domain.hpp>
+#include <dds/publisher.hpp>
+#include <dds/subscriber.hpp>
 
 namespace dds {
   class Runtime;
@@ -14,17 +16,24 @@ namespace dds {
 class SIMD_API dds::Runtime {
 public:
   Runtime();
+
   Runtime(const std::string& partition);
+
+  Runtime(const std::vector<std::string>& partitions);
+
   Runtime(const std::string& partition, const std::string& domain);
+
+  Runtime(const std::vector<std::string>& partitions, 
+	  const std::string& domain);
 
   ~Runtime();
 
 public:
-  ::dds::DomainParticipant get_participant() throw ();
+  ::dds::DomainParticipant get_participant();
   
-  boost::shared_ptr<DDS::Publisher> get_publisher()  throw ();
+  ::dds::Publisher get_publisher();
   
-  boost::shared_ptr<DDS::Subscriber> get_subscriber()  throw ();
+  ::dds::Subscriber get_subscriber();
 };
 
 #endif /* AC_DDS_DDS_HPP_ */

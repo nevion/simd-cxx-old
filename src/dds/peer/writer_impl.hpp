@@ -27,7 +27,7 @@ public:
       dwqos_(topic_->get_qos())
   {
     pub_ =
-      ::dds::peer::RuntimeImpl::instance()->get_publisher();
+      ::dds::peer::RuntimeImpl::instance().get_publisher();
     
     DDS::DataWriter* w = 
       pub_->create_datawriter(topic_->get_dds_topic(),
@@ -43,7 +43,7 @@ public:
     : topic_(topic), dwqos_(qos)
   {
     pub_ = 
-      ::dds::peer::RuntimeImpl::instance()->get_publisher();
+      ::dds::peer::RuntimeImpl::instance().get_publisher();
     DDS::DataWriter* w =
       pub_->create_datawriter(topic_->get_dds_topic(),
 			      dwqos_,

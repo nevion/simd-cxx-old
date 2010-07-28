@@ -2,6 +2,9 @@ cmake_minimum_required (VERSION 2.6)
 set(CMAKE_MODULE_PATH ../../../cmake)
 project (ddj01)
 
+include (MacroOpenSplice)
+include (osmacros)
+
 find_package (OpenSplice REQUIRED)
 find_package (Boost REQUIRED)
 find_package (SimD REQUIRED)
@@ -52,7 +55,6 @@ add_definitions (
  ${DEFINITIONS}
 )
 
-# Linkar contra librerias deseadas.
 target_link_libraries (
   ${DATAMODEL} 
   ${OpenSplice_LIBRARIES}

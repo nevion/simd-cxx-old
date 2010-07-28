@@ -1,6 +1,7 @@
 #ifndef AC_SIMD_DDS_TYPES_HPP
 #define AC_SIMD_DDS_TYPES_HPP
 
+#include <dds/config.hpp>
 
 namespace dds {
   const std::string& retcode2string(::DDS::ReturnCode_t rc);

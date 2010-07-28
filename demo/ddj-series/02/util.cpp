@@ -6,7 +6,7 @@
 #include <iostream>
 
 
-const unsigned long long ONE_SECOND = 1E9;
+const unsigned long int  ONE_SECOND = 1E9;
 const unsigned int       DEFAULT_SAMPLE_NUM = 1E3;
 const unsigned int       DEFAULT_SENSOR_ID = 0;
 const TemperatureScale   DEFAULT_TEMP_SCALE = CELSIUS;
@@ -16,7 +16,7 @@ const float              H0 = 0.5F;
 const float              DH = 0.2;
 
 timespec msec2timespec(unsigned long long msec) {
-  unsigned long long nsec = msec * 1E6;
+  unsigned long int nsec = msec * 1E6;
   timespec ts = {0, nsec};
   // nsec has to be <= 999999999
   

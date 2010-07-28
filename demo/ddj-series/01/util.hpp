@@ -25,7 +25,7 @@ struct tssub_options {
 
 // Command line options for the tspub program
 struct tspub_options {
-  unsigned int id;
+  unsigned short id;
   TemperatureScale scale;
   unsigned int samples;
   timespec period; // in msec

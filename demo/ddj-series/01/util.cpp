@@ -16,7 +16,7 @@ const float              H0 = 0.5F;
 const float              DH = 0.2;
 
 timespec msec2timespec(unsigned long long msec) {
-  unsigned long long nsec = msec * 1E6;
+  unsigned long int nsec = msec * 1E6;
   timespec ts = {0, nsec};
   // nsec has to be <= 999999999
   

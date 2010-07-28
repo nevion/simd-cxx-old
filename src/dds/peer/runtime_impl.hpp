@@ -3,6 +3,7 @@
 
 // -- STD C++ Include
 #include <string>
+#include <vector>
 
 // -- Boost Includes
 #include <boost/shared_ptr.hpp>
@@ -20,13 +21,15 @@ namespace dds {
     class SIMD_API RuntimeImpl {
 
   public:
-    static const std::string DEFAULT_DOMAIN;
     static const std::string DEFAULT_PARTITION;
 
   public:
     static void start();
     static void start(const std::string& partition);
+    static void start(const std::vector<std::string>& partition);
     static void start(const std::string& partition, const std::string& domain);
+    static void start(const std::vector<std::string>& partition, 
+		      const std::string& domain);
     /*
       static void start(std::ifstream& is);
 
@@ -37,14 +40,16 @@ namespace dds {
 
   protected:
     RuntimeImpl();
+
     RuntimeImpl(const std::string& domain);
-    void init(const std::string& partition);
+
+    void init(const std::vector<std::string>& partitions);
   public:
     ~RuntimeImpl();
 
   public:
 
-    static RuntimeImpl* instance() throw ();
+    static RuntimeImpl& instance();
 
     // TODO: Implement this method1
     //  void set_listener(shared_ptr<DDS::DomainParticipantListener> listener);
@@ -53,18 +58,18 @@ namespace dds {
     /**
      * Get the default participant.
      */
-    ::dds::DomainParticipant get_participant() throw ();
+    ::dds::DomainParticipant get_participant();
 
     /**
      * Get the default publisher.
      */
     // boost::shared_ptr<DDS::Publisher> get_publisher()  throw ();
-    dds::Publisher get_publisher()  throw ();
+    dds::Publisher get_publisher();
 
     /**
      * Get the default subscriber.
      */
-    dds::Subscriber get_subscriber()  throw ();
+    dds::Subscriber get_subscriber();
 
   private:
     static RuntimeImpl* this_;
@@ -73,8 +78,6 @@ namespace dds {
 
     dds::Publisher* pub_;
     dds::Subscriber* sub_;
-    //    boost::shared_ptr<DDS::Publisher> pub_;
-    //    boost::shared_ptr<DDS::Subscriber> sub_;
 
   };
 

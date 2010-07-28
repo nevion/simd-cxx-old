@@ -1,3 +1,14 @@
+2010-07-28  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+	* src/dds/runtime.*pp:
+	* src/dds/subscriber.*pp:
+	* src/dds/publisher.*pp: 
+
+	Added support for specifiying multiple partition when creating the
+	runtime.
+
+	
+
 2010-06-18  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 	* v0.8 Released see RELEASE_NOTES to detailed changes/additions.

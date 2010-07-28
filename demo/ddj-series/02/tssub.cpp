@@ -37,6 +37,8 @@ main(int argc, char* argv[]) {
   TempSensorTypeSeq data;
   DDS::SampleInfoSeq status;
 
+  std::string str = "Hello\
+  now";
   // Poll & Sleep untill you've not read opt.samples
   unsigned int count = 0;
   while (count < opt.samples) {

@@ -47,7 +47,7 @@ main(int argc, char* argv[])
   ShapeUpdateHandler handler;
   dds::ActiveReadCondition arc = 
     dr.create_readcondition(handler);
-  ::dds::ActiveWaitSet ws;
+  ::dds::WaitSet ws;
   DDS::ReturnCode_t retc = ws.attach(arc);
 
   while (read_samples_ < opt.samples) {

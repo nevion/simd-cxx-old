@@ -3,7 +3,8 @@
 #include <dds/peer/runtime_impl.hpp>
 
 
-dds::Subscriber::Subscriber() : dp_(dds::peer::RuntimeImpl::instance()->get_participant())
+dds::Subscriber::Subscriber() 
+  : dp_(dds::peer::RuntimeImpl::instance().get_participant())
 {
   ::dds::SubscriberQos pubQos;
   pubQos.set_partition(::dds::peer::RuntimeImpl::DEFAULT_PARTITION);
@@ -17,7 +18,7 @@ dds::Subscriber::Subscriber() : dp_(dds::peer::RuntimeImpl::instance()->get_part
 }
 
 dds::Subscriber::Subscriber(const std::string& partition) 
-  : dp_(dds::peer::RuntimeImpl::instance()->get_participant())
+  : dp_(dds::peer::RuntimeImpl::instance().get_participant())
 {
   ::dds::SubscriberQos pubQos;
   pubQos.set_partition(partition);
@@ -29,10 +30,38 @@ dds::Subscriber::Subscriber(const std::string& partition)
   this->reset(p, dds::mem::SubDeleter(dp_));
 }
 
+dds::Subscriber::Subscriber(const std::vector<std::string>& partitions) 
+  : dp_(dds::peer::RuntimeImpl::instance().get_participant())
+{
+  ::dds::SubscriberQos pubQos;
+  pubQos.set_partition(partitions);
+
+  DDS::Subscriber* p = dp_->create_subscriber(pubQos, 0, DDS::ANY_STATUS);
+
+  Assert::postcondition((p != 0), "Unable to create Subscriber", __FILE__);
+
+  this->reset(p, dds::mem::SubDeleter(dp_));
+}
+
+
 dds::Subscriber::Subscriber(const std::string& partition, dds::DomainParticipant dp) : dp_(dp)
 {
   ::dds::SubscriberQos pubQos;
   pubQos.set_partition(partition);
+
+  DDS::Subscriber* p = dp->create_subscriber(pubQos, 0, DDS::ANY_STATUS);
+
+  Assert::postcondition((p != 0), "Unable to create Subscriber", __FILE__);
+
+  this->reset(p, dds::mem::SubDeleter(dp_));
+}
+
+dds::Subscriber::Subscriber(const std::vector<std::string>& partitions, 
+			    dds::DomainParticipant dp) 
+  : dp_(dp)
+{
+  ::dds::SubscriberQos pubQos;
+  pubQos.set_partition(partitions);
 
   DDS::Subscriber* p = dp->create_subscriber(pubQos, 0, DDS::ANY_STATUS);
 

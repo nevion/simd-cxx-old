@@ -31,7 +31,7 @@ namespace dds {
 	topic_(topic),
 	drqos_(topic_.get_qos())
       {
-	sub_ = ::dds::peer::RuntimeImpl::instance()->get_subscriber();
+	sub_ = ::dds::peer::RuntimeImpl::instance().get_subscriber();
 	DDS::DataReader* r =
 	  sub_->create_datareader(topic_->get_dds_topic(),
 				  drqos_,
@@ -47,7 +47,7 @@ namespace dds {
 	topic_(topic),
 	drqos_(qos)
       {
-	sub_ = ::dds::peer::RuntimeImpl::instance()->get_subscriber();
+	sub_ = ::dds::peer::RuntimeImpl::instance().get_subscriber();
 	DDS::DataReader* r =
 	  sub_->create_datareader(topic_->get_dds_topic(),
 				  drqos_,
@@ -63,7 +63,7 @@ namespace dds {
 	  cftopic_(cftopic),
 	  drqos_(topic_.get_qos())
       {
-	sub_ = ::dds::peer::RuntimeImpl::instance()->get_subscriber();
+	sub_ = ::dds::peer::RuntimeImpl::instance().get_subscriber();
 	DDS::DataReader* r =
 	  sub_->create_datareader(cftopic_->get_dds_topic(),
 				  drqos_,
@@ -80,7 +80,7 @@ namespace dds {
 	  cftopic_(cftopic),
 	  drqos_(qos)
       {
-	sub_ = ::dds::peer::RuntimeImpl::instance()->get_subscriber();
+	sub_ = ::dds::peer::RuntimeImpl::instance().get_subscriber();
 	DDS::DataReader* r =
 	  sub_->create_datareader(cftopic_->get_dds_topic(),
 				  drqos_,

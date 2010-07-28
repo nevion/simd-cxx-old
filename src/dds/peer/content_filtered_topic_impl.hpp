@@ -32,7 +32,7 @@ public:
       topic_(t),
       filter_(filter),
       params_(params),
-      dp_(dds::peer::RuntimeImpl::instance()->get_participant())
+      dp_(dds::peer::RuntimeImpl::instance().get_participant())
   {
     DDS::StringSeq paramSeq;  
     paramSeq.length(params_.size() + 1);

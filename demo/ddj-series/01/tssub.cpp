@@ -11,6 +11,7 @@
 // Does some C++ magic required by SimD
 REGISTER_TOPIC_TRAITS(TempSensorType);
 
+const unsigned short tsPrio = 10;
 int main(int argc, char* argv[]) {
   try {
     // Parse command line args
@@ -18,9 +19,16 @@ int main(int argc, char* argv[]) {
     // Init the SimD runtime
     dds::Runtime runtime("");    
     // Create the "TempSensor" Topic 
-    dds::Topic<TempSensorType> tsTopic("TempSensor");    
+    dds::TopicQos tqos;
+    dds::Duration latency_budget = {2, 0};
+    dds::Duration deadline = {4, 0};
+    tqos.set_latency_budget(latency_budget);
+    tqos.set_deadline(deadline);
+    tqos.set_priority(tsPrio);
+    dds::Topic<TempSensorType> tsTopic("TempSensor", tqos);    
     // Create the DataReader
-    dds::DataReader<TempSensorType> dr(tsTopic);
+    dds::DataReaderQos drqos(tqos);
+    dds::DataReader<TempSensorType> dr(tsTopic, drqos);
     // Declare the containers
     TempSensorTypeSeq data;
     DDS::SampleInfoSeq status;

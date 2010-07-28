@@ -115,10 +115,11 @@ int main(int argc, char* argv[]) {
   dds::sigcon_t con_data = 
     reader.connect<dds::on_data_available>(func);
   
-  auto liveliness_handler = boost::bind(&DataHandler::handle_liveliness_change, 
-					&dh, 
-					_1, 
-					_2);
+  auto liveliness_handler = 
+    boost::bind(&DataHandler::handle_liveliness_change, 
+		&dh, 
+		_1, 
+		_2);
   
   dds::sigcon_t con_liv = 
     reader.connect<dds::on_liveliness_changed>(liveliness_handler);

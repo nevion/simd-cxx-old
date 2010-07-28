@@ -21,14 +21,14 @@ class dds::peer::TopicImpl : public dds::TopicDescription {
 public:
 
   TopicImpl(const std::string& name, const std::string& type_name) 
-    : name_(name), dp_(::dds::peer::RuntimeImpl::instance()->get_participant()) 
+    : name_(name), dp_(::dds::peer::RuntimeImpl::instance().get_participant()) 
   {
     TopicQos qos;
     this->init(name, type_name, qos);
   }
 
   TopicImpl(const std::string& name) 
-    : name_(name), dp_(::dds::peer::RuntimeImpl::instance()->get_participant()) 
+    : name_(name), dp_(::dds::peer::RuntimeImpl::instance().get_participant()) 
   {
     TopicQos qos;
     std::string type_name(ts_.get_type_name());
@@ -38,7 +38,7 @@ public:
   TopicImpl(const std::string& name, const TopicQos& qos) 
     : name_(name), 
       qos_(qos), 
-      dp_(::dds::peer::RuntimeImpl::instance()->get_participant()) 
+      dp_(::dds::peer::RuntimeImpl::instance().get_participant()) 
   {
     std::string type_name(ts_.get_type_name());
     this->init(name, type_name, qos);
@@ -49,7 +49,7 @@ public:
 	    const TopicQos& qos) 
     : name_(name), 
       qos_(qos), 
-      dp_(::dds::peer::RuntimeImpl::instance()->get_participant()) 
+      dp_(::dds::peer::RuntimeImpl::instance().get_participant()) 
   {
     this->init(name, type_name, qos);
   }

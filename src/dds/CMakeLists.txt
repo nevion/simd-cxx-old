@@ -4,16 +4,26 @@ include (osmacros)
 
 # Find required packages
 find_package (OpenSplice REQUIRED)
-find_package (Boost REQUIRED)
 
+# SimD uses Signal2 introduced in 1.39.0
+SET (Boost_ADDITIONAL_VERSIONS "1.43.0" "1.43" "1.42.0" "1.42" "1.41.0" "1.41")
+# MSVC will auto-link libraries so dont need to find them
+IF (MSVC)
+  find_package (Boost 1.39.0 REQUIRED)
+ELSE (MSVC)
+  find_package (Boost 1.39.0 COMPONENTS thread signals program_options REQUIRED)
+ENDIF (MSVC)
 
 # Set includes directories
 include_directories(
   ${PROJECT_SOURCE_DIR}/src
-  ${BOOST_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIR}
   ${OpenSplice_INCLUDE_DIRS}
 )
 
+link_directories(
+  ${Boost_LIBRARY_DIRS}
+)
 
 # SimD source files
 file (GLOB SimD_SOURCES *.cpp ./peer/*.cpp)

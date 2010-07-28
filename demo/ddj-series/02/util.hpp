@@ -8,7 +8,7 @@
 // -- Custom Include
 #include "gen/ccpp_TempControl.h"
 
-extern const unsigned long long ONE_SECOND;
+extern const unsigned long int  ONE_SECOND;
 extern const unsigned int       DEFAULT_SAMPLE_NUM;
 extern const unsigned int       DEFAULT_SENSOR_ID;
 extern const TemperatureScale   DEFAULT_TEMP_SCALE;
@@ -25,7 +25,7 @@ struct tssub_options {
 
 // Command line options for the tspub program
 struct tspub_options {
-  unsigned int id;
+  unsigned short id;
   TemperatureScale scale;
   unsigned int samples;
   timespec period; // in msec

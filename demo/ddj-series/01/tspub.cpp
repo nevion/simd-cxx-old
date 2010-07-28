@@ -12,6 +12,8 @@
 
 REGISTER_TOPIC_TRAITS(TempSensorType);
 
+const unsigned short tsPrio = 10;
+
 const unsigned short DEFAULT_ID = 0;
 
 int
@@ -25,9 +27,16 @@ main(int argc, char* argv[])
     // Create a SimD runtime
     dds::Runtime runtime("");
     // Create the "TempSensor" Topic
-    dds::Topic<TempSensorType> tsTopic("TempSensor");
+    dds::TopicQos tqos;
+    dds::Duration latency_budget = {2, 0};
+    dds::Duration deadline = {4, 0};
+    tqos.set_latency_budget(latency_budget);
+    tqos.set_deadline(deadline);
+    tqos.set_priority(tsPrio);
+    dds::Topic<TempSensorType> tsTopic("TempSensor", tqos);
     // Create a DataWriter
-    dds::DataWriter<TempSensorType> dw(tsTopic);
+    dds::DataWriterQos dwqos(tqos);
+    dds::DataWriter<TempSensorType> dw(tsTopic, dwqos);
     
     // Write some temperature randomly changing around a set point
     float temp = opt.t0 + ((random()*opt.dt)/RAND_MAX);

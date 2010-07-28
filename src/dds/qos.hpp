@@ -23,7 +23,7 @@ namespace dds {
       // @AC: This really is a shortcut, the initializer should not
       // rely on the DomainParticipant. Fix this in SIMD v1.0
       ::dds::DomainParticipant dp = 
-	::dds::peer::RuntimeImpl::instance()->get_participant();
+	::dds::peer::RuntimeImpl::instance().get_participant();
       INITIALIZER initializer(dp);
       initializer(*this);
     }
@@ -102,7 +102,7 @@ namespace dds {
       this->ownership.kind = DDS::SHARED_OWNERSHIP_QOS;
     }
 
-    void set_exclusive_owenership() {
+    void set_exclusive_ownership() {
       this->ownership.kind = DDS::EXCLUSIVE_OWNERSHIP_QOS;
     }
 
@@ -214,7 +214,7 @@ namespace dds {
   public:
     BasePubSubQos() {
       ::dds::DomainParticipant dp =
-	::dds::peer::RuntimeImpl::instance()->get_participant();
+	::dds::peer::RuntimeImpl::instance().get_participant();
       INITIALIZER initializer(dp);
       initializer(*this);
     }
