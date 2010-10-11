@@ -2,6 +2,7 @@
 #include <dds/config.hpp>
 #include <dds/waitset.hpp>
 
+DEFINE_EXCEPTION(dds, InterruptedException)
 
 dds::WaitSet::WaitSet() { }
 
@@ -52,27 +53,44 @@ dds::WaitSet::end() {
 	return cond_vec_.end();
 }
 
-dds::ConditionVector
+::dds::ConditionVector 
+dds::WaitSet::triggered_conditions() {
+  ConditionVector ecvec;
+  
+  for (unsigned int i = 0; i < cond_vec_.size(); ++i) {
+    if (cond_vec_[i]->get_trigger_value())
+      ecvec.push_back(cond_vec_[i]);
+  }
+}
+
+void 
+dds::WaitSet::wait (DDS::ConditionSeq& seq) {
+  int rc = waitset_.wait(seq, DDS::DURATION_INFINITE);
+  if (rc == DDS::RETCODE_ALREADY_DELETED)
+    throw dds::InterruptedException("Wait Interrupted by External Signal",
+				    __FILE__, rc);
+}
+
+void
 dds::WaitSet::wait(const dds::Duration_t& timeout) {
-	DDS::ConditionSeq cseq;
-	waitset_.wait(cseq, timeout);
-	ConditionVector ecvec;
-
-	for (unsigned int i = 0; i < cond_vec_.size(); ++i) {
-		if (cond_vec_[i]->get_trigger_value())
-			ecvec.push_back(cond_vec_[i]);
-	}
-
-	return ecvec;
+  DDS::ConditionSeq cseq;
+  int rc = waitset_.wait(cseq, timeout);
+  if (rc == DDS::RETCODE_ALREADY_DELETED)
+    throw dds::InterruptedException("Wait Interrupted by External Signal",
+				    __FILE__, rc);
 }
 
 void
 dds::WaitSet::dispatch(const dds::Duration_t& timeout) {
 	DDS::ConditionSeq cseq;
-	waitset_.wait(cseq, timeout);
+	int rc = waitset_.wait(cseq, timeout);
+	if (rc == DDS::RETCODE_ALREADY_DELETED)
+	  throw dds::InterruptedException("Wait Interrupted by External Signal",
+					  __FILE__, rc);
+	
 	for (unsigned int i = 0; i < cond_vec_.size(); ++i)
-			if (cond_vec_[i]->get_trigger_value())
-				cond_vec_[i]->execute();
+	  if (cond_vec_[i]->get_trigger_value())
+	    cond_vec_[i]->execute();
 }
 
 void
@@ -80,7 +98,8 @@ dds::WaitSet::dispatch() {
 	this->dispatch(DDS::DURATION_INFINITE);
 }
 
-dds::ConditionVector
+
+void
 dds::WaitSet::wait() {
-	return this->wait(DDS::DURATION_INFINITE);
+  this->wait(DDS::DURATION_INFINITE);
 }

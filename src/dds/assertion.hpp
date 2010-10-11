@@ -4,32 +4,6 @@
 #include <dds/osmacros.hpp>
 #include <dds/exception.hpp>
 
-#define DECLARE_EXCEPTION(ExceptionName)		\
-  class SIMD_API ExceptionName : public virtual Exception {	\
-  public:						\
-  ExceptionName(const std::string& what) throw();	\
-  ExceptionName(const std::string& what,		\
-		const std::string& where) throw();	\
-  ExceptionName(const std::string& what,		\
-		const std::string& where,		\
-		int ecode) throw();			\
-  virtual ~ExceptionName() throw();			\
-  }; 
-
-
-#define DEFINE_EXCEPTION(NP, ExceptionName)					\
-  NP::ExceptionName::ExceptionName(const std::string& what) throw()		\
-    : Exception(what) { }						\
-  NP::ExceptionName::ExceptionName(const std::string& what,			\
-			       const std::string& where) throw()	\
-    : Exception(what, where) { }					\
-  NP::ExceptionName::ExceptionName(const std::string& what,			\
-			       const std::string& where,		\
-			       int ecode) throw()			\
-    : Exception(what, where, ecode) { }					\
-  NP::ExceptionName::~ExceptionName() throw() { }
-
-
 namespace dds {
 
   DECLARE_EXCEPTION(PreconditionViolation)

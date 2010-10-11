@@ -9,8 +9,10 @@
 #include <dds/condition.hpp>
 
 
+
 namespace dds {
-	class WaitSet;
+  class WaitSet;
+  DECLARE_EXCEPTION(InterruptedException)
 }
 
 /**
@@ -21,78 +23,85 @@ namespace dds {
  * @author Angelo Corsaro <mailto:angelo.corsaro@gmail.com>
  */
 class SIMD_API dds::WaitSet : public ::boost::noncopyable {
-public:
-	typedef ::dds::ConditionVector::iterator iterator;
+ public:
+  typedef ::dds::ConditionVector::iterator iterator;
 
-public:
-	/**
-	 * Creates a new <code>WaitSet</code> which has not
-	 * condition attached to it.
-	 */
-	WaitSet();
+ public:
+  /**
+   * Creates a new <code>WaitSet</code> which has not
+   * condition attached to it.
+   */
+  WaitSet();
 
-	/**
-	 * Creates a new <code>WaitSet</code> and attaches the
-	 * condition passed to the ctor.
-	 *
-	 * @param cond the condition to be attached to this wait-set.
-	 */
-	WaitSet(const ::dds::Condition& cond);
+  /**
+   * Creates a new <code>WaitSet</code> and attaches the
+   * condition passed to the ctor.
+   *
+   * @param cond the condition to be attached to this wait-set.
+   */
+  WaitSet(const ::dds::Condition& cond);
 
-	/**
-	 * Destroys this and unregisters all the conditions that are
-	 * still attached.
-	 */
-	~WaitSet();
+  /**
+   * Destroys this and unregisters all the conditions that are
+   * still attached.
+   */
+  ~WaitSet();
 
-public:
-	/**
-	 * Waits for one of the attached condition to trigger or
-	 * for a timeout to expire. The attached conditions that
-	 * have been notified before the expiration of the timeout
-	 * are returned by the call.
-	 *
-	 * @param timeout the maximum amount of time for which the wait
-	 * should block while waiting for a condition to be triggered.
-	 *
-	 * @return a vector containing the triggered conditions
-	 *
-	 */
-	::dds::ConditionVector wait(const dds::Duration_t& timeout);
+ public:
+  /**
+   * Waits for one of the attached condition to trigger or
+   * for a timeout to expire. The attached conditions that
+   * have been notified before the expiration of the timeout
+   * are returned by the call.
+   *
+   * @param timeout the maximum amount of time for which the wait
+   * should block while waiting for a condition to be triggered.
+   *
+   *
+   */
+	
+  void wait(const dds::Duration_t& timeout);
 
-	/**
-	 * Waits for one of the attached conditions to trigger.
-	 *
-	 * @return a vector containing the triggered conditions
-	 */
-	::dds::ConditionVector wait();
+  /**
+   * Waits for one of the attached conditions to trigger.
+   *
+   * @return a vector containing the triggered conditions
+   */
+  void wait();
 
-	/**
-	 * Waits for at least one of the attached conditions to  trigger and then
-	 * dispatches the events.
-	 *
-	 */
-	void dispatch();
+  void wait (DDS::ConditionSeq& seq);
 
-	/**
-	 * Waits for at least one of the attached conditions to  trigger and then
-	 * dispatches the events, or, times out and unblocks.
-	 *
-	 */
-	void dispatch(const ::dds::Duration_t& timeout);
+  /**
+   * @return a vector containing the triggered conditions
+   */
+  ::dds::ConditionVector triggered_conditions();
 
-	WaitSet& operator +=(const ::dds::Condition& cond);
-	WaitSet& operator -=(const ::dds::Condition& cond);
+  /**
+   * Waits for at least one of the attached conditions to
+   * trigger and then dispatches the events.
+   *
+   */
+  void dispatch();
 
-	dds::ReturnCode_t attach(const ::dds::Condition& cond);
-	dds::ReturnCode_t detach(const ::dds::Condition& cond);
+  /**
+   * Waits for at least one of the attached conditions to  trigger and then
+   * dispatches the events, or, times out and unblocks.
+   *
+   */
+  void dispatch(const ::dds::Duration_t& timeout);
 
-	iterator begin();
-	iterator end();
+  WaitSet& operator +=(const ::dds::Condition& cond);
+  WaitSet& operator -=(const ::dds::Condition& cond);
 
-private:
-	::DDS::WaitSet waitset_;
-	::dds::ConditionVector cond_vec_;
+  dds::ReturnCode_t attach(const ::dds::Condition& cond);
+  dds::ReturnCode_t detach(const ::dds::Condition& cond);
+
+  iterator begin();
+  iterator end();
+
+ private:
+  ::DDS::WaitSet waitset_;
+  ::dds::ConditionVector cond_vec_;
 };
 
 

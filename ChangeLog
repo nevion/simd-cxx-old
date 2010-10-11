@@ -1,3 +1,13 @@
+2010-10-12  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+	* demo/ping/ping-asub.cpp: added catch for InterruptedException.
+
+	* src/dds/waitset.hpp:
+	* src/dds/waitset.cpp: Wait did not exit when issuing Ctrl-C from
+	the keyboard. This has been fixed and when an external catchable
+	signal is sent while in the wait-state an InterruptedException is
+	raised
+
 2010-07-28  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 	* src/dds/runtime.*pp:

@@ -119,10 +119,14 @@ int main(int argc, char* argv[]) {
 	    << dds::retcode2string(retc) << std::endl;
 
   DDS::Duration_t timeout = {1, 0};
-
-  while (true) {
-    ws.dispatch(timeout);
+  bool done = false;
+  while (!done) {
+    try {
+      ws.dispatch(timeout);
+    } catch (const dds::InterruptedException& e) {
+      exit(0);
+    }
   }
-  
+
   return 0;
 }

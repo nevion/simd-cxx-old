@@ -50,7 +50,7 @@ public:
     pimpl_->set_datareader(this);
   }
   
-  virtual ~DataReader() { }
+  ~DataReader() { }
 
 public:
 
@@ -60,7 +60,7 @@ public:
    * well as the <conde>infos</code> containers, thus will require a
    * return_loan.
    */
-  dds::ReturnCode_t 
+  inline dds::ReturnCode_t 
   read(TSeq& samples, 
        dds::SampleInfoSeq& infos) 
   {
@@ -73,7 +73,7 @@ public:
    * well as the <conde>infos</code> containers, thus will require a
    * return_loan.
    */
-  dds::ReturnCode_t 
+  inline dds::ReturnCode_t 
   take(TSeq& samples, 
        dds::SampleInfoSeq& infos) 
   {

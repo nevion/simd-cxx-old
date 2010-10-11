@@ -47,16 +47,16 @@ public:
     pimpl_.reset(new dds::peer::DataWriterImpl<T>(topic, qos, pub));
   }
   
-  virtual ~DataWriter() { }
+  ~DataWriter() { }
 
 public:
-dds::ReturnCode_t 
+inline dds::ReturnCode_t 
 write(const T& sample) 
 {
   return pimpl_->write(sample);
 }
 
-dds::ReturnCode_t 
+inline dds::ReturnCode_t 
 write(const T& sample, 
       const dds::Time_t& timestamp) 
 {

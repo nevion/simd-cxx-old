@@ -90,7 +90,7 @@ namespace dds {
 	boost::shared_ptr<DR> tmp(DR::_narrow(r), mem::DRDeleter(sub_));
 	reader_ = tmp;
       }
-      virtual ~DataReaderImpl() {
+      ~DataReaderImpl() {
 	reader_->set_listener(0, 0);
       }
       
@@ -108,7 +108,7 @@ namespace dds {
        * well as the <conde>infos</code> containers, thus will require a
        * return_loan.
        */
-      DDS::ReturnCode_t 
+      inline DDS::ReturnCode_t 
       read(TSeq& samples, 
 	   DDS::SampleInfoSeq& infos) 
       {
@@ -126,7 +126,7 @@ namespace dds {
        * well as the <conde>infos</code> containers, thus will require a
        * return_loan.
        */
-      DDS::ReturnCode_t 
+      inline DDS::ReturnCode_t 
       take(TSeq& samples, 
 	   DDS::SampleInfoSeq& infos) 
       {

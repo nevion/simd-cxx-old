@@ -35,6 +35,7 @@ public:
 			      0,
 			      DDS::ANY_STATUS);
     
+    //    native_writer_ = DW::_narrow(w);
     boost::shared_ptr<DW> tmp(DW::_narrow(w), mem::DWDeleter(pub_));
     writer_ = tmp;
   }
@@ -75,17 +76,17 @@ public:
     writer_ = tmp;
   }
     
-  virtual ~DataWriterImpl() { }
+  ~DataWriterImpl() { }
 
 public:
 
-  DDS::ReturnCode_t 
+  inline DDS::ReturnCode_t 
   write(const T& sample) 
   {
     return writer_->write(sample, DDS::HANDLE_NIL);
   }
     
-  DDS::ReturnCode_t 
+  inline DDS::ReturnCode_t 
   write(const T& sample, 
 	const DDS::Time_t& timestamp) 
   {
@@ -138,6 +139,7 @@ protected:
   dds::Topic<T>              topic_;
   dds::Publisher             pub_;
   ::boost::shared_ptr<DW>    writer_;
+  DW*                        native_writer_;
   dds::DataWriterQos         dwqos_;
 };
 
