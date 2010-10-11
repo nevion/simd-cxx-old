@@ -38,6 +38,8 @@ namespace dds {
 				  0,
 				  0);
 	
+	dds::Assert::precondition(r != 0, "Unable to create DataReader",
+				  __FILE__);
 	boost::shared_ptr<DR> tmp(DR::_narrow(r), mem::DRDeleter(sub_));
 	reader_ = tmp;
       }
@@ -463,7 +465,7 @@ namespace dds {
       ////////////////////////////////////////////////////////////////////////////
       // -- Vector read/take
       void read(std::vector<T>& data, 
-		std::vector<DDS::SampleInfo> info,
+		std::vector<DDS::SampleInfo>& info,
 		DDS::SampleStateMask samples_state,
 		DDS::ViewStateMask views_state,
 		DDS::InstanceStateMask instances_state) {
@@ -484,7 +486,7 @@ namespace dds {
       }
 
       void read(std::vector<T>& data, 
-		std::vector<DDS::SampleInfo> info) {
+		std::vector<DDS::SampleInfo>& info) {
 	this->read(data, 
 		   info, 
 		   DDS::LENGTH_UNLIMITED,
@@ -510,7 +512,7 @@ namespace dds {
       }
       
       void take(std::vector<T>& data, 
-		std::vector<DDS::SampleInfo> info,
+		std::vector<DDS::SampleInfo>& info,
 		DDS::SampleStateMask samples_state,
 		DDS::ViewStateMask views_state,
 		DDS::InstanceStateMask instances_state) {
@@ -532,7 +534,7 @@ namespace dds {
 
 
       void take(std::vector<T>& data, 
-		std::vector<DDS::SampleInfo> info) {
+		std::vector<DDS::SampleInfo>& info) {
 	this->take(data, 
 		   info, 
 		   DDS::LENGTH_UNLIMITED,

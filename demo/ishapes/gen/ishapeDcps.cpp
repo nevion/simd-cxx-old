@@ -4,8 +4,8 @@
 //  
 //  File name: ishapeDcps.cpp
 //  Source: gen/ishapeDcps.idl
-//  Generated: Mon Mar 15 16:10:44 2010
-//  OpenSplice V4.3
+//  Generated: Tue Oct 12 01:28:19 2010
+//  OpenSplice V5.3.0OSS
 //  
 //******************************************************************
 
@@ -143,6 +143,50 @@ ShapeTypeDataReader_ptr ShapeTypeDataReader::_unchecked_narrow (DDS::Object_ptr 
 {
    ShapeTypeDataReader_ptr result;
    result = dynamic_cast < ShapeTypeDataReader_ptr> (p);
+   result->m_count++;
+   return result;
+}
+
+const char * ShapeTypeDataReaderView::_local_id = "IDL:ShapeTypeDataReaderView:1.0";
+
+ShapeTypeDataReaderView_ptr ShapeTypeDataReaderView::_duplicate (ShapeTypeDataReaderView_ptr p)
+{
+   if (p) p->m_count++;
+   return p;
+}
+
+DDS::Boolean ShapeTypeDataReaderView::_local_is_a (const char * _id)
+{
+   if (strcmp (_id, ShapeTypeDataReaderView::_local_id) == 0)
+   {
+      return true;
+   }
+
+   typedef DDS::DataReaderView NestedBase_1;
+
+   if (NestedBase_1::_local_is_a (_id))
+   {
+      return true;
+   }
+
+   return false;
+}
+
+ShapeTypeDataReaderView_ptr ShapeTypeDataReaderView::_narrow (DDS::Object_ptr p)
+{
+   ShapeTypeDataReaderView_ptr result = NULL;
+   if (p && p->_is_a (ShapeTypeDataReaderView::_local_id))
+   {
+      result = dynamic_cast < ShapeTypeDataReaderView_ptr> (p);
+      result->m_count++;
+   }
+   return result;
+}
+
+ShapeTypeDataReaderView_ptr ShapeTypeDataReaderView::_unchecked_narrow (DDS::Object_ptr p)
+{
+   ShapeTypeDataReaderView_ptr result;
+   result = dynamic_cast < ShapeTypeDataReaderView_ptr> (p);
    result->m_count++;
    return result;
 }

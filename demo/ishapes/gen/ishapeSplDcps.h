@@ -1,13 +1,13 @@
 #ifndef ISHAPESPLTYPES_H
 #define ISHAPESPLTYPES_H
 
+#include "ccpp_ishape.h"
+
 #include <c_base.h>
 #include <c_misc.h>
 #include <c_sync.h>
 #include <c_collection.h>
 #include <c_field.h>
-#include "ccpp_ishape.h"
-
 
 extern c_metaObject __ShapeType__load (c_base base);
 extern char * __ShapeType__keys (void);

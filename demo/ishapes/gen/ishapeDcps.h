@@ -4,8 +4,8 @@
 //  
 //  File name: ishapeDcps.h
 //  Source: gen/ishapeDcps.idl
-//  Generated: Mon Mar 15 16:10:44 2010
-//  OpenSplice V4.3
+//  Generated: Tue Oct 12 01:28:19 2010
+//  OpenSplice V5.3.0OSS
 //  
 //******************************************************************
 #ifndef _ISHAPEDCPS_H_
@@ -14,8 +14,10 @@
 
 #include "sacpp_mapping.h"
 #include "sacpp_DDS_DCPS.h"
-#include "dds_dcps.h"
+#include "dds_dcps_interfaces.h"
 #include "ishape.h"
+#include "dds_builtinTopics.h"
+#include "dds_dcps_builtintopics.h"
 struct ShapeType;
 
 class ShapeTypeTypeSupportInterface;
@@ -37,6 +39,13 @@ class ShapeTypeDataReader;
 typedef ShapeTypeDataReader * ShapeTypeDataReader_ptr;
 typedef DDS_DCPSInterface_var < ShapeTypeDataReader> ShapeTypeDataReader_var;
 typedef DDS_DCPSInterface_out < ShapeTypeDataReader> ShapeTypeDataReader_out;
+
+
+class ShapeTypeDataReaderView;
+
+typedef ShapeTypeDataReaderView * ShapeTypeDataReaderView_ptr;
+typedef DDS_DCPSInterface_var < ShapeTypeDataReaderView> ShapeTypeDataReaderView_var;
+typedef DDS_DCPSInterface_out < ShapeTypeDataReaderView> ShapeTypeDataReaderView_out;
 
 
 struct ShapeTypeSeq_uniq_ {};
@@ -65,7 +74,7 @@ protected:
    ShapeTypeTypeSupportInterface () {};
    ~ShapeTypeTypeSupportInterface () {};
 private:
-   ShapeTypeTypeSupportInterface (const ShapeTypeTypeSupportInterface &) {};
+   ShapeTypeTypeSupportInterface (const ShapeTypeTypeSupportInterface &);
    ShapeTypeTypeSupportInterface & operator = (const ShapeTypeTypeSupportInterface &);
 };
 
@@ -103,7 +112,7 @@ protected:
    ShapeTypeDataWriter () {};
    ~ShapeTypeDataWriter () {};
 private:
-   ShapeTypeDataWriter (const ShapeTypeDataWriter &) {};
+   ShapeTypeDataWriter (const ShapeTypeDataWriter &);
    ShapeTypeDataWriter & operator = (const ShapeTypeDataWriter &);
 };
 
@@ -144,8 +153,49 @@ protected:
    ShapeTypeDataReader () {};
    ~ShapeTypeDataReader () {};
 private:
-   ShapeTypeDataReader (const ShapeTypeDataReader &) {};
+   ShapeTypeDataReader (const ShapeTypeDataReader &);
    ShapeTypeDataReader & operator = (const ShapeTypeDataReader &);
+};
+
+class ShapeTypeDataReaderView
+:
+   virtual public DDS::DataReaderView
+{ 
+public:
+   typedef ShapeTypeDataReaderView_ptr _ptr_type;
+   typedef ShapeTypeDataReaderView_var _var_type;
+
+   static ShapeTypeDataReaderView_ptr _duplicate (ShapeTypeDataReaderView_ptr obj);
+   DDS::Boolean _local_is_a (const char * id);
+
+   static ShapeTypeDataReaderView_ptr _narrow (DDS::Object_ptr obj);
+   static ShapeTypeDataReaderView_ptr _unchecked_narrow (DDS::Object_ptr obj);
+   static ShapeTypeDataReaderView_ptr _nil () { return 0; }
+   static const char * _local_id;
+   ShapeTypeDataReaderView_ptr _this () { return this; }
+
+   virtual DDS::ReturnCode_t read (ShapeTypeSeq& received_data, DDS::SampleInfoSeq& info_seq, DDS::Long max_samples, DDS::SampleStateMask sample_states, DDS::ViewStateMask view_states, DDS::InstanceStateMask instance_states) = 0;
+   virtual DDS::ReturnCode_t take (ShapeTypeSeq& received_data, DDS::SampleInfoSeq& info_seq, DDS::Long max_samples, DDS::SampleStateMask sample_states, DDS::ViewStateMask view_states, DDS::InstanceStateMask instance_states) = 0;
+   virtual DDS::ReturnCode_t read_w_condition (ShapeTypeSeq& received_data, DDS::SampleInfoSeq& info_seq, DDS::Long max_samples, DDS::ReadCondition_ptr a_condition) = 0;
+   virtual DDS::ReturnCode_t take_w_condition (ShapeTypeSeq& received_data, DDS::SampleInfoSeq& info_seq, DDS::Long max_samples, DDS::ReadCondition_ptr a_condition) = 0;
+   virtual DDS::ReturnCode_t read_next_sample (ShapeType& received_data, DDS::SampleInfo& sample_info) = 0;
+   virtual DDS::ReturnCode_t take_next_sample (ShapeType& received_data, DDS::SampleInfo& sample_info) = 0;
+   virtual DDS::ReturnCode_t read_instance (ShapeTypeSeq& received_data, DDS::SampleInfoSeq& info_seq, DDS::Long max_samples, DDS::InstanceHandle_t a_handle, DDS::SampleStateMask sample_states, DDS::ViewStateMask view_states, DDS::InstanceStateMask instance_states) = 0;
+   virtual DDS::ReturnCode_t take_instance (ShapeTypeSeq& received_data, DDS::SampleInfoSeq& info_seq, DDS::Long max_samples, DDS::InstanceHandle_t a_handle, DDS::SampleStateMask sample_states, DDS::ViewStateMask view_states, DDS::InstanceStateMask instance_states) = 0;
+   virtual DDS::ReturnCode_t read_next_instance (ShapeTypeSeq& received_data, DDS::SampleInfoSeq& info_seq, DDS::Long max_samples, DDS::InstanceHandle_t a_handle, DDS::SampleStateMask sample_states, DDS::ViewStateMask view_states, DDS::InstanceStateMask instance_states) = 0;
+   virtual DDS::ReturnCode_t take_next_instance (ShapeTypeSeq& received_data, DDS::SampleInfoSeq& info_seq, DDS::Long max_samples, DDS::InstanceHandle_t a_handle, DDS::SampleStateMask sample_states, DDS::ViewStateMask view_states, DDS::InstanceStateMask instance_states) = 0;
+   virtual DDS::ReturnCode_t read_next_instance_w_condition (ShapeTypeSeq& received_data, DDS::SampleInfoSeq& info_seq, DDS::Long max_samples, DDS::InstanceHandle_t a_handle, DDS::ReadCondition_ptr a_condition) = 0;
+   virtual DDS::ReturnCode_t take_next_instance_w_condition (ShapeTypeSeq& received_data, DDS::SampleInfoSeq& info_seq, DDS::Long max_samples, DDS::InstanceHandle_t a_handle, DDS::ReadCondition_ptr a_condition) = 0;
+   virtual DDS::ReturnCode_t return_loan (ShapeTypeSeq& received_data, DDS::SampleInfoSeq& info_seq) = 0;
+   virtual DDS::ReturnCode_t get_key_value (ShapeType& key_holder, DDS::InstanceHandle_t handle) = 0;
+   virtual DDS::InstanceHandle_t lookup_instance (const ShapeType& instance) = 0;
+
+protected:
+   ShapeTypeDataReaderView () {};
+   ~ShapeTypeDataReaderView () {};
+private:
+   ShapeTypeDataReaderView (const ShapeTypeDataReaderView &);
+   ShapeTypeDataReaderView & operator = (const ShapeTypeDataReaderView &);
 };
 
 template <>

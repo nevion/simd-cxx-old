@@ -15,6 +15,7 @@ __ShapeType__keys(void)
 
 #include <v_kernel.h>
 #include <v_topic.h>
+#include <os_stdlib.h>
 #include <string.h>
 
 c_bool

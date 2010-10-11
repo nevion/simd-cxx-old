@@ -1,5 +1,11 @@
 2010-10-12  Angelo Corsaro  <angelo.corsaro@gmail.com>
-
+	
+	* src/dds/peer/reader_impl.hpp: 
+	* src/dds/reader.hpp: 
+	  Fixed issue #20
+	
+	* src/dds/peer/reader_impl.hpp: Fixed issue #18.
+	
 	* demo/ishapes/ShapesDialog.cpp: Extended support for filtering to
 	include the inside as well as the outsize of the filtering
 	rectangle.
