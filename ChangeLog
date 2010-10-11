@@ -1,5 +1,11 @@
 2010-10-12  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
+	* demo/ishapes/ShapesDialog.cpp: Extended support for filtering to
+	include the inside as well as the outsize of the filtering
+	rectangle.
+	
+	* demo/latency: Added latency test for SimD. 
+
 	* demo/ping/ping-asub.cpp: added catch for InterruptedException.
 
 	* src/dds/waitset.hpp:
