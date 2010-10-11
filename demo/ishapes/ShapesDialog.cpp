@@ -116,7 +116,7 @@ ShapesDialog::onPublishButtonClicked() {
     boost::shared_ptr<Shape>
       square(new Square(rect, dynamics, pen, brush));
     shapesWidget->addShape(square);
-    std::cout << "CREATE SQUARE" << std::endl;
+    // std::cout << "CREATE SQUARE" << std::endl;
     break;
   }
   case TRIANGLE: {
@@ -132,7 +132,7 @@ ShapesDialog::onPublishButtonClicked() {
     boost::shared_ptr<Shape>
       triangle(new Triangle(rect, dynamics, pen, brush));
     shapesWidget->addShape(triangle);
-    std::cout << "CREATE TRIANGLE" << std::endl;
+    // std::cout << "CREATE TRIANGLE" << std::endl;
     break;
   }
   default:
@@ -183,11 +183,16 @@ ShapesDialog::onSubscribeButtonClicked() {
       dds::DataReader<ShapeType> dr;
       if (filterDialog_->isEnabled()) {
 	std::string tname = "CFCircle" + boost::lexical_cast<std::string>(i);
-	std::cout <<"Creating CFTopic: " << tname << std::endl;
+	std::string filter = filterExpression_;
+	if (filterDialog_->filterOutside() == false) {
+	  // filter = "NOT " + filterExpression_;
+	  // "(x BETWEEN %0 AND %1) AND (y BETWEEN %2 AND %3)")
+	  filter = "(x < %0) OR (x > %1) OR (y < %2) OR (y > %3)" ;
+	}
 	dds::ContentFilteredTopic<ShapeType> cfTopic(tname, 
-						    circleTopic_, 
-						    filterExpression_,
-						    filterParams_);
+						     circleTopic_, 
+						     filter,
+						     filterParams_);
 	dds::DataReader<ShapeType> cfdr(cfTopic , readerQos_.get_qos());
 	dr = cfdr;	    
       }

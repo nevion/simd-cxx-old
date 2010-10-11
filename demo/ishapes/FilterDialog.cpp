@@ -12,8 +12,6 @@ FilterDialog::FilterDialog(ShapesWidget* widget)
   int Y1 = filterDialog_.y1Slider->value();
   int W = X1 - X0;
   int H =  Y1 - Y0;
-  std::cout << "X0 = " << X0 <<" Y0 = " << Y0
-            << "\nX1 = " << X1 << "Y1 = " << Y1 << std::endl;
   filter_ = QRect(X0,Y0, W, H);
 }
 
@@ -21,13 +19,11 @@ FilterDialog::~FilterDialog() { }
 
 void
 FilterDialog::accept() {
-  std::cout << "FilterDialog::accept()" << std::endl;
   this->setVisible(false);
 }
 
 void
 FilterDialog::reject() {
-  std::cout << "FilterDialog::accept()" << std::endl;
   this->setVisible(false);
 }
 
@@ -61,7 +57,6 @@ FilterDialog::updateY1(int y) {
 
 void
 FilterDialog::updateFilterStatus(bool on) {
-  std::cout << "FilterDialog::updateFilterStatus(" << on << ")" << std::endl;
   if (on)
     widget_->displayFilter(filter_);
   enabled_ = on;
@@ -75,4 +70,9 @@ FilterDialog::isEnabled() {
 QRect 
 FilterDialog::getFilterBounds() {
   return filter_;
+}
+
+bool
+FilterDialog::filterOutside() {
+  return filterDialog_.filterCombo->currentIndex() == 0;
 }

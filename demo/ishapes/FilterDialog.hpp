@@ -27,6 +27,8 @@ public slots:
   virtual bool isEnabled();
   
   virtual QRect getFilterBounds();
+  virtual bool filterOutside();
+
 private:
   Ui_FilterDialog filterDialog_;
   ShapesWidget* widget_;

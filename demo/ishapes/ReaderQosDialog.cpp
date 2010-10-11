@@ -30,7 +30,7 @@ ReaderQosDialog::get_qos()
 
   if (qosForm_.reliableRButt->isChecked()) {
     qos_.set_reliable();
-    std::cout << "ReaderQos = RELIABLE" << std::endl;
+    //    std::cout << "ReaderQos = RELIABLE" << std::endl;
   }
   switch (qosForm_.durabilityComboBox->currentIndex()) {
   case 1:
