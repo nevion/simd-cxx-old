@@ -1,0 +1,11 @@
+struct Ping {
+  long id;
+  string data;
+};
+#pragma keylist Ping
+
+struct Pong {
+  long id;
+  string data;
+};
+#pragma keylist Pong
