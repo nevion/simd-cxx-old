@@ -1,4 +1,5 @@
 2010-10-12  Angelo Corsaro  <angelo.corsaro@gmail.com>
+	
 	* src/dds/reader.hpp: 
 	* src/dds/peer/reader_impl.hpp: 
 	Fixed issue #20

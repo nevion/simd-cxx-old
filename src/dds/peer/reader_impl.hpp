@@ -507,7 +507,7 @@ namespace dds {
 		      DDS::ANY_VIEW_STATE,
 		      DDS::ALIVE_INSTANCE_STATE);
 	
-	for (int i = 0; i < dat.length(); ++i) {
+	for (uint32_t i = 0; i < dat.length(); ++i) {
 	  data.push_back(dat[i]);
 	}
 	return_loan(dat, inf);

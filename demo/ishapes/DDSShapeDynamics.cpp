@@ -51,15 +51,9 @@ DDSShapeDynamics::simulate() {
 		    DDS::ANY_INSTANCE_STATE);
     
   if (samples.length() > 0) {
-    int sampleIndex = -1;
-    int i = 0;
-    /*
-      while (i < samples.length() && sampleIndex == -1) {
-      if (strcmp(samples[i].color, color_.c_str()) == 0)
-      sampleIndex = i;
-      ++i;
-      }
-    */
+    int32_t sampleIndex = -1;
+    uint32_t i = 0;
+
     QPoint tmp;
     plist_.erase(plist_.begin(), plist_.end());
     while (i < samples.length()) {
