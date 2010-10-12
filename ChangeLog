@@ -1,5 +1,14 @@
 2010-10-12  Angelo Corsaro  <angelo.corsaro@gmail.com>
-	
+	* src/dds/reader.hpp: 
+	* src/dds/peer/reader_impl.hpp: 
+	Fixed issue #20
+	* demo/ping/ping-sub.cpp: 	
+	* cmake/osmacros.cmake: 
+
+	Removed dependency from C++0x extensions.
+
+2010-10-11  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
 	* src/dds/peer/reader_impl.hpp: 
 	* src/dds/reader.hpp: 
 	  Fixed issue #20
