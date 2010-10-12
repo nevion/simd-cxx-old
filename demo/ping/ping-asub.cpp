@@ -109,20 +109,17 @@ int main(int argc, char* argv[]) {
   dds::DataReader<PingType> reader(pingTopic);
   
   
-  auto func = 
+  boost::function<void (dds::DataReader<PingType>)> func = 
     boost::bind(&DataHandler::handle_data, &dh, _1);
   
   dds::sigcon_t con_data = 
     reader.connect<dds::on_data_available>(func);
-  
-  auto liveliness_handler = 
-    boost::bind(&DataHandler::handle_liveliness_change, 
-		&dh, 
-		_1, 
-		_2);
+ 
   
   dds::sigcon_t con_liv = 
-    reader.connect<dds::on_liveliness_changed>(liveliness_handler);
+    reader.connect<dds::on_liveliness_changed>(
+					       boost::bind(&DataHandler::handle_liveliness_change, 
+							   &dh, _1, _2));
   
   completion_barrier.wait();
   con_data.disconnect();

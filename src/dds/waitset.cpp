@@ -61,6 +61,7 @@ dds::WaitSet::triggered_conditions() {
     if (cond_vec_[i]->get_trigger_value())
       ecvec.push_back(cond_vec_[i]);
   }
+  return ecvec;
 }
 
 void 

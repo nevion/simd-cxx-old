@@ -2,6 +2,8 @@
 #define AC_SIMD_DDS_READER_IMPL_HPP_
 
 #include <iostream>
+// -- Boost Includes
+#include <boost/tuple/tuple.hpp>
 
 // -- SIMD_DDS Includes
 #include <dds/dds.hpp>
@@ -606,15 +608,15 @@ namespace dds {
        * Creates an <code>ReadCondition</code> that waits for new samples to
        * be arriving in order to notify.
        */
-      // ::dds::ReadCondition
       template <typename F>
       ::dds::ReadCondition
-      create_readcondition(const F& f)
+      create_readcondition(const F& f, 
+			   dds::SampleStateMask sample_state, 
+			   dds::ViewStateMask view_state, 
+			   dds::InstanceStateMask instance_state)
       {
 	DDS::ReadCondition* rc =
-	  reader_->create_readcondition(DDS::NOT_READ_SAMPLE_STATE,
-					DDS::ANY_VIEW_STATE,
-					DDS::ALIVE_INSTANCE_STATE);
+	  reader_->create_readcondition(sample_state, view_state, instance_state);
 	
 	::dds::mem::RCondDeleter<DR> deleter(reader_);
 	::boost::shared_ptr <DDS::ReadCondition> rrc(rc, deleter);
@@ -623,6 +625,7 @@ namespace dds {
 							    f);
 	return ardc;
       }
+      
       /*      
       ::dds::QueryCondition
       create_querycondition(const dds::SampleStateMask&     ssm,
@@ -645,52 +648,52 @@ namespace dds {
       void on_requested_deadline_missed(DDS::DataReader*,
 					const DDS::RequestedDeadlineMissedStatus& status) 
       {
-	(std::get<on_requested_deadline_missed::value>(signals_))(*dds_reader_, status);
+	(boost::get<on_requested_deadline_missed::value>(signals_))(*dds_reader_, status);
       }
       
       void on_requested_incompatible_qos(DDS::DataReader*,
 					 const DDS::RequestedIncompatibleQosStatus& status) 
       {
-	(std::get<on_requested_incompatible_qos::value>(signals_))(*dds_reader_, status);
+	(boost::get<on_requested_incompatible_qos::value>(signals_))(*dds_reader_, status);
       }
       
       void on_sample_rejected(DDS::DataReader*,
 			      const DDS::SampleRejectedStatus& status) 
       {
-	(std::get<on_sample_rejected::value>(signals_))(*dds_reader_, status);
+	(boost::get<on_sample_rejected::value>(signals_))(*dds_reader_, status);
       }
       
       void on_liveliness_changed(DDS::DataReader*,
 				 const DDS::LivelinessChangedStatus& status) 
       {
-	(std::get<on_liveliness_changed::value>(signals_))(*dds_reader_, status);
+	(boost::get<on_liveliness_changed::value>(signals_))(*dds_reader_, status);
       }
       
       void on_data_available(DDS::DataReader*) {
-	(std::get<on_data_available::value>(signals_))(*dds_reader_);
+	(boost::get<on_data_available::value>(signals_))(*dds_reader_);
       }
       
       void on_subscription_matched(DDS::DataReader*,
 				   const DDS::SubscriptionMatchedStatus& status) 
       {
-	(std::get<on_subscription_matched::value>(signals_))(*dds_reader_, status);
+	(boost::get<on_subscription_matched::value>(signals_))(*dds_reader_, status);
       }
       
       void on_sample_lost(DDS::DataReader*,
 			  const DDS::SampleLostStatus& status) 
       {
-	(std::get<on_sample_lost::value>(signals_))(*dds_reader_, status);
+	(boost::get<on_sample_lost::value>(signals_))(*dds_reader_, status);
       }
       
     public:
             
       template <typename Signal> dds::sigcon_t connect(typename Signal::template traits<T>::slot_type slot) {
-	return std::get<Signal::value>(signals_).connect(slot);
+	return boost::get<Signal::value>(signals_).connect(slot);
       }
       
     protected:
       // -- Signals
-      std::tuple<typename dds::on_data_available::traits<T>::signal_type,
+      boost::tuple<typename dds::on_data_available::traits<T>::signal_type,
 		 typename dds::on_requested_incompatible_qos::traits<T>::signal_type,
 		 typename dds::on_liveliness_changed::traits<T>::signal_type,
 		 typename dds::on_requested_deadline_missed::traits<T>::signal_type,

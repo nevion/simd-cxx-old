@@ -1,4 +1,4 @@
-SET (DEFINITIONS "-DNDEBUG -O5 -pipe -std=c++0x ")
+SET (DEFINITIONS "-DNDEBUG -O3 -pipe -Wall")
 
 # SET (DEFINITIONS "-g  -O2 -pipe -std=c++0x ")
 # IF (WIN32)

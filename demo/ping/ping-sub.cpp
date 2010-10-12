@@ -80,8 +80,8 @@ public:
     reader.read(bit);
     */
     reader.read(data);
-    auto end = data.end();
-    for (auto index = data.begin(); index < end; ++index) {
+    std::vector<PingType>::iterator end = data.end();
+    for (std::vector<PingType>::iterator index = data.begin(); index < end; ++index) {
       std::cout << index->vendor << " . " << index->counter
 		<< std::endl;
     }
@@ -110,7 +110,10 @@ int main(int argc, char* argv[]) {
   dds::DataReader<PingType> reader(pingTopic);
 
   PingDataHandler handler;
-  dds::ReadCondition arc = reader.create_readcondition(handler);
+  dds::ReadCondition arc = reader.create_readcondition(handler, 
+						       dds::NOT_READ_SAMPLE_STATE, 
+						       dds::ANY_VIEW_STATE,
+						       dds::ALIVE_INSTANCE_STATE);
   
   ::dds::WaitSet ws;
   DDS::ReturnCode_t retc = ws.attach(arc);

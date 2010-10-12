@@ -249,7 +249,7 @@ namespace dds {
   
     void set_partition(const std::vector<std::string>& partitions) {
       this->partition.name.length (partitions.size());
-      for (int i = 0; i < partitions.size(); ++i) 
+      for (uint32_t i = 0; i < partitions.size(); ++i) 
 	this->partition.name[i] = DDS::string_dup(partitions[i].c_str());
     }
   };

@@ -299,8 +299,23 @@ public:
   ::dds::ReadCondition
   create_readcondition(const F& f)
   {
-    return pimpl_->create_readcondition(f);
+    return this->create_readcondition(f,
+				      DDS::NOT_READ_SAMPLE_STATE,
+				      DDS::ANY_VIEW_STATE,
+				      DDS::ALIVE_INSTANCE_STATE);
   }
+  
+  
+  template <typename F>
+  ::dds::ReadCondition
+  create_readcondition(const F& f, 
+		       dds::SampleStateMask sample_state, 
+		       dds::ViewStateMask view_state, 
+		       dds::InstanceStateMask instance_state)
+  {
+    return pimpl_->create_readcondition(f,sample_state, view_state, instance_state);
+  }
+
 
   /*
   ::dds::QueryCondition
