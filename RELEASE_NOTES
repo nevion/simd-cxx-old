@@ -8,9 +8,18 @@ New Features
 - New API to easily specify multiple partitions when creating the
   Runtime class
 
+- Verified compilation with OpenSplice DDS v5.3
+
+- New API to control the status when creating ReadConditions
+
+- New demo allowing to measure rountrip latency with SimD
+
+- Graceful exit when using Ctrl-C while on a "wait"
+
+
 Bug Fixes
 ---------
-- The following open issues were fixed: 15, 16, 17
+- The following open issues were fixed: 15, 16, 17, 18, 19, 20
 
 
 ==========================================================================
