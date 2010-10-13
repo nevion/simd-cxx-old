@@ -21,14 +21,14 @@ IF( CMAKE_INSTALL_PREFIX STREQUAL "/usr/local" )
     SET( CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}/local" )
 ENDIF()
 
-find_package (Doxygen)
+# find_package (Doxygen)
 
-if (DOXYGEN_FOUND)
-  message(STATUS "Generating SimD Documentation")
-  exec_program("cd ..; ${DOXYGEN_EXECUTABLE} doxygen.cfg")
-else (DOXYGEN_FOUND)
-message(STATUS "Doxygen not found, I cannot generate the documentation")
-endif (DOXYGEN_FOUND)
+# if (DOXYGEN_FOUND)
+#   message(STATUS "Generating SimD Documentation")
+#   exec_program("cd ..; ${DOXYGEN_EXECUTABLE} doxygen.cfg")
+# else (DOXYGEN_FOUND)
+# message(STATUS "Doxygen not found, I cannot generate the documentation")
+# endif (DOXYGEN_FOUND)
 
 add_subdirectory (src/dds)
 

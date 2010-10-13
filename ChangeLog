@@ -1,3 +1,11 @@
+2010-10-13  Angelo Corsaro  <angelo.corsaro@gmail.com>
+	* SimD v0.9 Release
+	
+	* demo/latency/latency-pub.cpp: 
+	* demo/latency/latency-sub.cpp: 
+
+	Remove use of C++0x auto keyword.
+	
 2010-10-12  Angelo Corsaro  <angelo.corsaro@gmail.com>
 	
 	* src/dds/reader.hpp: 
