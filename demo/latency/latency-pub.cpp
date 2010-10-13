@@ -98,7 +98,7 @@ int main(int argc, char* argv[]) {
 
   dds::DataReader<Pong> reader(pongT, drqos);
   ReadConditionHandler rch;
-  auto rc = reader.create_readcondition(rch);
+  dds::ReadCondition rc = reader.create_readcondition(rch);
   dds::WaitSet ws;
   ws.attach(rc);
   

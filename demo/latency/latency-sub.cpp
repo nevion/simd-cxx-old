@@ -90,7 +90,7 @@ int main(int argc, char* argv[]) {
     drqos.set_reliable();
   dds::DataReader<Ping> reader(pingT, drqos);
   ReadConditionHandler rch;
-  auto rc = reader.create_readcondition(rch);
+  dds::ReadCondition rc = reader.create_readcondition(rch);
   dds::WaitSet ws;
   ws.attach(rc);
   
