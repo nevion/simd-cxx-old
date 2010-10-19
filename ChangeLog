@@ -20,9 +20,13 @@
 	* demo/hello/hello-sub.cpp: 
 	* demo/hello/hello-pub.cpp: 
 
+	Expanded example to show the use of the extended
+	DataReader/DataWriter ctor to set Publisher/Subscriber.
+	
 	* demo/ddj-series/03/CMakeLists.txt: 
 	* demo/ddj-series/02/CMakeLists.txt: 
 	* demo/ddj-series/01/CMakeLists.txt: 
+	Updated to reflect the use of the CMake built-in FindBoost.
 
 2010-10-13  Angelo Corsaro  <angelo.corsaro@gmail.com>
 	* SimD v0.9 Release
