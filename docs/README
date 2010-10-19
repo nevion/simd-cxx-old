@@ -1,0 +1,4 @@
+This directory usually contains the Doxygen generated
+documentation. If empty, it might means that CMake could not find
+doxygen in your environment. In this latter case, you might want to
+install doxygen or check its installation settings.
