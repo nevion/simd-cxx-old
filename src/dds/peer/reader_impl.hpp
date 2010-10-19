@@ -62,6 +62,23 @@ namespace dds {
 	reader_ = tmp;
       }
 
+      DataReaderImpl(const dds::Topic<T>& topic,
+		     const dds::DataReaderQos& qos,
+		     const dds::Subscriber& sub) :
+	topic_(topic),
+	drqos_(qos),
+	sub_(sub)
+      {
+	DDS::DataReader* r =
+	  sub_->create_datareader(topic_->get_dds_topic(),
+				  drqos_,
+				  0, 
+				  0);
+	
+	boost::shared_ptr<DR> tmp(DR::_narrow(r), mem::DRDeleter(sub_));
+	reader_ = tmp;
+      }
+
       DataReaderImpl(const ContentFilteredTopic<T>& cftopic)
 	: topic_(cftopic.get_related_topic()),
 	  cftopic_(cftopic),
@@ -94,6 +111,25 @@ namespace dds {
 	boost::shared_ptr<DR> tmp(DR::_narrow(r), mem::DRDeleter(sub_));
 	reader_ = tmp;
       }
+
+      DataReaderImpl(const dds::ContentFilteredTopic<T>& cftopic,
+		     const dds::DataReaderQos& qos,
+		     const dds::Subscriber& sub)
+	: topic_(cftopic.get_related_topic()),
+	  cftopic_(cftopic),
+	  drqos_(qos),
+	  sub_(sub)
+      {
+	DDS::DataReader* r =
+	  sub_->create_datareader(cftopic_->get_dds_topic(),
+				  drqos_,
+				  0,
+				  0);
+	
+	boost::shared_ptr<DR> tmp(DR::_narrow(r), mem::DRDeleter(sub_));
+	reader_ = tmp;
+      }
+
       ~DataReaderImpl() {
 	reader_->set_listener(0, 0);
       }
@@ -705,9 +741,9 @@ namespace dds {
     protected:
       dds::Topic<T>                               topic_;
       dds::ContentFilteredTopic<T>                cftopic_;
-      boost::shared_ptr<DDS::Subscriber>          sub_;
       boost::shared_ptr<DR>                       reader_;
       dds::DataReaderQos                          drqos_;
+      dds::Subscriber                             sub_;
       boost::shared_ptr<DDS::DataReaderListener>  listener_;
       dds::DataReader<T>*                         dds_reader_;
     };

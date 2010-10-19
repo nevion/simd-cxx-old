@@ -15,9 +15,7 @@ namespace dds {
 
 class SIMD_API dds::Runtime {
 public:
-  Runtime();
-
-  Runtime(const std::string& partition);
+  Runtime(const std::string& partition = "");
 
   Runtime(const std::vector<std::string>& partitions);
 

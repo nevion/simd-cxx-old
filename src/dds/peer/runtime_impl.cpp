@@ -40,14 +40,6 @@ dds::peer::RuntimeImpl::~RuntimeImpl() {
   SIMD_LOG(SIMD_ALLOC, "Deleted RuntimeImpl at: " << std::hex << this << std::dec);
 }
 
-void dds::peer::RuntimeImpl::start() {
-  startOpenSplice();
-  this_ = new RuntimeImpl();
-  std::vector<std::string> partitions;
-  partitions.push_back(DEFAULT_PARTITION);
-  this_->init(partitions);
-}
-
 void dds::peer::RuntimeImpl::start(const std::string& partition) {
   startOpenSplice();
   this_ = new RuntimeImpl();

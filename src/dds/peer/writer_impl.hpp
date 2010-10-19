@@ -62,7 +62,7 @@ public:
     
   DataWriterImpl(const dds::Topic<T>& topic, 
 		 const dds::DataWriterQos& qos, 
-		 const boost::shared_ptr<DDS::Publisher>& pub)
+		 const dds::Publisher& pub)
     :	topic_(topic), pub_(pub), dwqos_(qos)
   {
     DDS::DataWriter* w =

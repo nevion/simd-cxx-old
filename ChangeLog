@@ -1,3 +1,29 @@
+2010-10-19  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+	* src/dds/types.hpp: 
+	Added type-defs for dds::Duration and dds::Time.
+
+	* src/dds/runtime.hpp: 
+	* src/dds/runtime.cpp: 
+	* src/dds/peer/runtime_impl.cpp: 
+	Refactored ctors to have now the default partition as a default value.
+
+	* src/dds/reader.hpp:
+	* src/dds/peer/reader_impl.hpp:
+	* src/dds/peer/writer_impl.hpp: Added support for explicitely
+	setting the Publisher/Subscriber when creating the
+	DataReader/DataWriter. This allows now to have
+	DataReader/DataWriter connceted to different partitions than those
+	used by the SimD runtime.
+
+	* demo/tweet/CMakeLists.txt: 
+	* demo/hello/hello-sub.cpp: 
+	* demo/hello/hello-pub.cpp: 
+
+	* demo/ddj-series/03/CMakeLists.txt: 
+	* demo/ddj-series/02/CMakeLists.txt: 
+	* demo/ddj-series/01/CMakeLists.txt: 
+
 2010-10-13  Angelo Corsaro  <angelo.corsaro@gmail.com>
 	* SimD v0.9 Release
 	

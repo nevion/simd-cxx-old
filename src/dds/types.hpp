@@ -11,6 +11,10 @@ namespace dds {
   typedef ::DDS::Time_t Time_t;
   typedef DDS::ReturnCode_t ReturnCode_t; 
 
+  typedef ::DDS::Duration_t Duration;
+  typedef ::DDS::Time_t Time;
+  typedef DDS::ReturnCode_t ReturnCode; 
+
   typedef DDS::SampleStateKind SampleStateKind; 
   typedef DDS::SampleStateMask SampleStateMask;
 

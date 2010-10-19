@@ -3,7 +3,7 @@
 
 #include <dds/types.hpp>
 #include <dds/condition.hpp>
-
+#include <dds/subscriber.hpp>
 
 namespace dds {
 
@@ -39,6 +39,14 @@ public:
     pimpl_->set_datareader(this);
   }
 
+  DataReader(const Topic<T>& topic, 
+	     const DataReaderQos& qos,
+	     const dds::Subscriber& sub) 
+  {
+    pimpl_.reset(new dds::peer::DataReaderImpl<T>(topic, qos, sub));
+    pimpl_->set_datareader(this);
+  }
+
   DataReader(const ContentFilteredTopic<T>& topic) {
     pimpl_.reset(new dds::peer::DataReaderImpl<T>(topic));
     pimpl_->set_datareader(this);
@@ -50,6 +58,13 @@ public:
     pimpl_->set_datareader(this);
   }
   
+  DataReader(const ContentFilteredTopic<T>& topic,
+             const DataReaderQos& qos,
+	     const dds::Subscriber& sub) {
+    pimpl_.reset(new dds::peer::DataReaderImpl<T>(topic, qos, sub));
+    pimpl_->set_datareader(this);
+  }
+
   ~DataReader() { }
 
 public:

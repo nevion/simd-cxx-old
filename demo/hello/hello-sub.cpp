@@ -27,6 +27,7 @@ namespace po = boost::program_options;
 
 int period = 5;
 int history_depth = 10;
+std::string partition = "HelloPartition";
 
 bool parse_args(int argc, char* argv[]) 
 {
@@ -35,6 +36,7 @@ bool parse_args(int argc, char* argv[])
     ("help", "produce help message")
     ("reader-history-depth", po::value<int>(), "sets the reader history depth")
     ("period", po::value<int>(), "read polling period in milli-seconcs")
+    ("partition", po::value<std::string>(), "DDS Partition")
     ;
   
   po::variables_map vm;        
@@ -52,6 +54,10 @@ bool parse_args(int argc, char* argv[])
     
     if (vm.count("period")) 
       period = vm["period"].as<int>();
+
+    if (vm.count("partition")) 
+      partition = vm["partition"].as<std::string>();
+
   } 
   catch (...) {
     std::cout << desc << std::endl;
@@ -66,7 +72,7 @@ int main(int argc, char* argv[]) {
     return 1;
   
   // -- Start DDS
-  dds::Runtime runtime();
+  dds::Runtime runtime("");
   
   // -- Create a Topic
   dds::TopicQos tqos;
@@ -74,10 +80,13 @@ int main(int argc, char* argv[]) {
   tqos.set_transient();
   dds::Topic<swatch::hello> helloTopic("helloTopic", tqos);
 
+  // Create Subscriber
+  dds::Subscriber sub(partition);
+
   // Create a DataReader
   dds::DataReaderQos drqos(tqos);  
   drqos.set_keep_last(history_depth);
-  dds::DataReader<swatch::hello> reader(helloTopic, drqos);
+  dds::DataReader<swatch::hello> reader(helloTopic, drqos, sub);
 
   swatch::helloSeq samples;
   DDS::SampleInfoSeq infos;
@@ -86,7 +95,7 @@ int main(int argc, char* argv[]) {
   while (true) {
     reader.read(samples, infos);
     
-    for (int i = 0; i < samples.length(); ++i) {
+    for (uint32_t i = 0; i < samples.length(); ++i) {
       std::cout << "=>> " <<  samples[i].name << std::endl;
     }
     if (samples.length() > 0)

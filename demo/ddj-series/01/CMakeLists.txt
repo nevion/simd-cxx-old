@@ -6,12 +6,12 @@ include (MacroOpenSplice)
 include (osmacros)
 
 find_package (OpenSplice REQUIRED)
-find_package (Boost REQUIRED)
+find_package (Boost REQUIRED COMPONENTS thread program_options system)
 find_package (SimD REQUIRED)
 
 include_directories(
   ${PROJECT_SOURCE_DIR}
-  ${BOOST_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
   ${OpenSplice_INCLUDE_DIRS}
   ${SimD_INCLUDE_DIRS}
 )
@@ -58,18 +58,18 @@ add_definitions (
 target_link_libraries (
   ${DATAMODEL} 
   ${OpenSplice_LIBRARIES}
-  ${BOOST_LIBRARIES}
+  ${Boost_LIBRARIES}
   ${SimD_LIBRARIES}
 )
 
 target_link_libraries (${PUB_EXE}
  ${OpenSplice_LIBRARIES}
- ${BOOST_LIBRARIES}
+ ${Boost_LIBRARIES}
  ${DATAMODEL} 
 )
 
 target_link_libraries (${SUB_EXE}
  ${OpenSplice_LIBRARIES}
- ${BOOST_LIBRARIES}
+ ${Boost_LIBRARIES}
  ${DATAMODEL}
 )

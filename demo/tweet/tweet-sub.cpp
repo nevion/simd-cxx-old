@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
 
   while (true) {
     dr.take(data, info);
-    for (int i = 0; i < data.length(); ++i) {
+    for (uint32_t i = 0; i < data.length(); ++i) {
       std::cout << ">> " << data[i].userId << " :: " 
 		<< data[i].tweet << std::endl;
     }
