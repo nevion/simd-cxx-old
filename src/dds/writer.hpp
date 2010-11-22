@@ -105,4 +105,15 @@ protected:
 ::boost::shared_ptr< dds::peer::DataWriterImpl<T> > pimpl_;
 };
 
+template <typename T>
+DataWriter<T> operator << (DataWriter<T>& dw, const T& sample) {
+  dw.write(sample);
+}
+
+template <typename T>
+DataWriter<T> operator << (DataWriter<T>& dw, const DataWriterQos& qos) {
+  dw.set_qos(qos);
+}
+
+
 #endif /* AC_SIMD_DDS_WRITER_HPP */

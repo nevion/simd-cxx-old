@@ -1,3 +1,10 @@
+2010-11-22  Angelo Corsaro  <angelo.corsaro@gmail.com>
+
+	* src/dds/writer.hpp: Added support for writing using stream operators.
+
+	* demo/ishapes/ishape.idl: Moved color to be the first attribute
+	in the structure.
+
 2010-10-19  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 	* src/dds/types.hpp: 

@@ -1,8 +1,8 @@
 struct ShapeType {
+  string color;
   long x;
   long y;
   long shapesize;
-  string color;
 };
 
 #pragma keylist ShapeType color
