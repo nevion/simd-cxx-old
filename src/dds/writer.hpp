@@ -50,70 +50,73 @@ public:
   ~DataWriter() { }
 
 public:
-inline dds::ReturnCode_t 
-write(const T& sample) 
-{
-  return pimpl_->write(sample);
-}
+  inline dds::ReturnCode_t 
+  write(const T& sample) 
+  {
+    return pimpl_->write(sample);
+  }
 
-inline dds::ReturnCode_t 
-write(const T& sample, 
-      const dds::Time_t& timestamp) 
-{
-  return pimpl_->write(sample, 
-		       timestamp);
-}
+  inline dds::ReturnCode_t 
+  write(const T& sample, 
+	const dds::Time_t& timestamp) 
+  {
+    return pimpl_->write(sample, 
+			 timestamp);
+  }
   
-DataInstanceWriter<T>
-register_instance(const T& key) 
-{
-  return pimpl_->register_instance(key);
-}
+  DataInstanceWriter<T>
+  register_instance(const T& key) 
+  {
+    return pimpl_->register_instance(key);
+  }
 
-// -- QoS Getter/Setter
+  // -- QoS Getter/Setter
     
-DataWriterQos
-get_qos() 
-{
-  return pimpl_->get_qos();
-}
+  DataWriterQos
+  get_qos() 
+  {
+    return pimpl_->get_qos();
+  }
 
-dds::ReturnCode_t
-set_qos(const DataWriterQos &qos)  
-{
-  return pimpl_->set_qos(qos);
-}
+  dds::ReturnCode_t
+  set_qos(const DataWriterQos &qos)  
+  {
+    return pimpl_->set_qos(qos);
+  }
 
-boost::shared_ptr<dds::Topic<T> >
-get_topic() 
-{
-  return pimpl_->get_topic();
-}
+  boost::shared_ptr<dds::Topic<T> >
+  get_topic() 
+  {
+    return pimpl_->get_topic();
+  }
     
-dds::Publisher get_publisher() 
-{
-  return pimpl_->get_publisher();
-}
+  dds::Publisher get_publisher() 
+  {
+    return pimpl_->get_publisher();
+  }
 
-dds::ReturnCode_t
-wait_for_acks(const dds::Duration_t& timeout) 
-{
-  return pimpl_->wait_for_acks(timeout);
-}
+  dds::ReturnCode_t
+  wait_for_acks(const dds::Duration_t& timeout) 
+  {
+    return pimpl_->wait_for_acks(timeout);
+  }
+public:
+
+  DataWriter<T> operator << (const T& sample) {
+    this->write(sample);
+    return *this;
+  }
+
+
+  DataWriter<T> operator << (const DataWriterQos& qos) {
+    this->set_qos(qos);
+    return *this;
+  }
+
 
 protected:
-::boost::shared_ptr< dds::peer::DataWriterImpl<T> > pimpl_;
+  ::boost::shared_ptr< dds::peer::DataWriterImpl<T> > pimpl_;
 };
-
-template <typename T>
-DataWriter<T> operator << (DataWriter<T>& dw, const T& sample) {
-  dw.write(sample);
-}
-
-template <typename T>
-DataWriter<T> operator << (DataWriter<T>& dw, const DataWriterQos& qos) {
-  dw.set_qos(qos);
-}
 
 
 #endif /* AC_SIMD_DDS_WRITER_HPP */
