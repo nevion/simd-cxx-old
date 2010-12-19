@@ -34,9 +34,12 @@ ReaderQosDialog::get_qos()
   }
   switch (qosForm_.durabilityComboBox->currentIndex()) {
   case 1:
-    qos_.set_transient();
+    qos_.set_transient_local();
     break;
   case 2: 
+    qos_.set_transient();
+    break;
+  case 3: 
     qos_.set_persistent();
     break;
   };

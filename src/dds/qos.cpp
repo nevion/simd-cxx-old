@@ -28,11 +28,11 @@ dds::TopicQos::set_priority(long prio) {
  
 void 
 dds::TopicQos::set_durability_service(DDS::Duration_t service_cleanup_delay,
-				       DDS::HistoryQosPolicyKind history_kind,
-				       DDS::Long history_depth,
-				       DDS::Long max_samples,
-				       DDS::Long max_instances,
-				       DDS::Long max_samples_per_instance)
+				      DDS::HistoryQosPolicyKind history_kind,
+				      DDS::Long history_depth,
+				      DDS::Long max_samples,
+				      DDS::Long max_instances,
+				      DDS::Long max_samples_per_instance)
 {
   this->durability_service.service_cleanup_delay = service_cleanup_delay;
   this->durability_service.history_kind = history_kind;
@@ -116,6 +116,16 @@ dds::DataWriterQos::set_lifespan(DDS::Duration_t duration)
   this->lifespan.duration = duration;
 }
 
+void 
+dds::DataWriterQos::set_keep_last(int d) {
+  this->history.kind = DDS::KEEP_LAST_HISTORY_QOS;
+  this->history.depth = d;
+}
+
+void
+dds::DataWriterQos::set_keep_all() {
+  this->history.kind = DDS::KEEP_ALL_HISTORY_QOS;
+}
 //////////////////////////////////////////////////////////////////////////////
 
 dds::DataReaderQos::DataReaderQos() :  
@@ -157,8 +167,8 @@ dds::DataReaderQos::set_lifespan(DDS::Duration_t duration)
 
 void 
 dds::DataReaderQos::set_data_lifecycle(DDS::Duration_t purge_no_writer, 
-		   DDS::Duration_t purge_disposed,
-		   bool enable_invalid_samples)
+				       DDS::Duration_t purge_disposed,
+				       bool enable_invalid_samples)
 {
   this->reader_data_lifecycle.autopurge_nowriter_samples_delay = purge_no_writer;
   this->reader_data_lifecycle.autopurge_disposed_samples_delay = purge_disposed;

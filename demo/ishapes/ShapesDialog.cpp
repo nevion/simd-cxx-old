@@ -22,6 +22,12 @@ static const float PI = 3.1415926535F;
 
 /* Ugly hack -- fixme */
 static QColor  color_[CN];
+/*
+  #define IS_WIDTH 500
+  #define IS_WIDTH 340
+*/
+#define IS_WIDTH  321
+#define IS_HEIGHT 361
 
 const char* const colorString_[] = {
   "BLUE",
@@ -39,13 +45,25 @@ static const std::string circleTopicName("Circle");
 static const std::string squareTopicName("Square");
 static const std::string triangleTopicName("Triangle");
 
+
 ShapesDialog::ShapesDialog() 
   :   timer(this),
-      circleTopic_(circleTopicName),
-      squareTopic_(squareTopicName),
-      triangleTopic_(triangleTopicName),
       filterExpression_("(x BETWEEN %0 AND %1) AND (y BETWEEN %2 AND %3)")
 {
+  dds::TopicQos tqos;
+  dds::Duration cleanup_delay = {3600, 0};
+  tqos.set_persistent();
+  tqos.set_durability_service(cleanup_delay,
+			      DDS::KEEP_LAST_HISTORY_QOS,
+			      100,
+			      8192,
+			      4196,
+			      8192);
+
+  circleTopic_ = dds::Topic<ShapeType>(circleTopicName, tqos);
+  squareTopic_ = dds::Topic<ShapeType>(squareTopicName, tqos);
+  triangleTopic_ = dds::Topic<ShapeType>(triangleTopicName,tqos);
+
   mainWidget.setupUi(this);
   shapesWidget = new ShapesWidget(mainWidget.renderFrame);
   shapesWidget->resize(mainWidget.renderFrame->size());
@@ -74,7 +92,9 @@ ShapesDialog::onPublishButtonClicked() {
   float speed = ((float)mainWidget.speedSlider->value()) / 9;
   QRect rect(0, 0, d, d);
   // TODO: This should be retrieved from the canvas...
-  QRect constr(0, 0, 500, 360);
+
+
+  QRect constr(0, 0, IS_WIDTH, IS_HEIGHT);
   // QRect constr = this->geometry();
   int x = constr.width() * ((float)rand() / RAND_MAX);
   int y = constr.height() * ((float)rand() / RAND_MAX);
@@ -146,7 +166,7 @@ ShapesDialog::onSubscribeButtonClicked() {
    
   int d = mainWidget.sizeSlider->value();
   QRect rect(0, 0, d, d);
-  QRect constr(0, 0, 500, 340);
+  QRect constr(0, 0, IS_WIDTH, IS_HEIGHT);
   // QRect constr = this->geometry();
   int x = static_cast<int>(constr.width() * ((float)rand() / RAND_MAX)*0.9F);
   int y = static_cast<int>(constr.height() * ((float)rand() / RAND_MAX)*0.9F);
@@ -179,26 +199,27 @@ ShapesDialog::onSubscribeButtonClicked() {
 
   switch (sIdx) {
   case CIRCLE: {
+    dds::DataReader<ShapeType> dr;
+    if (filterDialog_->isEnabled()) {
+      std::string tname = "CFCircle";
+      std::string filter = filterExpression_;
+      if (filterDialog_->filterOutside() == false) 
+	filter = "(x < %0) OR (x > %1) OR (y < %2) OR (y > %3)" ;
+      
+      dds::ContentFilteredTopic<ShapeType> cfTopic(tname, 
+						   circleTopic_, 
+						   filter,
+						   filterParams_);
+      dds::DataReader<ShapeType> cfdr(cfTopic , readerQos_.get_qos());
+      dr = cfdr;	    
+    }
+    else {
+      dds::DataReader<ShapeType> rdr(circleTopic_, readerQos_.get_qos());
+      dr = rdr;
+    }
+    
     for (int i = 0; i < CN; ++i) {
       std::string colorStr(colorString_[i]);
-      dds::DataReader<ShapeType> dr;
-      if (filterDialog_->isEnabled()) {
-	std::string tname = "CFCircle" + boost::lexical_cast<std::string>(i);
-	std::string filter = filterExpression_;
-	if (filterDialog_->filterOutside() == false) 
-	  filter = "(x < %0) OR (x > %1) OR (y < %2) OR (y > %3)" ;
-	
-	dds::ContentFilteredTopic<ShapeType> cfTopic(tname, 
-						     circleTopic_, 
-						     filter,
-						     filterParams_);
-	dds::DataReader<ShapeType> cfdr(cfTopic , readerQos_.get_qos());
-	dr = cfdr;	    
-      }
-      else {
-	dds::DataReader<ShapeType> rdr(circleTopic_, readerQos_.get_qos());
-	dr = rdr;
-      }
       boost::shared_ptr<DDSShapeDynamics>
 	dynamics(new DDSShapeDynamics(x, y, dr, colorStr, i));
       boost::shared_ptr<Shape>
@@ -210,27 +231,27 @@ ShapesDialog::onSubscribeButtonClicked() {
   }
         
   case SQUARE: {
-    for (int i = 0; i < CN; ++i) {
-      dds::DataReader<ShapeType> dr;
-      std::string colorStr(colorString_[i]);
-      if (filterDialog_->isEnabled()) {
-	std::string tname = "CFSquare" + boost::lexical_cast<std::string>(i);
-	std::string filter = filterExpression_;
-	if (filterDialog_->filterOutside() == false) 
-	  filter = "(x < %0) OR (x > %1) OR (y < %2) OR (y > %3)" ;
+    dds::DataReader<ShapeType> dr;
+    if (filterDialog_->isEnabled()) {
+      std::string tname = "CFSquare";
+      std::string filter = filterExpression_;
+      if (filterDialog_->filterOutside() == false) 
+	filter = "(x < %0) OR (x > %1) OR (y < %2) OR (y > %3)" ;
 	
-	dds::ContentFilteredTopic<ShapeType> cfTopic(tname, 
-						     squareTopic_, 
-						     filter,
-						     filterParams_);
-	dds::DataReader<ShapeType> cfdr(cfTopic , readerQos_.get_qos());
-	dr = cfdr;	    
-      }
-      else {
-	dds::DataReader<ShapeType> rdr(squareTopic_, readerQos_.get_qos());
-	dr = rdr;
-      }
+      dds::ContentFilteredTopic<ShapeType> cfTopic(tname, 
+						   squareTopic_, 
+						   filter,
+						   filterParams_);
+      dds::DataReader<ShapeType> cfdr(cfTopic , readerQos_.get_qos());
+      dr = cfdr;	    
+    }
+    else {
+      dds::DataReader<ShapeType> rdr(squareTopic_, readerQos_.get_qos());
+      dr = rdr;
+    }
 
+    for (int i = 0; i < CN; ++i) {
+      std::string colorStr(colorString_[i]);
       boost::shared_ptr<DDSShapeDynamics>
 	dynamics(new DDSShapeDynamics(x, y, dr, colorStr, i));
       boost::shared_ptr<Shape>
@@ -241,10 +262,9 @@ ShapesDialog::onSubscribeButtonClicked() {
     break;
   }
   case TRIANGLE: {
-    for (int i = 0; i < CN; ++i) {
       dds::DataReader<ShapeType> dr;
       if (filterDialog_->isEnabled()) {
-	std::string tname = "CFTriangle" + boost::lexical_cast<std::string>(i);
+	std::string tname = "CFTriangle";
 	std::string filter = filterExpression_;
 	if (filterDialog_->filterOutside() == false) 
 	  filter = "(x < %0) OR (x > %1) OR (y < %2) OR (y > %3)" ;
@@ -261,6 +281,8 @@ ShapesDialog::onSubscribeButtonClicked() {
 	dr = rdr;
       }
 
+
+    for (int i = 0; i < CN; ++i) {
       std::string colorStr(colorString_[i]);
       boost::shared_ptr<DDSShapeDynamics>
 	dynamics(new DDSShapeDynamics(x, y, dr, colorStr, i));

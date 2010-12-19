@@ -34,9 +34,12 @@ WriterQosDialog::get_qos()
   }
   switch (qosForm_.durabilityComboBox->currentIndex()) {
   case 1:
+    qos_.set_transient_local();
+    break;
+  case 2:
     qos_.set_transient();
     break;
-  case 2: 
+  case 3: 
     qos_.set_persistent();
     break;
   };
@@ -46,5 +49,7 @@ WriterQosDialog::get_qos()
   if (qosForm_.ownershipExclusiveRButt->isChecked())
     qos_.set_strength(qosForm_.strengthSpinBox->value());
 
+  qos_.history.kind = DDS::KEEP_LAST_HISTORY_QOS;
+  qos_.history.depth = 100;
   return qos_;
 }

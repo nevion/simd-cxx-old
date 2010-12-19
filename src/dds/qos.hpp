@@ -49,8 +49,7 @@ namespace dds {
     }
 
     void set_transient_local() {
-      // Not a bug, on OpenSplice DDS TRANSIENT_LOCAL gets anyway TRANSIENT behaviour
-      this->durability.kind = DDS::TRANSIENT_DURABILITY_QOS;
+      this->durability.kind = DDS::TRANSIENT_LOCAL_DURABILITY_QOS;
     }
   
     void set_transient() {
@@ -175,7 +174,10 @@ namespace dds {
 
     // Lifespan Qos
     void set_lifespan(DDS::Duration_t duration);
+    
+    void set_keep_last(int d);
 
+    void set_keep_all();
 
   protected:
     void copy_topic_qos(const TopicQos & tqos);

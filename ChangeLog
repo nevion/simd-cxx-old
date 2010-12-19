@@ -1,3 +1,13 @@
+2010-12-10  Angelo Corsaro  <acorsaro@icorsaro.net>
+
+	* src/dds/qos.hpp: 
+
+	- Changed the <set_transient_local> to really set
+	TRANSIENT_LOCAL durability.
+
+	- Added support for history on the DataWriterQos class.
+	
+
 2010-11-22  Angelo Corsaro  <angelo.corsaro@gmail.com>
 
 	* src/dds/writer.hpp: Added support for writing using stream operators.

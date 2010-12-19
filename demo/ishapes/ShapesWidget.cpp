@@ -17,6 +17,8 @@ ShapesWidget::ShapesWidget(QWidget *parent)
 {
     this->setBackgroundRole(QPalette::Base);
     this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    logo_.load("logo.jpg");
+    simd_.load("simd.jpg");
 }
 
 ShapesWidget::~ShapesWidget() {
@@ -41,6 +43,8 @@ ShapesWidget::nextAnimationFrame() {
 void
 ShapesWidget::paintEvent(QPaintEvent*) {
     QPainter painter(this);
+    painter.drawPixmap(15, 300, logo_);
+    painter.drawPixmap(200, 10, simd_);
     if (showCurrentFilter_) {
       QBrush brush(QColor(0x99,0x99,0x99,0x99), Qt::SolidPattern);
       painter.setBrush(brush);

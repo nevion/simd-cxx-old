@@ -77,15 +77,6 @@ private:
   dds::Topic<ShapeType>      triangleTopic_;
   std::string 		     filterExpression_;
   std::vector<std::string>   filterParams_;
-  /*
-  dds::DataReader<ShapeType>    circleReader_;
-  dds::DataReader<ShapeType>    squareReader_;
-  dds::DataReader<ShapeType>   triangleReader_;
-
-  dds::DataWriter<ShapeType>    circleWriter_;
-  dds::DataWriter<ShapeType>    squareWriter_;
-  dds::DataWriter<ShapeType>    triangleWriter_;
-  */
 };
 
 #endif	/* _ISHAPESFORM_HPP */
