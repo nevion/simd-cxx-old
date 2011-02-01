@@ -8,14 +8,14 @@
 	- Added support for history on the DataWriterQos class.
 	
 
-2010-11-22  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2010-11-22  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* src/dds/writer.hpp: Added support for writing using stream operators.
 
 	* demo/ishapes/ishape.idl: Moved color to be the first attribute
 	in the structure.
 
-2010-10-19  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2010-10-19  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* src/dds/types.hpp: 
 	Added type-defs for dds::Duration and dds::Time.
@@ -45,7 +45,7 @@
 	* demo/ddj-series/01/CMakeLists.txt: 
 	Updated to reflect the use of the CMake built-in FindBoost.
 
-2010-10-13  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2010-10-13  Angelo Corsaro  <angelo@icorsaro.net>
 	* SimD v0.9 Release
 	
 	* demo/latency/latency-pub.cpp: 
@@ -53,7 +53,7 @@
 
 	Remove use of C++0x auto keyword.
 	
-2010-10-12  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2010-10-12  Angelo Corsaro  <angelo@icorsaro.net>
 	
 	* src/dds/reader.hpp: 
 	* src/dds/peer/reader_impl.hpp: 
@@ -63,7 +63,7 @@
 
 	Removed dependency from C++0x extensions.
 
-2010-10-11  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2010-10-11  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* src/dds/peer/reader_impl.hpp: 
 	* src/dds/reader.hpp: 
@@ -85,7 +85,7 @@
 	signal is sent while in the wait-state an InterruptedException is
 	raised
 
-2010-07-28  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2010-07-28  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* src/dds/runtime.*pp:
 	* src/dds/subscriber.*pp:
@@ -96,7 +96,7 @@
 
 	
 
-2010-06-18  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2010-06-18  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* v0.8 Released see RELEASE_NOTES to detailed changes/additions.
 	
@@ -107,7 +107,7 @@
 	* src/dds/types.hpp: New file mapping types from DDS => dds 
 	* src/dds/*: Homogenized public types to belong to the "dds" namespace.
 
-2010-03-31  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2010-03-31  Angelo Corsaro  <angelo@icorsaro.net>
 
 
 	* cppcheck: Run cppcheck over SimD and detected a few small
@@ -172,16 +172,16 @@
 	NOTE: The support for content-filtering in the demo is not
 	complete yet.
 	
-2010-03-25  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2010-03-25  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* CMakeLists.txt: Changed order for doc documentation
 	
 	* README, INSTALL: Updated to reflect CMake build system
 
-2010-03-02  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2010-03-02  Angelo Corsaro  <angelo@icorsaro.net>
 	* src/dds/qos.hpp: Fixed typo in the set_reliable(DDS::Duration_t timeout).
 
-2010-02-12  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2010-02-12  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* Changed build system to CMake. This will allow to build SimD on
 	Linux, Windows and MacOS.
@@ -196,7 +196,7 @@
 	"start" and distructor will call the "stop".
 
 
-2009-12-23  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2009-12-23  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* src/dds/instance_writer.hpp: Fixed dispose method to properly
 	pass key + instance handle.
@@ -211,7 +211,7 @@
 	writes data with time-stamp to call the legacy API
 	write_w_timestamp.
 
-2009-12-05  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2009-12-05  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* Updated:
 	     - namespace from "simd" to "dds"
@@ -223,7 +223,7 @@
 	      - updated ishapes demo
 
 
-2009-10-06  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2009-10-06  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* demo/ishapes:
 
@@ -243,7 +243,7 @@
 	  it if needed (esp. if using BOOST < 1.40).
 
 
-2009-09-15  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2009-09-15  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* src/simd/traits.hpp: Moved handle_body_traits here from condition.hpp
 
@@ -281,7 +281,7 @@
 	* demo/ping/ping-sub.cpp: Updated to show the use of the extended
 	Condition API.
 
-2009-09-08  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2009-09-08  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* src/simd/runtime.hpp: 
 	* src/simd/memory.hpp: 
@@ -293,7 +293,7 @@
 
 	* src/simd/config.hpp: Added OpenSplice DDS specific includes.
 
-2009-08-31  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2009-08-31  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* demo/ping/ping-sub.cpp: 
 	* demo/ping/ping-pub.cpp: 
@@ -329,12 +329,12 @@
 	  simpler, this also makes it safer.
 
 	  
-2009-08-25  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2009-08-25  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* src/simd/condition.hpp:
 	* src/simd/waitset.hpp: Fixed implementation for ExecutableConditions.
 
-2009-08-21  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2009-08-21  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* src/simd/simd.hpp:
 	* src/simd/simd.cpp: Main header file that application need to include.
@@ -348,7 +348,7 @@
 
 	* demo/ping/ping-*.cpp: updated to reflect changes in the SimD API.
 
-2009-08-16  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2009-08-16  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* src/simd/condition.cpp:
 	* src/simd/condition.hpp:
@@ -358,7 +358,7 @@
 	  new kind of Condition which can dispatch call to a specified
 	  functor. 
 
-2009-08-12  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2009-08-12  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* src/simd/*.hpp: removed forward declaration of classes within
 	the simd namespace to work around some parsing issues that were
@@ -376,7 +376,7 @@
 
 	Thanks to Reynald Bourtembourg for catchings this.
 
-2009-07-20  Angelo Corsaro  <angelo.corsaro@gmail.com>
+2009-07-20  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* Release SimD v0.1-alpha
 
