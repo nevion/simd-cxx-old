@@ -74,16 +74,16 @@ bool parse_args(int argc, char* argv[])
 struct DataHandler {
 
   void handle_data(dds::DataReader<PingType> reader) {
-    PingTypeSeq samples;
-    DDS::SampleInfoSeq infos;
+    std::vector<PingType> samples;
+    std::vector<dds::SampleInfo> infos;
     
     reader.read(samples, infos);
-    for (int i = 0; i < samples.length(); ++i) {
+    for (unsigned int i = 0; i < samples.size(); ++i) {
       std::cout << samples[i].vendor << " . " << samples[i].counter 
 		<< std::endl;
       samples_to_read--;
     }
-    reader.return_loan(samples, infos);
+
     if (samples_to_read <= 0)
       completion_barrier.wait();
   }

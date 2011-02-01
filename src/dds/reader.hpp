@@ -246,7 +246,7 @@ public:
   
   ////////////////////////////////////////////////////////////////////////////
   // -- Vector read/take
-  void read(std::vector<T>& data, 
+  void read(std::vector<T>& data,
 	    std::vector<dds::SampleInfo>& info,
 	    dds::SampleStateMask samples_state,
 	    dds::ViewStateMask views_state,
@@ -254,7 +254,7 @@ public:
     pimpl_->read(data, info, samples_state, views_state, instances_state);
   }
   
-  void read(std::vector<T>& data, 
+  void read(std::vector<T>& data,
 	    std::vector<dds::SampleInfo>& info) {
     pimpl_->read(data, info);
   }
@@ -263,7 +263,7 @@ public:
     pimpl_->read(data);
   }
 
-  void take(std::vector<T>& data, 
+  void take(std::vector<T>& data,
 	    std::vector<dds::SampleInfo>& info,
 	    dds::SampleStateMask samples_state,
 	    dds::ViewStateMask views_state,
@@ -271,7 +271,7 @@ public:
     pimpl_->take(data, info, samples_state, views_state, instances_state);
   }
   
-  void take(std::vector<T>& data, 
+  void take(std::vector<T>& data,
 	    std::vector<dds::SampleInfo>& info) {
     pimpl_->take(data, info);
   }

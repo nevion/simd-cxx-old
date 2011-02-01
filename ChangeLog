@@ -1,3 +1,14 @@
+2011-02-01  Angelo Corsaro  <angelo@icorsaro.net>
+
+	* src/dds/peer/reader_impl.hpp: 
+	* src/dds/reader.hpp:
+	  Fixed issue with the read(std::vector<T>, std::vector<SampleInfo>);
+	   
+	* src/dds/writer.hpp: Added operator << for std::vectors of samples.
+	 
+	* README: Updated README to better specify the BOOST requirements.
+
+
 2010-12-10  Angelo Corsaro  <acorsaro@icorsaro.net>
 
 	* src/dds/qos.hpp: 

@@ -12,7 +12,7 @@ REQUIREMENTS
 ------------
 The requirements for compiling and running SimD are:
 
-    - OpenSplice DDS v4.1 or higher (http:://www.opensplice.org)
+    - OpenSplice DDS v5.x  (http:://www.opensplice.org)
     - BOOST v1.40 (or higher)
     - BOOST Process (Already shipped with SimD)
     - GCC/G++ v4.1 (or higher)
@@ -22,6 +22,7 @@ The requirements for compiling and running SimD are:
 
 BOOST
 -----
+If BOOST is not installed on the standard include path, than
 SimD requires the BOOST_INCLUDE_DIR and BOOST_LIB_DIR environment variables to
 point to the boost installation containing headers and libraries
 respectively.
