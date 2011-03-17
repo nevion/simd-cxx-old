@@ -51,8 +51,8 @@ DDSShapeDynamics::simulate() {
 		    DDS::ANY_INSTANCE_STATE);
     
   if (samples.length() > 0) {
-    int32_t sampleIndex = -1;
-    uint32_t i = 0;
+    boost::int32_t sampleIndex = -1;
+    boost::uint32_t i = 0;
 
     QPoint tmp;
     plist_.erase(plist_.begin(), plist_.end());

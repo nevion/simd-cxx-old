@@ -25,7 +25,7 @@ find_package (Doxygen)
 
 if (DOXYGEN_FOUND)
   message(STATUS "Generating SimD Documentation")
-  exec_program("cd ..; ${DOXYGEN_EXECUTABLE} doxygen.cfg")
+  exec_program("${DOXYGEN_EXECUTABLE} doxygen.cfg")
 else (DOXYGEN_FOUND)
   message(STATUS "Doxygen not found, I cannot generate the documentation")
 endif (DOXYGEN_FOUND)

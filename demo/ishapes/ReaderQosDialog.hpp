@@ -1,9 +1,9 @@
 #ifndef DDS_DEMO_ISHAPES_READER_QOS_HPP_
 #define DDS_DEMO_ISHAPES_READER_QOS_HPP_
 
+#include <dds/dds.hpp>
 #include <QtGui>
 #include <ui_readerQosForm.h>
-#include <dds/dds.hpp>
 
 class ReaderQosDialog : public QDialog 
 {

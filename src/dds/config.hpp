@@ -8,6 +8,10 @@
 #define SIMD_UNUSED_ARG(x) \
   do { } while (&x == 0);
 
+#ifndef SIMD_NOSTARTOSPL
+#define SIMD_NOSTARTOSPL (0)
+#endif
+
 //////////////////////////////////////////////////////////////////////////////
 // SIMD LOG-specific Macros
 //////////////////////////////////////////////////////////////////////////////
@@ -41,6 +45,7 @@ extern const std::string SIMD_LOG_TAG[];
 // -- BOOST Includes
 #include <boost/signals2.hpp>
 #include <boost/signals2/signal.hpp>
+#include <boost/cstdint.hpp>
 
 // -- OpenSplice DDS Includes
 #include <dds_dcps.h>

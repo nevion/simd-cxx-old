@@ -182,19 +182,19 @@ public:
 	////////////////////////////////////////////////////////////////////////
 	// -- ForwardIterator read/take
 	template<typename DataForwardIterator, typename InfoForwardIterator>
-	uint32_t read(DataForwardIterator data_begin,
-			InfoForwardIterator info_begin, uint32_t max_samples,
+	boost::uint32_t read(DataForwardIterator data_begin,
+			InfoForwardIterator info_begin, boost::uint32_t max_samples,
 			DDS::SampleStateMask samples_state, DDS::ViewStateMask views_state,
 			DDS::InstanceStateMask instances_state) {
 		//@TODO: Static assert on iterator tag
 		TSeq data;
 		DDS::SampleInfoSeq info;
-		uint32_t size;
+		boost::uint32_t size;
 		reader_->read(data, info, max_samples, samples_state, views_state,
 				instances_state);
 
 		size = data.length();
-		for (uint32_t i = 0; i < size; ++i) {
+		for (boost::uint32_t i = 0; i < size; ++i) {
 			*data_begin = data[i];
 			*info_begin = info[i];
 			++data_begin;
@@ -205,23 +205,23 @@ public:
 	}
 
 	template<typename DataForwardIterator, typename InfoForwardIterator>
-	uint32_t read(DataForwardIterator data_begin,
-			InfoForwardIterator info_begin, uint32_t max_samples) {
+	boost::uint32_t read(DataForwardIterator data_begin,
+			InfoForwardIterator info_begin, boost::uint32_t max_samples) {
 		return read(data_begin, info_begin, max_samples,
 				DDS::NOT_READ_SAMPLE_STATE, DDS::ANY_VIEW_STATE,
 				DDS::ALIVE_INSTANCE_STATE);
 	}
 
 	template<typename DataForwardIterator>
-	uint32_t read(DataForwardIterator data_begin, uint32_t max_samples) {
+	boost::uint32_t read(DataForwardIterator data_begin, boost::uint32_t max_samples) {
 		TSeq data;
 		DDS::SampleInfoSeq info;
-		uint32_t size;
+		boost::uint32_t size;
 		reader_->read(data, info, max_samples, DDS::NOT_READ_SAMPLE_STATE,
 				DDS::ANY_VIEW_STATE, DDS::ALIVE_INSTANCE_STATE);
 
 		size = data.length();
-		for (uint32_t i = 0; i < size; ++i) {
+		for (boost::uint32_t i = 0; i < size; ++i) {
 			*data_begin = data[i];
 			++data_begin;
 		}
@@ -230,19 +230,19 @@ public:
 	}
 
 	template<typename DataForwardIterator, typename InfoForwardIterator>
-	uint32_t take(DataForwardIterator data_begin,
-			InfoForwardIterator info_begin, uint32_t max_samples,
+	boost::uint32_t take(DataForwardIterator data_begin,
+			InfoForwardIterator info_begin, boost::uint32_t max_samples,
 			DDS::SampleStateMask samples_state, DDS::ViewStateMask views_state,
 			DDS::InstanceStateMask instances_state) {
 		//@TODO: Static assert on iterator tag
 		TSeq data;
 		DDS::SampleInfoSeq info;
-		uint32_t size;
+		boost::uint32_t size;
 		reader_->take(data, info, max_samples, samples_state, views_state,
 				instances_state);
 
 		size = data.length();
-		for (uint32_t i = 0; i < size; ++i) {
+		for (boost::uint32_t i = 0; i < size; ++i) {
 			*data_begin = data[i];
 			*info_begin = info[i];
 			++data_begin;
@@ -253,23 +253,23 @@ public:
 	}
 
 	template<typename DataForwardIterator, typename InfoForwardIterator>
-	uint32_t take(DataForwardIterator data_begin,
-			InfoForwardIterator info_begin, uint32_t max_samples) {
+	boost::uint32_t take(DataForwardIterator data_begin,
+			InfoForwardIterator info_begin, boost::uint32_t max_samples) {
 		return read(data_begin, info_begin, max_samples,
 				DDS::NOT_READ_SAMPLE_STATE, DDS::ANY_VIEW_STATE,
 				DDS::ALIVE_INSTANCE_STATE);
 	}
 
 	template<typename DataForwardIterator>
-	uint32_t take(DataForwardIterator data_begin, uint32_t max_samples) {
+	boost::uint32_t take(DataForwardIterator data_begin, boost::uint32_t max_samples) {
 		TSeq data;
 		DDS::SampleInfoSeq info;
-		uint32_t size;
+		boost::uint32_t size;
 		reader_->take(data, info, max_samples, DDS::ANY_VIEW_STATE,
 				DDS::ALIVE_INSTANCE_STATE);
 
 		size = data.length();
-		for (uint32_t i = 0; i < size; ++i) {
+		for (boost::uint32_t i = 0; i < size; ++i) {
 			*data_begin = data[i];
 			++data_begin;
 		}
@@ -279,18 +279,18 @@ public:
 	////////////////////////////////////////////////////////////////////////
 	// -- OutputIterator read/take
 	template<typename DataOutputIterator, typename InfoOutputIterator>
-	uint32_t read(DataOutputIterator data_begin, InfoOutputIterator info_begin,
+	boost::uint32_t read(DataOutputIterator data_begin, InfoOutputIterator info_begin,
 			DDS::SampleStateMask samples_state, DDS::ViewStateMask views_state,
 			DDS::InstanceStateMask instances_state) {
 		//@TODO: Static assert on iterator tag
 		TSeq data;
 		DDS::SampleInfoSeq info;
-		uint32_t size;
+		boost::uint32_t size;
 		reader_->read(data, info, DDS::LENGTH_UNLIMITED, samples_state,
 				views_state, instances_state);
 
 		size = data.length();
-		for (uint32_t i = 0; i < size; ++i) {
+		for (boost::uint32_t i = 0; i < size; ++i) {
 			*data_begin = data[i];
 			*info_begin = info[i];
 			++data_begin;
@@ -301,16 +301,16 @@ public:
 	}
 
 	template<typename DataOutputIterator>
-	uint32_t read(DataOutputIterator data_begin) {
+	boost::uint32_t read(DataOutputIterator data_begin) {
 		//@TODO: Static assert on iterator tag
 		TSeq data;
 		DDS::SampleInfoSeq info;
-		uint32_t size;
+		boost::uint32_t size;
 		reader_->read(data, info, DDS::LENGTH_UNLIMITED, DDS::ANY_SAMPLE_STATE,
 				DDS::ANY_VIEW_STATE, DDS::ALIVE_INSTANCE_STATE);
 
 		size = data.length();
-		for (uint32_t i = 0; i < size; ++i) {
+		for (boost::uint32_t i = 0; i < size; ++i) {
 			*data_begin = data[i];
 			++data_begin;
 		}
@@ -319,18 +319,18 @@ public:
 	}
 	//----------------------------------------------------------------------
 	template<typename DataOutputIterator, typename InfoOutputIterator>
-	uint32_t take(DataOutputIterator data_begin, InfoOutputIterator info_begin,
+	boost::uint32_t take(DataOutputIterator data_begin, InfoOutputIterator info_begin,
 			DDS::SampleStateMask samples_state, DDS::ViewStateMask views_state,
 			DDS::InstanceStateMask instances_state) {
 		//@TODO: Static assert on iterator tag
 		TSeq data;
 		DDS::SampleInfoSeq info;
-		uint32_t size;
+		boost::uint32_t size;
 		reader_->take(data, info, DDS::LENGTH_UNLIMITED, samples_state,
 				views_state, instances_state);
 
 		size = data.length();
-		for (uint32_t i = 0; i < size; ++i) {
+		for (boost::uint32_t i = 0; i < size; ++i) {
 			*data_begin = data[i];
 			*info_begin = info[i];
 			++data_begin;
@@ -341,16 +341,16 @@ public:
 	}
 
 	template<typename DataOutputIterator>
-	uint32_t take(DataOutputIterator data_begin) {
+	boost::uint32_t take(DataOutputIterator data_begin) {
 		//@TODO: Static assert on iterator tag
 		TSeq data;
 		DDS::SampleInfoSeq info;
-		uint32_t size;
+		boost::uint32_t size;
 		reader_->take(data, info, DDS::LENGTH_UNLIMITED, DDS::ANY_SAMPLE_STATE,
 				DDS::ANY_VIEW_STATE, DDS::ALIVE_INSTANCE_STATE);
 
 		size = data.length();
-		for (uint32_t i = 0; i < size; ++i) {
+		for (boost::uint32_t i = 0; i < size; ++i) {
 			*data_begin = data[i];
 			++data_begin;
 		}
@@ -383,7 +383,7 @@ public:
 		reader_->read(dat, inf, DDS::LENGTH_UNLIMITED, DDS::ANY_SAMPLE_STATE,
 				DDS::ANY_VIEW_STATE, DDS::ALIVE_INSTANCE_STATE);
 
-		for (uint32_t i = 0; i < dat.length(); ++i) {
+		for (boost::uint32_t i = 0; i < dat.length(); ++i) {
 			data.push_back(dat[i]);
 			info.push_back(inf[i]);
 		}
@@ -396,7 +396,7 @@ public:
 		reader_->read(dat, inf, DDS::LENGTH_UNLIMITED, DDS::ANY_SAMPLE_STATE,
 				DDS::ANY_VIEW_STATE, DDS::ALIVE_INSTANCE_STATE);
 
-		for (uint32_t i = 0; i < dat.length(); ++i) {
+		for (boost::uint32_t i = 0; i < dat.length(); ++i) {
 			data.push_back(dat[i]);
 		}
 		return_loan(dat, inf);

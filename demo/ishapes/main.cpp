@@ -5,8 +5,8 @@
  * Created on July 12, 2009, 6:49 PM
  */
 
-#include <QtGui/QApplication>
 #include <ShapesDialog.hpp>
+#include <QtGui/QApplication>
 #include <stdlib.h>
 #include <time.h>
 

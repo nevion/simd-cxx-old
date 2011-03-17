@@ -8,11 +8,11 @@
 #ifndef _DDSSHAPEDYNAMICS_HPP
 #define	_DDSSHAPEDYNAMICS_HPP
 
+#include <dds/reader.hpp>
 #include <ShapeDynamics.hpp>
 #include <QRect>
 #include <QtGui>
 #include <Shape.hpp>
-#include <dds/reader.hpp>
 
 // -- Shaped Include
 #include <gen/ccpp_ishape.h>

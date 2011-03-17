@@ -8,6 +8,12 @@
 #ifndef _ISHAPESFORM_HPP
 #define	_ISHAPESFORM_HPP
 
+#include <dds/reader.hpp>
+#include <dds/runtime.hpp>
+#include <dds/topic.hpp>
+#include <dds/reader.hpp>
+#include <dds/writer.hpp>
+#include <dds/traits.hpp>
 
 #include <QtGui>
 
@@ -18,13 +24,6 @@
 
 #include <ShapesWidget.hpp>
 #include <Circle.hpp>
-
-#include <dds/reader.hpp>
-#include <dds/runtime.hpp>
-#include <dds/topic.hpp>
-#include <dds/reader.hpp>
-#include <dds/writer.hpp>
-#include <dds/traits.hpp>
 
 // -- Shaped Include
 #include <gen/ccpp_ishape.h>

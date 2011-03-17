@@ -8,8 +8,8 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include <QtGui>
 #include "ShapesDialog.hpp"
+#include <QtGui>
 #include <iostream>
 #include <Circle.hpp>
 #include <Square.hpp>

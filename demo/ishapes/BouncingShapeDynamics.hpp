@@ -8,10 +8,10 @@
 #ifndef _BOUNCINGSHAPEDYNAMICS_HPP
 #define	_BOUNCINGSHAPEDYNAMICS_HPP
 
+#include <dds/dds.hpp>
+
 #include <ShapeDynamics.hpp>
 #include <QRect>
-
-#include <dds/writer.hpp>
 
 // -- Shaped Include
 #include <gen/ccpp_ishape.h>

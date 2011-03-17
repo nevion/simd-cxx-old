@@ -1,10 +1,10 @@
 #ifndef  DDS_DEMO_ISHAPES_FILTER_DIALOG_HPP_
 #define  DDS_DEMO_ISHAPES_FILTER_DIALOG_HPP_
 
+#include <dds/dds.hpp>
 #include <QtGui>
 #include <QRect>
 #include <ui_filterForm.h>
-#include <dds/dds.hpp>
 #include <ShapesWidget.hpp>
 
 class FilterDialog : public QDialog {

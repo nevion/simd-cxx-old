@@ -1,9 +1,9 @@
 #ifndef DDS_DEMO_ISHAPES_WRITER_QOS_HPP_
 #define DDS_DEMO_ISHAPES_WRITER_QOS_HPP_
 
+#include <dds/dds.hpp>
 #include <QtGui>
 #include <ui_writerQosForm.h>
-#include <dds/dds.hpp>
 
 class WriterQosDialog : public QDialog 
 {

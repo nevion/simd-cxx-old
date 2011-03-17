@@ -5,13 +5,19 @@ Starting from version 0.6 SimD uses the CMake platform independent compilation f
 This should make it pretty straightforward for Windows User to get SimD compiled on
 Windows and even generate Visual Studio projects.
 
-The steps required to build SimD on Windows are pretty simple, first of all you need to
-properly configure the file src/dds/osmacros.hpp to include the proper OS specific file.
-For windows this file is os-win32.hpp.
+First of all, make sure to set the SIMD_INSTALL_DIR environment variable to
+point to the place where you want SimD to be installed.
 
-Then, starting from the SimD root directory you should do the following:
+Starting from the SimD root directory you should then do the following:
 
-$ cmake -DWIN32=1 -DCMAKE -DCMAKE_INSTALL_PREFIX=%SIMD_INSTALL_DIR% .
+$ cmake -G <generator-name> -DWIN32=1 -DCMAKE_INSTALL_PREFIX=%SIMD_INSTALL_DIR% .
 
-Notice that this assumes you've set the SIMD_INSTALL_DIR to point to the place where you
-want SimD to be installed.s
+The parameter generator-name is the name of the Visual Studio version you want
+the project files to be created for. For example
+ 
+$ cmake -G "Visual Studio 9 2008" -DWIN32=1 -DCMAKE_INSTALL_PREFIX=%SIMD_INSTALL_DIR% .
+
+This will create a MSVC solution called SimD.sln for building the SimD library.
+
+In order to build a demo, for example ishapes, cd into demo/ishapes and run
+cmake from there.

@@ -166,10 +166,10 @@ public:
   ////////////////////////////////////////////////////////////////////////////
   // -- ForwardIterator read/take
   template <typename DataForwardIterator, typename InfoForwardIterator> 
-  uint32_t
+  boost::uint32_t
   read(DataForwardIterator data_begin, 
        InfoForwardIterator info_begin,
-       uint32_t max_samples, 
+       boost::uint32_t max_samples, 
        dds::SampleStateMask samples_state,
        dds::ViewStateMask views_state,
        dds::InstanceStateMask instances_state) {
@@ -178,27 +178,27 @@ public:
   }
 
   template <typename DataForwardIterator, typename InfoForwardIterator> 
-  uint32_t
+  boost::uint32_t
   read(DataForwardIterator data_begin, 
        InfoForwardIterator info_begin,
-       uint32_t max_samples) {
+       boost::uint32_t max_samples) {
     return pimpl_->read(data_begin, info_begin, max_samples);
   }
 
   //--------------------------------------------------------------------------
   template <typename DataForwardIterator, typename InfoForwardIterator> 
-  uint32_t
+  boost::uint32_t
   take(DataForwardIterator data_begin, 
        InfoForwardIterator info_begin,
-       uint32_t max_samples) {
+       boost::uint32_t max_samples) {
     return pimpl_->take(data_begin, info_begin, max_samples);
   }
 
   template <typename DataForwardIterator, typename InfoForwardIterator> 
-  uint32_t
+  boost::uint32_t
   take(DataForwardIterator data_begin, 
        InfoForwardIterator info_begin,
-       uint32_t max_samples, 
+       boost::uint32_t max_samples, 
        dds::SampleStateMask samples_state,
        dds::ViewStateMask views_state,
        dds::InstanceStateMask instances_state) {
@@ -211,7 +211,7 @@ public:
   ////////////////////////////////////////////////////////////////////////////
   // -- OutputIterator read/take
   template <typename DataOutputIterator, typename InfoOutputIterator> 
-  uint32_t
+  boost::uint32_t
   read(DataOutputIterator data_begin, 
        InfoOutputIterator info_begin,
        dds::SampleStateMask samples_state,
@@ -221,13 +221,13 @@ public:
   }
   
   template <typename DataOutputIterator> 
-  uint32_t
+  boost::uint32_t
   read(DataOutputIterator data_begin) {
     return pimpl_->read(data_begin);
   }
   //--------------------------------------------------------------------------
   template <typename DataOutputIterator, typename InfoOutputIterator> 
-  uint32_t
+  boost::uint32_t
   take(DataOutputIterator data_begin, 
        InfoOutputIterator info_begin,
        dds::SampleStateMask samples_state,
@@ -237,7 +237,7 @@ public:
   }
   
   template <typename DataOutputIterator> 
-  uint32_t
+  boost::uint32_t
   take(DataOutputIterator data_begin) {
     return pimpl_->read(data_begin);
   }

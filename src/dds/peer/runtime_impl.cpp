@@ -14,17 +14,21 @@ dds::peer::RuntimeImpl* dds::peer::RuntimeImpl::this_;
 namespace bp = boost::process;
 
 int startOpenSplice() {
-  std::string exec(bp::find_executable_in_path("ospl"));
-  std::vector<std::string> args;
-  args.push_back(exec);
-  args.push_back("start");
+  int result = 0;
+  if (!SIMD_NOSTARTOSPL) {
+    std::string exec(bp::find_executable_in_path("ospl"));
+    std::vector<std::string> args;
+    args.push_back(exec);
+    args.push_back("start");
 
-  bp::context ctx;
-  ctx.environment = bp::self::get_environment(); 
-  ctx.stdout_behavior = bp::silence_stream();
-  bp::child c = bp::launch(exec, args, ctx); 
-  bp::status s = c.wait();
-  return s.exited() ? s.exit_status() : 1;
+    bp::context ctx;
+    ctx.environment = bp::self::get_environment(); 
+    ctx.stdout_behavior = bp::silence_stream();
+    bp::child c = bp::launch(exec, args, ctx); 
+    bp::status s = c.wait();
+    result = s.exited() ? s.exit_status() : 1;
+  }
+  return result;
 }
 
 
