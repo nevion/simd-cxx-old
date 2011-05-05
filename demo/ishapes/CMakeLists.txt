@@ -7,7 +7,11 @@ find_package (OpenSplice REQUIRED)
 find_package (Boost REQUIRED COMPONENTS thread program_options system)
 find_package (SimD REQUIRED)
 
-find_package (Qt4 REQUIRED)
+if (APPLE)
+   set(QT_LIBRARY_DIR /Library/Framework)
+   set(QT_BINARY_DIR /usr/bin)
+endif (APPLE)
+find_package (Qt4 REQUIRED COMPONENTS QtCore QtGui QtOpenGL QtSVg QtMultimedia)
 
 include_directories(
   ${PROJECT_SOURCE_DIR}
@@ -15,6 +19,9 @@ include_directories(
   ${OpenSplice_INCLUDE_DIRS}
   ${SimD_INCLUDE_DIRS}
 )
+
+set (ISHAPES_EXE ishapes)
+set (DATAMODEL datamodel)
 
 include(
 ${QT_USE_FILE}
@@ -54,8 +61,10 @@ set (QT_UI_SOURCES
   filterForm.ui
 )
 
+
 QT4_WRAP_CPP(QT_MOC_SOURCES ${QT_MOC_HEADERS})
 QT4_WRAP_UI(QT_UI_HEADERS ${QT_UI_SOURCES})
+QT4_ADD_RESOURCES (${ISHAPES_EXE} ishapes.qrc)
 
 set (ISHAPES_SOURCES
  ${QT_MOC_SOURCES}
@@ -73,10 +82,9 @@ set (ISHAPES_SOURCES
  Triangle.cpp
  WriterQosDialog.cpp
  FilterDialog.cpp
+ ishapesrc.cpp
 )
 
-set (ISHAPES_EXE ishapes)
-set (DATAMODEL datamodel)
 
 add_executable (${ISHAPES_EXE} ${ISHAPES_SOURCES})
 #add_library (${DATAMODEL} SHARED ${OpenSplice_DATAMODEL} )

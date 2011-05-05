@@ -3,6 +3,7 @@
 CONFIG += qt debug
 FORMS=iShapesForm.ui readerQosForm.ui writerQosForm.ui
 HEADERS = ShapesDialog.hpp WriterQosDialog.hpp ShapesWidget.hpp ReaderQosDialog.hpp
+RESOURCES=ishapes.qrc
 
 SOURCES+=BouncingShapeDynamics.cpp \
 Circle.cpp \

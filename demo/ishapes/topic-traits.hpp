@@ -9,7 +9,7 @@
 #define	_TOPIC_TRAITS_HPP
 
 
-REGISTER_TOPIC_TRAITS(ShapeType);
-
+REGISTER_TOPIC_TRAITS(org::opensplice::demo::ShapeType);
+using namespace org::opensplice::demo;
 #endif	/* _TOPIC_TRAITS_HPP */
 

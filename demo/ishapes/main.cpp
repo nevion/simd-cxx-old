@@ -13,9 +13,6 @@
 #include <dds/runtime.hpp>
 
 int main(int argc, char *argv[]) {
-    // initialize resources, if needed
-    // Q_INIT_RESOURCE(resfile);
-    
     std::string partition("");
 
     if (argc > 1) {

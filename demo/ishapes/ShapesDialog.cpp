@@ -103,7 +103,8 @@ ShapesDialog::onPublishButtonClicked() {
   
   QBrush brush(color_[cIdx], Qt::SolidPattern);
   //  QPen pen(color_[(cIdx+1)%(CN-1)], 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-  QPen pen(color_[cIdx], 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+  
+  QPen pen(color_[cIdx], 0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
   switch (sIdx) {
   case CIRCLE: {
@@ -176,7 +177,7 @@ ShapesDialog::onSubscribeButtonClicked() {
   //  QBrush brush(color_[BLACK], Qt::FDiagPattern);
   QBrush brush(gray, Qt::SolidPattern);
 
-  QPen pen(Qt::white, 0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+  QPen pen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
   std::vector<std::string> empty;
   filterParams_ = empty;

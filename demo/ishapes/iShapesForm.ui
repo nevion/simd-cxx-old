@@ -12,7 +12,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>508</width>
+    <width>518</width>
     <height>378</height>
    </rect>
   </property>
@@ -24,13 +24,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>508</width>
+    <width>518</width>
     <height>378</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>508</width>
+    <width>518</width>
     <height>378</height>
    </size>
   </property>
@@ -51,7 +51,7 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>161</width>
+     <width>171</width>
      <height>201</height>
     </rect>
    </property>
@@ -69,9 +69,9 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>0</x>
       <y>10</y>
-      <width>146</width>
+      <width>161</width>
       <height>181</height>
      </rect>
     </property>
@@ -92,7 +92,7 @@
           <widget class="QLabel" name="wShapeLabel">
            <property name="font">
             <font>
-             <pointsize>10</pointsize>
+             <pointsize>13</pointsize>
             </font>
            </property>
            <property name="layoutDirection">
@@ -110,7 +110,7 @@
           <widget class="QLabel" name="colorLabel">
            <property name="font">
             <font>
-             <pointsize>10</pointsize>
+             <pointsize>13</pointsize>
             </font>
            </property>
            <property name="text">
@@ -125,7 +125,7 @@
           <widget class="QLabel" name="label">
            <property name="font">
             <font>
-             <pointsize>10</pointsize>
+             <pointsize>13</pointsize>
             </font>
            </property>
            <property name="text">
@@ -140,7 +140,7 @@
           <widget class="QLabel" name="label_2">
            <property name="font">
             <font>
-             <pointsize>10</pointsize>
+             <pointsize>13</pointsize>
             </font>
            </property>
            <property name="text">
@@ -162,7 +162,7 @@
           <widget class="QComboBox" name="wShapeList">
            <property name="font">
             <font>
-             <pointsize>10</pointsize>
+             <pointsize>13</pointsize>
             </font>
            </property>
            <item>
@@ -184,6 +184,11 @@
          </item>
          <item>
           <widget class="QComboBox" name="colorList">
+           <property name="font">
+            <font>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
            <item>
             <property name="text">
              <string>Blue</string>
@@ -346,7 +351,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>10</x>
      <y>220</y>
-     <width>161</width>
+     <width>171</width>
      <height>151</height>
     </rect>
    </property>
@@ -361,8 +366,8 @@ p, li { white-space: pre-wrap; }
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>141</width>
-      <height>130</height>
+      <width>154</width>
+      <height>137</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -372,7 +377,7 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="label_3">
          <property name="font">
           <font>
-           <pointsize>10</pointsize>
+           <pointsize>13</pointsize>
           </font>
          </property>
          <property name="text">
@@ -387,7 +392,7 @@ p, li { white-space: pre-wrap; }
         <widget class="QComboBox" name="rShapeList">
          <property name="font">
           <font>
-           <pointsize>10</pointsize>
+           <pointsize>13</pointsize>
           </font>
          </property>
          <item>
@@ -413,7 +418,7 @@ p, li { white-space: pre-wrap; }
       <widget class="QPushButton" name="subQosButton">
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>13</pointsize>
         </font>
        </property>
        <property name="toolTip">
@@ -432,7 +437,7 @@ p, li { white-space: pre-wrap; }
       <widget class="QPushButton" name="filterButton">
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>13</pointsize>
         </font>
        </property>
        <property name="toolTip">
@@ -451,7 +456,7 @@ p, li { white-space: pre-wrap; }
       <widget class="QPushButton" name="createReaderButton">
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>13</pointsize>
         </font>
        </property>
        <property name="toolTip">
@@ -472,7 +477,7 @@ p, li { white-space: pre-wrap; }
   <widget class="QFrame" name="renderFrame">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>190</x>
      <y>10</y>
      <width>321</width>
      <height>361</height>

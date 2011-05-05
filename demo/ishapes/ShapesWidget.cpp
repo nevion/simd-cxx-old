@@ -13,12 +13,12 @@
 
 ShapesWidget::ShapesWidget(QWidget *parent)
 : QWidget(parent),
-  showCurrentFilter_(false)
+  showCurrentFilter_(false),
+  logo_("./images/logo.png"),
+  simd_("./images/simd.png")
 {
     this->setBackgroundRole(QPalette::Base);
     this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    logo_.load("logo.jpg");
-    simd_.load("simd.jpg");
 }
 
 ShapesWidget::~ShapesWidget() {
@@ -43,6 +43,7 @@ ShapesWidget::nextAnimationFrame() {
 void
 ShapesWidget::paintEvent(QPaintEvent*) {
     QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing, true);
     painter.drawPixmap(15, 300, logo_);
     painter.drawPixmap(200, 10, simd_);
     if (showCurrentFilter_) {
