@@ -4,17 +4,18 @@
 #include <dds/memory.hpp>
 #include <dds/publisher.hpp>
 #include <dds/subscriber.hpp>
-#include <boost/process.hpp>
+// #include <boost/process.hpp>
 #include <string>
 #include <vector>
 
 const std::string dds::peer::RuntimeImpl::DEFAULT_PARTITION = "";
 dds::peer::RuntimeImpl* dds::peer::RuntimeImpl::this_;
 
-namespace bp = boost::process;
+//namespace bp = boost::process;
 
 int startOpenSplice() {
   int result = 0;
+  /*
   if (!SIMD_NOSTARTOSPL) {
     std::string exec(bp::find_executable_in_path("ospl"));
     std::vector<std::string> args;
@@ -28,6 +29,7 @@ int startOpenSplice() {
     bp::status s = c.wait();
     result = s.exited() ? s.exit_status() : 1;
   }
+  */
   return result;
 }
 

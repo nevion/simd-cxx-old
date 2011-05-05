@@ -31,12 +31,14 @@ file (GLOB SimD_SOURCES *.cpp ./peer/*.cpp)
 # install include files
 #install (DIRECTORY "${PROJECT_SOURCE_DIR}/src/dds"
 #     DESTINATION include PATTERN "*~" EXCLUDE PATTERN "*svn*" EXCLUDE )
-install (DIRECTORY "${PROJECT_SOURCE_DIR}/src/dds"
-     DESTINATION include FILES_MATCHING PATTERN "*.hpp")
+
+#install (files "${PROJECT_SOURCE_DIR}/src/dds"
+#     DESTINATION include FILES_MATCHING PATTERN "*.hpp")
+install(DIRECTORY "${PROJECT_SOURCE_DIR}/src/dds" DESTINATION include PATTERN "*.hpp")
 
 #install documentation
-install (DIRECTORY "${PROJECT_SOURCE_DIR}/docs"
-DESTINATION . PATTERN "*~" EXCLUDE PATTERN "*svn*" EXCLUDE )
+#install (DIRECTORY "${PROJECT_SOURCE_DIR}/docs"
+#DESTINATION . PATTERN "*~" EXCLUDE PATTERN "*svn*" EXCLUDE )
 
 # C++ Options
 add_definitions( ${DEFINITIONS} )
@@ -45,6 +47,8 @@ add_definitions( -DSIMD_API_BUILD )
 
 # library setup
 add_library(lib${PROJECT_NAME}  ${SimD_SOURCES} ${OpenSplice_LIBRARIES})
+
+target_link_libraries (lib${PROJECT_NAME} ${OpenSplice_LIBRARIES} ${Boost_LIBRARIES})
 
 add_custom_target( lib DEPENDS lib${PROJECT_NAME} )
 
