@@ -60,8 +60,8 @@ set (QT_UI_SOURCES
   writerQosForm.ui
   filterForm.ui
 )
-
-
+set (ISHAPE_RCS ./ishape.qrc)
+QT4_ADD_RESOURCES (ISHAPE_RC_SRCS ${ISHAPE_RCS})
 QT4_WRAP_CPP(QT_MOC_SOURCES ${QT_MOC_HEADERS})
 QT4_WRAP_UI(QT_UI_HEADERS ${QT_UI_SOURCES})
 
@@ -84,7 +84,7 @@ set (ISHAPES_SOURCES
 )
 
 
-add_executable (${ISHAPES_EXE} ${ISHAPES_SOURCES})
+add_executable (${ISHAPES_EXE} ${ISHAPES_SOURCES} ${ISHAPE_RC_SRCS})
 #add_library (${DATAMODEL} SHARED ${OpenSplice_DATAMODEL} )
 add_library (${DATAMODEL} STATIC ${OpenSplice_DATAMODEL} )
 

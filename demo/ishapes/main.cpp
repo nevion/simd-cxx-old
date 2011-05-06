@@ -24,9 +24,9 @@ int main(int argc, char *argv[]) {
     
     srand(clock());
     QApplication app(argc, argv);
-
+    Q_INIT_RESOURCE(ishape);
     // create and show your widgets here
-    ShapesDialog shapes;
+      ShapesDialog shapes;
     shapes.show();
     int retval = app.exec();
 

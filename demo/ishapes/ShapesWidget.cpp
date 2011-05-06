@@ -14,8 +14,8 @@
 ShapesWidget::ShapesWidget(QWidget *parent)
 : QWidget(parent),
   showCurrentFilter_(false),
-  logo_("./images/logo.png"),
-  simd_("./images/simd.png")
+  logo_(":/images/logo.png"),
+  simd_(":/images/simd.png")
 {
     this->setBackgroundRole(QPalette::Base);
     this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
