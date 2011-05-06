@@ -38,10 +38,10 @@
    <enum>Qt::ClickFocus</enum>
   </property>
   <property name="windowTitle">
-   <string>OpenSplice|DDS Shapes Demo</string>
+   <string>OpenSplice | DDS - iShapes Demo</string>
   </property>
   <property name="sizeGripEnabled">
-   <bool>false</bool>
+   <bool>true</bool>
   </property>
   <property name="modal">
    <bool>false</bool>
@@ -92,7 +92,9 @@
           <widget class="QLabel" name="wShapeLabel">
            <property name="font">
             <font>
-             <pointsize>13</pointsize>
+             <pointsize>11</pointsize>
+             <stylestrategy>PreferAntialias</stylestrategy>
+             <kerning>false</kerning>
             </font>
            </property>
            <property name="layoutDirection">
@@ -110,7 +112,9 @@
           <widget class="QLabel" name="colorLabel">
            <property name="font">
             <font>
-             <pointsize>13</pointsize>
+             <pointsize>11</pointsize>
+             <stylestrategy>PreferAntialias</stylestrategy>
+             <kerning>false</kerning>
             </font>
            </property>
            <property name="text">
@@ -125,7 +129,9 @@
           <widget class="QLabel" name="label">
            <property name="font">
             <font>
-             <pointsize>13</pointsize>
+             <pointsize>11</pointsize>
+             <stylestrategy>PreferAntialias</stylestrategy>
+             <kerning>false</kerning>
             </font>
            </property>
            <property name="text">
@@ -140,7 +146,9 @@
           <widget class="QLabel" name="label_2">
            <property name="font">
             <font>
-             <pointsize>13</pointsize>
+             <pointsize>11</pointsize>
+             <stylestrategy>PreferAntialias</stylestrategy>
+             <kerning>false</kerning>
             </font>
            </property>
            <property name="text">
@@ -162,7 +170,9 @@
           <widget class="QComboBox" name="wShapeList">
            <property name="font">
             <font>
-             <pointsize>13</pointsize>
+             <pointsize>11</pointsize>
+             <stylestrategy>PreferAntialias</stylestrategy>
+             <kerning>false</kerning>
             </font>
            </property>
            <item>
@@ -186,7 +196,9 @@
           <widget class="QComboBox" name="colorList">
            <property name="font">
             <font>
-             <pointsize>13</pointsize>
+             <pointsize>11</pointsize>
+             <stylestrategy>PreferAntialias</stylestrategy>
+             <kerning>false</kerning>
             </font>
            </property>
            <item>
@@ -305,6 +317,14 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="font">
+        <font>
+         <family>Lucida Grande</family>
+         <pointsize>11</pointsize>
+         <stylestrategy>PreferAntialias</stylestrategy>
+         <kerning>false</kerning>
+        </font>
+       </property>
        <property name="toolTip">
         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -330,6 +350,13 @@ p, li { white-space: pre-wrap; }
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+         <stylestrategy>PreferAntialias</stylestrategy>
+         <kerning>false</kerning>
+        </font>
        </property>
        <property name="toolTip">
         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -366,7 +393,7 @@ p, li { white-space: pre-wrap; }
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>154</width>
+      <width>151</width>
       <height>137</height>
      </rect>
     </property>
@@ -377,7 +404,9 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="label_3">
          <property name="font">
           <font>
-           <pointsize>13</pointsize>
+           <pointsize>11</pointsize>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>false</kerning>
           </font>
          </property>
          <property name="text">
@@ -392,7 +421,9 @@ p, li { white-space: pre-wrap; }
         <widget class="QComboBox" name="rShapeList">
          <property name="font">
           <font>
-           <pointsize>13</pointsize>
+           <pointsize>11</pointsize>
+           <stylestrategy>PreferAntialias</stylestrategy>
+           <kerning>false</kerning>
           </font>
          </property>
          <item>
@@ -418,7 +449,9 @@ p, li { white-space: pre-wrap; }
       <widget class="QPushButton" name="subQosButton">
        <property name="font">
         <font>
-         <pointsize>13</pointsize>
+         <pointsize>11</pointsize>
+         <stylestrategy>PreferAntialias</stylestrategy>
+         <kerning>false</kerning>
         </font>
        </property>
        <property name="toolTip">
@@ -437,7 +470,9 @@ p, li { white-space: pre-wrap; }
       <widget class="QPushButton" name="filterButton">
        <property name="font">
         <font>
-         <pointsize>13</pointsize>
+         <pointsize>11</pointsize>
+         <stylestrategy>PreferAntialias</stylestrategy>
+         <kerning>false</kerning>
         </font>
        </property>
        <property name="toolTip">
@@ -456,7 +491,9 @@ p, li { white-space: pre-wrap; }
       <widget class="QPushButton" name="createReaderButton">
        <property name="font">
         <font>
-         <pointsize>13</pointsize>
+         <pointsize>11</pointsize>
+         <stylestrategy>PreferAntialias</stylestrategy>
+         <kerning>false</kerning>
         </font>
        </property>
        <property name="toolTip">

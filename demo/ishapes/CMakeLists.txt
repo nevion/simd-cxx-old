@@ -64,7 +64,6 @@ set (QT_UI_SOURCES
 
 QT4_WRAP_CPP(QT_MOC_SOURCES ${QT_MOC_HEADERS})
 QT4_WRAP_UI(QT_UI_HEADERS ${QT_UI_SOURCES})
-QT4_ADD_RESOURCES (${ISHAPES_EXE} ishapes.qrc)
 
 set (ISHAPES_SOURCES
  ${QT_MOC_SOURCES}
@@ -82,7 +81,6 @@ set (ISHAPES_SOURCES
  Triangle.cpp
  WriterQosDialog.cpp
  FilterDialog.cpp
- ishapesrc.cpp
 )
 
 

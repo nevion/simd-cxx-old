@@ -50,8 +50,10 @@ ShapesDialog::ShapesDialog()
   :   timer(this),
       filterExpression_("(x BETWEEN %0 AND %1) AND (y BETWEEN %2 AND %3)")
 {
+
   dds::TopicQos tqos;
   dds::Duration cleanup_delay = {3600, 0};
+
   tqos.set_persistent();
   tqos.set_durability_service(cleanup_delay,
 			      DDS::KEEP_LAST_HISTORY_QOS,
@@ -103,8 +105,8 @@ ShapesDialog::onPublishButtonClicked() {
   
   QBrush brush(color_[cIdx], Qt::SolidPattern);
   //  QPen pen(color_[(cIdx+1)%(CN-1)], 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-  
-  QPen pen(color_[cIdx], 0, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+  // color_[cIdx]
+  QPen pen(QColor(33, 33, 33), 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
   switch (sIdx) {
   case CIRCLE: {
@@ -177,7 +179,7 @@ ShapesDialog::onSubscribeButtonClicked() {
   //  QBrush brush(color_[BLACK], Qt::FDiagPattern);
   QBrush brush(gray, Qt::SolidPattern);
 
-  QPen pen(Qt::black, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+  QPen pen(QColor(33,33,33), 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
   std::vector<std::string> empty;
   filterParams_ = empty;
