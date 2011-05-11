@@ -8,8 +8,13 @@
 #ifndef _TOPIC_TRAITS_HPP
 #define	_TOPIC_TRAITS_HPP
 
+#include "config.hpp"
 
-REGISTER_TOPIC_TRAITS(org::opensplice::demo::ShapeType);
-using namespace org::opensplice::demo;
+#if (ISHAPES_B2_DEMO == 1)
+  REGISTER_TOPIC_TRAITS(org::opensplice::demo::ShapeType);
+  using namespace org::opensplice::demo;
+#else
+  REGISTER_TOPIC_TRAITS(ShapeType);
+#endif
 #endif	/* _TOPIC_TRAITS_HPP */
 

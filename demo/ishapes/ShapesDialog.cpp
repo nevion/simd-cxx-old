@@ -7,7 +7,7 @@
  */
 
 #include <boost/shared_ptr.hpp>
-
+#include "config.hpp"
 #include "ShapesDialog.hpp"
 #include <QtGui>
 #include <iostream>
@@ -22,12 +22,6 @@ static const float PI = 3.1415926535F;
 
 /* Ugly hack -- fixme */
 static QColor  color_[CN];
-/*
-  #define IS_WIDTH 500
-  #define IS_WIDTH 340
-*/
-#define IS_WIDTH  321
-#define IS_HEIGHT 361
 
 const char* const colorString_[] = {
   "BLUE",
@@ -50,7 +44,11 @@ ShapesDialog::ShapesDialog()
   :   timer(this),
       filterExpression_("(x BETWEEN %0 AND %1) AND (y BETWEEN %2 AND %3)")
 {
-
+#if (ISHAPES_B2_DEMO == 1)
+  circleTopic_ = dds::Topic<ShapeType>(circleTopicName);
+  squareTopic_ = dds::Topic<ShapeType>(squareTopicName);
+  triangleTopic_ = dds::Topic<ShapeType>(triangleTopicName);
+#else
   dds::TopicQos tqos;
   dds::Duration cleanup_delay = {3600, 0};
 
@@ -65,7 +63,7 @@ ShapesDialog::ShapesDialog()
   circleTopic_ = dds::Topic<ShapeType>(circleTopicName, tqos);
   squareTopic_ = dds::Topic<ShapeType>(squareTopicName, tqos);
   triangleTopic_ = dds::Topic<ShapeType>(triangleTopicName,tqos);
-
+#endif
   mainWidget.setupUi(this);
   shapesWidget = new ShapesWidget(mainWidget.renderFrame);
   shapesWidget->resize(mainWidget.renderFrame->size());
@@ -106,7 +104,8 @@ ShapesDialog::onPublishButtonClicked() {
   QBrush brush(color_[cIdx], Qt::SolidPattern);
   //  QPen pen(color_[(cIdx+1)%(CN-1)], 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
   // color_[cIdx]
-  QPen pen(QColor(33, 33, 33), 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+  // QColor(33, 33, 33)
+  QPen pen(QColor(0xff, 0xff, 0xff), 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
   switch (sIdx) {
   case CIRCLE: {
@@ -179,7 +178,7 @@ ShapesDialog::onSubscribeButtonClicked() {
   //  QBrush brush(color_[BLACK], Qt::FDiagPattern);
   QBrush brush(gray, Qt::SolidPattern);
 
-  QPen pen(QColor(33,33,33), 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+  QPen pen(QColor(0xff,0xff,0xff), 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
   std::vector<std::string> empty;
   filterParams_ = empty;

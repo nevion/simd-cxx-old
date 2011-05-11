@@ -52,14 +52,20 @@ set (QT_MOC_HEADERS
   WriterQosDialog.hpp
   FilterDialog.hpp
 )
+if (APPLE)
+  set (QT_UI_SOURCES
+          macos/iShapesFormWide.ui  
+          macos/readerQosForm.ui
+          macos/writerQosForm.ui
+          macos/filterForm.ui)
+else (APPLE)
+  set (QT_UI_SOURCES
+          iShapesForm.ui  
+          readerQosForm.ui
+          writerQosForm.ui
+          filterForm.ui)
+endif (APPLE)
 
-set (QT_UI_SOURCES
-  iShapesForm.ui  
-  qosForm.ui
-  readerQosForm.ui
-  writerQosForm.ui
-  filterForm.ui
-)
 set (ISHAPE_RCS ./ishape.qrc)
 QT4_ADD_RESOURCES (ISHAPE_RC_SRCS ${ISHAPE_RCS})
 QT4_WRAP_CPP(QT_MOC_SOURCES ${QT_MOC_HEADERS})
