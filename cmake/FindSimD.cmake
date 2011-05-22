@@ -5,15 +5,21 @@
 #  SimD_INCLUDE_DIRS - the SimD include directory.
 #  SimD_LIBRARIES - Link these to use SimD.
 #
-# You need the environment variable $SIMD_INSTALL_DIR to be set to your SimD
+# You need to define the SIMD_INSTALL_DIR variable or have the
+# environment variable $SIMD_INSTALL_DIR to be set to your SimD
 # installation directory.
 ##############################################################################
+
+# If SIMD_INSTALL_DIR was defined in the environment, use it.
+if (NOT SIMD_INSTALL_DIR AND NOT $ENV{SIMD_INSTALL_DIR} STREQUAL "")
+  set(SIMD_INSTALL_DIR $ENV{SIMD_INSTALL_DIR})
+endif(NOT SIMD_INSTALL_DIR AND NOT $ENV{SIMD_INSTALL_DIR} STREQUAL "")
 
 FIND_PATH(SimD_INCLUDE_DIR
 	NAMES
 		dds/dds.hpp
 	PATHS
-		$ENV{SIMD_INSTALL_DIR}/include
+		${SIMD_INSTALL_DIR}/include
 )
 
 IF (SimD_INCLUDE_DIR)
@@ -31,7 +37,7 @@ FIND_LIBRARY(SimD_LIBRARY
 	NAMES
 		SimD
 	PATHS
-		$ENV{SIMD_INSTALL_DIR}/lib
+		${SIMD_INSTALL_DIR}/lib
 )
 
 SET(SimD_LIBRARIES
