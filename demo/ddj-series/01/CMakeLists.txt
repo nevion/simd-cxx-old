@@ -6,7 +6,7 @@ include (MacroOpenSplice)
 include (osmacros)
 
 find_package (OpenSplice REQUIRED)
-find_package (Boost REQUIRED COMPONENTS thread program_options system)
+find_package (Boost REQUIRED thread program_options system)
 find_package (SimD REQUIRED)
 
 include_directories(

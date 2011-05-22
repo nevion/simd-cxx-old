@@ -11,7 +11,7 @@ SET (Boost_ADDITIONAL_VERSIONS "1.43.0" "1.43" "1.42.0" "1.42" "1.41.0" "1.41")
 IF (MSVC)
   find_package (Boost 1.39.0 REQUIRED)
 ELSE (MSVC)
-  find_package (Boost 1.39.0 COMPONENTS thread signals program_options system REQUIRED)
+  find_package (Boost 1.39.0 REQUIRED thread signals program_options system)
 ENDIF (MSVC)
 
 # Set includes directories
