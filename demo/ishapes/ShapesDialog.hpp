@@ -25,9 +25,6 @@
 #include <ShapesWidget.hpp>
 #include <Circle.hpp>
 
-// -- Shaped Include
-#include <gen/ccpp_ishape.h>
-
 #define CN 9
 
 

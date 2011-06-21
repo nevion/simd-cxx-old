@@ -1,10 +1,3 @@
-/* 
- * File:   Shape.hpp
- * Author: corsaro
- *
- * Created on July 12, 2009, 9:50 PM
- */
-
 #ifndef _SHAPE_HPP
 #define	_SHAPE_HPP
 

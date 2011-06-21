@@ -27,8 +27,8 @@ include(
 ${QT_USE_FILE}
 )
 
-
-set (idls ishape.idl)
+ 
+set (idls ishape.idl ishapeiop.idl)
 
 
 foreach(idl ${idls})
@@ -54,13 +54,13 @@ set (QT_MOC_HEADERS
 )
 if (APPLE)
   set (QT_UI_SOURCES
-          macos/iShapesFormWide.ui  
+          macos/iShapesForm.ui
           macos/readerQosForm.ui
           macos/writerQosForm.ui
           macos/filterForm.ui)
 else (APPLE)
   set (QT_UI_SOURCES
-          iShapesForm.ui  
+          iShapesForm.ui
           readerQosForm.ui
           writerQosForm.ui
           filterForm.ui)

@@ -1,10 +1,3 @@
-/* 
- * File:   ShapeDynamics.hpp
- * Author: corsaro
- *
- * Created on July 12, 2009, 9:54 PM
- */
-
 #ifndef _SHAPEDYNAMICS_HPP
 #define	_SHAPEDYNAMICS_HPP
 

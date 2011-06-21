@@ -1,11 +1,3 @@
-
-/* 
- * File:   iShapesForm.cpp
- * Author: corsaro
- * 
- * Created on July 12, 2009, 6:50 PM
- */
-
 #include <boost/shared_ptr.hpp>
 #include "config.hpp"
 #include "ShapesDialog.hpp"
@@ -105,7 +97,7 @@ ShapesDialog::onPublishButtonClicked() {
   //  QPen pen(color_[(cIdx+1)%(CN-1)], 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
   // color_[cIdx]
   // QColor(33, 33, 33)
-  QPen pen(QColor(0xff, 0xff, 0xff), 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+  QPen pen(QColor(0xff, 0xff, 0xff), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
   switch (sIdx) {
   case CIRCLE: {
@@ -178,7 +170,7 @@ ShapesDialog::onSubscribeButtonClicked() {
   //  QBrush brush(color_[BLACK], Qt::FDiagPattern);
   QBrush brush(gray, Qt::SolidPattern);
 
-  QPen pen(QColor(0xff,0xff,0xff), 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+  QPen pen(QColor(0xff,0xff,0xff), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 
   std::vector<std::string> empty;
   filterParams_ = empty;

@@ -359,6 +359,11 @@
        </item>
        <item>
         <property name="text">
+         <string>TransientLocal</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
          <string>Transient</string>
         </property>
        </item>

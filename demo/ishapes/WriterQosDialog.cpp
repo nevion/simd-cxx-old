@@ -33,6 +33,9 @@ WriterQosDialog::get_qos()
     // std::cout << "WriterQos = RELIABLE" << std::endl;
   }
   switch (qosForm_.durabilityComboBox->currentIndex()) {
+  case 0:
+    qos_.set_volatile();
+    break;
   case 1:
     qos_.set_transient_local();
     break;

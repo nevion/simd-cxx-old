@@ -1,10 +1,3 @@
-/* 
- * File:   Circle.hpp
- * Author: corsaro
- *
- * Created on July 12, 2009, 10:55 PM
- */
-
 #ifndef _CIRCLE_HPP
 #define	_CIRCLE_HPP
 

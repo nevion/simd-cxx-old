@@ -15,7 +15,6 @@
 #include <Shape.hpp>
 
 // -- Shaped Include
-#include <gen/ccpp_ishape.h>
 #include <topic-traits.hpp>
 
 #define CN 9

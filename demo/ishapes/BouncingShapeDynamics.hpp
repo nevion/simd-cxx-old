@@ -14,7 +14,6 @@
 #include <QRect>
 
 // -- Shaped Include
-#include <gen/ccpp_ishape.h>
 #include <topic-traits.hpp>
 
 class BouncingShapeDynamics : public ShapeDynamics {
