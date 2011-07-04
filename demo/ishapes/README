@@ -24,7 +24,8 @@ that the config.h file contains the following definition:
 
 #define ISHAPES_B2_DEMO 1
 
-Otherwise if you want the iShapes application to be built for interoperability, you need to define it as follows:
+Otherwise if you want the iShapes application to be built for
+interoperability, you need to define it as follows:
 
 #define ISHAPES_B2_DEMO 0
 

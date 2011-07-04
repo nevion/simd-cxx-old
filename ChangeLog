@@ -1,8 +1,11 @@
 2011-07-04  Angelo Corsaro  <angelo@icorsaro.net>
 
+	* RELEASE_NOTES: Added a short descriptions of the changes made for
+	v0.10
+
 	* demo/tweet/CMakeLists.txt: Fixed Boost include dependency which
 	was causing some compilation errors.
-	
+
 
 2011-06-21  Angelo Corsaro  <angelo@icorsaro.net>
 

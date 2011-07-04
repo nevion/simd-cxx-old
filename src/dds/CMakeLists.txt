@@ -6,7 +6,7 @@ include (osmacros)
 find_package (OpenSplice REQUIRED)
 
 # SimD uses Signal2 introduced in 1.39.0
-SET (Boost_ADDITIONAL_VERSIONS "1.43.0" "1.43" "1.42.0" "1.42" "1.41.0" "1.41")
+SET (Boost_ADDITIONAL_VERSIONS "1.46.1" "1.46.0" "1.45.0" "1.44.0" "1.43.0" "1.43" "1.42.0" "1.42" "1.41.0" "1.41")
 # MSVC will auto-link libraries so dont need to find them
 IF (MSVC)
   find_package (Boost 1.39.0 REQUIRED)
