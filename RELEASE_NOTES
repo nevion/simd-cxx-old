@@ -7,6 +7,31 @@ as well as on some of the examples, most notably on the iShapes and Tweet
 demos.
 
 
+New Features
+------------
+
+    - SimD works now on MacOS X.
+
+    - SimD works with the OpenSplice DDS Library Mode (tested with
+      OpenSplice v6 beta)
+
+
+
+Changes from v0.9
+-----------------
+
+    - The OpenSplice DDS Daemon is not started automatically
+      anymore. This change has been introduced to make SimD ready for
+      OpenSplice DDS v6 which will support a library mode. 
+
+      This means that you'll have to start OpenSplice, by using the 
+      command:
+
+      $ ospl start
+      
+      before running any SimD application.
+  
+
 ==========================================================================
 [SimD v0.9]
 ==========================================================================
