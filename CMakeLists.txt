@@ -13,7 +13,7 @@ SET( ${PROJECT_NAME}_SOVERSION 0.9.0)
 
 # project options
 OPTION( BUILD_SHARED_LIBS "Set to OFF to build static libraries" ON )
-OPTION( INSTALL_DOC "Set to OFF to skip build/install Documentation" ON )
+#OPTION( INSTALL_DOC "Set to OFF to skip build/install Documentation" ON )
 
 
 # set default install prefix to project root directory

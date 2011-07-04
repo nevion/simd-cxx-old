@@ -30,7 +30,6 @@ int main(int argc, char* argv[]) {
 			      8192,
 			      4196,
 			      8192);
-			      
   dds::Topic<TweetType> topic("TweetTopic", tQos);
 
   dds::DataWriterQos dwQos(tQos);

@@ -4,35 +4,11 @@
 #include <dds/memory.hpp>
 #include <dds/publisher.hpp>
 #include <dds/subscriber.hpp>
-// #include <boost/process.hpp>
 #include <string>
 #include <vector>
 
 const std::string dds::peer::RuntimeImpl::DEFAULT_PARTITION = "";
 dds::peer::RuntimeImpl* dds::peer::RuntimeImpl::this_;
-
-//namespace bp = boost::process;
-
-int startOpenSplice() {
-  int result = 0;
-  /*
-  if (!SIMD_NOSTARTOSPL) {
-    std::string exec(bp::find_executable_in_path("ospl"));
-    std::vector<std::string> args;
-    args.push_back(exec);
-    args.push_back("start");
-
-    bp::context ctx;
-    ctx.environment = bp::self::get_environment(); 
-    ctx.stdout_behavior = bp::silence_stream();
-    bp::child c = bp::launch(exec, args, ctx); 
-    bp::status s = c.wait();
-    result = s.exited() ? s.exit_status() : 1;
-  }
-  */
-  return result;
-}
-
 
 dds::peer::RuntimeImpl::RuntimeImpl(const std::string& domain) 
  : dp_(domain) 
@@ -47,7 +23,6 @@ dds::peer::RuntimeImpl::~RuntimeImpl() {
 }
 
 void dds::peer::RuntimeImpl::start(const std::string& partition) {
-  startOpenSplice();
   this_ = new RuntimeImpl();
   std::vector<std::string> partitions;
   partitions.push_back(partition);
@@ -55,7 +30,6 @@ void dds::peer::RuntimeImpl::start(const std::string& partition) {
 }
 
 void dds::peer::RuntimeImpl::start(const std::vector<std::string>& partitions) {
-  startOpenSplice();
   this_ = new RuntimeImpl();
   this_->init(partitions);
 }
@@ -64,7 +38,6 @@ void dds::peer::RuntimeImpl::start(const std::vector<std::string>& partitions) {
 void dds::peer::RuntimeImpl::start(const std::string& partition,
 				   const std::string& domain)
 {
-  startOpenSplice();
   this_ = new RuntimeImpl(domain);
   std::vector<std::string> partitions;
   partitions.push_back(partition);
@@ -74,7 +47,6 @@ void dds::peer::RuntimeImpl::start(const std::string& partition,
 void dds::peer::RuntimeImpl::start(const std::vector<std::string>& partitions,
 				   const std::string& domain)
 {
-  startOpenSplice();
   this_ = new RuntimeImpl(domain);
   this_->init(partitions);
 }

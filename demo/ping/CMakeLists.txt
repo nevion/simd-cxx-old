@@ -9,7 +9,7 @@ find_package (SimD REQUIRED)
 
 include_directories(
   ${PROJECT_SOURCE_DIR}
-  ${Boost_INCLUDE}
+  ${Boost_INCLUDE_DIRS}
   ${OpenSplice_INCLUDE_DIRS}
   ${SimD_INCLUDE_DIRS}
 )
@@ -59,7 +59,6 @@ add_definitions (
  ${DEFINITIONS}
 )
 
-# Linkar contra librerias deseadas.
 target_link_libraries (
   ${DATAMODEL} 
   ${OpenSplice_LIBRARIES}

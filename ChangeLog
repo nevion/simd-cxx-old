@@ -1,3 +1,62 @@
+2011-07-04  Angelo Corsaro  <angelo@icorsaro.net>
+
+	* demo/tweet/CMakeLists.txt: Fixed Boost include dependency which
+	was causing some compilation errors.
+	
+
+2011-06-21  Angelo Corsaro  <angelo@icorsaro.net>
+
+	* demo/ishapes/config.hpp:
+	* demo/ishapes/ShapesDialog.cpp
+	* demo/ishapes/ReaderQosDialog.cpp
+	* demo/ishapes/ShapesDialog.hpp
+	* demo/ishapes/WriterQosDialog.cpp
+	* demo/ishapes/macos/iShapesForm-small.ui
+	* demo/ishapes/macos/writerQosForm.ui
+	* demo/ishapes/macos/readerQosForm.ui
+	* demo/ishapes/topic-traits.hpp
+	* demo/ishapes/DDSShapeDynamics.hpp
+	* demo/ishapes/CMakeLists.txt
+	* demo/ishapes/ShapeDynamics.hpp
+	* demo/ishapes/Shape.hpp
+	* demo/ishapes/Circle.hpp
+	* demo/ishapes/config.hpp
+	* demo/ishapes/README
+	* demo/ishapes/BouncingShapeDynamics.hpp
+
+	Update the iShapes demo to properly allow the generation of the 
+	executable for testing interoperability and for BlendBox testing.
+
+	
+2011-05-11  Angelo Corsaro  <angelo@icorsaro.net>
+
+	* demo/ishapes/ShapesDialog.cpp: Added macros to switch between
+	the settings required by the B2 vs. the seetings required for the
+	interoperability demo.
+
+	
+2011-05-06  Angelo Corsaro  <angelo@icorsaro.net>
+
+	* demo/ishapes/CMakeLists.txt: Removed dependency from ishapes.qrc 
+	as the resource system is not completely in place yet.
+	
+2011-05-05  Angelo Corsaro  <angelo@icorsaro.net>
+
+	* src/boost: removed entire directory since the upcoming version of
+	OpenSplice will be running on library mode and we don't need to
+	start the daemon any-more.
+
+	* src/dds/peer/runtime_impl.cpp: Removed automatic OpenSplice startup.
+	
+	* demo/ishapes/ShapesWidget.cpp: Enabled Anti-aliased rendering.
+	
+	* demo/ishapes/ishape.idl: Enclosed ShapeType into the 
+	org::opensplice::demo module to make it work smoothly with the 
+	BlendBox (B2) demo.
+
+	* demo/ishapes/ShapesWidget.cpp: 
+	Added AntiAlialsing rendering for better graphics.
+
 2011-02-01  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* src/dds/peer/reader_impl.hpp: 

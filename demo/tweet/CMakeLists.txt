@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 2.6)
 set(CMAKE_MODULE_PATH ../../cmake)
-project (Tweet)
+project (tweet)
 include (MacroOpenSplice)
 include (osmacros)
 find_package (OpenSplice REQUIRED)
@@ -9,7 +9,7 @@ find_package (SimD REQUIRED)
 
 include_directories(
   ${PROJECT_SOURCE_DIR}
-  ${Boost_INCLUDE}
+  ${Boost_INCLUDE_DIRS}
   ${OpenSplice_INCLUDE_DIRS}
   ${SimD_INCLUDE_DIRS}
 )
@@ -46,7 +46,7 @@ set (DATAMODEL datamodel)
 add_executable (${PUB_EXE} ${PUB_SOURCES})
 add_executable (${SUB_EXE} ${SUB_SOURCES})
 add_library (${DATAMODEL} STATIC ${OpenSplice_DATAMODEL})
-#add_library (${DATAMODEL} SHARED ${OpenSplice_DATAMODEL})
+
 
 add_definitions (
  ${OpenSplice_DEFINITIONS}
@@ -71,3 +71,4 @@ target_link_libraries (${SUB_EXE}
  ${Boost_LIBRARIES}
  ${DATAMODEL}
 )
+
