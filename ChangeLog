@@ -1,3 +1,7 @@
+2011-07-06  Angelo Corsaro  <angelo@icorsaro.net>
+
+	* CMakeLists.txt: Updated the SimD version number, v0.10.
+
 2011-07-04  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* RELEASE_NOTES: Added a short descriptions of the changes made for
