@@ -2,9 +2,10 @@
 #define AC_SIMD_DDS_TYPES_HPP
 
 #include <dds/config.hpp>
+#include <dds/osmacros.hpp>
 
 namespace dds {
-  const std::string& retcode2string(::DDS::ReturnCode_t rc);
+  SIMD_API const std::string& retcode2string(::DDS::ReturnCode_t rc);
   typedef ::DDS::SampleInfo SampleInfo;
   typedef ::DDS::SampleInfoSeq SampleInfoSeq;
   typedef ::DDS::Duration_t Duration_t;
