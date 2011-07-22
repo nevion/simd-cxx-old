@@ -12,7 +12,7 @@ namespace dds {
 
 
   template <typename AssertImpl>  
-  class SIMD_API AssertBase : public AssertImpl {
+  class AssertBase : public AssertImpl {
   public:
     inline static void precondition(bool condition) {
       AssertImpl::precondition(condition);

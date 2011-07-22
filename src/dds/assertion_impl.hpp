@@ -5,7 +5,7 @@
 
 namespace dds {
 
-  class SIMD_API NullAssertImpl {
+  class NullAssertImpl {
   public:
     inline static void precondition(bool) {  }
   
@@ -37,7 +37,7 @@ namespace dds {
   };
 
 
-  class SIMD_API SimpleAssertImpl {
+  class SimpleAssertImpl {
   public:
     inline static void precondition(bool condition) {
       if (!condition)
