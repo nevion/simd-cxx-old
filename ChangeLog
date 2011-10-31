@@ -1,3 +1,20 @@
+2011-10-31  Angelo Corsaro  <angelo@icorsaro.net> 
+
+	* README: 
+	* src/dds/peer/runtime_impl.cpp:
+	* src/dds/peer/runtime_impl.hpp:
+	* src/dds/domain.cpp:
+	* src/dds/config.hpp:
+	* src/dds/domain.hpp:
+	* src/dds/runtime.cpp:
+	* src/dds/runtime.hpp:
+	* src/dds/ospl-ver.hpp:
+
+	  Added support for int-typed domainId as supported by OpenSplice
+	v6.x. The compilation flags defined on the src/dds/ospl-ver.hpp
+	allow to select the v5.x or v6.x API style.
+	
+
 2011-07-06  Angelo Corsaro  <angelo@icorsaro.net>
 
 	* CMakeLists.txt: Updated the SimD version number, v0.10.

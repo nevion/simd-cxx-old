@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>221</width>
-    <height>335</height>
+    <width>222</width>
+    <height>339</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -98,7 +98,7 @@
       <x>10</x>
       <y>20</y>
       <width>181</width>
-      <height>51</height>
+      <height>59</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -180,7 +180,7 @@
       <x>10</x>
       <y>20</y>
       <width>171</width>
-      <height>20</height>
+      <height>27</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -221,8 +221,8 @@
      <rect>
       <x>10</x>
       <y>20</y>
-      <width>171</width>
-      <height>21</height>
+      <width>191</width>
+      <height>26</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_6">
@@ -241,6 +241,11 @@
        <item>
         <property name="text">
          <string>Volatile</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Transient Local</string>
         </property>
        </item>
        <item>

@@ -7,10 +7,6 @@ find_package (OpenSplice REQUIRED)
 find_package (Boost REQUIRED COMPONENTS thread program_options system)
 find_package (SimD REQUIRED)
 
-if (APPLE)
-   set(QT_LIBRARY_DIR /Library/Framework)
-   set(QT_BINARY_DIR /usr/bin)
-endif (APPLE)
 find_package (Qt4 REQUIRED COMPONENTS QtCore QtGui QtOpenGL QtSVg QtMultimedia)
 
 include_directories(

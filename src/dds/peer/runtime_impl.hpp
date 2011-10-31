@@ -26,10 +26,18 @@ namespace dds {
   public:
     static void start();
     static void start(const std::string& partition);
-    static void start(const std::vector<std::string>& partition);
+
+#if (SIMD_OSPL_MAJ_VER >= 6)
+    static void start(const std::string& partition, int domainID);
+    static void start(const std::vector<std::string>& partition, 
+		      int domain);
+#else
     static void start(const std::string& partition, const std::string& domain);
     static void start(const std::vector<std::string>& partition, 
 		      const std::string& domain);
+
+#endif /* (SIMD_OSPL_MAJ_VER >= 6) */
+    static void start(const std::vector<std::string>& partition);
     /*
       static void start(std::ifstream& is);
 
@@ -41,8 +49,11 @@ namespace dds {
   protected:
     RuntimeImpl();
 
+#if (SIMD_OSPL_MAJ_VER >= 6)
+    RuntimeImpl(int domainId);
+#else
     RuntimeImpl(const std::string& domain);
-
+#endif /* (SIMD_OSPL_MAJ_VER >= 6) */
     void init(const std::vector<std::string>& partitions);
   public:
     ~RuntimeImpl();

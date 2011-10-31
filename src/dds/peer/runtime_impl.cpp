@@ -10,9 +10,51 @@
 const std::string dds::peer::RuntimeImpl::DEFAULT_PARTITION = "";
 dds::peer::RuntimeImpl* dds::peer::RuntimeImpl::this_;
 
+#if (SIMD_OSPL_MAJ_VER >= 6)
+dds::peer::RuntimeImpl::RuntimeImpl(int domainId) 
+ : dp_(domainId) 
+{ }
+
+void dds::peer::RuntimeImpl::start(const std::string& partition,
+				   int domainId)
+{
+  this_ = new RuntimeImpl(domainId);
+  std::vector<std::string> partitions;
+  partitions.push_back(partition);
+  this_->init(partitions);
+}
+
+void dds::peer::RuntimeImpl::start(const std::vector<std::string>& partitions,
+				   int domainId)
+{
+  this_ = new RuntimeImpl(domainId);
+  this_->init(partitions);
+}
+
+
+#else 
 dds::peer::RuntimeImpl::RuntimeImpl(const std::string& domain) 
  : dp_(domain) 
 { }
+
+void dds::peer::RuntimeImpl::start(const std::string& partition,
+				   const std::string& domain)
+{
+  this_ = new RuntimeImpl(domain);
+  std::vector<std::string> partitions;
+  partitions.push_back(partition);
+  this_->init(partitions);
+}
+
+void dds::peer::RuntimeImpl::start(const std::vector<std::string>& partitions,
+				   const std::string& domain)
+{
+  this_ = new RuntimeImpl(domain);
+  this_->init(partitions);
+}
+
+#endif /* (SIMD_OSPL_MAJ_VER >= 6) */
+
 
 dds::peer::RuntimeImpl::RuntimeImpl() { }
 
@@ -35,21 +77,6 @@ void dds::peer::RuntimeImpl::start(const std::vector<std::string>& partitions) {
 }
 
 
-void dds::peer::RuntimeImpl::start(const std::string& partition,
-				   const std::string& domain)
-{
-  this_ = new RuntimeImpl(domain);
-  std::vector<std::string> partitions;
-  partitions.push_back(partition);
-  this_->init(partitions);
-}
-
-void dds::peer::RuntimeImpl::start(const std::vector<std::string>& partitions,
-				   const std::string& domain)
-{
-  this_ = new RuntimeImpl(domain);
-  this_->init(partitions);
-}
 
 void dds::peer::RuntimeImpl::init(const std::vector<std::string>& partitions) {
   pub_ = new dds::Publisher(partitions);

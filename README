@@ -28,6 +28,30 @@ point to the boost installation containing headers and libraries
 respectively.
 
 
+CONFIGURING the OpenSplice DDS Version
+-----------
+
+OpenSplice DDS v6.x has introduced a chance in the
+DomainParticipantFactory API which now expects the domainId to be an
+integer (before was a string). 
+
+SimD will supports OpenSplice DDS v5.x as well as v6.x but in order for
+it to compile properly you need to set the right version on the file:
+
+   ./src/dds/ospl-ver.hpp
+
+For instance, for OpenSplice DDS v6.1 the setting should be:
+
+#define SIMD_OSPL_MAJ_VER 6
+#define SIMD_OSPL_MIN_VER 1
+
+While for OpenSplice DDS v5.5 would be:
+
+#define SIMD_OSPL_MAJ_VER 5
+#define SIMD_OSPL_MIN_VER 5
+
+
+
 COMPILING
 ---------
 Once you've obtained a copy of SimD, decide where you want to install it,

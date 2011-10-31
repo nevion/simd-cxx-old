@@ -6,18 +6,31 @@ dds::Runtime::Runtime(const std::string& partition) {
   ::dds::peer::RuntimeImpl::start(partition);
 }
 
+#if (SIMD_OSPL_MAJ_VER >= 6)
+dds::Runtime::Runtime(const std::string& partition, int domainId) {
+  ::dds::peer::RuntimeImpl::start(partition, domainId);
+}
+
+dds::Runtime::Runtime(const std::vector<std::string>& partitions,
+		      int domainId) {
+  ::dds::peer::RuntimeImpl::start(partitions, domainId);
+}
+
+#else 
+dds::Runtime::Runtime(const std::string& partition, const std::string& domainId) {
+  ::dds::peer::RuntimeImpl::start(partition, domainId);
+}
+
+dds::Runtime::Runtime(const std::vector<std::string>& partitions,
+		      const std::string& domainId) {
+  ::dds::peer::RuntimeImpl::start(partitions, domainId);
+}
+#endif /* (SIMD_OSPL_MAJ_VER >= 6) */
+
 dds::Runtime::Runtime(const std::vector<std::string>& partitions) {
   ::dds::peer::RuntimeImpl::start(partitions);
 }
 
-dds::Runtime::Runtime(const std::string& partition, const std::string& domain) {
-  ::dds::peer::RuntimeImpl::start(partition, domain);
-}
-
-dds::Runtime::Runtime(const std::vector<std::string>& partitions,
-		      const std::string& domain) {
-  ::dds::peer::RuntimeImpl::start(partitions, domain);
-}
 
 dds::Runtime::~Runtime() { 
   ::dds::peer::RuntimeImpl::stop();

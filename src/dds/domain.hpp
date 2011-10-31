@@ -25,8 +25,11 @@ namespace dds {
   class SIMD_API DomainParticipant : public boost::shared_ptr<DDS::DomainParticipant> {
   public:
     DomainParticipant();
-    DomainParticipant(const std::string& partition);
-
+#if (SIMD_OSPL_MAJ_VER == 6)
+    DomainParticipant(int domainId);
+#else
+    DomainParticipant(const std::string& domain);
+#endif
     /*
       DomainParticipant(const std::string& domain,
       const DDS::DomainParticipantQos& qos);

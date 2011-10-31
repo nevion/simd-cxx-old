@@ -2,6 +2,7 @@
 #define AC_DDS_RUNTIME_HPP_
 
 #include <string>
+#include <dds/config.hpp>
 #include <dds/domain.hpp>
 #include <dds/publisher.hpp>
 #include <dds/subscriber.hpp>
@@ -19,10 +20,18 @@ public:
 
   Runtime(const std::vector<std::string>& partitions);
 
+#if (SIMD_OSPL_MAJ_VER >= 6)
+  Runtime(const std::string& partition, int domainID);
+
+  Runtime(const std::vector<std::string>& partitions, 
+	  int domainID);
+
+#else
   Runtime(const std::string& partition, const std::string& domain);
 
   Runtime(const std::vector<std::string>& partitions, 
 	  const std::string& domain);
+#endif /* (SIMD_OSPL_MAJ_VER >= 6) */
 
   ~Runtime();
 
