@@ -18,6 +18,10 @@ $ cd build
 $ cmake -DCMAKE_INSTALL_PREFIX=$SIMD_INSTALL_DIR ..
 $ make install
 
+If you prefer to compiler using clang++ you should configure the project
+with the following command:
+
+$ cmake .. -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_INSTALL_PREFIX=$SIMD_INSTALL_DIR
 
 Then to see if you installation was successful try out a demo:
 
