@@ -7,7 +7,7 @@ find_package (OpenSplice REQUIRED)
 find_package (Boost REQUIRED COMPONENTS thread program_options system)
 find_package (SimD REQUIRED)
 
-find_package (Qt4 REQUIRED COMPONENTS QtCore QtGui QtOpenGL QtSVg QtMultimedia)
+find_package (Qt4 REQUIRED COMPONENTS QtCore QtGui)
 
 include_directories(
   ${PROJECT_SOURCE_DIR}

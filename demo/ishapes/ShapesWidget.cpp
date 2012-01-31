@@ -8,6 +8,7 @@
 #include <iostream>
 #include <QtGui>
 #include <boost/shared_ptr.hpp>
+#include "config.hpp"
 #include "ShapesWidget.hpp"
 
 
@@ -44,8 +45,8 @@ void
 ShapesWidget::paintEvent(QPaintEvent*) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.drawPixmap(15, 300, logo_);
-    painter.drawPixmap(200, 10, simd_);
+    painter.drawPixmap(BRAND_LOGO_X, BRAND_LOGO_Y, logo_);
+    painter.drawPixmap(SIMD_LOGO_X, SIMD_LOGO_Y, simd_);
     if (showCurrentFilter_) {
       QBrush brush(QColor(0x99,0x99,0x99,0x99), Qt::SolidPattern);
       painter.setBrush(brush);

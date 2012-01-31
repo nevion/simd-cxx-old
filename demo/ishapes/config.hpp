@@ -1,15 +1,28 @@
 #ifndef SIMD_DEMO_ISHAPES_CONFIG_HPP
 #define SIMD_DEMO_ISHAPES_CONFIG_HPP
 
-#define ISHAPES_B2_DEMO 1
+#define ISHAPES_B2_DEMO 0
 #define ISHAPES_WIDE_FORMAT 0
-
+/*
+ painter.drawPixmap(15, 300, logo_);
+    painter.drawPixmap(200, 10, simd_);
+ */
 #if  (ISHAPES_WIDE_FORMAT == 1)
-#  define IS_WIDTH 500
-#  define IS_WIDTH 360
+#  define IS_WIDTH 501
+#  define IS_HEIGHT 361
+#  define SIMD_LOGO_X 380
+#  define SIMD_LOGO_Y 10
+//#  define BRAND_LOGO_X 195
+//#  define BRAND_LOGO_Y 300
+#  define BRAND_LOGO_X 2
+#  define BRAND_LOGO_Y 270
 #else
 #  define IS_WIDTH  321
 #  define IS_HEIGHT 361
+#  define SIMD_LOGO_X 200
+#  define SIMD_LOGO_Y 1
+#  define BRAND_LOGO_X 15
+#  define BRAND_LOGO_Y 300
 #endif
 
 
