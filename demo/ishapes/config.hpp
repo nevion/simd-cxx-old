@@ -1,8 +1,9 @@
 #ifndef SIMD_DEMO_ISHAPES_CONFIG_HPP
 #define SIMD_DEMO_ISHAPES_CONFIG_HPP
 
-#define ISHAPES_B2_DEMO 0
-#define ISHAPES_WIDE_FORMAT 0
+#define ISHAPES_B2_DEMO  1
+#define ISHAPES_WIDE_FORMAT 1
+#define REFRESH_PERIOD 40 //ms
 /*
  painter.drawPixmap(15, 300, logo_);
     painter.drawPixmap(200, 10, simd_);
@@ -15,7 +16,7 @@
 //#  define BRAND_LOGO_X 195
 //#  define BRAND_LOGO_Y 300
 #  define BRAND_LOGO_X 2
-#  define BRAND_LOGO_Y 270
+#  define BRAND_LOGO_Y 300
 #else
 #  define IS_WIDTH  321
 #  define IS_HEIGHT 361

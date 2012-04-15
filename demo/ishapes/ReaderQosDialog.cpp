@@ -55,5 +55,14 @@ ReaderQosDialog::get_qos()
   else
     qos_.set_keep_all();
   
+  if (qosForm_.timeBasedFilterActive->isChecked()) {
+    int period = 
+      qosForm_.timeBasedFilterValue->text().toInt();
+    int sec = period / 1000;
+    int nsec = (period - (sec/1000))/1000000;
+    DDS::Duration_t d = {sec, nsec};
+    qos_.set_time_filter(d);
+  }
+  
   return qos_;
 }

@@ -12,6 +12,7 @@
 
 static const float PI = 3.1415926535F;
 
+
 /* Ugly hack -- fixme */
 static QColor  color_[CN];
 
@@ -72,7 +73,7 @@ ShapesDialog::ShapesDialog()
   color_[CYAN] = QColor(0x99, 0xCC, 0xFF);
   color_[GRAY] = QColor(0x99, 0x99, 0x99);
   color_[BLACK] = QColor(0x33, 0x33, 0x33);
-  timer.start(40);
+  timer.start(REFRESH_PERIOD);
 }
 
 ShapesDialog::~ShapesDialog() {
