@@ -131,7 +131,6 @@ ShapesDialog::onPublishButtonClicked() {
     boost::shared_ptr<Shape>
       square(new Square(rect, dynamics, pen, brush));
     shapesWidget->addShape(square);
-    // std::cout << "CREATE SQUARE" << std::endl;
     break;
   }
   case TRIANGLE: {
@@ -147,7 +146,6 @@ ShapesDialog::onPublishButtonClicked() {
     boost::shared_ptr<Shape>
       triangle(new Triangle(rect, dynamics, pen, brush));
     shapesWidget->addShape(triangle);
-    // std::cout << "CREATE TRIANGLE" << std::endl;
     break;
   }
   default:
@@ -309,6 +307,5 @@ ShapesDialog::onWriterQosButtonClicked()
 void
 ShapesDialog::onFilterButtonClicked()
 {
-  // std::cout << "FilterButton Clicked" << std::endl;
   filterDialog_->setVisible(true);
 }
