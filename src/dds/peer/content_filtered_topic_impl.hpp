@@ -54,7 +54,7 @@ public:
                                 __FILE__); 
   }
 
-  ~ContentFilteredTopicImpl() {
+  virtual ~ContentFilteredTopicImpl() {
     dp_->delete_contentfilteredtopic(cft_);
   }
 
