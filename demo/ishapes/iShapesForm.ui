@@ -57,7 +57,11 @@
    </property>
    <property name="font">
     <font>
+     <family>Ubuntu</family>
      <pointsize>10</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
     </font>
    </property>
    <property name="frameShape">
@@ -72,12 +76,16 @@
       <x>10</x>
       <y>10</y>
       <width>151</width>
-      <height>181</height>
+      <height>191</height>
      </rect>
     </property>
     <property name="font">
      <font>
+      <family>Ubuntu</family>
       <pointsize>10</pointsize>
+      <weight>75</weight>
+      <italic>false</italic>
+      <bold>true</bold>
      </font>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -92,8 +100,11 @@
           <widget class="QLabel" name="wShapeLabel">
            <property name="font">
             <font>
-             <family>Sans Serif</family>
-             <pointsize>9</pointsize>
+             <family>Ubuntu</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <italic>false</italic>
+             <bold>true</bold>
              <stylestrategy>PreferAntialias</stylestrategy>
              <kerning>false</kerning>
             </font>
@@ -113,8 +124,11 @@
           <widget class="QLabel" name="colorLabel">
            <property name="font">
             <font>
-             <family>Sans Serif</family>
-             <pointsize>9</pointsize>
+             <family>Ubuntu</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <italic>false</italic>
+             <bold>true</bold>
              <stylestrategy>PreferAntialias</stylestrategy>
              <kerning>false</kerning>
             </font>
@@ -131,8 +145,11 @@
           <widget class="QLabel" name="label">
            <property name="font">
             <font>
-             <family>Sans Serif</family>
-             <pointsize>9</pointsize>
+             <family>Ubuntu</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <italic>false</italic>
+             <bold>true</bold>
              <stylestrategy>PreferAntialias</stylestrategy>
              <kerning>false</kerning>
             </font>
@@ -149,8 +166,11 @@
           <widget class="QLabel" name="label_2">
            <property name="font">
             <font>
-             <family>Sans Serif</family>
-             <pointsize>9</pointsize>
+             <family>Ubuntu</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <italic>false</italic>
+             <bold>true</bold>
              <stylestrategy>PreferAntialias</stylestrategy>
              <kerning>false</kerning>
             </font>
@@ -174,8 +194,11 @@
           <widget class="QComboBox" name="wShapeList">
            <property name="font">
             <font>
-             <family>Sans Serif</family>
-             <pointsize>9</pointsize>
+             <family>Ubuntu</family>
+             <pointsize>10</pointsize>
+             <weight>50</weight>
+             <italic>false</italic>
+             <bold>false</bold>
              <stylestrategy>PreferAntialias</stylestrategy>
              <kerning>false</kerning>
             </font>
@@ -201,8 +224,11 @@
           <widget class="QComboBox" name="colorList">
            <property name="font">
             <font>
-             <family>Sans Serif</family>
-             <pointsize>9</pointsize>
+             <family>Ubuntu</family>
+             <pointsize>10</pointsize>
+             <weight>50</weight>
+             <italic>false</italic>
+             <bold>false</bold>
              <stylestrategy>PreferAntialias</stylestrategy>
              <kerning>false</kerning>
             </font>
@@ -251,6 +277,15 @@
          </item>
          <item>
           <widget class="QSlider" name="sizeSlider">
+           <property name="font">
+            <font>
+             <family>Ubuntu</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <italic>true</italic>
+             <bold>true</bold>
+            </font>
+           </property>
            <property name="minimum">
             <number>10</number>
            </property>
@@ -282,6 +317,15 @@
          </item>
          <item>
           <widget class="QSlider" name="speedSlider">
+           <property name="font">
+            <font>
+             <family>Ubuntu</family>
+             <pointsize>10</pointsize>
+             <weight>75</weight>
+             <italic>true</italic>
+             <bold>true</bold>
+            </font>
+           </property>
            <property name="minimum">
             <number>10</number>
            </property>
@@ -325,8 +369,11 @@
        </property>
        <property name="font">
         <font>
-         <family>Sans Serif</family>
-         <pointsize>9</pointsize>
+         <family>Ubuntu</family>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <italic>true</italic>
+         <bold>true</bold>
          <stylestrategy>PreferAntialias</stylestrategy>
          <kerning>false</kerning>
         </font>
@@ -359,8 +406,11 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="font">
         <font>
-         <family>Sans Serif</family>
-         <pointsize>9</pointsize>
+         <family>Ubuntu</family>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <italic>true</italic>
+         <bold>true</bold>
          <stylestrategy>PreferAntialias</stylestrategy>
          <kerning>false</kerning>
         </font>
@@ -389,6 +439,15 @@ p, li { white-space: pre-wrap; }
      <height>151</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Ubuntu</family>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <italic>true</italic>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="frameShape">
     <enum>QFrame::Box</enum>
    </property>
@@ -401,8 +460,17 @@ p, li { white-space: pre-wrap; }
       <x>10</x>
       <y>10</y>
       <width>151</width>
-      <height>137</height>
+      <height>138</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
      <item>
@@ -411,8 +479,11 @@ p, li { white-space: pre-wrap; }
         <widget class="QLabel" name="label_3">
          <property name="font">
           <font>
-           <family>Sans Serif</family>
-           <pointsize>9</pointsize>
+           <family>Ubuntu</family>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <italic>false</italic>
+           <bold>true</bold>
            <stylestrategy>PreferAntialias</stylestrategy>
            <kerning>false</kerning>
           </font>
@@ -429,8 +500,11 @@ p, li { white-space: pre-wrap; }
         <widget class="QComboBox" name="rShapeList">
          <property name="font">
           <font>
-           <family>Sans Serif</family>
-           <pointsize>9</pointsize>
+           <family>Ubuntu</family>
+           <pointsize>10</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
            <stylestrategy>PreferAntialias</stylestrategy>
            <kerning>false</kerning>
           </font>
@@ -458,8 +532,11 @@ p, li { white-space: pre-wrap; }
       <widget class="QPushButton" name="subQosButton">
        <property name="font">
         <font>
-         <family>Sans Serif</family>
-         <pointsize>9</pointsize>
+         <family>Ubuntu</family>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <italic>true</italic>
+         <bold>true</bold>
          <stylestrategy>PreferAntialias</stylestrategy>
          <kerning>false</kerning>
         </font>
@@ -480,8 +557,11 @@ p, li { white-space: pre-wrap; }
       <widget class="QPushButton" name="filterButton">
        <property name="font">
         <font>
-         <family>Sans Serif</family>
-         <pointsize>9</pointsize>
+         <family>Ubuntu</family>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <italic>true</italic>
+         <bold>true</bold>
          <stylestrategy>PreferAntialias</stylestrategy>
          <kerning>false</kerning>
         </font>
@@ -502,8 +582,11 @@ p, li { white-space: pre-wrap; }
       <widget class="QPushButton" name="createReaderButton">
        <property name="font">
         <font>
-         <family>Sans Serif</family>
-         <pointsize>9</pointsize>
+         <family>Ubuntu</family>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <italic>true</italic>
+         <bold>true</bold>
          <stylestrategy>PreferAntialias</stylestrategy>
          <kerning>false</kerning>
         </font>
@@ -613,6 +696,15 @@ p, li { white-space: pre-wrap; }
       </colorrole>
      </disabled>
     </palette>
+   </property>
+   <property name="font">
+    <font>
+     <family>Ubuntu</family>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <italic>true</italic>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="autoFillBackground">
     <bool>true</bool>
