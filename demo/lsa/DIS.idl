@@ -1,0 +1,76 @@
+module lsa {
+    module dis {
+    // TODO: Ensure (if we care) that structures are optimally aligned --
+    // i.e. reorder attributes if necessary
+
+    struct EntityId {
+      unsigned short site;
+      unsigned short application;
+      unsigned short entity;
+    };
+
+    /*
+     * Used just a subset to show the principles...
+     */
+    enum ForceId {
+      OTHER_FORCE_ID,
+      FRIENDLY,
+      OPPOSING,
+      NEUTRAL
+    };
+
+    enum EntityKind {
+      OTHER_ENTITY_KIND,
+      PLATFORM,
+      MUNITION,
+      LIFE_FORM,
+      ENVIRONMENTAL,
+      CULTURAL_FEATURE,
+      SUPPLY,
+      RADIO,
+      EXPENDABLE,
+      SENSOR_EMITTER
+    };
+
+
+    struct EntityType {
+      EntityKind kind;
+      octet domain;
+      unsigned short country;
+      octet category;
+      octet subcategory;
+      octet specific;
+      octet extra;
+    };
+
+    struct LinearVelocity {
+      float x;
+      float y;
+      float z;
+    };
+
+
+    struct Location {
+      double x;
+      double y;
+      double z;
+    };
+
+    struct Orientation {
+      float psi;
+      float theta;
+      float phi;
+    };
+
+    struct EntityState {
+      EntityId id;
+      ForceId forceId;
+      EntityType type;
+      Location location;
+      LinearVelocity velocity;
+      Orientation orientation;
+      string marking;
+    };
+    #pragma keylist EntityState id.site id.application id.entity
+  };
+};
