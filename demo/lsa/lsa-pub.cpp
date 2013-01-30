@@ -52,6 +52,7 @@ int main(int argc, char* argv[]) {
   lsa::demo::Ship ship(shipES);
   while (true) {
     dw.write(ship.tick());
+    std::cout << "." << std::endl;
     usleep(simulationPeriod);
   }
   return 0;

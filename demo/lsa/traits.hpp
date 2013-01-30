@@ -5,6 +5,7 @@
 #include <dds/runtime.hpp>
 #include <dds/topic.hpp>
 #include <dds/writer.hpp>
+#include <dds/reader.hpp>
 #include <dds/traits.hpp>
 
 
