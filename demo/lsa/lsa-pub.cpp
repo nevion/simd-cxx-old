@@ -4,20 +4,30 @@
 #include <traits.hpp>
 #include <Ship.hpp>
 
-std::string shipName = "Nautilus";
 long simulationPeriod = 1000 * 1000; // usec 
 
 int main(int argc, char* argv[]) {
+  std::string shipName;
+  int site;
+  int application;
+  std::cout << "Please, enter the following simulation parameters:\n";
+  std::cout << "Ship Name: ";
+  std::cin >> shipName;
+  std::cout << "Site Id: ";
+  std::cin >> site;
+  std::cout << "Application Id: ";
+  std::cin >> application;
   dds::Runtime runtime("");
+
   dds::Topic<lsa::dis::EntityState> entityStateTopic("EntityStateTopic");
   dds::DataWriter<lsa::dis::EntityState> dw(entityStateTopic);
+  
 
-  // TODO: Fix me by using arg-line params
   lsa::dis::EntityState shipES;
   // EntityID
-  shipES.id.site = 0;
-  shipES.id.application = 1;
-  shipES.id.entity = 2;
+  shipES.id.site = site;
+  shipES.id.application = application;
+  shipES.id.entity = 0;
 
   // Force ID
   shipES.forceId = lsa::dis::FRIENDLY;
