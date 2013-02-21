@@ -37,7 +37,7 @@ ShapesDialog::ShapesDialog()
   :   timer(this),
       filterExpression_("(x BETWEEN %0 AND %1) AND (y BETWEEN %2 AND %3)")
 {
-#if (ISHAPES_B2_DEMO == 1)
+#if (PERSISTENT_TOPIC == 0)
   circleTopic_ = dds::Topic<ShapeType>(circleTopicName);
   squareTopic_ = dds::Topic<ShapeType>(squareTopicName);
   triangleTopic_ = dds::Topic<ShapeType>(triangleTopicName);
@@ -48,10 +48,10 @@ ShapesDialog::ShapesDialog()
   tqos.set_persistent();
   tqos.set_durability_service(cleanup_delay,
 			      DDS::KEEP_LAST_HISTORY_QOS,
-			      100,
-			      8192,
-			      4196,
-			      8192);
+			      DS_HISTORY,
+			      DS_MAX_SAMPLES,
+			      DS_MAX_INSTANCES,
+			      DS_MAX_SAMPLES_X_INSTANCE);
 
   circleTopic_ = dds::Topic<ShapeType>(circleTopicName, tqos);
   squareTopic_ = dds::Topic<ShapeType>(squareTopicName, tqos);

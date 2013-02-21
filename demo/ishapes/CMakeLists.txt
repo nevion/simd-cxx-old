@@ -24,8 +24,8 @@ ${QT_USE_FILE}
 )
 
  
-set (idls ishape.idl ishapeiop.idl)
-
+# set (idls ishape.idl ishapeiop.idl)
+set (idls ishape.idl)
 
 foreach(idl ${idls})
 	OpenSplice_IDLGEN (${idl})
