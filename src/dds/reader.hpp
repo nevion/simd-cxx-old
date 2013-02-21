@@ -348,7 +348,7 @@ public:
   template <typename Signal> 
   dds::sigcon_t 
   connect(typename Signal::template traits<T>::slot_type slot) {
-    return pimpl_->connect<Signal>(slot);
+    return pimpl_->template connect<Signal>(slot);
   }
   
 protected:
