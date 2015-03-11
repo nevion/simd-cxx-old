@@ -99,8 +99,20 @@ dds::WaitSet::dispatch() {
 	this->dispatch(DDS::DURATION_INFINITE);
 }
 
-
 void
 dds::WaitSet::wait() {
   this->wait(DDS::DURATION_INFINITE);
+}
+
+#if defined(WIN32)
+HANDLE
+#elif defined(_POSIX_C_SOURCE)
+int
+#endif
+dds::WaitSet::get_os_waitable_handle(){
+    return waitset_.get_os_waitable_handle();
+}
+
+uint64_t dds::WaitSet::clear_os_waitable_handle_events(){
+    return waitset_.clear_os_waitable_handle_events();
 }

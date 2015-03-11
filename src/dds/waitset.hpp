@@ -95,6 +95,13 @@ class SIMD_API dds::WaitSet : public ::boost::noncopyable {
 
   dds::ReturnCode_t attach(const ::dds::Condition& cond);
   dds::ReturnCode_t detach(const ::dds::Condition& cond);
+#if defined(WIN32)
+  HANDLE
+#elif defined(_POSIX_C_SOURCE)
+  int
+#endif
+  get_os_waitable_handle();
+  uint64_t clear_os_waitable_handle_events();
 
   iterator begin();
   iterator end();
