@@ -14,7 +14,11 @@
 #
 ##############################################################################
 # Courtesy of Ivan Galvez Junquera <ivgalvez@gmail.com>
+# Revamped by Jason Newton <nevion@gmail.com>
 ##############################################################################
+
+find_package(PackageHandleStandardArgs)
+
 FIND_PATH(OpenSplice_INCLUDE_DIR
 	NAMES
 		ccpp_dds_dcps.h
@@ -27,6 +31,7 @@ SET(OpenSplice_INCLUDE_DIRS
 	$ENV{OSPL_HOME}/include 
 	$ENV{OSPL_HOME}/include/sys
 )
+set(OpenSplice_INCLUDE_DIRS "${OpenSplice_INCLUDE_DIRS}" CACHE FILEPATH "OpenSplice include directories")
 
 # Find libraries
 FIND_LIBRARY(DCPSGAPI_LIBRARY
@@ -63,21 +68,18 @@ SET(OpenSplice_LIBRARIES
 			${DDSDATABASE_LIBRARY}
 			${DDSOS_LIBRARY}
 )
+set(OpenSplice_LIBRARIES "${OpenSplice_LIBRARIES}" CACHE FILEPATH "OpenSplice libraries")
 
-# Binary for the IDL compiler 
-SET (OpenSplice_IDLGEN_BINARY $ENV{OSPL_HOME}/bin/idlpp)
+# Binary for the IDL compiler
+set(OpenSplice_IDLGEN_BINARY $ENV{OSPL_HOME}/bin/idlpp CACHE FILEPATH "OpenSplice idlpp IDL tool")
 
-IF (OpenSplice_INCLUDE_DIRS AND OpenSplice_LIBRARIES)
-	SET(OpenSplice_FOUND TRUE)
-ENDIF (OpenSplice_INCLUDE_DIRS AND OpenSplice_LIBRARIES)
+mark_as_advanced(
+    OpenSplice_INCLUDE_DIRS
+    OpenSplice_LIBRARIES
+    OpenSplice_IDLGEN_BINARY
+)
 
-IF (OpenSplice_FOUND)
-	MESSAGE(STATUS "Found OpenSplice DDS libraries: ${OpenSplice_LIBRARIES}")
-ELSE (OpenSplice_FOUND)
-	IF (OpenSplice_FIND_REQUIRED)
-		MESSAGE(FATAL_ERROR "Could not find OpenSplice DDS")
-	ENDIF (OpenSplice_FIND_REQUIRED)
-ENDIF (OpenSplice_FOUND)
+find_package_handle_standard_args(OpenSplice FOUND_VAR OpenSplice_FOUND REQUIRED_VARS OpenSplice_LIBRARIES)
 
-MARK_AS_ADVANCED(OpenSplice_INCLUDE_DIRS OpenSplice_LIBRARIES OpenSplice_IDLGEN_BINARY)
-INCLUDE (MacroOpenSplice)
+
+include(OpenSplice)
