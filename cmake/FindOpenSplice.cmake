@@ -19,54 +19,44 @@
 
 find_package(PackageHandleStandardArgs)
 
-FIND_PATH(OpenSplice_INCLUDE_DIR
-	NAMES
-		ccpp_dds_dcps.h
-	PATHS
-		$ENV{OSPL_HOME}/include/dcps/C++/SACPP
+find_path(OpenSplice_INCLUDE_DIR
+    NAMES ccpp_dds_dcps.h
+    PATHS $ENV{OSPL_HOME}/include/dcps/C++/SACPP
 )
 
-SET(OpenSplice_INCLUDE_DIRS 
-	${OpenSplice_INCLUDE_DIR} 
-	$ENV{OSPL_HOME}/include 
-	$ENV{OSPL_HOME}/include/sys
+set(OpenSplice_INCLUDE_DIRS
+    ${OpenSplice_INCLUDE_DIR}
+    $ENV{OSPL_HOME}/include
+    $ENV{OSPL_HOME}/include/sys
 )
 set(OpenSplice_INCLUDE_DIRS "${OpenSplice_INCLUDE_DIRS}" CACHE FILEPATH "OpenSplice include directories")
 
 # Find libraries
-FIND_LIBRARY(DCPSGAPI_LIBRARY
-	NAMES
-		dcpsgapi
-	PATHS
-		$ENV{OSPL_HOME}/lib
+find_library(DCPSGAPI_LIBRARY
+    NAMES dcpsgapi
+    PATHS $ENV{OSPL_HOME}/lib
 )
 
-FIND_LIBRARY(DCPSSACPP_LIBRARY
-	NAMES
-		dcpssacpp
-	PATHS
-		$ENV{OSPL_HOME}/lib
+find_library(DCPSSACPP_LIBRARY
+    NAMES dcpssacpp
+    PATHS $ENV{OSPL_HOME}/lib
 )
 
-FIND_LIBRARY(DDSDATABASE_LIBRARY
-	NAMES
-		ddsdatabase
-	PATHS
-		$ENV{OSPL_HOME}/lib
+find_library(DDSDATABASE_LIBRARY
+    NAMES ddsdatabase
+    PATHS $ENV{OSPL_HOME}/lib
 )
 
-FIND_LIBRARY(DDSOS_LIBRARY
-   NAMES
-		ddsos
-   PATHS
-      $ENV{OSPL_HOME}/lib
+find_library(DDSOS_LIBRARY
+   NAMES ddsos
+   PATHS $ENV{OSPL_HOME}/lib
 )
 
-SET(OpenSplice_LIBRARIES
-			${DCPSGAPI_LIBRARY}
-			${DCPSSACPP_LIBRARY}
-			${DDSDATABASE_LIBRARY}
-			${DDSOS_LIBRARY}
+set(OpenSplice_LIBRARIES
+    ${DCPSGAPI_LIBRARY}
+    ${DCPSSACPP_LIBRARY}
+    ${DDSDATABASE_LIBRARY}
+    ${DDSOS_LIBRARY}
 )
 set(OpenSplice_LIBRARIES "${OpenSplice_LIBRARIES}" CACHE FILEPATH "OpenSplice libraries")
 
