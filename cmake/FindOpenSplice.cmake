@@ -31,33 +31,16 @@ set(OpenSplice_INCLUDE_DIRS
 )
 set(OpenSplice_INCLUDE_DIRS "${OpenSplice_INCLUDE_DIRS}" CACHE FILEPATH "OpenSplice include directories")
 
-# Find libraries
-find_library(DCPSGAPI_LIBRARY
-    NAMES dcpsgapi
-    PATHS $ENV{OSPL_HOME}/lib
-)
+set(OpenSplice_LIBS dcpsgapi dcpssacpp ddsdatabase ddsos ddskernel)
+set(OpenSplice_LIBRARIES)
+foreach(lib ${OpenSplice_LIBS})
+    find_library(OpenSplice_${lib}_LIBRARY
+        NAMES ${lib}
+        PATHS $ENV{OSPL_HOME}/lib
+    )
+    list(APPEND OpenSplice_LIBRARIES ${OpenSplice_${lib}_LIBRARY})
+endforeach()
 
-find_library(DCPSSACPP_LIBRARY
-    NAMES dcpssacpp
-    PATHS $ENV{OSPL_HOME}/lib
-)
-
-find_library(DDSDATABASE_LIBRARY
-    NAMES ddsdatabase
-    PATHS $ENV{OSPL_HOME}/lib
-)
-
-find_library(DDSOS_LIBRARY
-   NAMES ddsos
-   PATHS $ENV{OSPL_HOME}/lib
-)
-
-set(OpenSplice_LIBRARIES
-    ${DCPSGAPI_LIBRARY}
-    ${DCPSSACPP_LIBRARY}
-    ${DDSDATABASE_LIBRARY}
-    ${DDSOS_LIBRARY}
-)
 set(OpenSplice_LIBRARIES "${OpenSplice_LIBRARIES}" CACHE FILEPATH "OpenSplice libraries")
 
 # Binary for the IDL compiler
